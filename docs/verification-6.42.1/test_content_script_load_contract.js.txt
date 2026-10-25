@@ -1,0 +1,40 @@
+[zs-diag] 18:16:37.641 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":true,"run":false}
+[zeroscript] Multi-Script content script ready (provider: deepseek)
+[zs-diag] 18:16:37.789 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: chatgpt)
+[zs-diag] 18:16:37.883 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: claude)
+[zs-diag] 18:16:38.005 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: gemini)
+[zs-diag] 18:16:38.117 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: kimi)
+[zs-diag] 18:16:38.246 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: glm)
+[zs-diag] 18:16:38.359 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: arena)
+[zs-diag] 18:16:38.468 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":true,"run":false}
+[zeroscript] Multi-Script content script ready (provider: meta)
+[zs-diag] 18:16:38.587 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: promptql)
+[zs-diag] 18:16:38.691 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: superapp)
+[zs-diag] 18:16:38.806 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":true,"run":false}
+[zeroscript] Multi-Script content script ready (provider: qwen)
+[zs-diag] 18:16:38.894 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":true,"run":false}
+[zeroscript] Multi-Script content script ready (provider: notion)
+[zs-diag] 18:16:38.991 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: vani)
+[zs-diag] 18:16:39.099 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: crax)
+[zs-diag] 18:16:39.175 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: venice)
+[zs-diag] 18:16:39.317 imageTool.loaded {"tools":[],"th":0,"rp":0,"gen":false,"run":false}
+[zeroscript] Multi-Script content script ready (provider: clickup)
+  ok  every content_scripts block loads in one shared scope (no TDZ / no throw)
+  ok  the harness actually detects a top-level TDZ violation (guard is not vacuous)
+  ok  core/main.js binds no top-level A.<field> before `const A = {`
+  ok  A literal declares verifyState and verifyCount
+  ok  any block loading core/main.js also loads core/verification.js
+  ok  core/verification.js defines ZSVerify in one evaluated scope
+
+test_content_script_load_contract: 6 sections passed

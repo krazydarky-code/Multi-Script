@@ -1,0 +1,1 @@
+PASS Dev-first release policy: deterministic Dev/bundle, frozen Public bytes/checksum, newer version, stable identity, no private/generated data and safe rejection paths.

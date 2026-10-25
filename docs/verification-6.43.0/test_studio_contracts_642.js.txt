@@ -1,0 +1,1 @@
+PASS project/engine-scoped skills, disabled methods, verified/candidate prompts, Markdown/JSON import, library adaptation, Ultra contract, queue edit/reorder/context/receipt integrity and deterministic Flight scoring/collisions.

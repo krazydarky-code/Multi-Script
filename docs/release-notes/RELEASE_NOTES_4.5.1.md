@@ -1,0 +1,3 @@
+# Multi-Script 4.5.1 — Layered Notion Routing
+
+At the start of each new Notion chat, Multi-Script now tries the exact visible model option once. When Notion exposes GPT-5.6 Sol, Claude Opus 5, Kimi K3, or eventually Claude Opus 5.5, it selects and verifies that label. It then inserts one compact routing request before the shared Multi-Script system prompt. If the option is not exposed or cannot be verified, it falls back to Standard Auto without imitation or false model claims. This maximizes legitimate routing odds but cannot override workspace entitlements or Notion's private server-side router.

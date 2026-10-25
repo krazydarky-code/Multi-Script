@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Observed tool evidence and bounded recovery. Prompts never grant capabilities.
+(function(g){'use strict';
+ const PROFILES={
+  adaptive:{inspect:'Read the smallest relevant surface and classify scope/risk before choosing depth.',research:'Resolve real uncertainty; expand research for unfamiliar APIs or a substantial visual build.',build:'Complete one integrated path, escalating depth for dependencies, data, authority or a failed check.',verify:'Run the smallest check that can establish the requested behavior; expand when evidence exposes risk.'},
+  quick:{inspect:'Read the target and immediate caller; preserve existing conventions.',research:'Look up uncertain APIs only; reuse still-valid references and avoid broad optional exploration.',build:'Make the smallest complete change without parallel redesigns or new dependencies.',verify:'Reproduce the requested outcome once and inspect errors/read-back. Correctness and truthful evidence remain required.'},
+  standard:{inspect:'Trace inputs, implementation and outputs, including the main failure path.',research:'Resolve API/schema uncertainty with a primary source or a bounded probe.',build:'Integrate the requested behavior with validation, error states and cleanup.',verify:'Test the normal path and a relevant failure case; capture visible changes when supported.'},
+  deep:{inspect:'Map adjacent interfaces, lifecycle and ownership; identify the most consequential edge cases.',research:'Check current documentation and existing project decisions before changing a contract.',build:'Implement the complete flow and preserve compatibility and data boundaries.',verify:'Exercise failure/recovery, lifecycle and target inputs; inspect actual visual/runtime evidence and repair defects.'},
+  maximum:{inspect:'Map dependencies, risks, acceptance criteria and available specialist/native tools.',research:'Resolve uncertain APIs, platform constraints and important reference decisions before implementation.',build:'Integrate relevant specialists into one coherent artifact with explicit ownership and performance budgets.',verify:'Check integration, failure recovery, platform/performance risks and rendered output; rerun affected checks after repairs.'},
+  ultra:{inspect:'Perform one bounded project survey, select relevant specialist manuals and keep one concise internal plan; no progress-tool prerequisite.',research:'For a substantial creative build, fetch 2–3 real primary/style references and record URLs, observations and adapted principles before large writes. Resolve uncertain APIs in the actual execution context.',build:'Produce editable sources and integrate code, UI, world/assets, animation, VFX and audio only where relevant. Reuse the current architecture and one style bible.',verify:'Run the actual build/playtest and inspect output. Capture the real delivered viewport/UI; for motion use a short recording or equivalent temporal evidence. Repair defects, recheck the affected path and separate implemented, tested and blocked outcomes.'}
+ };
+ const bare=n=>String(n||'').split('/').pop().split('.').pop();
+ const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
+ const localAsset=c=>/^(ms_create_icon_pack|ms_create_canvas_ui|ms_create_canvas_texture)$/.test(bare(c.tool));
+ const signature=c=>bare(c.tool)+'|'+JSON.stringify(stable(c.arguments||{}));
+ function kind(call){const n=bare(call.tool),a=call.arguments||{};
+  if(/^(ms_task_progress|ms_get_skill|ms_list_skills|ms_recommend_skills|ms_ultra_manual|ms_studio_director|ms_full_spectrum_skill_mesh|list_commands|list_tools|more_output|list_mcp_servers|list_multiscript_capabilities)$/.test(n))return 'guidance';
+  if(/^(ms_fetch_reference|http_get|fetch_roblox_doc|web_search|search_web|ms_research_references)$/.test(n))return 'research';
+  if(/screen_capture|screenshot|screen_record|capture_viewport/.test(n))return 'capture';
+  if(/^(start_stop_play|run_project|stop_project|start_play|stop_play)$/.test(n))return 'runtime';
+  if(/^msrb_/.test(n)){if(n==='msrb_source_transfer')return a.action==='commit'?'write':a.action==='status'?'read':'other';if(/^msrb_(project_summary|get_|find_|read_|search_|dependency_|export_|validate_|console_read)/.test(n))return 'read';return /^(msrb_(create_instances|set_properties|set_attributes|update_tags|reparent_instances|clone_instances|bulk_rename|patch_script|replace_script|delete_instances|undo|redo))$/.test(n)?'write':'other';}
+  if(n==='ms_roblox_script_manage')return (a.action||'read')==='read'?'read':['create','replace','append','replace_text','delete','configure'].includes(a.action)?'write':'other';
+  if(/^ms_ws_(write|patch|apply|create|build|run)/.test(n))return 'write';
+  if(n==='execute_blender_code'){const code=String(a.code||'');return /bpy\.ops|\.new\s*\(|\.remove\s*\(|keyframe_insert|\.(location|rotation_euler|scale|parent)\s*=/.test(code)?'write':'read';}
+  if(/^manage_/.test(n)&&/^(create|add|set|delete|remove|update|save|modify)/i.test(String(a.action||'')))return 'write';
+  if(/^(inspect_instance|get_studio_state|search_game_tree|script_read|script_search|script_grep|ms_native_read|ms_roblox_(list_children|find_instances|world_stats))$/.test(n))return 'read';
+  if(n==='execute_luau'||n==='ms_roblox_run_luau'){const code=String(a.code||a.script||'');if(/Instance\.new|:(Destroy|PivotTo|MoveTo)\s*\(|\.(Source|Parent|Position|CFrame|Size|Value|Color|Anchored)\s*=/.test(code))return 'write';if(/GetChildren|GetDescendants|FindFirstChild|GetService|PlaceId/.test(code))return 'read';}
+  if(/multi_edit|script_write|ms_native_write|create_|build_|set_|delete_|remove_|update_|spawn_|import_/.test(n))return 'write';return 'other';
+ }
+ function create(request,effort,tools=[],context={}){const text=String(request||''),visual=/\b(ui|ux|gui|hud|menu|interface|vfx|particle|effect|animat\w*|model|creature|world|map|game|level|building)\b/i.test(text),smallAsset=/\b(build|create|make|design|remake|revamp)\s+(?:(?:a|an|the|one|single|matching|small|simple|new|ui)\s+){0,5}(icon|glyph|logo|svg|decal|button|prop)\b/i.test(text),major=visual&&!smallAsset&&/\b(build|create|make|design|overhaul|remake|revamp|develop)\b/i.test(text);
+  const names=tools.map(t=>typeof t==='string'?t:t.name).filter(Boolean);
+  const intentBuild=!context.engineFree&&(major||context.workspace||/\b(script|code|system|inventory|mechanic|feature)\b/i.test(text))&&/^\s*(please\s+)?(build|create|make|implement|remake|revamp|develop)\b/i.test(text)&&!/\b(plan only|only a plan|a plan for|specification|proposal|in chat|code block|svg|snippet|without editing|do not (edit|build|implement))\b/i.test(text)&&names.some(n=>/execute_luau|execute_blender_code|ms_ws_(write|build|run)|msrb_(replace_script|patch_script|create_instances|set_properties)|ms_native_write|ms_roblox_script_manage|multi_edit|create_|build_|add_node/.test(n));
+  return {request:text.slice(0,2000),effort,guidanceReads:{},loadedMethods:[],requireSkill:effort==='ultra'&&(major||/^\s*(?:please\s+)?(?:bake|retopolog\w*|sculpt|rig|export|prototype|author)\b/i.test(text)),reads:{},failures:{},stalls:0,researched:false,researchUnavailable:false,skillLoaded:false,wrote:false,projectWrite:false,captured:false,motionEvidence:false,finalReminder:false,intentBuild,requireResearch:effort==='ultra'&&major&&!/\b(no|without|skip|do not|don't)\s+(web\s+)?research\b/i.test(text),names,visual,motion:/\b(animat\w*|motion|vfx|particle|tween|walk|run cycle)\b/i.test(text)};
+ }
+ function gate(trace,call){if(!trace)return {blocked:false};const key=signature(call),type=kind(call);let reason='';
+  if((trace.failures[key]||0)>=2)reason='This exact command failed twice. Do not replay it unchanged. Fix the reported schema/API/context issue or report the specific blocker.';
+  if(type==='guidance'&&/^(ms_get_skill|ms_ultra_manual|ms_studio_director)$/.test(bare(call.tool))&&(trace.guidanceReads?.[key]?.count||0)>=2)reason='This full method already returned the same guidance twice. Reuse its instructions and advance the requested work or report the precise blocker; do not reload the same skill/manual unchanged.';
+   if(type==='read'&&(trace.reads[key]?.count||0)>=2)reason='The same scope already returned the same observation twice without an intervening successful write. Reuse that evidence, inspect a specific new question, or implement the requested slice. A failed/truncated query does not prove the place is empty.';
+  if(type==='write'&&!localAsset(call)&&trace.requireResearch&&!trace.researched&&!trace.researchUnavailable){const tool=trace.names.find(n=>/^(ms_fetch_reference|http_get|fetch_roblox_doc|ms_research_references)$/.test(bare(n)));if(tool)reason='Before a substantial Ultra creative write, fetch a real reference or uncertain API with '+tool+' using its live schema. Retain the source/observation in working context; no progress-tool call is required. If access fails, report the exact limitation and continue feasible work; do not invent research.';}
+  if(!reason&&type==='write'&&!localAsset(call)&&trace.effort==='ultra'&&trace.requireSkill&&!trace.skillLoaded&&trace.names.some(n=>/^(ms_get_skill|ms_ultra_manual)$/.test(bare(n))))reason='Load a relevant full skill with ms_get_skill or the applicable ms_ultra_manual before a major Ultra build, including when the user skips web research. An unrelated loaded workflow does not satisfy this step. A list of skill names is not the production method. Keep the current plan and fetched references; do not repeat discovery.';
+  if(!reason)return {blocked:false};trace.stalls++;return {blocked:true,pause:trace.stalls>=3,feedback:'ERROR: command NOT RUN. '+reason};
+ }
+ function relevantMethod(trace,id,feedback){
+  const topics=[
+   [/\b(ui|ux|gui|hud|menu|interface|inventory|shop|dashboard)\b/i,/ui|ux|gui|interface|inventory|component|design|shop/],
+   [/\b(animat\w*|motion|rig|tween|walk|run cycle)\b/i,/animat|motion|rig|tween|shape.key|posing|blockout/],
+   [/\b(vfx|particle|effect|shader|lighting)\b/i,/vfx|effect|particle|shader|light|material/],
+   [/\b(model|mesh|creature|character|prop|sculpt|bake|retopolog\w*|geometry)\b/i,/model|mesh|creature|character|prop|sculpt|bak|retopolog|geometry|blockout|shape.key/],
+   [/\b(world|map|level|building|terrain)\b/i,/world|map|level|building|terrain|environment|blockout/]
+  ].filter(([request])=>request.test(trace.request));
+  let metadata='';try{const parsed=JSON.parse(feedback);metadata=[parsed.id,parsed.name,parsed.capabilityDomain,parsed.description].filter(Boolean).join(' ');}catch{}
+  const evidence=(id+' '+metadata).toLowerCase();
+  return !topics.length||topics.some(([,method])=>method.test(evidence));
+ }
+ function record(trace,call,feedback,isError){if(!trace)return;const key=signature(call),type=kind(call),text=String(feedback||'').slice(0,120000);
+  if(isError){trace.failures[key]=(trace.failures[key]||0)+1;if(type==='research')trace.researchUnavailable=true;return;}
+  if(type==='research'){trace.researched=true;trace.stalls=0;}
+  const name=bare(call.tool),args=call.arguments||{};
+  if((name==='ms_get_skill'&&typeof args.skill_id==='string'&&args.skill_id.trim())||(name==='ms_ultra_manual'&&(args.action||'read')==='read'&&args.id&&!args.section)){const id=String(args.skill_id||args.id);trace.loadedMethods=(trace.loadedMethods||[]);if(!trace.loadedMethods.includes(id))trace.loadedMethods.push(id);const related=relevantMethod(trace,id,text);trace.skillLoaded=trace.skillLoaded||related;if(related)trace.stalls=0;}
+  if(type==='guidance'){trace.guidanceReads=trace.guidanceReads||{};const old=trace.guidanceReads[key];trace.guidanceReads[key]={value:text,count:old?.value===text?old.count+1:1};}
+  if(type==='runtime'){trace.reads={};trace.stalls=0;}
+  if(type==='write'){let receipt;try{receipt=JSON.parse(String(feedback||'').replace(/^Output of '[^']+':\s*/,''));}catch{}if(args.dry_run===true||receipt?.dryRun===true||receipt?.applied===false||receipt?.executed===false||receipt?.note==='the engine did not return the structured result line')return;trace.wrote=true;if(!localAsset(call)){trace.projectWrite=true;trace.reads={};trace.captured=false;trace.motionEvidence=false;}trace.stalls=0;}
+  if(type==='read'){const old=trace.reads[key];trace.reads[key]={value:text,count:old?.value===text?old.count+1:1};}
+  if(type==='capture'){trace.captured=true;if(/record|video/.test(bare(call.tool)))trace.motionEvidence=true;trace.stalls=0;}
+ }
+ function finalCheck(trace){if(!trace)return '';
+  if(trace.intentBuild&&!trace.projectWrite)return 'No implementation operation was observed for this build request. Loading skills or reading the project is not an implemented artifact. Use the authorized live build/write tools, or state the exact access/scope blocker and provide an honest handoff instead of claiming completion.';
+  if(trace.effort!=='ultra')return '';
+  if(!trace.projectWrite||!trace.visual)return '';
+  const capture=trace.names.find(n=>/screen_capture|screenshot|capture_viewport/.test(n)),recording=trace.names.find(n=>/screen_record/.test(n));
+  if(trace.motion&&!trace.motionEvidence&&recording)return 'Motion has not been reviewed over time. Use '+recording+' for a short real recording (up to five seconds), or report why it is unavailable. One screenshot is not a motion test.';
+  if(!trace.captured&&capture)return 'The delivered visual result has not been captured since the last change. Use '+capture+' with its exact live schema and inspect the image; if blocked, state the limitation instead of claiming visual verification.';return '';
+ }
+ function policy(request,effort,context={}){const p=PROFILES[effort]||PROFILES.adaptive,tools=Array.isArray(context.tools)?context.tools:[],names=tools.map(t=>typeof t==='string'?t:t.name).filter(Boolean),chosen=names.filter(n=>/screen_capture|screen_record|ms_fetch_reference|http_get|script_read|ms_get_skill|ms_studio_director|start_stop_play|get_console_output/.test(n)).slice(0,10);
+  const creature=/\b(stud|blocky|brick)\b/i.test(request)&&/\b(creature|monster|pet|animal|dragon)\b/i.test(request)?"Stud creature references: load ms_get_skill with skill_id=blender-reference-blockout, then read its full ms_skill_reference method and closest example. This optional brick style does not replace existing art direction.\n":"";return `${creature}[MULTI-SCRIPT ${String(effort||'adaptive').toUpperCase()} · WORK METHOD]\nInspect: ${p.inspect}\nResearch: ${p.research}\nBuild: ${p.build}\nVerify: ${p.verify}\nApply each coherent slice now; inspect its result before the next.\nUse the live advertised schemas, including required target_file and studio_id for Studio scripts. One project survey is enough until evidence changes: do not repeatedly read the same place and call it empty. Failed or permission-denied inspection is UNKNOWN, not empty. Use valid Color3.R/G/B channels (0–1), not R255/G255/B255; use Color3.fromRGB for 0–255 input. Guard optional/restricted property reads individually; do not retry a restricted Lighting.Technology probe or bypass its capability. Verify current LightingStyle support before using it.\n${chosen.length?'Relevant available tools: '+chosen.join(', ')+'. Fetch exact schemas before use.':'Tool availability must come from the current catalog, not a remembered name.'}\nDo not change or discuss model identity because of routing preference metadata. Continue the real user task with the actual provider-selected backend. Scope and permissions are unchanged.`;
+ }
+ const api={PROFILES,create,gate,record,finalCheck,policy,kind};g.MSExecution=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(globalThis);

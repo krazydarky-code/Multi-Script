@@ -1,0 +1,1 @@
+PASS phone worker: exact target/context and request receipt, lost-ack retry retains receipt only, rejected stale chat never replays, disabled snapshots cleared and overlapping polls serialized.

@@ -1,0 +1,2 @@
+PASS actual locally trusted HTTPS download, bounded advertised/chunked body, insecure redirect and unsafe URL rejection; no TLS verification bypass.
+

@@ -1,0 +1,113 @@
+{
+  "version": "6.42.1",
+  "primaryEdition": "dev",
+  "frozenPublic": "6.42.0",
+  "suiteCount": 16,
+  "passed": 16,
+  "environmentSkips": 0,
+  "themeMatrix": {
+    "combinations": 324,
+    "contrast": 18762,
+    "paintedContrast": 228,
+    "motion": 42,
+    "screenshots": 6
+  },
+  "results": [
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 119.5,
+      "skipped": false
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 492.16,
+      "skipped": false
+    },
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 22.16,
+      "skipped": false
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 2.27,
+      "skipped": false
+    },
+    {
+      "file": "test_fnaf_theme.js",
+      "exitCode": 0,
+      "seconds": 102.64,
+      "skipped": false
+    },
+    {
+      "file": "test_portable_settings_and_capability_floor.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_settings_customization.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_theme_contrast_642.js",
+      "exitCode": 0,
+      "seconds": 6.64,
+      "skipped": false
+    },
+    {
+      "file": "test_theme_picker_legibility.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_themes_bar_628.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 10.94,
+      "skipped": false
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 26.5,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 0.62,
+      "skipped": false
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.25,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false
+    }
+  ]
+}

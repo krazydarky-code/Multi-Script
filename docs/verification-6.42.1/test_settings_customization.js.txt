@@ -1,0 +1,1 @@
+PASS customizable settings UI and browser-secret exclusion

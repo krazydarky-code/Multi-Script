@@ -1,0 +1,2 @@
+PASS comprehensive skill/tool mesh: weak prompts receive simultaneous specialist coverage without a generic multiplier
+

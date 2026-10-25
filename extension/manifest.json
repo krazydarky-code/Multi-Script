@@ -1,0 +1,755 @@
+{
+  "manifest_version": 3,
+  "name": "Multi-Script \u00b7 Multi-Engine AI Studio",
+  "version": "6.49.9",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo0m9zu2P+wdLOQumCpjuXQszz4W2tSzh8Tt/KeN+Fae1AGXG5Iy4LimsQ+pcVER1nhp1prU5WbFQi4oHoieeSeQCSw5OQnlc6Gyoom59jEDaQk0k01Nq8Otm5ppRb5kbPXxCdOzv3m2biXRwAsW33GprbDQiTc5g2WqXDTCcJFJQ5umF0ZsD334S6hLMwWF3ihmDA4omabroqk6t2VGfpQFtH7zgTiG1VNEhjopJBkbVjkP3DqtOmMcwwxrgADCQeMtDEJiR/2f59a02x4GxfNo+j6cTkfHA9tmvJxB0TVkASBkDbhwO4yEfzdE3uL0U1aT7hfnkppOj0IfIl31nRwIDAQAB",
+  "description": "Customizable multi-provider AI workflows for Roblox, Unity, Godot, Blender, Figma, and MCP tools.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "nativeMessaging",
+    "unlimitedStorage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://chat.deepseek.com/*",
+    "https://deepseek.com/*",
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://www.claude.ai/*",
+    "https://claude.com/*",
+    "https://www.claude.com/*",
+    "https://gemini.google.com/*",
+    "https://www.kimi.ai/*",
+    "https://kimi.ai/*",
+    "https://chat.z.ai/*",
+    "https://chat.qwen.ai/*",
+    "https://arena.ai/*",
+    "https://www.meta.ai/*",
+    "https://meta.ai/*",
+    "http://127.0.0.1/*",
+    "ws://127.0.0.1/*",
+    "https://notion.ai/*",
+    "https://www.notion.ai/*",
+    "https://notion.so/*",
+    "https://www.notion.so/*",
+    "https://notion.com/*",
+    "https://www.notion.com/*",
+    "https://app.notion.com/*",
+    "https://prompt.ql.app/*",
+    "https://superapp.chat/*",
+    "https://www.superapp.chat/*",
+    "https://www.kimi.com/*",
+    "https://kimi.com/*",
+    "https://c.vani.ai/*",
+    "https://venice.ai/*",
+    "https://www.venice.ai/*",
+    "https://app.clickup.com/*",
+    "https://vani.ai/*",
+    "https://www.vani.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Multi-Script",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://superapp.chat/*",
+        "https://www.superapp.chat/*"
+      ],
+      "js": [
+        "core/superapp-protocol.js",
+        "providers/superapp-net.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://chat.deepseek.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/deepseek.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "providers/chatgpt-cm.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/chatgpt.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://claude.ai/*",
+        "https://www.claude.ai/*",
+        "https://claude.com/*",
+        "https://www.claude.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/claude.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://gemini.google.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/gemini.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.kimi.ai/*",
+        "https://kimi.ai/*",
+        "https://www.kimi.com/*",
+        "https://kimi.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/kimi.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://chat.z.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/glm.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://arena.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/arena.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.meta.ai/*",
+        "https://meta.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/meta.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://prompt.ql.app/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/promptql.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://superapp.chat/*",
+        "https://www.superapp.chat/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "core/superapp-protocol.js",
+        "providers/superapp.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://chat.qwen.ai/*"
+      ],
+      "js": [
+        "providers/qwen-net.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://chat.qwen.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/qwen.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://notion.ai/*",
+        "https://www.notion.ai/*",
+        "https://notion.so/*",
+        "https://www.notion.so/*",
+        "https://notion.com/*",
+        "https://www.notion.com/*",
+        "https://app.notion.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/notion.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/notion-usage.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://c.vani.ai/*",
+        "https://vani.ai/*",
+        "https://www.vani.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/dom-chat.js",
+        "providers/vani.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://venice.ai/*",
+        "https://www.venice.ai/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/dom-chat.js",
+        "providers/venice.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://app.clickup.com/*"
+      ],
+      "js": [
+        "core/engines.js",
+        "core/config.js",
+        "core/parser.js",
+        "providers/dom-chat.js",
+        "providers/clickup.js",
+        "core/tool-routing.js",
+        "core/pacing.js",
+        "core/resilience.js",
+        "core/verification.js",
+        "core/enhancer.js",
+        "core/media-relay.js",
+        "core/trust.js",
+        "core/terminal.js",
+        "core/memory.js",
+        "core/scenes.js",
+        "core/theme-catalog.js",
+        "core/extras.js",
+        "core/build-edition.js",
+        "core/roblox-production.js",
+        "core/ultra-handbook.js",
+        "core/ultra-craft.js",
+        "core/ultra-manuals.js",
+        "core/execution-discipline.js",
+        "core/studio-workflows.js",
+        "core/task-progress.js",
+        "core/update-panel.js",
+        "core/main.js"
+      ],
+      "css": [
+        "core/scenes.css",
+        "overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "workspace-link.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "short_name": "Multi-Script",
+  "version_name": "6.49.9 Multi-Script Studio - GitHub delivery",
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon.png",
+        "icons/icon128.png"
+      ],
+      "matches": [
+        "https://superapp.chat/*",
+        "https://www.superapp.chat/*",
+        "https://chat.deepseek.com/*",
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://www.claude.ai/*",
+        "https://claude.com/*",
+        "https://www.claude.com/*",
+        "https://gemini.google.com/*",
+        "https://www.kimi.ai/*",
+        "https://kimi.ai/*",
+        "https://www.kimi.com/*",
+        "https://kimi.com/*",
+        "https://chat.z.ai/*",
+        "https://arena.ai/*",
+        "https://www.meta.ai/*",
+        "https://meta.ai/*",
+        "https://prompt.ql.app/*",
+        "https://chat.qwen.ai/*",
+        "https://notion.ai/*",
+        "https://www.notion.ai/*",
+        "https://notion.so/*",
+        "https://www.notion.so/*",
+        "https://notion.com/*",
+        "https://www.notion.com/*",
+        "https://app.notion.com/*",
+        "https://c.vani.ai/*",
+        "https://vani.ai/*",
+        "https://www.vani.ai/*",
+        "https://venice.ai/*",
+        "https://www.venice.ai/*",
+        "https://app.clickup.com/*"
+      ]
+    }
+  ]
+}

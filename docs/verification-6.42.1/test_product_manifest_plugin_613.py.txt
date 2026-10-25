@@ -1,0 +1,1 @@
+PASS canonical product manifest, explicit catalogue contracts, Roblox companion v6.20 diagnostics and secure opt-in execution boundary

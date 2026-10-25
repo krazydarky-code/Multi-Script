@@ -1,0 +1,6 @@
+10:02:45 extension connected  (127.0.0.1)  [1 client(s)]
+
+PASS actual loopback WebSocket catalog, skill query/retrieval and real SVG artifact generation through the shipped runtime handler.
+
+10:02:45 extension disconnected  [0 client(s)]
+

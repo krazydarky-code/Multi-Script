@@ -1,0 +1,4 @@
+PASS dark native keyboard Ultra activation/demotion, persistence, theme/portal, reduced motion, forced colors and narrow layout
+PASS light native keyboard Ultra activation/demotion, persistence, theme/portal, reduced motion, forced colors and narrow layout
+PASS persisted Ultra hydration, explicit no-motion and Agent reset
+PASS bounded Multi-Script Ultra routing, scope, Critic independence, transport and attribution

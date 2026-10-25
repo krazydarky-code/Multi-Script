@@ -1,0 +1,2 @@
+PASS 40 signed metadata, path/identity/permissions, staging, local-edit protection, real apply, disk-failure rollback, killed-process recovery, obsolete-file removal and private-data preservation checks.
+

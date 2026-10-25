@@ -1,0 +1,633 @@
+{
+  "version": "6.43.0",
+  "date": "2026-10-17",
+  "passed": 34,
+  "total": 34,
+  "skipped": 0,
+  "results": [
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 21.16,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 1.51,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_cowork_provider_sessions_642.js",
+      "exitCode": 0,
+      "seconds": 14.06,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_cowork_queue_640.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_new_provider_transport_637.js",
+      "exitCode": 0,
+      "seconds": 3.28,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 130.03,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 10.45,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 48.39,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_provider_send_budget.js",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 441.22,
+      "skipped": false,
+      "run": "verification-6.43-settings"
+    },
+    {
+      "file": "test_studio_contracts_642.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_task_progress.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-types"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 13.45,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_vani_generation_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 27.8,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 24.45,
+      "skipped": false,
+      "run": "verification-6.43-settings"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.84,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_cowork_evidence_642.py",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 0.75,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.03,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.86,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_studio_hub_637.py",
+      "exitCode": 0,
+      "seconds": 1.62,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_workflows_cowork_640.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_code_mode_636.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_engine_tool_routing.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_workspace_ui_640.js",
+      "exitCode": 0,
+      "seconds": 40.44,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_progress_themes.js",
+      "exitCode": 0,
+      "seconds": 19.38,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 32.84,
+      "skipped": false,
+      "run": "verification-6.43-loops"
+    },
+    {
+      "file": "test_progress_agent_loop.js",
+      "exitCode": 0,
+      "seconds": 7.53,
+      "skipped": false,
+      "run": "verification-6.43-types"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 50.01,
+      "skipped": false,
+      "run": "verification-6.43-loops"
+    }
+  ],
+  "executionHistory": [
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 21.16,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 1,
+      "seconds": 0.16,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_cowork_provider_sessions_642.js",
+      "exitCode": 0,
+      "seconds": 12.28,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_cowork_queue_640.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_new_provider_transport_637.js",
+      "exitCode": 0,
+      "seconds": 3.28,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 130.03,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 8.09,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 48.39,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_provider_send_budget.js",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 1,
+      "seconds": 11.73,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_studio_contracts_642.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_task_progress.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 13.45,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_vani_generation_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 27.8,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 1,
+      "seconds": 9.84,
+      "skipped": false,
+      "run": "verification-6.43-js"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.14,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.84,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_cowork_evidence_642.py",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 0.75,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.33,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.73,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.86,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_studio_hub_637.py",
+      "exitCode": 0,
+      "seconds": 1.62,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_workflows_cowork_640.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false,
+      "run": "verification-6.43-runtime"
+    },
+    {
+      "file": "test_code_mode_636.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 1.06,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_engine_tool_routing.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 1,
+      "seconds": 2.95,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_task_progress.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_workspace_ui_640.js",
+      "exitCode": 0,
+      "seconds": 40.44,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.11,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.73,
+      "skipped": false,
+      "run": "verification-6.43-final"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 0.97,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 9.67,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_progress_themes.js",
+      "exitCode": 0,
+      "seconds": 14.97,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_task_progress.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.03,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false,
+      "run": "verification-6.43-corrections"
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 32.84,
+      "skipped": false,
+      "run": "verification-6.43-loops"
+    },
+    {
+      "file": "test_progress_agent_loop.js",
+      "exitCode": 0,
+      "seconds": 6.97,
+      "skipped": false,
+      "run": "verification-6.43-loops"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 50.01,
+      "skipped": false,
+      "run": "verification-6.43-loops"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 1.51,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_cowork_provider_sessions_642.js",
+      "exitCode": 0,
+      "seconds": 14.06,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 10.45,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_progress_themes.js",
+      "exitCode": 0,
+      "seconds": 19.38,
+      "skipped": false,
+      "run": "verification-6.43-ui-final"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 441.22,
+      "skipped": false,
+      "run": "verification-6.43-settings"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 24.45,
+      "skipped": false,
+      "run": "verification-6.43-settings"
+    },
+    {
+      "file": "test_progress_agent_loop.js",
+      "exitCode": 0,
+      "seconds": 7.53,
+      "skipped": false,
+      "run": "verification-6.43-types"
+    },
+    {
+      "file": "test_task_progress.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "run": "verification-6.43-types"
+    }
+  ],
+  "boundaries": [
+    "Headless Chromium provider DOM fixtures, not all live authenticated provider accounts.",
+    "Real loopback phone HTTP, real WebSocket origin checks and actual extension queue actions; no physical phone/Wi-Fi hardware test.",
+    "Models and native editor connections in round-trip tests are fixtures; skill/SVG artifacts use the real Python runtime.",
+    "Historical full 6.42 baseline is not counted as a new full run."
+  ]
+}

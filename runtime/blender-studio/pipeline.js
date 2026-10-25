@@ -1,0 +1,45 @@
+// Connection evidence, explicit companion setup and real game-asset handoff.
+export function mountPipeline({getState,command,control}){
+  const labels={roblox:'Roblox Studio',unity:'Unity',godot:'Godot'},$=id=>document.getElementById(id);
+  const panel=document.createElement('section');panel.id='pipeline-connections';
+  panel.innerHTML=`<div class="panel-label">CONNECTIONS</div><div id="pipeline-runtime" class="pipeline-state" role="status">Checking Blender…</div><p id="pipeline-activity" class="muted"></p><div id="pipeline-ai" class="pipeline-state">Choose an AI chat in the dock</div><button id="pipeline-check">Check Blender connection</button><div id="pipeline-engines"></div><details class="guide" open><summary>Include Blender when I start…</summary><p>Prepare Blender automatically with these game-engine sessions.</p>${Object.entries(labels).map(([id,label])=>`<label class="pipeline-choice"><input type="checkbox" data-companion="${id}"> ${label} + Blender</label>`).join('')}<label class="pipeline-label" for="pipeline-project">Blender project to use</label><select id="pipeline-project"><option value="">Current / last project</option></select><p id="pipeline-setup-note" class="muted">Connect the game editor normally, then press Start in a fresh AI chat. That session receives both toolsets.</p></details>`;
+  document.querySelector('.left>.row').after(panel);
+  const handoff=document.createElement('section');handoff.id='pipeline-handoff';
+  handoff.innerHTML=`<div class="panel-label">SEND TO YOUR GAME</div><p class="muted">Model here, export to your game, then check it in the editor.</p><label class="pipeline-label" for="handoff-engine">Destination</label><select id="handoff-engine">${Object.entries(labels).map(([id,label])=>`<option value="${id}">${label}</option>`).join('')}</select><div id="handoff-folder-row"><label class="pipeline-label" for="handoff-folder">Game project folder</label><input id="handoff-folder" placeholder="Paste the full project folder" spellcheck="false"><small id="handoff-folder-help"></small></div><label class="pipeline-label" for="handoff-name">Asset name</label><input id="handoff-name" value="BlenderAsset" maxlength="64"><label class="pipeline-choice"><input id="handoff-overwrite" type="checkbox"> Replace existing asset</label><button id="handoff-send" class="primary">Prepare Roblox import</button><p id="handoff-note" class="muted" role="status"></p><code id="handoff-path" hidden></code><a id="handoff-download" hidden>Download exported asset</a><details class="guide"><summary>How the connection works</summary><p>The AI uses your game-editor tools and this Blender project in one session. Blender creates models and animation; your game editor imports and uses the exported asset.</p><p>Check scale, materials, collisions and animation in the destination editor. A copied file is recorded separately from a verified engine import.</p></details>`;
+  document.querySelector('.right .export').before(handoff);
+  let session=null,bridge=null,configKey='',saving=false,sending=false;
+  window.addEventListener('ms-blender-session',event=>{session=event.detail?.session;bridge=event.detail?.bridge;paint();});
+  function paint(){
+    const s=getState();if(!s)return;
+    const working=s.running&&s.phase==='working',error=s.phase==='error'||s.error;
+    $('pipeline-runtime').textContent=error?'Blender needs attention':working?'Blender is working':s.running&&s.verified?'Blender connected · verified':s.running?'Checking Blender response…':s.job?.state==='running'?'Preparing Blender…':'Blender is stopped';
+    $('pipeline-runtime').dataset.tone=error?'error':working?'working':s.running&&s.verified?'ready':'idle';
+    const last=s.lastSuccess,age=last?Math.max(0,Math.floor(Date.now()/1000-last.at)):0;
+    $('pipeline-activity').textContent=error?s.error:working?s.message:last&&s.running?`Last Blender response: ${age<60?age+'s':Math.floor(age/60)+'m'} ago · ${last.operation}`:'Create or open a project to connect Blender.';
+    const access=!!(s.running&&s.aiTarget&&session?.ok&&session.started&&session.bridge&&session.blenderToolsAvailable&&session.engines?.includes('blender')&&session.blenderWorkspaceProject===s.project);
+    $('pipeline-ai').textContent=!session?'Choose an AI chat in the dock':session.starting?'AI session is starting…':!session.started?'Start the engine agent in your AI chat':!session.bridge?'AI chat lost its bridge connection':!session.engines?.includes('blender')?'This chat has no Blender tools':!session.blenderToolsAvailable?'Start / refresh this chat to load Blender tools':!s.aiTarget?'AI target is desktop Blender':session.blenderWorkspaceProject!==s.project?'Waiting for this project in the AI chat':access?(session.running||session.generating?'AI session working · Blender available':'AI has access to this project'):'Blender is not ready for AI tools';
+    $('pipeline-ai').dataset.tone=access?'ready':'idle';$('pipeline-check').disabled=!s.running||working||s.job?.state==='running';
+    const rows=bridge?.connected&&!bridge.bridgeStale?bridge.engines:Date.now()/1000-(s.enginesUpdatedAt||0)<20?s.engines:[];
+    $('pipeline-engines').replaceChildren(...Object.entries(labels).map(([id,label])=>{const row=document.createElement('div'),e=rows?.find(x=>x.id===id),ready=e?.enabled!==false&&e?.connected===true&&e?.alive;row.className='pipeline-engine';row.dataset.ready=String(!!ready);const name=document.createElement('b'),status=document.createElement('span');name.textContent=label;status.textContent=e?.enabled===false?'Disabled':ready?'Editor connected':'Connect editor';row.append(name,status);return row;}));
+    const c=s.companion||{},key=JSON.stringify([s.projects,c.engines,c.project]);
+    if(!saving&&key!==configKey){configKey=key;panel.querySelectorAll('[data-companion]').forEach(el=>el.checked=c.engines?.includes(el.dataset.companion));$('pipeline-project').replaceChildren(new Option('Current / last project',''),...(s.projects||[]).map(p=>new Option(p.name,p.id)));$('pipeline-project').value=c.project||'';}
+    $('handoff-send').disabled=sending||!s.running||!s.verified||working||s.job?.state==='running';
+  }
+  async function save(){
+    if(saving)return;saving=true;panel.querySelectorAll('input,select').forEach(el=>el.disabled=true);
+    try{const saved=await control('companion',{engines:[...panel.querySelectorAll('[data-companion]:checked')].map(el=>el.dataset.companion),project:$('pipeline-project').value});if(!saved?.ok)throw Error(saved?.error||'Settings were not saved.');$('pipeline-setup-note').textContent='Saved. In a fresh AI chat, press Start for the connected game engine. Blender is prepared first; Chat Studio stays engine-free.';}
+    catch(e){$('pipeline-setup-note').textContent=e.message;}
+    finally{saving=false;configKey='';panel.querySelectorAll('input,select').forEach(el=>el.disabled=false);paint();}
+  }
+  panel.querySelectorAll('input,select').forEach(el=>el.onchange=()=>void save());
+  $('pipeline-check').onclick=async()=>{await command('snapshot');paint();};
+  function destination(){const engine=$('handoff-engine').value,folder=engine!=='roblox';$('handoff-folder-row').hidden=!folder;$('handoff-overwrite').checked=false;$('handoff-folder').value=getState()?.companion?.destinations?.[engine]||'';$('handoff-folder-help').textContent=engine==='unity'?'Choose the folder containing Assets and ProjectSettings.':'Choose the folder containing project.godot.';$('handoff-send').textContent=folder?'Export & copy to '+labels[engine]:'Prepare Roblox import';$('handoff-note').textContent=engine==='roblox'?'Prepare a GLB, then import it with Roblox Studio’s Importer.':engine==='unity'?'Exports FBX into Assets/MultiScript/Blender. Return to Unity to import it.':'Exports GLB into assets/multiscript/blender. Return to Godot to import it.';$('handoff-download').hidden=true;$('handoff-path').hidden=true;}
+  $('handoff-engine').onchange=destination;destination();
+  $('handoff-send').onclick=async()=>{
+    if(sending)return;sending=true;paint();$('handoff-note').textContent='Exporting from real Blender…';
+    try{const r=await command('handoff',{engine:$('handoff-engine').value,name:$('handoff-name').value,project_path:$('handoff-folder').value,overwrite:$('handoff-overwrite').checked});if(!r)throw Error(getState()?.error||'Handoff did not complete. Check the workspace message.');const receipt=r.data;$('handoff-path').textContent=receipt.path;$('handoff-path').hidden=false;$('handoff-download').href='/api/asset/'+encodeURIComponent(receipt.project)+'/'+receipt.assetFile;$('handoff-download').download=$('handoff-name').value+'.'+receipt.format;$('handoff-download').hidden=false;$('handoff-note').textContent=receipt.engine==='roblox'?'GLB ready. Download it, then use Roblox Studio → File → Import and review its import settings.':'File copied and verified. Return to '+labels[receipt.engine]+' to finish importing, then check the model and animation. Engine import is not yet verified.';}
+    catch(e){$('handoff-note').textContent=e.message;}
+    finally{sending=false;paint();}
+  };
+  paint();setInterval(paint,1000);
+}

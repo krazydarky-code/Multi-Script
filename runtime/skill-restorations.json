@@ -1,0 +1,19 @@
+{
+  "version": "6.49.9",
+  "baseSkills": 241,
+  "restoredSkillIds": [
+    "blender-texture-baking",
+    "blender-shape-keys",
+    "blender-geometry-nodes",
+    "blender-sculpt-retopology",
+    "blender-gltf-export",
+    "figma-prototyping",
+    "figma-developer-handoff",
+    "canvas-svg-ui"
+  ],
+  "restoredVirtualToolIds": [
+    "blender.asset-delivery",
+    "blender.profiler-evidence"
+  ],
+  "policy": "Base v24 definitions unchanged. Restore only reviewed missing specialist topics with rewritten domain-specific methods; virtual workflows never grant native tools or permissions."
+}

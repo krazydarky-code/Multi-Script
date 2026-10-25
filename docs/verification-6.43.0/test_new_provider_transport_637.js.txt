@@ -1,0 +1,1 @@
+PASS four provider transport fixtures: exact send, own-send hook isolation, role parsing, idle detection and ClickUp private-AI scope guard.

@@ -1,0 +1,272 @@
+{
+  "version": "6.41.0",
+  "kind": "read-only unauthenticated headless smoke probe",
+  "results": [
+    {
+      "id": "arena",
+      "requestedUrl": "https://arena.ai/",
+      "checkedAt": "2026-10-17T13:19:34.870Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://arena.ai/",
+      "title": "Just a moment...",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "chatgpt",
+      "requestedUrl": "https://chatgpt.com/",
+      "checkedAt": "2026-10-17T13:19:27.182Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://chatgpt.com/",
+      "title": "Just a moment...",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "claude",
+      "requestedUrl": "https://claude.ai/",
+      "checkedAt": "2026-10-17T13:19:27.192Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://claude.ai/",
+      "title": "Just a moment...",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "clickup",
+      "requestedUrl": "https://app.clickup.com/",
+      "checkedAt": "2026-10-17T13:19:42.998Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://app.clickup.com/login",
+      "title": "Login",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": "Open a private ClickUp Brain AI conversation. Multi-Script will not use a team chat, task comment or public channel."
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "crax",
+      "requestedUrl": "https://crax.gpt.lol/",
+      "checkedAt": "2026-10-17T13:19:40.958Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "error": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://crax.gpt.lol/",
+      "boundary": "Navigation or adapter probe failed; live compatibility unverified.",
+      "finalUrl": "about:blank"
+    },
+    {
+      "id": "deepseek",
+      "requestedUrl": "https://chat.deepseek.com/",
+      "checkedAt": "2026-10-17T13:19:27.159Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://chat.deepseek.com/",
+      "title": "ERROR: The request could not be satisfied",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "gemini",
+      "requestedUrl": "https://gemini.google.com/app",
+      "checkedAt": "2026-10-17T13:19:27.214Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://gemini.google.com/app",
+      "title": "Google Gemini",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    },
+    {
+      "id": "glm",
+      "requestedUrl": "https://chat.z.ai/",
+      "checkedAt": "2026-10-17T13:19:31.137Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://chat.z.ai/",
+      "title": "Z.ai - Advanced AI Chatbot & Agent powered by GLM-5.3-Flash",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    },
+    {
+      "id": "kimi",
+      "requestedUrl": "https://www.kimi.com/",
+      "checkedAt": "2026-10-17T13:19:30.333Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://www.kimi.com/",
+      "title": "Kimi AI with K3 | Built for Agentic Coding & Knowledge Work",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    },
+    {
+      "id": "meta",
+      "requestedUrl": "https://www.meta.ai/",
+      "checkedAt": "2026-10-17T13:19:31.182Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://www.meta.ai/",
+      "title": "Meta AI - Your AI Assistant for Images, Shopping and More",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "notion",
+      "requestedUrl": "https://app.notion.com/chat",
+      "checkedAt": "2026-10-17T13:19:35.773Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://app.notion.com/login?redirectURL=%2Fchat",
+      "title": "Notion - Log in",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "promptql",
+      "requestedUrl": "https://prompt.ql.app/",
+      "checkedAt": "2026-10-17T13:19:38.119Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://prompt.ql.app/",
+      "title": "Home | PromptQL",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "qwen",
+      "requestedUrl": "https://chat.qwen.ai/",
+      "checkedAt": "2026-10-17T13:19:31.860Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://chat.qwen.ai/",
+      "title": "Qwen",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    },
+    {
+      "id": "superapp",
+      "requestedUrl": "https://superapp.chat/",
+      "checkedAt": "2026-10-17T13:19:38.583Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://superapp.chat/",
+      "title": "Your team and AI. One shared thread. · SuperApp",
+      "dom": {
+        "composerDetected": false,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "No usable guest composer detected; account, route, challenge or DOM verification needed."
+    },
+    {
+      "id": "vani",
+      "requestedUrl": "https://c.vani.ai/chat",
+      "checkedAt": "2026-10-17T13:19:39.634Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://c.vani.ai/c",
+      "title": "Free AI chat with frontier models, no sign-up · Vani AI",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    },
+    {
+      "id": "venice",
+      "requestedUrl": "https://venice.ai/chat/agent",
+      "checkedAt": "2026-10-17T13:19:41.735Z",
+      "authenticated": false,
+      "sentMessages": 0,
+      "executedTools": 0,
+      "finalUrl": "https://venice.ai/chat/agent",
+      "title": "Venice | Private, Uncensored AI",
+      "dom": {
+        "composerDetected": true,
+        "userTurns": 0,
+        "assistantTurns": 0,
+        "modeWarning": ""
+      },
+      "boundary": "Guest composer detected; sending and authenticated/model behavior unverified."
+    }
+  ]
+}

@@ -1,0 +1,959 @@
+{
+  "version": "6.41.0",
+  "date": "2026-10-17",
+  "passed": 153,
+  "failed": 0,
+  "javascriptSuites": 94,
+  "pythonSuites": 59,
+  "providerBrowserAssertions": 513,
+  "providerTransportAssertions": 64,
+  "commandEnvelopes": 14848,
+  "settingsControlsOperated": 458,
+  "environmentBoundaries": [
+    {
+      "file": "test_godot_audio_npc_tools.py",
+      "boundaries": [
+        "SKIP godot --check-only: no Godot 4 binary (set GODOT_BIN)"
+      ]
+    },
+    {
+      "file": "test_godot_native_tools.py",
+      "boundaries": [
+        "SKIP godot: no Godot 4 binary (set GODOT_BIN)"
+      ]
+    },
+    {
+      "file": "test_native_pro_tools.py",
+      "boundaries": [
+        "SKIP blender: no bpy python",
+        "SKIP unity compile: .NET SDK + Unity reference DLLs not installed (set MS_DOTNET / MS_UNITY_REFS)"
+      ]
+    },
+    {
+      "file": "test_unix_scripts.py",
+      "boundaries": [
+        "PASS unix scripts: static checks done; integration section skipped on Windows (POSIX-only)"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "file": "test_adaptive_creative_routing.js",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 30.55,
+      "skipped": false
+    },
+    {
+      "file": "test_all_skills_and_tools.py",
+      "exitCode": 0,
+      "seconds": 23.88,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_direct_max_adaptive.js",
+      "exitCode": 0,
+      "seconds": 1.58,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_human_verification.js",
+      "exitCode": 0,
+      "seconds": 1.83,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_roblox_json_protocol.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_routing_off_614.js",
+      "exitCode": 0,
+      "seconds": 1.2,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_starter_profiles_and_engine_free.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_arena_verification_detection.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_assist_tools.py",
+      "exitCode": 0,
+      "seconds": 0.75,
+      "skipped": false
+    },
+    {
+      "file": "test_blender_assist.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_bridge_builtins.py",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false
+    },
+    {
+      "file": "test_bridge_diagnostics.py",
+      "exitCode": 0,
+      "seconds": 0.58,
+      "skipped": false
+    },
+    {
+      "file": "test_bridge_environment_628.py",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "skipped": false
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.27,
+      "skipped": false
+    },
+    {
+      "file": "test_brief_and_scorecard.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false
+    },
+    {
+      "file": "test_chatbar_nudge.js",
+      "exitCode": 0,
+      "seconds": 41.0,
+      "skipped": false
+    },
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 47.73,
+      "skipped": false
+    },
+    {
+      "file": "test_claude_provider_setup.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_code_mode_636.js",
+      "exitCode": 0,
+      "seconds": 0.14,
+      "skipped": false
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 0.86,
+      "skipped": false
+    },
+    {
+      "file": "test_cowork_queue_640.js",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_argument_hotfix.py",
+      "exitCode": 0,
+      "seconds": 2.14,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 1.44,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_execution_standards.py",
+      "exitCode": 0,
+      "seconds": 0.38,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_production_6361.js",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_surfaces.py",
+      "exitCode": 0,
+      "seconds": 1.08,
+      "skipped": false
+    },
+    {
+      "file": "test_critic_loop_613.py",
+      "exitCode": 0,
+      "seconds": 1.0,
+      "skipped": false
+    },
+    {
+      "file": "test_cross_provider_tool_matrix.js",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false
+    },
+    {
+      "file": "test_desktop_vision.py",
+      "exitCode": 0,
+      "seconds": 1.41,
+      "skipped": false
+    },
+    {
+      "file": "test_dsml_native_markup.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false
+    },
+    {
+      "file": "test_elevenlabs_audio.py",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false
+    },
+    {
+      "file": "test_elevenlabs_settings.py",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_prefs_platform.py",
+      "exitCode": 0,
+      "seconds": 0.36,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_registry_integrity.js",
+      "exitCode": 0,
+      "seconds": 0.14,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_schema_assurance_69.py",
+      "exitCode": 0,
+      "seconds": 0.94,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_setup_guides_6271.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_toggles_and_code_transport.py",
+      "exitCode": 0,
+      "seconds": 0.55,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_tool_layer.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_tool_routing.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_toolkit.py",
+      "exitCode": 0,
+      "seconds": 1.11,
+      "skipped": false
+    },
+    {
+      "file": "test_enhancer_browser_send.js",
+      "exitCode": 0,
+      "seconds": 14.17,
+      "skipped": false
+    },
+    {
+      "file": "test_enhancer_presentation_627.js",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false
+    },
+    {
+      "file": "test_enhancer_send_gate.js",
+      "exitCode": 0,
+      "seconds": 0.61,
+      "skipped": false
+    },
+    {
+      "file": "test_error_recovery.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_extension_stress.js",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "skipped": false
+    },
+    {
+      "file": "test_fnaf_office_engine.js",
+      "exitCode": 0,
+      "seconds": 0.41,
+      "skipped": false
+    },
+    {
+      "file": "test_fnaf_theme.js",
+      "exitCode": 0,
+      "seconds": 77.95,
+      "skipped": false
+    },
+    {
+      "file": "test_form_craft.py",
+      "exitCode": 0,
+      "seconds": 0.59,
+      "skipped": false
+    },
+    {
+      "file": "test_full_spectrum_skill_mesh.py",
+      "exitCode": 0,
+      "seconds": 0.78,
+      "skipped": false
+    },
+    {
+      "file": "test_full_spectrum_studio.py",
+      "exitCode": 0,
+      "seconds": 0.61,
+      "skipped": false
+    },
+    {
+      "file": "test_game_idea_production.js",
+      "exitCode": 0,
+      "seconds": 0.49,
+      "skipped": false
+    },
+    {
+      "file": "test_game_idea_ui.js",
+      "exitCode": 0,
+      "seconds": 7.17,
+      "skipped": false
+    },
+    {
+      "file": "test_game_idea_variety_6271.js",
+      "exitCode": 0,
+      "seconds": 0.58,
+      "skipped": false
+    },
+    {
+      "file": "test_godot_audio_npc_tools.py",
+      "exitCode": 0,
+      "seconds": 0.39,
+      "skipped": true
+    },
+    {
+      "file": "test_godot_launcher.py",
+      "exitCode": 0,
+      "seconds": 0.44,
+      "skipped": false
+    },
+    {
+      "file": "test_godot_native_tools.py",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "skipped": true
+    },
+    {
+      "file": "test_halloween_ui.js",
+      "exitCode": 0,
+      "seconds": 4.31,
+      "skipped": false
+    },
+    {
+      "file": "test_intent_to_product_intelligence.py",
+      "exitCode": 0,
+      "seconds": 0.76,
+      "skipped": false
+    },
+    {
+      "file": "test_keyless_local_audio.py",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false
+    },
+    {
+      "file": "test_launcher_env_635.py",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false
+    },
+    {
+      "file": "test_limits_and_long_payloads.js",
+      "exitCode": 0,
+      "seconds": 0.36,
+      "skipped": false
+    },
+    {
+      "file": "test_local_bridge_compat.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_local_memory.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_mcp_resources.py",
+      "exitCode": 0,
+      "seconds": 0.78,
+      "skipped": false
+    },
+    {
+      "file": "test_media_relay.py",
+      "exitCode": 0,
+      "seconds": 0.89,
+      "skipped": false
+    },
+    {
+      "file": "test_media_relay_js.js",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false
+    },
+    {
+      "file": "test_memory_graph.py",
+      "exitCode": 0,
+      "seconds": 0.51,
+      "skipped": false
+    },
+    {
+      "file": "test_memory_panel.js",
+      "exitCode": 0,
+      "seconds": 1.67,
+      "skipped": false
+    },
+    {
+      "file": "test_menu_settings_scope.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_model_improvement_layer.py",
+      "exitCode": 0,
+      "seconds": 1.17,
+      "skipped": false
+    },
+    {
+      "file": "test_multi_engine_provider_reliability.py",
+      "exitCode": 0,
+      "seconds": 0.41,
+      "skipped": false
+    },
+    {
+      "file": "test_native_facade.py",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "skipped": false
+    },
+    {
+      "file": "test_native_pro_tools.py",
+      "exitCode": 0,
+      "seconds": 13.81,
+      "skipped": true
+    },
+    {
+      "file": "test_new_provider_transport_637.js",
+      "exitCode": 0,
+      "seconds": 3.11,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_always_on.js",
+      "exitCode": 0,
+      "seconds": 1.09,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_app_chat_and_setup.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_bar_auto_width.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_bootstrap_once.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_dom.js",
+      "exitCode": 0,
+      "seconds": 1.38,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_model_switching.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_profiles.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_prompt_only_routing.js",
+      "exitCode": 0,
+      "seconds": 1.28,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_route_guard.js",
+      "exitCode": 0,
+      "seconds": 2.34,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_send_failfast.js",
+      "exitCode": 0,
+      "seconds": 54.66,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_transcript_editable_guard.js",
+      "exitCode": 0,
+      "seconds": 3.19,
+      "skipped": false
+    },
+    {
+      "file": "test_notion_usage.js",
+      "exitCode": 0,
+      "seconds": 0.23,
+      "skipped": false
+    },
+    {
+      "file": "test_one_shot_autonomy.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false
+    },
+    {
+      "file": "test_pacing_engine.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_parser_repair.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_portable_settings_and_capability_floor.js",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "skipped": false
+    },
+    {
+      "file": "test_presentation_craft_627.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false
+    },
+    {
+      "file": "test_product_release_hardening.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false
+    },
+    {
+      "file": "test_prompt_enhancer.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_behavior.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_benchmarks.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 47.55,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_failure_640.js",
+      "exitCode": 0,
+      "seconds": 6.94,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_interface_628.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_send_budget.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 34.05,
+      "skipped": false
+    },
+    {
+      "file": "test_refusal_feedback.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_required_param_contract.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_audio_npc_tools.py",
+      "exitCode": 0,
+      "seconds": 0.45,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_json_contract.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_professional_tool_expansion.py",
+      "exitCode": 0,
+      "seconds": 0.69,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_schema_conformance.js",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_studio_id.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_workflow_tools.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false
+    },
+    {
+      "file": "test_schema_fuzz_all_tools.py",
+      "exitCode": 0,
+      "seconds": 0.62,
+      "skipped": false
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 19.59,
+      "skipped": false
+    },
+    {
+      "file": "test_settings_customization.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 357.89,
+      "skipped": false
+    },
+    {
+      "file": "test_shared_transport_edges_641.js",
+      "exitCode": 0,
+      "seconds": 4.61,
+      "skipped": false
+    },
+    {
+      "file": "test_skill_application_641.py",
+      "exitCode": 0,
+      "seconds": 1.3,
+      "skipped": false
+    },
+    {
+      "file": "test_skill_packs.py",
+      "exitCode": 0,
+      "seconds": 0.66,
+      "skipped": false
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false
+    },
+    {
+      "file": "test_sounds.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false
+    },
+    {
+      "file": "test_staged_and_replay_guards.py",
+      "exitCode": 0,
+      "seconds": 0.44,
+      "skipped": false
+    },
+    {
+      "file": "test_stale_bridge_replacement.py",
+      "exitCode": 0,
+      "seconds": 45.23,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_craft_skills.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_hub_637.py",
+      "exitCode": 0,
+      "seconds": 1.58,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_port_posix.py",
+      "exitCode": 0,
+      "seconds": 0.44,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_revamp_637.js",
+      "exitCode": 0,
+      "seconds": 12.31,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_ui.js",
+      "exitCode": 0,
+      "seconds": 17.23,
+      "skipped": false
+    },
+    {
+      "file": "test_superapp_provider.js",
+      "exitCode": 0,
+      "seconds": 8.95,
+      "skipped": false
+    },
+    {
+      "file": "test_superapp_wire.js",
+      "exitCode": 0,
+      "seconds": 1.31,
+      "skipped": false
+    },
+    {
+      "file": "test_terminal_panel.js",
+      "exitCode": 0,
+      "seconds": 1.72,
+      "skipped": false
+    },
+    {
+      "file": "test_terminal_running_628.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false
+    },
+    {
+      "file": "test_theme_picker_legibility.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_themes_bar_628.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false
+    },
+    {
+      "file": "test_tool_parameter_contracts.py",
+      "exitCode": 0,
+      "seconds": 0.48,
+      "skipped": false
+    },
+    {
+      "file": "test_trust_model.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 11.62,
+      "skipped": false
+    },
+    {
+      "file": "test_unity_launcher.py",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false
+    },
+    {
+      "file": "test_universal_capability_foundation.py",
+      "exitCode": 0,
+      "seconds": 1.22,
+      "skipped": false
+    },
+    {
+      "file": "test_universal_capability_visibility_615.js",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false
+    },
+    {
+      "file": "test_universal_effort_and_enhancer_wiring.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false
+    },
+    {
+      "file": "test_universal_mastery_skills.py",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_unix_scripts.py",
+      "exitCode": 0,
+      "seconds": 0.61,
+      "skipped": false
+    },
+    {
+      "file": "test_usage_optimizer.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 33.52,
+      "skipped": false
+    },
+    {
+      "file": "test_venice_agentic_transport.js",
+      "exitCode": 0,
+      "seconds": 6.89,
+      "skipped": false
+    },
+    {
+      "file": "test_venice_classic_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 29.92,
+      "skipped": false
+    },
+    {
+      "file": "test_verification_assistant.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_virtual_tool_library.py",
+      "exitCode": 0,
+      "seconds": 1.44,
+      "skipped": false
+    },
+    {
+      "file": "test_visual_digest.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_worker_pacing_contract.js",
+      "exitCode": 0,
+      "seconds": 0.25,
+      "skipped": false
+    },
+    {
+      "file": "test_workflows_cowork_640.py",
+      "exitCode": 0,
+      "seconds": 0.66,
+      "skipped": false
+    },
+    {
+      "file": "test_workspace_636.py",
+      "exitCode": 0,
+      "seconds": 8.17,
+      "skipped": false
+    },
+    {
+      "file": "test_workspace_ui_640.js",
+      "exitCode": 0,
+      "seconds": 31.86,
+      "skipped": false
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Multi-Script 6.48.3 verification
+
+New checks exercise Auto/Window/Auto transitions across all 15 adapters, retained sizing variables, rounded controls, visible idle Task progress/Chat studio, control bounds and small viewports. Complete Gemini and ChatGPT article-layout sessions run real local skill/catalog/asset built-ins with deterministic provider replies; uncertainty stops automatic replay. Gemini startup-error checks verify that an explicit provider failure does not report an active session. Separate tests retain current composer, method chips, progress and provider-transport coverage.
+
+Source/fixture tests cannot certify every authenticated layout/model or resolve an actual Gemini service error. Startup without a readable response now stops honestly. The local signed upgrade proof uses the actual last public 6.48.0 archive and an isolated download fixture; browser registration is not changed by that proof. Exact suite receipts are delivered alongside the package. Public GitHub/CI verification remains blocked while the account is suspended.

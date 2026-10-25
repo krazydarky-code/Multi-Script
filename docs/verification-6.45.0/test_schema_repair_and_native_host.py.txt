@@ -1,0 +1,102 @@
+PASS string number is converted and clamped to the schema range
+
+PASS boolean words become booleans
+
+PASS enum matches case-insensitively
+
+PASS {x,y,z} becomes a vector array
+
+PASS near-miss key 'path' is renamed to 'file_path'
+
+PASS a bare string becomes a one-item array
+
+PASS every repair is reported
+
+PASS {arguments:{...}} envelope is unwrapped
+
+PASS a stringified JSON object is parsed
+
+PASS '1, 2, 3' becomes [1,2,3]
+
+PASS nested stringified objects are repaired recursively
+
+PASS already-valid arguments are left alone
+
+PASS repair never raises on NoneType
+
+PASS repair never raises on int
+
+PASS repair never raises on list
+
+PASS repair never raises on str
+
+PASS repair never raises on dict
+
+PASS example() produces a schema-shaped sample
+
+PASS describe() names the required argument
+
+PASS ping answers with host version and echoes the id
+
+PASS unknown command is an error that lists valid commands
+
+PASS host exits cleanly when Chrome closes the pipe
+
+PASS an oversized frame is rejected, not crashed on
+
+PASS a malformed JSON frame is rejected, not crashed on
+
+PASS start launches the real bridge and waits until it listens
+
+PASS processes lists the bridge process
+
+PASS a second start is idempotent (already running)
+
+PASS status reports listening
+
+PASS tail returns bridge output lines
+
+PASS stop terminates the bridge and frees the port
+
+PASS restart brings it back
+
+PASS native host manifest has the stdio contract
+
+PASS installer can derive a stable extension id from the folder path
+
+PASS host never spawns the bridge with DETACHED_PROCESS (it overrides NO_WINDOW -> a console flashes per child)
+
+PASS host spawns the bridge with a hidden console (CREATE_NO_WINDOW)
+
+PASS host serialises starts with a lock
+
+PASS bridge installs the windowless-subprocess patch before it launches anything
+
+PASS winquiet is a no-op off Windows and idempotent
+
+PASS crash-loop restarts back off
+
+PASS manifest pins a key so the extension id never depends on the folder
+
+PASS installer derives the pinned id from the manifest key
+
+PASS the pinned id ends up in allowed_origins
+
+PASS installer can prove the launcher works before the browser restarts
+
+PASS Setup.bat uses CRLF line endings
+
+PASS Start.bat uses CRLF line endings
+
+PASS Start.bat refuses an unextracted zip, finds Python, installs websockets, detects a double launch
+
+PASS Start.bat runs the bridge in its own window
+
+PASS Setup.bat does not double-pause
+
+PASS MacOS_Start.command exists and is LF
+
+
+
+ALL PASS
+

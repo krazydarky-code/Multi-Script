@@ -1,0 +1,8 @@
+{
+  "edition": "dev",
+  "workspace": {
+    "maxPayloadBytes": null,
+    "maxCommandSeconds": null,
+    "background": true
+  }
+}

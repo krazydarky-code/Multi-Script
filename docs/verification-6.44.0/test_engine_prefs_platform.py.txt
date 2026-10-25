@@ -1,0 +1,58 @@
+
+
+1. no prefs file at all
+
+  ok  Linux with no prefs -> Roblox starts off (no Studio build exists)
+
+  ok  macOS with no prefs -> nothing forced off (Studio works there)
+
+  ok  Windows with no prefs -> nothing forced off
+
+
+
+2. the shipped-default file (Roblox ENABLED, foreign OS) must not defeat Linux
+
+  ok  legacy OS-less prefs with Roblox enabled -> Roblox forced off on Linux
+
+  ok  prefs written on Windows -> Roblox forced off on Linux
+
+
+
+3. this machine's OWN choice is respected
+
+  ok  a Linux user who switched Roblox ON keeps it on (explicit choice wins)
+
+  ok  only the engines the user actually disabled are returned
+
+
+
+4. an explicit Studio path overrides the Linux default
+
+  ok  ZS_STUDIO_MCP_PATH set -> Roblox is left enabled even on Linux
+
+
+
+5. saving records the OS
+
+  ok  save succeeds
+
+  ok  the OS is recorded (got 'darwin')
+
+  ok  the disabled set round-trips (got ['godot'])
+
+  ok  a saved file reloads to the same set on the same OS
+
+
+
+6. malformed input never crashes the bridge
+
+  ok  corrupt JSON -> empty set, no exception
+
+  ok  wrong type -> empty set, no exception
+
+  ok  only well-formed engine ids survive
+
+
+
+test_engine_prefs_platform: 6 sections passed
+

@@ -1,0 +1,2 @@
+PASS 904 actual skill contracts/tool references/tag sets, 18 engine/objective applied-workflow results, read-only discovery and canonical aliases.
+

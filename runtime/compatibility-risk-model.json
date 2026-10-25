@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "warning": "Probabilities are engineering-prioritization estimates from schema complexity and test evidence, not guaranteed real-world rates.",
+  "preFixRisk": {
+    "nestedObjectParameters": 0.32,
+    "oneOfAnyOfOrLocalRef": 0.28,
+    "unknownParametersWhenForbidden": 0.22,
+    "fractionalIntegerCoercion": 0.16,
+    "schemaDriftAfterServerRestart": 0.12,
+    "transientEditorDisconnect": 0.08
+  },
+  "postFixEstimatedResidualRisk": {
+    "nestedObjectParameters": 0.04,
+    "oneOfAnyOfOrLocalRef": 0.06,
+    "unknownParametersWhenForbidden": 0.03,
+    "fractionalIntegerCoercion": 0.01,
+    "schemaDriftAfterServerRestart": 0.04,
+    "transientEditorDisconnect": 0.04
+  },
+  "controls": [
+    "recursive schema normalization",
+    "strict integer conversion",
+    "live schema lookup immediately before native calls",
+    "cache invalidation on server restart",
+    "collision-safe server routing",
+    "single evidence-based transient retry",
+    "schema audit tool",
+    "exhaustive provider and parameter matrices"
+  ]
+}

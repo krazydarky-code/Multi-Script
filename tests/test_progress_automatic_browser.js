@@ -1,0 +1,16 @@
+// Direct final responses must settle automatic stages without claiming engine verification.
+const assert=require('assert'),h=require('../tools/studio_harness');
+(async()=>{
+ const html='<!doctype html><body><ol class="flex-col-reverse"><div class="mx-auto"><div class="prose">Here is your pelican SVG: &lt;svg viewBox="0 0 100 100"&gt;&lt;path d="M0 0"/&gt;&lt;/svg&gt;</div></div></ol><form><textarea placeholder="Ask anything"></textarea><button type="submit" aria-label="Send message">Send</button></form></body>';
+ const x=await h.open({html,url:'https://arena.ai/c/automatic-progress-test',provider:'providers/arena.js',bridge:'up',stateHook:true,storage:{msPacingSettings:{mode:'off'}}});assert(x);
+ try{const p=x.page;
+  await p.evaluate(()=>{const q=__qa;q.beginTaskProgress('Make me a pelican riding a bicycle in SVG');Object.assign(q.A,{started:true,lastSendOk:true,sendToken:null});Object.assign(ZSProvider.timings,{GEN_IDLE_MS:80,STABLE_MS:100,WARMUP_MS:300});q.agentLoop(0);});
+  await p.waitForFunction(()=>__qa.readTaskProgress()?.outcome==='response'&&!__qa.A.running,null,{timeout:20000});
+  const run=await p.evaluate(()=>__qa.readTaskProgress());assert.strictEqual(run.planSource,'automatic');assert(run.steps.every(s=>s.status==='done'));assert.strictEqual(run.calls,0);
+  await p.click('#ms-task-chip');const text=await p.locator('#ms-progress-view').textContent();assert(text.includes('Response received'));assert(text.includes('response stages finished'));assert(!text.includes('Plan pending'));assert(!text.includes('tasks reported verified'));
+  assert.strictEqual(await p.locator('#zs-bar #ms-task-chip').count(),1);assert.strictEqual(await p.locator('#ms-run-dock button').count(),0);assert.strictEqual(await p.locator('#zs-bar #ms-phone-chip').count(),1);assert.strictEqual(await p.locator('#ms-run-dock #ms-phone-chip').count(),0);
+  await p.keyboard.press('Escape');await p.click('#ms-phone-chip');await p.keyboard.press('Escape');assert.strictEqual(await p.evaluate(()=>document.activeElement.id),'ms-phone-chip');
+  const portal=await p.evaluate(()=>{const root=document.querySelector('#zs-root'),bar=document.querySelector('#zs-bar'),host=document.createElement('div');document.body.append(host);host.append(bar);const detached=!root.contains(bar);__qa.beginTaskProgress('Verify the portaled run controls');const task=bar.querySelector('#ms-task-chip'),phone=bar.querySelector('#ms-phone-chip'),panel=root.querySelector('#ms-run-panel');task.click();const taskOpened=!panel.hidden;panel.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));const taskFocus=document.activeElement===task;phone.click();const phoneOpened=!panel.hidden&&!panel.querySelector('#ms-phone-view').hidden;panel.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));const phoneFocus=document.activeElement===phone;root.append(bar);host.remove();return{detached,taskOpened,taskFocus,phoneOpened,phoneFocus};});assert(Object.values(portal).every(Boolean),JSON.stringify(portal));
+  assert.deepStrictEqual(x.errors,[]);console.log('PASS real agent-loop direct SVG response: automatic stages settle, no fake project verification, single chatbar phone button and Escape focus.');
+ }finally{await x.close();}
+})().catch(e=>{console.error(e.stack);process.exitCode=1;});

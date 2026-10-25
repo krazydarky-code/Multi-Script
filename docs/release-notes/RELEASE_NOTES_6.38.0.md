@@ -1,0 +1,13 @@
+# Multi-Script 6.38.0
+
+Critic is an Agent prompt add-on with an enabled setting and one to three review passes. It is included in startup instructions and each task prompt, works with the enhancer off or after choosing the original wording, and preserves the task scope. The forced extra-prompt Critic loop and Studio popover were removed. New idea remains a direct, readable chatbar action; Sandbox/Ask is in Agent settings. Ultra stays the final slider position and now requests game/style research, source URLs, a shared style bible, reference captures where possible, real project screenshots, playtests and visual comparisons.
+
+Venice supports both Classic and Agentic Chat. Agentic user and assistant boundaries, send/stop controls and final-answer markup were inspected live. Native reasoning/tool steps are excluded from local command parsing. Guest Agentic Chat emitted local-tool JSON and read a skill result executed by the real runtime. The full automatic extension pipeline was tested separately with actual Python skill retrieval and SVG creation in a deterministic provider fixture. The requested DeepSeek V4.1 Flash Uncensored selection requires availability on the user's Venice account and was not verified in this guest session.
+
+Startup now handles bounded safe skill/catalog discovery calls instead of silently dropping any initial command other than list_commands/list_tools. A final startup-only instruction keeps optional creative/critic guidance from replacing initialization. Loading saved autonomy does not mark settings dirty. Fresh effort/Critic changes are delivered through compact settings rather than repeating all craft packs.
+
+Pacing fixes an error cooldown being subtracted against time since an earlier send. The extension worker shares send leases, post-send gaps and cooldowns across tabs, persists them across worker wakes, and expires abandoned leases. Visible retry-after hints extend cooldowns. Usage/account limits stop automated retry; a new user submission can resume. Provider refusal retries are bounded, and zero retry budgets remain zero. A clicked send with uncertain acknowledgement is not automatically replayed.
+
+Disconnected chat tabs no longer leave a log-reader executor thread blocked indefinitely. Queue reads have a bounded timeout and handler cancellation is awaited, so the actual WebSocket disconnect/shutdown check exits cleanly.
+
+The original native provider adapters were compared against the supplied 6.36.1 archive. Their existing routing/DOM contracts were preserved; common startup, prompt and send paths received these repairs. The release retains nine independent live chatbar scenes and the full Dev/Public runtime editions. See QA_6.38.md and PROVIDER_QA_6.38.md for verification and limits.

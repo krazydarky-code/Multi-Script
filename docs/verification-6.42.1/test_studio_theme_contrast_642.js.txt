@@ -1,0 +1,1 @@
+PASS all six new bar themes against opposite light/dark menus: brand, idea and Ultra text meet 4.5:1 contrast; independent bar lightness is preserved.

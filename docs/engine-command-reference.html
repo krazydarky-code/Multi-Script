@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Multi-Script 6.17.0 · Engine command reference</title>
+<style>
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:#f6f7f9;color:#111827;font:14px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 70px}
+h1{font-size:24px;margin:0 0 6px;letter-spacing:-.01em}
+h2{font-size:16px;margin:34px 0 12px}
+.sub{color:#6b7280;margin:0 0 22px}
+.lead{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:14px 18px;margin:0 0 22px}
+.lead b{color:#1e40af}
+.lead ul{margin:8px 0 0;padding-left:20px;color:#1e3a8a}.lead li{margin:4px 0}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px 8px;margin-bottom:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);border-top:3px solid var(--accent)}
+.card header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h3{margin:0;font-size:15px}
+.count{font-size:11px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.blurb{color:#4b5563;font-size:12.5px;margin:8px 0 12px}
+table{border-collapse:collapse;width:100%;margin:0 0 10px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid #f3f4f6;font-size:12.5px;vertical-align:top}
+th{background:#fafafa;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;font-weight:600}
+tr:last-child td{border-bottom:0}
+td.tname{white-space:nowrap}
+code{background:#f3f4f6;padding:1px 5px;border-radius:4px;font:11.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+td.ex code{display:block;background:#0f172a;color:#e2e8f0;padding:6px 8px;border-radius:6px;white-space:pre-wrap;word-break:break-all;font-size:11px}
+.pill{font:600 9.5px/1 ui-monospace,Menlo,monospace;padding:3px 6px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em;vertical-align:1px}
+.pill.dispatch{background:#fef3c7;color:#92400e}
+.pill.flat{background:#e0e7ff;color:#3730a3}
+.acts{margin-top:5px;line-height:1.9}
+.acts .lbl{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#9ca3af;margin-right:5px}
+.muted{color:#9ca3af}
+.note{color:#4b5563}
+footer{color:#9ca3af;font-size:11px;margin-top:30px;text-align:center}
+</style></head>
+<body><div class="wrap">
+<h1>Engine command reference</h1>
+<p class="sub">Generated directly from <code>extension/core/engines.js</code> — the same data the extension uses, so it cannot drift from the code.</p>
+
+<div class="lead"><b>The transport is JSON for every engine.</b> Only the vocabulary differs.
+<ul>
+<li>MCP is JSON-RPC and every tool declares JSON-Schema'd parameters, so the plain-text <code>{"command":…,"params":{…}}</code> envelope is already the native format of the thing on the other end.</li>
+<li>A per-engine wire format would fork the parser, the camouflage masking and the parse-error recovery for no capability gain.</li>
+<li>What actually broke non-Roblox sessions was teaching Roblox's one-tool-per-action vocabulary everywhere. Unity is <b>action-dispatch</b>; Godot needs camelCase <code>projectPath</code>; Blender needs JSON-escaped code.</li>
+</ul></div>
+
+<h2>Roblox Studio — unchanged vocabulary, corrected shapes</h2>
+<section class="card" style="--accent:#dc2626">
+  <header><h3>Roblox Studio</h3><span class="count">flat, one tool per action</span></header>
+  <p class="blurb">The JSON transport and this vocabulary are deliberately untouched by 6.17.0. Every place-scoped command also takes <code>studio_id</code> (get it from <code>list_roblox_studios</code>). The build-surface rows were corrected against the live server's published parameter schemas — the earlier shapes were guessed and several were wrong.</p>
+  <table><thead><tr><th>Command</th><th>Required params</th><th>Note</th></tr></thead><tbody>
+    <tr><td class="tname"><code>execute_luau</code></td><td>code, datamodel_type (&quot;Edit&quot; | &quot;Server&quot; | &quot;Client&quot;)</td><td class="note">Run Luau in the place. Use `return` for output - print() is NOT captured.</td></tr>
+    <tr><td class="tname"><code>multi_edit</code></td><td>datamodel_type, edits[] {file_path, old_string, new_string}</td><td class="note">old_string must byte-match the current script. script_read first.</td></tr>
+    <tr><td class="tname"><code>inspect_instance</code></td><td>path</td><td class="note">Dot path, e.g. Workspace.Model.Part.</td></tr>
+    <tr><td class="tname"><code>script_read</code></td><td>target_file</td><td class="note">Full dot path. Never creates a script.</td></tr>
+    <tr><td class="tname"><code>search_game_tree</code></td><td>datamodel_type (&quot;Edit&quot; in edit mode; &quot;Edit&quot; is rejected during playtest)</td><td class="note">Flat JSON hierarchy. Scope with path / instance_type / keywords / max_depth (default 3, max 10). Follow with inspect_instance for properties.</td></tr>
+    <tr><td class="tname"><code>insert_asset</code></td><td>assetId (<b>string</b>, e.g. &quot;123456789&quot;)</td><td class="note">Always pass assetName (names the inserted instance) and optionally assetType / parentPath. Confirm the instance landed afterwards.</td></tr>
+    <tr><td class="tname"><code>search_asset</code></td><td>—</td><td class="note">Creator Store + Inventory. query / assetType / scope / maxResults. Results are candidates — finding is not inserting.</td></tr>
+    <tr><td class="tname"><code>generate_mesh</code></td><td><b>textPrompt</b> (not <code>prompt</code>)</td><td class="note">Blocks until done — do NOT wait_job_finished for it. Geometry only: set size/collision/materials after.</td></tr>
+    <tr><td class="tname"><code>generate_procedural_model</code></td><td><b>prompt</b></td><td class="note">Server recommends <code>&quot;async&quot;:true</code> → returns a <b>jobId</b>. Only wait_job_finished when you need the result.</td></tr>
+    <tr><td class="tname"><code>wait_job_finished</code></td><td><b>jobId</b> (not <code>generation_id</code>)</td><td class="note">Only for a job started with async:true, and only when your next step depends on it.</td></tr>
+    <tr><td class="tname"><code>get_console_output</code></td><td>—</td><td class="note">Primary evidence channel for a build. Read it after running code instead of assuming success.</td></tr>
+    <tr><td class="tname"><code>screen_capture</code></td><td><b>capture_id</b> (e.g. &quot;ScreenCapture_1&quot;)</td><td class="note">Returns an image. This assistant has no image input — verify geometry programmatically instead.</td></tr>
+    <tr><td class="tname"><code>character_navigation</code></td><td>datamodel_type (&quot;Client&quot;), instance_path OR x/y/z</td><td class="note">Moves the player character. Optional speed_multiplier (0.1–10).</td></tr>
+    <tr><td class="tname"><code>list_roblox_studios</code></td><td>—</td><td class="note">Discovery call. Run it FIRST and copy the exact &quot;id&quot; into studio_id on every place-scoped command.</td></tr>
+  </tbody></table>
+</section>
+
+<h2>Godot</h2>
+<section class="card" style="--accent:#478cbf">
+    <header><h3>Godot</h3><span class="count">14 tools</span></header>
+    <p class="blurb">Flat tool set, but every project-scoped tool needs <code>projectPath</code> = the <b>absolute folder containing project.godot</b>. <code>list_projects</code> is the one exception and takes <code>directory</code>. Extracted from the published <code>@coding-solo/godot-mcp@0.1.1</code> schemas.</p>
+    <table><thead><tr><th>Command</th><th>Required params</th><th>Example</th></tr></thead>
+    <tbody><tr>
+      <td class="tname"><code>launch_editor</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;launch_editor&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>run_project</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;run_project&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_debug_output</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_debug_output&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>stop_project</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;stop_project&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_godot_version</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_godot_version&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>list_projects</code> <span class="pill flat">flat</span></td>
+      <td><code>directory</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;list_projects&quot;,&quot;params&quot;:{&quot;directory&quot;:&quot;/abs/path/to/scan&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_project_info</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_project_info&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>create_scene</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>scenePath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;create_scene&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;scenePath&quot;:&quot;res://scenes/Level1.tscn&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>add_node</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>scenePath</code>, <code>nodeType</code>, <code>nodeName</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;add_node&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;scenePath&quot;:&quot;res://scenes/Level1.tscn&quot;,&quot;nodeType&quot;:&quot;Sprite2D&quot;,&quot;nodeName&quot;:&quot;Sprite&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>load_sprite</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>scenePath</code>, <code>nodePath</code>, <code>texturePath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;load_sprite&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;scenePath&quot;:&quot;res://scenes/Level1.tscn&quot;,&quot;nodePath&quot;:&quot;Level/Sprite&quot;,&quot;texturePath&quot;:&quot;res://art/sprite.png&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>export_mesh_library</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>scenePath</code>, <code>outputPath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;export_mesh_library&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;scenePath&quot;:&quot;res://scenes/Level1.tscn&quot;,&quot;outputPath&quot;:&quot;res://resources/level.tres&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>save_scene</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>scenePath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;save_scene&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;scenePath&quot;:&quot;res://scenes/Level1.tscn&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_uid</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code>, <code>filePath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_uid&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;,&quot;filePath&quot;:&quot;res://scenes/Level1.tscn&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>update_project_uids</code> <span class="pill flat">flat</span></td>
+      <td><code>projectPath</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;update_project_uids&quot;,&quot;params&quot;:{&quot;projectPath&quot;:&quot;/abs/path/to/folder-with-project.godot&quot;}}</code></td>
+    </tr></tbody></table>
+  </section>
+
+<h2>Unity</h2>
+<section class="card" style="--accent:#0f9d58">
+    <header><h3>Unity</h3><span class="count">33 tools</span></header>
+    <p class="blurb">Mixed model: a few flat tools, and the rest are <b>action-dispatch</b> — one tool, an <code>action</code> string selects the operation. Writing the action as the command (e.g. <code>{"command":"get_hierarchy"}</code>) is the classic failure; 6.17.0 repairs it automatically when exactly one tool owns that action.</p>
+    <table><thead><tr><th>Command</th><th>Required params</th><th>Example</th></tr></thead>
+    <tbody><tr>
+      <td class="tname"><code>batch_execute</code> <span class="pill flat">flat</span></td>
+      <td><code>commands</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;batch_execute&quot;,&quot;params&quot;:{&quot;commands&quot;:&quot;[ … ]&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>set_active_instance</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;set_active_instance&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>refresh_unity</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;refresh_unity&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_scene</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (8)</span> <code>create</code> <code>get_active</code> <code>get_build_settings</code> <code>get_hierarchy</code> <code>load</code> <code>save</code> <code>scene_view_frame</code> <code>screenshot</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_scene&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>find_gameobjects</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;find_gameobjects&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_gameobject</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (6)</span> <code>create</code> <code>delete</code> <code>duplicate</code> <code>look_at</code> <code>modify</code> <code>move_relative</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_gameobject&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_components</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (3)</span> <code>add</code> <code>remove</code> <code>set_property</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_components&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>create_script</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;create_script&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>script_apply_edits</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;script_apply_edits&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>apply_text_edits</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;apply_text_edits&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>validate_script</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;validate_script&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_sha</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_sha&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>delete_script</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;delete_script&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_asset</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (8)</span> <code>create</code> <code>create_folder</code> <code>delete</code> <code>duplicate</code> <code>get_info</code> <code>move</code> <code>rename</code> <code>search</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_asset&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_prefabs</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (4)</span> <code>create_from_gameobject</code> <code>get_hierarchy</code> <code>get_info</code> <code>modify_contents</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_prefabs&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_material</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (6)</span> <code>assign_material_to_renderer</code> <code>create</code> <code>get_material_info</code> <code>set_material_color</code> <code>set_material_shader_property</code> <code>set_renderer_color</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_material&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_texture</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (3)</span> <code>apply_gradient</code> <code>apply_pattern</code> <code>create</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_texture&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_ui</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (6)</span> <code>attach_ui_document</code> <code>create</code> <code>create_panel_settings</code> <code>get_visual_tree</code> <code>read</code> <code>update</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_ui&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_editor</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (13)</span> <code>add_layer</code> <code>add_tag</code> <code>close_prefab_stage</code> <code>deploy_package</code> <code>open_prefab_stage</code> <code>pause</code> <code>play</code> <code>remove_layer</code> <code>remove_tag</code> <code>restore_package</code> <code>save_prefab_stage</code> <code>set_active_tool</code> <code>stop</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_editor&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>execute_menu_item</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;execute_menu_item&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>read_console</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;read_console&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>run_tests</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;run_tests&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_test_job</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_test_job&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>find_in_file</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;find_in_file&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>execute_custom_tool</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;execute_custom_tool&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_camera</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (14)</span> <code>add_extension</code> <code>create_camera</code> <code>ensure_brain</code> <code>force_camera</code> <code>list_cameras</code> <code>ping</code> <code>release_override</code> <code>screenshot</code> <code>screenshot_multiview</code> <code>set_aim</code> <code>set_blend</code> <code>set_body</code> <code>set_noise</code> <code>set_priority</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_camera&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_graphics</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (19)</span> <code>bake_create_light_probe_group</code> <code>bake_create_reflection_probe</code> <code>bake_start</code> <code>bake_status</code> <code>feature_add</code> <code>feature_list</code> <code>feature_reorder</code> <code>feature_toggle</code> <code>ping</code> <code>pipeline_get_info</code> <code>pipeline_set_quality</code> <code>stats_get</code> <code>stats_get_memory</code> <code>volume_add_effect</code> <code>volume_create</code> <code>volume_create_profile</code> <code>volume_get_info</code> <code>volume_list_effects</code> <code>volume_set_effect</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_graphics&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_packages</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (6)</span> <code>add_package</code> <code>add_registry</code> <code>list_packages</code> <code>remove_package</code> <code>search_packages</code> <code>status</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_packages&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_physics</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (18)</span> <code>add_joint</code> <code>apply_force</code> <code>assign_physics_material</code> <code>configure_joint</code> <code>configure_rigidbody</code> <code>create_physics_material</code> <code>get_collision_matrix</code> <code>get_settings</code> <code>linecast</code> <code>overlap</code> <code>ping</code> <code>raycast</code> <code>raycast_all</code> <code>set_collision_matrix</code> <code>set_settings</code> <code>shapecast</code> <code>simulate_step</code> <code>validate</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_physics&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_probuilder</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (10)</span> <code>auto_smooth</code> <code>center_pivot</code> <code>create_shape</code> <code>duplicate_and_flip</code> <code>extrude_faces</code> <code>get_mesh_info</code> <code>ping</code> <code>select_faces</code> <code>validate_mesh</code> <code>weld_vertices</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_probuilder&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>manage_profiler</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (14)</span> <code>frame_debugger_disable</code> <code>frame_debugger_enable</code> <code>frame_debugger_get_events</code> <code>get_counters</code> <code>get_frame_timing</code> <code>get_object_memory</code> <code>memory_compare_snapshots</code> <code>memory_list_snapshots</code> <code>memory_take_snapshot</code> <code>ping</code> <code>profiler_set_areas</code> <code>profiler_start</code> <code>profiler_status</code> <code>profiler_stop</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;manage_profiler&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>unity_reflect</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (3)</span> <code>get_member</code> <code>get_type</code> <code>search</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;unity_reflect&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>unity_docs</code> <span class="pill dispatch">action-dispatch</span></td>
+      <td><code>action</code><div class="acts"><span class="lbl">actions (4)</span> <code>get_doc</code> <code>get_manual</code> <code>get_package_doc</code> <code>lookup</code></div></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;unity_docs&quot;,&quot;params&quot;:{&quot;action&quot;:&quot;get_hierarchy&quot;}}</code></td>
+    </tr></tbody></table>
+  </section>
+
+<h2>Blender</h2>
+<section class="card" style="--accent:#ea7600">
+    <header><h3>Blender</h3><span class="count">4 tools</span></header>
+    <p class="blurb">Code-execution based. The code goes in <code>params.code</code> as a JSON <b>string</b>, so every quote and newline inside the Python must be escaped. Blender MCP servers differ, so only the tools this project has evidence for are registered — confirm the rest with <code>list_commands</code>.</p>
+    <table><thead><tr><th>Command</th><th>Required params</th><th>Example</th></tr></thead>
+    <tbody><tr>
+      <td class="tname"><code>execute_blender_code</code> <span class="pill flat">flat</span></td>
+      <td><code>code</code></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;execute_blender_code&quot;,&quot;params&quot;:{&quot;code&quot;:&quot;import bpy\\nprint(bpy.data.scenes[0].name)&quot;}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_scene_info</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_scene_info&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_object_info</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_object_info&quot;,&quot;params&quot;:{}}</code></td>
+    </tr><tr>
+      <td class="tname"><code>get_viewport_screenshot</code> <span class="pill flat">flat</span></td>
+      <td><span class="muted">none</span></td>
+      <td class="ex"><code>{&quot;command&quot;:&quot;get_viewport_screenshot&quot;,&quot;params&quot;:{}}</code></td>
+    </tr></tbody></table>
+  </section>
+
+<h2>Any other MCP server</h2>
+<section class="card" style="--accent:#6b7280">
+  <header><h3>Unreal, Figma, custom servers</h3><span class="count">discovery-first</span></header>
+  <p class="blurb">Their command sets are not documented in the prompt on purpose — guessing a package or tool name is how you get a hallucinated API. The extension emits a discovery-first rule instead: run <code>list_mcp_servers</code>, then <code>list_commands</code> with that server's id, and use only what it advertises. If a tool's schema shows an <code>action</code> parameter, the action goes inside <code>params.action</code> — it is not a tool name of its own.</p>
+</section>
+
+<footer>Multi-Script 6.17.0 · generated 2026-09-30 19:16:01 UTC · 14 Godot + 33 Unity + 4 Blender tools, 132 Unity actions</footer>
+</div></body></html>

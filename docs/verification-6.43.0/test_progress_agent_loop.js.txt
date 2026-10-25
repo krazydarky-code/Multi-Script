@@ -1,0 +1,1 @@
+PASS actual parser/agent loop: model plans and updates local checklist, prefixed command works, project failure is counted, reporting calls are excluded, and a final Done claim leaves blocked work unfinished.

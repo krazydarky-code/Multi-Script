@@ -1,0 +1,1138 @@
+{
+  "product": "Multi-Script",
+  "version": "6.42.0",
+  "passed": 160,
+  "total": 160,
+  "javascript": 100,
+  "python": 60,
+  "method": "Latest execution per test, selected by its individual log timestamp. Earlier failed runs were corrected and rerun. A returned success can contain explicit environment skips.",
+  "results": [
+    {
+      "file": "test_adaptive_creative_routing.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false,
+      "log": "verification-642/all-js/test_adaptive_creative_routing.js.log"
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 31.55,
+      "skipped": false,
+      "log": "verification-642/all-js/test_agentic_runtime_roundtrip.js.log"
+    },
+    {
+      "file": "test_all_skills_and_tools.py",
+      "exitCode": 0,
+      "seconds": 21.28,
+      "skipped": false,
+      "log": "verification-642/all-py/test_all_skills_and_tools.py.log"
+    },
+    {
+      "file": "test_arena_direct_max_adaptive.js",
+      "exitCode": 0,
+      "seconds": 1.53,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_direct_max_adaptive.js.log"
+    },
+    {
+      "file": "test_arena_human_verification.js",
+      "exitCode": 0,
+      "seconds": 1.88,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_human_verification.js.log"
+    },
+    {
+      "file": "test_arena_roblox_json_protocol.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_roblox_json_protocol.js.log"
+    },
+    {
+      "file": "test_arena_routing_off_614.js",
+      "exitCode": 0,
+      "seconds": 1.25,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_routing_off_614.js.log"
+    },
+    {
+      "file": "test_arena_starter_profiles_and_engine_free.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_starter_profiles_and_engine_free.js.log"
+    },
+    {
+      "file": "test_arena_verification_detection.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_arena_verification_detection.js.log"
+    },
+    {
+      "file": "test_assist_tools.py",
+      "exitCode": 0,
+      "seconds": 1.03,
+      "skipped": false,
+      "log": "verification-642/all-py/test_assist_tools.py.log"
+    },
+    {
+      "file": "test_blender_assist.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_blender_assist.js.log"
+    },
+    {
+      "file": "test_bridge_builtins.py",
+      "exitCode": 0,
+      "seconds": 1.11,
+      "skipped": false,
+      "log": "verification-642/all-py/test_bridge_builtins.py.log"
+    },
+    {
+      "file": "test_bridge_diagnostics.py",
+      "exitCode": 0,
+      "seconds": 0.95,
+      "skipped": false,
+      "log": "verification-642/all-py/test_bridge_diagnostics.py.log"
+    },
+    {
+      "file": "test_bridge_environment_628.py",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "skipped": false,
+      "log": "verification-642/all-py/test_bridge_environment_628.py.log"
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.5,
+      "skipped": false,
+      "log": "verification-642/all-py/test_bridge_wire_638.py.log"
+    },
+    {
+      "file": "test_brief_and_scorecard.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false,
+      "log": "verification-642/all-py/test_brief_and_scorecard.py.log"
+    },
+    {
+      "file": "test_chatbar_nudge.js",
+      "exitCode": 0,
+      "seconds": 36.84,
+      "skipped": false,
+      "log": "verification-642/all-js/test_chatbar_nudge.js.log"
+    },
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 28.7,
+      "skipped": false,
+      "log": "verification-642/all-js/test_chatbar_studio.js.log"
+    },
+    {
+      "file": "test_claude_provider_setup.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "log": "verification-642/all-js/test_claude_provider_setup.js.log"
+    },
+    {
+      "file": "test_code_mode_636.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "log": "verification-642/all-js/test_code_mode_636.js.log"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 1.36,
+      "skipped": false,
+      "log": "verification-642/all-js/test_content_script_load_contract.js.log"
+    },
+    {
+      "file": "test_cowork_evidence_642.py",
+      "exitCode": 0,
+      "seconds": 0.78,
+      "skipped": false,
+      "log": "verification-642/all-py/test_cowork_evidence_642.py.log"
+    },
+    {
+      "file": "test_cowork_provider_sessions_642.js",
+      "exitCode": 0,
+      "seconds": 9.86,
+      "skipped": false,
+      "log": "verification-642/delivery-final/test_cowork_provider_sessions_642.js.log"
+    },
+    {
+      "file": "test_cowork_queue_640.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "log": "verification-642/all-js/test_cowork_queue_640.js.log"
+    },
+    {
+      "file": "test_creative_argument_hotfix.py",
+      "exitCode": 0,
+      "seconds": 1.19,
+      "skipped": false,
+      "log": "verification-642/all-py/test_creative_argument_hotfix.py.log"
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 1.58,
+      "skipped": false,
+      "log": "verification-642/version-rechecks/test_creative_asset_pack_6361.py.log"
+    },
+    {
+      "file": "test_creative_execution_standards.py",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false,
+      "log": "verification-642/all-py/test_creative_execution_standards.py.log"
+    },
+    {
+      "file": "test_creative_production_6361.js",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false,
+      "log": "verification-642/all-js/test_creative_production_6361.js.log"
+    },
+    {
+      "file": "test_creative_surfaces.py",
+      "exitCode": 0,
+      "seconds": 0.72,
+      "skipped": false,
+      "log": "verification-642/all-py/test_creative_surfaces.py.log"
+    },
+    {
+      "file": "test_critic_loop_613.py",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false,
+      "log": "verification-642/all-py/test_critic_loop_613.py.log"
+    },
+    {
+      "file": "test_cross_provider_tool_matrix.js",
+      "exitCode": 0,
+      "seconds": 0.31,
+      "skipped": false,
+      "log": "verification-642/all-js/test_cross_provider_tool_matrix.js.log"
+    },
+    {
+      "file": "test_desktop_vision.py",
+      "exitCode": 0,
+      "seconds": 1.39,
+      "skipped": false,
+      "log": "verification-642/all-py/test_desktop_vision.py.log"
+    },
+    {
+      "file": "test_dsml_native_markup.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "log": "verification-642/all-js/test_dsml_native_markup.js.log"
+    },
+    {
+      "file": "test_elevenlabs_audio.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "log": "verification-642/all-py/test_elevenlabs_audio.py.log"
+    },
+    {
+      "file": "test_elevenlabs_settings.py",
+      "exitCode": 0,
+      "seconds": 0.19,
+      "skipped": false,
+      "log": "verification-642/all-py/test_elevenlabs_settings.py.log"
+    },
+    {
+      "file": "test_engine_prefs_platform.py",
+      "exitCode": 0,
+      "seconds": 0.44,
+      "skipped": false,
+      "log": "verification-642/all-py/test_engine_prefs_platform.py.log"
+    },
+    {
+      "file": "test_engine_registry_integrity.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_engine_registry_integrity.js.log"
+    },
+    {
+      "file": "test_engine_schema_assurance_69.py",
+      "exitCode": 0,
+      "seconds": 1.38,
+      "skipped": false,
+      "log": "verification-642/all-py/test_engine_schema_assurance_69.py.log"
+    },
+    {
+      "file": "test_engine_setup_guides_6271.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_engine_setup_guides_6271.js.log"
+    },
+    {
+      "file": "test_engine_toggles_and_code_transport.py",
+      "exitCode": 0,
+      "seconds": 0.52,
+      "skipped": false,
+      "log": "verification-642/all-py/test_engine_toggles_and_code_transport.py.log"
+    },
+    {
+      "file": "test_engine_tool_layer.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_engine_tool_layer.js.log"
+    },
+    {
+      "file": "test_engine_tool_routing.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_engine_tool_routing.js.log"
+    },
+    {
+      "file": "test_engine_toolkit.py",
+      "exitCode": 0,
+      "seconds": 0.91,
+      "skipped": false,
+      "log": "verification-642/all-py/test_engine_toolkit.py.log"
+    },
+    {
+      "file": "test_enhancer_browser_send.js",
+      "exitCode": 0,
+      "seconds": 17.03,
+      "skipped": false,
+      "log": "verification-642/rechecks/test_enhancer_browser_send.js.log"
+    },
+    {
+      "file": "test_enhancer_presentation_627.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_enhancer_presentation_627.js.log"
+    },
+    {
+      "file": "test_enhancer_send_gate.js",
+      "exitCode": 0,
+      "seconds": 0.48,
+      "skipped": false,
+      "log": "verification-642/all-js/test_enhancer_send_gate.js.log"
+    },
+    {
+      "file": "test_error_recovery.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_error_recovery.js.log"
+    },
+    {
+      "file": "test_extension_stress.js",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false,
+      "log": "verification-642/all-js/test_extension_stress.js.log"
+    },
+    {
+      "file": "test_flight_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 9.2,
+      "skipped": false,
+      "log": "verification-642/final-flight/test_flight_lifecycle_642.js.log"
+    },
+    {
+      "file": "test_fnaf_office_engine.js",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false,
+      "log": "verification-642/all-js/test_fnaf_office_engine.js.log"
+    },
+    {
+      "file": "test_fnaf_theme.js",
+      "exitCode": 0,
+      "seconds": 88.61,
+      "skipped": false,
+      "log": "verification-642/settings/test_fnaf_theme.js.log"
+    },
+    {
+      "file": "test_form_craft.py",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false,
+      "log": "verification-642/all-py/test_form_craft.py.log"
+    },
+    {
+      "file": "test_full_spectrum_skill_mesh.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false,
+      "log": "verification-642/all-py/test_full_spectrum_skill_mesh.py.log"
+    },
+    {
+      "file": "test_full_spectrum_studio.py",
+      "exitCode": 0,
+      "seconds": 0.67,
+      "skipped": false,
+      "log": "verification-642/all-py/test_full_spectrum_studio.py.log"
+    },
+    {
+      "file": "test_game_idea_production.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "log": "verification-642/all-js/test_game_idea_production.js.log"
+    },
+    {
+      "file": "test_game_idea_ui.js",
+      "exitCode": 0,
+      "seconds": 4.67,
+      "skipped": false,
+      "log": "verification-642/all-js/test_game_idea_ui.js.log"
+    },
+    {
+      "file": "test_game_idea_variety_6271.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "log": "verification-642/all-js/test_game_idea_variety_6271.js.log"
+    },
+    {
+      "file": "test_godot_audio_npc_tools.py",
+      "exitCode": 0,
+      "seconds": 0.39,
+      "skipped": true,
+      "log": "verification-642/all-py/test_godot_audio_npc_tools.py.log"
+    },
+    {
+      "file": "test_godot_launcher.py",
+      "exitCode": 0,
+      "seconds": 0.39,
+      "skipped": false,
+      "log": "verification-642/all-py/test_godot_launcher.py.log"
+    },
+    {
+      "file": "test_godot_native_tools.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": true,
+      "log": "verification-642/all-py/test_godot_native_tools.py.log"
+    },
+    {
+      "file": "test_halloween_ui.js",
+      "exitCode": 0,
+      "seconds": 8.55,
+      "skipped": false,
+      "log": "verification-642/all-js/test_halloween_ui.js.log"
+    },
+    {
+      "file": "test_intent_to_product_intelligence.py",
+      "exitCode": 0,
+      "seconds": 1.03,
+      "skipped": false,
+      "log": "verification-642/all-py/test_intent_to_product_intelligence.py.log"
+    },
+    {
+      "file": "test_keyless_local_audio.py",
+      "exitCode": 0,
+      "seconds": 0.55,
+      "skipped": false,
+      "log": "verification-642/all-py/test_keyless_local_audio.py.log"
+    },
+    {
+      "file": "test_launcher_env_635.py",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "log": "verification-642/all-py/test_launcher_env_635.py.log"
+    },
+    {
+      "file": "test_limits_and_long_payloads.js",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false,
+      "log": "verification-642/all-js/test_limits_and_long_payloads.js.log"
+    },
+    {
+      "file": "test_local_bridge_compat.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_local_bridge_compat.js.log"
+    },
+    {
+      "file": "test_local_memory.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_local_memory.js.log"
+    },
+    {
+      "file": "test_mcp_resources.py",
+      "exitCode": 0,
+      "seconds": 0.75,
+      "skipped": false,
+      "log": "verification-642/all-py/test_mcp_resources.py.log"
+    },
+    {
+      "file": "test_media_relay.py",
+      "exitCode": 0,
+      "seconds": 0.95,
+      "skipped": false,
+      "log": "verification-642/all-py/test_media_relay.py.log"
+    },
+    {
+      "file": "test_media_relay_js.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "log": "verification-642/all-js/test_media_relay_js.js.log"
+    },
+    {
+      "file": "test_memory_graph.py",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "skipped": false,
+      "log": "verification-642/all-py/test_memory_graph.py.log"
+    },
+    {
+      "file": "test_memory_panel.js",
+      "exitCode": 0,
+      "seconds": 1.75,
+      "skipped": false,
+      "log": "verification-642/all-js/test_memory_panel.js.log"
+    },
+    {
+      "file": "test_menu_settings_scope.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_menu_settings_scope.js.log"
+    },
+    {
+      "file": "test_model_improvement_layer.py",
+      "exitCode": 0,
+      "seconds": 0.94,
+      "skipped": false,
+      "log": "verification-642/all-py/test_model_improvement_layer.py.log"
+    },
+    {
+      "file": "test_multi_engine_provider_reliability.py",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "skipped": false,
+      "log": "verification-642/all-py/test_multi_engine_provider_reliability.py.log"
+    },
+    {
+      "file": "test_native_facade.py",
+      "exitCode": 0,
+      "seconds": 0.42,
+      "skipped": false,
+      "log": "verification-642/all-py/test_native_facade.py.log"
+    },
+    {
+      "file": "test_native_pro_tools.py",
+      "exitCode": 0,
+      "seconds": 13.98,
+      "skipped": true,
+      "log": "verification-642/all-py/test_native_pro_tools.py.log"
+    },
+    {
+      "file": "test_new_provider_transport_637.js",
+      "exitCode": 0,
+      "seconds": 4.03,
+      "skipped": false,
+      "log": "verification-642/all-js/test_new_provider_transport_637.js.log"
+    },
+    {
+      "file": "test_notion_always_on.js",
+      "exitCode": 0,
+      "seconds": 1.77,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_always_on.js.log"
+    },
+    {
+      "file": "test_notion_app_chat_and_setup.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_app_chat_and_setup.js.log"
+    },
+    {
+      "file": "test_notion_bar_auto_width.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_bar_auto_width.js.log"
+    },
+    {
+      "file": "test_notion_bootstrap_once.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_bootstrap_once.js.log"
+    },
+    {
+      "file": "test_notion_dom.js",
+      "exitCode": 0,
+      "seconds": 1.19,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_dom.js.log"
+    },
+    {
+      "file": "test_notion_model_switching.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_model_switching.js.log"
+    },
+    {
+      "file": "test_notion_profiles.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_profiles.js.log"
+    },
+    {
+      "file": "test_notion_prompt_only_routing.js",
+      "exitCode": 0,
+      "seconds": 1.27,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_prompt_only_routing.js.log"
+    },
+    {
+      "file": "test_notion_route_guard.js",
+      "exitCode": 0,
+      "seconds": 2.92,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_route_guard.js.log"
+    },
+    {
+      "file": "test_notion_send_failfast.js",
+      "exitCode": 0,
+      "seconds": 55.72,
+      "skipped": false,
+      "log": "verification-642/last-provider/test_notion_send_failfast.js.log"
+    },
+    {
+      "file": "test_notion_transcript_editable_guard.js",
+      "exitCode": 0,
+      "seconds": 3.19,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_transcript_editable_guard.js.log"
+    },
+    {
+      "file": "test_notion_usage.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_notion_usage.js.log"
+    },
+    {
+      "file": "test_one_shot_autonomy.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_one_shot_autonomy.js.log"
+    },
+    {
+      "file": "test_pacing_engine.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_pacing_engine.js.log"
+    },
+    {
+      "file": "test_parser_repair.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_parser_repair.js.log"
+    },
+    {
+      "file": "test_portable_settings_and_capability_floor.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_portable_settings_and_capability_floor.js.log"
+    },
+    {
+      "file": "test_presentation_craft_627.py",
+      "exitCode": 0,
+      "seconds": 1.33,
+      "skipped": false,
+      "log": "verification-642/all-py/test_presentation_craft_627.py.log"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false,
+      "log": "verification-642/version-rechecks/test_product_manifest_plugin_613.py.log"
+    },
+    {
+      "file": "test_product_release_hardening.py",
+      "exitCode": 0,
+      "seconds": 0.88,
+      "skipped": false,
+      "log": "verification-642/all-py/test_product_release_hardening.py.log"
+    },
+    {
+      "file": "test_prompt_enhancer.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false,
+      "log": "verification-642/all-js/test_prompt_enhancer.js.log"
+    },
+    {
+      "file": "test_provider_behavior.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_behavior.js.log"
+    },
+    {
+      "file": "test_provider_benchmarks.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_benchmarks.js.log"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 47.61,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_browser_matrix_641.js.log"
+    },
+    {
+      "file": "test_provider_failure_640.js",
+      "exitCode": 0,
+      "seconds": 6.8,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_failure_640.js.log"
+    },
+    {
+      "file": "test_provider_interface_628.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_interface_628.js.log"
+    },
+    {
+      "file": "test_provider_send_budget.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_send_budget.js.log"
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 33.34,
+      "skipped": false,
+      "log": "verification-642/all-js/test_provider_transport_matrix_641.js.log"
+    },
+    {
+      "file": "test_refusal_feedback.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_refusal_feedback.js.log"
+    },
+    {
+      "file": "test_required_param_contract.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_required_param_contract.js.log"
+    },
+    {
+      "file": "test_roblox_audio_npc_tools.py",
+      "exitCode": 0,
+      "seconds": 0.86,
+      "skipped": false,
+      "log": "verification-642/all-py/test_roblox_audio_npc_tools.py.log"
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 1.17,
+      "skipped": false,
+      "log": "verification-642/version-rechecks/test_roblox_companion.py.log"
+    },
+    {
+      "file": "test_roblox_json_contract.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_roblox_json_contract.js.log"
+    },
+    {
+      "file": "test_roblox_professional_tool_expansion.py",
+      "exitCode": 0,
+      "seconds": 1.22,
+      "skipped": false,
+      "log": "verification-642/all-py/test_roblox_professional_tool_expansion.py.log"
+    },
+    {
+      "file": "test_roblox_schema_conformance.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_roblox_schema_conformance.js.log"
+    },
+    {
+      "file": "test_roblox_studio_id.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_roblox_studio_id.js.log"
+    },
+    {
+      "file": "test_roblox_workflow_tools.py",
+      "exitCode": 0,
+      "seconds": 1.36,
+      "skipped": false,
+      "log": "verification-642/all-py/test_roblox_workflow_tools.py.log"
+    },
+    {
+      "file": "test_schema_fuzz_all_tools.py",
+      "exitCode": 0,
+      "seconds": 0.91,
+      "skipped": false,
+      "log": "verification-642/all-py/test_schema_fuzz_all_tools.py.log"
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 29.16,
+      "skipped": false,
+      "log": "verification-642/all-py/test_schema_repair_and_native_host.py.log"
+    },
+    {
+      "file": "test_settings_customization.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_settings_customization.js.log"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 433.84,
+      "skipped": false,
+      "log": "verification-642/settings/test_settings_sweep.js.log"
+    },
+    {
+      "file": "test_shared_transport_edges_641.js",
+      "exitCode": 0,
+      "seconds": 2.31,
+      "skipped": false,
+      "log": "verification-642/all-js/test_shared_transport_edges_641.js.log"
+    },
+    {
+      "file": "test_skill_application_641.py",
+      "exitCode": 0,
+      "seconds": 1.5,
+      "skipped": false,
+      "log": "verification-642/all-py/test_skill_application_641.py.log"
+    },
+    {
+      "file": "test_skill_packs.py",
+      "exitCode": 0,
+      "seconds": 0.66,
+      "skipped": false,
+      "log": "verification-642/all-py/test_skill_packs.py.log"
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-js/test_skill_tool_mesh_prompt.js.log"
+    },
+    {
+      "file": "test_sounds.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_sounds.js.log"
+    },
+    {
+      "file": "test_staged_and_replay_guards.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false,
+      "log": "verification-642/all-py/test_staged_and_replay_guards.py.log"
+    },
+    {
+      "file": "test_stale_bridge_replacement.py",
+      "exitCode": 0,
+      "seconds": 55.31,
+      "skipped": false,
+      "log": "verification-642/all-py/test_stale_bridge_replacement.py.log"
+    },
+    {
+      "file": "test_studio_contracts_642.js",
+      "exitCode": 0,
+      "seconds": 0.14,
+      "skipped": false,
+      "log": "verification-642/final-ui/test_studio_contracts_642.js.log"
+    },
+    {
+      "file": "test_studio_craft_skills.py",
+      "exitCode": 0,
+      "seconds": 0.25,
+      "skipped": false,
+      "log": "verification-642/all-py/test_studio_craft_skills.py.log"
+    },
+    {
+      "file": "test_studio_hub_637.py",
+      "exitCode": 0,
+      "seconds": 1.55,
+      "skipped": false,
+      "log": "verification-642/all-py/test_studio_hub_637.py.log"
+    },
+    {
+      "file": "test_studio_port_posix.py",
+      "exitCode": 0,
+      "seconds": 0.38,
+      "skipped": false,
+      "log": "verification-642/all-py/test_studio_port_posix.py.log"
+    },
+    {
+      "file": "test_studio_revamp_637.js",
+      "exitCode": 0,
+      "seconds": 10.88,
+      "skipped": false,
+      "log": "verification-642/all-js/test_studio_revamp_637.js.log"
+    },
+    {
+      "file": "test_studio_theme_contrast_642.js",
+      "exitCode": 0,
+      "seconds": 5.84,
+      "skipped": false,
+      "log": "verification-642/theme-stable/test_studio_theme_contrast_642.js.log"
+    },
+    {
+      "file": "test_studio_ui.js",
+      "exitCode": 0,
+      "seconds": 16.3,
+      "skipped": false,
+      "log": "verification-642/all-js/test_studio_ui.js.log"
+    },
+    {
+      "file": "test_superapp_provider.js",
+      "exitCode": 0,
+      "seconds": 9.01,
+      "skipped": false,
+      "log": "verification-642/all-js/test_superapp_provider.js.log"
+    },
+    {
+      "file": "test_superapp_wire.js",
+      "exitCode": 0,
+      "seconds": 1.25,
+      "skipped": false,
+      "log": "verification-642/all-js/test_superapp_wire.js.log"
+    },
+    {
+      "file": "test_terminal_panel.js",
+      "exitCode": 0,
+      "seconds": 1.78,
+      "skipped": false,
+      "log": "verification-642/all-js/test_terminal_panel.js.log"
+    },
+    {
+      "file": "test_terminal_running_628.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false,
+      "log": "verification-642/all-js/test_terminal_running_628.js.log"
+    },
+    {
+      "file": "test_theme_picker_legibility.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_theme_picker_legibility.js.log"
+    },
+    {
+      "file": "test_themes_bar_628.js",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "skipped": false,
+      "log": "verification-642/final-ui/test_themes_bar_628.js.log"
+    },
+    {
+      "file": "test_tool_parameter_contracts.py",
+      "exitCode": 0,
+      "seconds": 0.38,
+      "skipped": false,
+      "log": "verification-642/all-py/test_tool_parameter_contracts.py.log"
+    },
+    {
+      "file": "test_trust_model.js",
+      "exitCode": 0,
+      "seconds": 0.06,
+      "skipped": false,
+      "log": "verification-642/all-js/test_trust_model.js.log"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 9.59,
+      "skipped": false,
+      "log": "verification-642/contrast-final/test_ultra_integration_639.js.log"
+    },
+    {
+      "file": "test_unity_launcher.py",
+      "exitCode": 0,
+      "seconds": 0.11,
+      "skipped": false,
+      "log": "verification-642/all-py/test_unity_launcher.py.log"
+    },
+    {
+      "file": "test_universal_capability_foundation.py",
+      "exitCode": 0,
+      "seconds": 0.97,
+      "skipped": false,
+      "log": "verification-642/all-py/test_universal_capability_foundation.py.log"
+    },
+    {
+      "file": "test_universal_capability_visibility_615.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_universal_capability_visibility_615.js.log"
+    },
+    {
+      "file": "test_universal_effort_and_enhancer_wiring.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "log": "verification-642/all-js/test_universal_effort_and_enhancer_wiring.js.log"
+    },
+    {
+      "file": "test_universal_mastery_skills.py",
+      "exitCode": 0,
+      "seconds": 0.23,
+      "skipped": false,
+      "log": "verification-642/all-py/test_universal_mastery_skills.py.log"
+    },
+    {
+      "file": "test_unix_scripts.py",
+      "exitCode": 0,
+      "seconds": 0.66,
+      "skipped": true,
+      "log": "verification-642/all-py/test_unix_scripts.py.log"
+    },
+    {
+      "file": "test_usage_optimizer.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_usage_optimizer.js.log"
+    },
+    {
+      "file": "test_vani_generation_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 26.25,
+      "skipped": false,
+      "log": "verification-642/delivery-final/test_vani_generation_lifecycle_642.js.log"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 47.28,
+      "skipped": false,
+      "log": "verification-642/last-provider/test_vani_runtime_roundtrip_641.js.log"
+    },
+    {
+      "file": "test_venice_agentic_transport.js",
+      "exitCode": 0,
+      "seconds": 7.3,
+      "skipped": false,
+      "log": "verification-642/all-js/test_venice_agentic_transport.js.log"
+    },
+    {
+      "file": "test_venice_classic_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 32.59,
+      "skipped": false,
+      "log": "verification-642/all-js/test_venice_classic_roundtrip_641.js.log"
+    },
+    {
+      "file": "test_verification_assistant.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_verification_assistant.js.log"
+    },
+    {
+      "file": "test_virtual_tool_library.py",
+      "exitCode": 0,
+      "seconds": 1.38,
+      "skipped": false,
+      "log": "verification-642/all-py/test_virtual_tool_library.py.log"
+    },
+    {
+      "file": "test_visual_digest.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "log": "verification-642/all-js/test_visual_digest.js.log"
+    },
+    {
+      "file": "test_worker_pacing_contract.js",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "log": "verification-642/delivery-final/test_worker_pacing_contract.js.log"
+    },
+    {
+      "file": "test_workflows_cowork_640.py",
+      "exitCode": 0,
+      "seconds": 0.59,
+      "skipped": false,
+      "log": "verification-642/all-py/test_workflows_cowork_640.py.log"
+    },
+    {
+      "file": "test_workspace_636.py",
+      "exitCode": 0,
+      "seconds": 7.69,
+      "skipped": false,
+      "log": "verification-642/all-py/test_workspace_636.py.log"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 23.77,
+      "skipped": false,
+      "log": "verification-642/contrast-final/test_workspace_overhaul_642.js.log"
+    },
+    {
+      "file": "test_workspace_ui_640.js",
+      "exitCode": 0,
+      "seconds": 33.23,
+      "skipped": false,
+      "log": "verification-642/all-js/test_workspace_ui_640.js.log"
+    }
+  ],
+  "boundaries": [
+    "Authenticated/paid provider model compliance is not certified by deterministic browser fixtures.",
+    "Native Blender bpy and Unity compilation require the actual editors; their tests disclose skips. Godot execution requires its installed binary.",
+    "POSIX-only integration is skipped on Windows; shell syntax/static checks still run.",
+    "Co-work verification checkboxes are owner-reported evidence, not independent certification.",
+    "Remote phone pairing/control is not included. The dashboard is tested at phone widths."
+  ]
+}

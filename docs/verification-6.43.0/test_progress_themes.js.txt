@@ -1,0 +1,1 @@
+PASS progress panel across 12 desktop/mobile theme cases: 4.5:1 text contrast, accent progress, bounded layout, Escape/focus and settings/dock separation.

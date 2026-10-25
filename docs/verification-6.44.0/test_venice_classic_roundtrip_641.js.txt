@@ -1,0 +1,1 @@
+PASS venice full startup, unexpected skill discovery, real catalog/skill retrieval/SVG creation, per-task Critic + Ultra, native-step isolation and no duplicate replay after uncertain acknowledgement.

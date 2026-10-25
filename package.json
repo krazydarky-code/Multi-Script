@@ -1,0 +1,7 @@
+{
+  "name": "multi-script-studio",
+  "version": "6.49.9",
+  "private": true,
+  "type": "commonjs",
+  "scripts": { "test:superapp": "node tests/test_superapp_provider.js", "check": "python tools/release_check.py" }
+}

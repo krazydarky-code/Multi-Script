@@ -1,0 +1,1 @@
+PASS ClickUp private boundaries: hidden/remounted scope, team/nested-human exclusion, native-tool isolation, 2.5s quiet interval, safe exact send and changed-chat rejection.

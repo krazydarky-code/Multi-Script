@@ -1,0 +1,904 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+   Multi-Script environment scenes (see core/scenes.js). Every layer is
+   absolutely positioned inside .ms-scene; only transform/opacity animate. */
+.ms-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  contain: strict;
+  isolation: isolate;
+}
+.ms-scene > div {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ms-scene svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.ms-scene .sc-twinkle {
+  animation: sc-twinkle 4.5s ease-in-out infinite;
+}
+@keyframes sc-twinkle {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+.ms-scene .sc-caption {
+  inset: auto 22px 18px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+  opacity: 0.78;
+  z-index: 5;
+}
+.ms-scene .sc-caption b {
+  font:
+    800 11px/1.2 ui-monospace,
+    "Cascadia Mono",
+    Consolas,
+    monospace;
+  letter-spacing: 3px;
+  color: var(--sc-cap, #f3ead8);
+  text-shadow: 0 1px 2px #000;
+}
+.ms-scene .sc-caption span {
+  font:
+    500 10.5px/1.3 system-ui,
+    sans-serif;
+  letter-spacing: 0.4px;
+  color: var(--sc-cap2, #b9b0a2);
+  text-shadow: 0 1px 2px #000;
+  font-style: italic;
+}
+.ms-scene .sc-flicker {
+  animation: sc-flicker 6s steps(1) infinite;
+}
+@keyframes sc-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0.35;
+  }
+  42% {
+    opacity: 1;
+  }
+  44% {
+    opacity: 0.5;
+  }
+  45% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 0.7;
+  }
+  79% {
+    opacity: 1;
+  }
+}
+.ms-scene .sc-fog {
+  background:
+    radial-gradient(
+      60% 22% at 30% 92%,
+      rgba(200, 205, 220, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 18% at 75% 96%,
+      rgba(200, 205, 220, 0.08),
+      transparent 70%
+    );
+  animation: sc-drift 38s ease-in-out infinite alternate;
+}
+@keyframes sc-drift {
+  from {
+    transform: translateX(-6%);
+  }
+  to {
+    transform: translateX(6%);
+  }
+}
+
+/* ---------- Scream · Woodsboro ---------- */
+.ms-scene[data-scene="scream"] {
+  --sc-cap: #ffe3e6;
+  --sc-cap2: #c9a9b0;
+  background: #0b0a14;
+}
+.ms-scene[data-scene="scream"] .sc-sky {
+  background:
+    radial-gradient(
+      90% 60% at 78% 18%,
+      rgba(235, 84, 101, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #07081a 0%, #14122b 46%, #2a1b33 72%, #1a1222 100%);
+}
+.ms-scene[data-scene="scream"] .sc-clouds i {
+  position: absolute;
+  top: var(--t, 14%);
+  left: -30%;
+  width: 46%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(150, 140, 170, 0.22),
+    transparent
+  );
+  filter: blur(6px);
+  animation: sc-cloud 70s linear infinite;
+}
+.ms-scene[data-scene="scream"] .sc-clouds i:nth-child(2) {
+  --t: 22%;
+  width: 36%;
+  animation-duration: 95s;
+  animation-delay: -40s;
+}
+.ms-scene[data-scene="scream"] .sc-clouds i:nth-child(3) {
+  --t: 8%;
+  width: 30%;
+  animation-duration: 120s;
+  animation-delay: -80s;
+  opacity: 0.7;
+}
+@keyframes sc-cloud {
+  to {
+    transform: translateX(330%);
+  }
+}
+.ms-scene[data-scene="scream"] .sc-tv {
+  animation: sc-tv 2.6s steps(1) infinite;
+}
+@keyframes sc-tv {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  38% {
+    opacity: 0.4;
+  }
+  52% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.95;
+  }
+}
+.ms-scene[data-scene="scream"] .sc-swing {
+  animation: sc-swing 5.5s ease-in-out infinite alternate;
+}
+@keyframes sc-swing {
+  from {
+    transform: rotate(-7deg);
+  }
+  to {
+    transform: rotate(9deg);
+  }
+}
+.ms-scene[data-scene="scream"] .sc-headlights {
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 246, 220, 0.13) 45%,
+    rgba(255, 246, 220, 0.02) 55%,
+    transparent 62%
+  );
+  transform: translateX(-120%);
+  animation: sc-headlights 24s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+@keyframes sc-headlights {
+  0%,
+  70% {
+    transform: translateX(-120%);
+  }
+  85% {
+    transform: translateX(30%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+.ms-scene[data-scene="scream"] .sc-hud {
+  inset: 18px 22px auto auto;
+}
+.ms-scene[data-scene="scream"] .sc-call {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 7px 12px 7px 9px;
+  border-radius: 10px;
+  background: rgba(10, 8, 14, 0.72);
+  border: 1px solid rgba(235, 84, 101, 0.45);
+  color: #ffe9ec;
+  font:
+    600 10px/1.25 ui-monospace,
+    Consolas,
+    monospace;
+  letter-spacing: 1px;
+  box-shadow: 0 0 0 0 rgba(235, 84, 101, 0.5);
+  opacity: 0;
+  animation: sc-call 18s ease-in-out infinite;
+}
+.ms-scene[data-scene="scream"] .sc-call b {
+  font-size: 16px;
+  color: #eb5465;
+  animation: sc-ring 0.18s linear infinite alternate;
+  display: inline-block;
+}
+.ms-scene[data-scene="scream"] .sc-call em {
+  display: block;
+  font-style: normal;
+  color: #eb5465;
+  font-size: 9px;
+}
+@keyframes sc-call {
+  0%,
+  55% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  60%,
+  88% {
+    opacity: 0.95;
+    transform: none;
+    box-shadow: 0 0 18px 0 rgba(235, 84, 101, 0.35);
+  }
+  94%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sc-ring {
+  from {
+    transform: rotate(-14deg);
+  }
+  to {
+    transform: rotate(14deg);
+  }
+}
+
+/* ---------- Halloween · Haddonfield ---------- */
+.ms-scene[data-scene="myers"] {
+  --sc-cap: #ffe2bf;
+  --sc-cap2: #c8a88a;
+  background: #0a0810;
+}
+.ms-scene[data-scene="myers"] .sc-sky {
+  background: linear-gradient(
+    180deg,
+    #0d0b1d 0%,
+    #211633 38%,
+    #4a2236 56%,
+    #a24a24 66%,
+    #2a1620 70%,
+    #0d0b12 100%
+  );
+}
+.ms-scene[data-scene="myers"] .sc-jack {
+  animation: sc-jack 3.2s ease-in-out infinite;
+}
+@keyframes sc-jack {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.78;
+  }
+  33% {
+    opacity: 0.95;
+  }
+  60% {
+    opacity: 0.85;
+  }
+}
+.ms-scene[data-scene="myers"] .sc-lamp {
+  background:
+    radial-gradient(
+      14% 30% at 64.5% 46%,
+      rgba(255, 170, 80, 0.3),
+      transparent 70%
+    ),
+    conic-gradient(
+      from 165deg at 65.6% 45%,
+      transparent 0deg,
+      rgba(255, 175, 90, 0.14) 14deg,
+      rgba(255, 175, 90, 0.05) 26deg,
+      transparent 30deg
+    );
+  animation: sc-flicker 9s steps(1) infinite;
+  mix-blend-mode: screen;
+}
+.ms-scene[data-scene="myers"] .sc-leaves i {
+  position: absolute;
+  left: var(--x);
+  top: -6%;
+  width: calc(14px * var(--s));
+  height: calc(9px * var(--s));
+  border-radius: 70% 0 70% 0;
+  background: hsl(var(--h) 75% 42%);
+  opacity: 0.85;
+  animation: sc-leaf var(--d) linear var(--dl) infinite;
+}
+@keyframes sc-leaf {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  25% {
+    transform: translate(40px, 28vh) rotate(160deg);
+  }
+  50% {
+    transform: translate(-20px, 55vh) rotate(320deg);
+  }
+  75% {
+    transform: translate(30px, 82vh) rotate(480deg);
+  }
+  100% {
+    transform: translate(-10px, 112vh) rotate(640deg);
+  }
+}
+.ms-scene[data-scene="myers"] .sc-fog {
+  background: radial-gradient(
+    70% 16% at 50% 94%,
+    rgba(255, 190, 140, 0.08),
+    transparent 70%
+  );
+}
+
+/* ---------- Slender · the woods ---------- */
+.ms-scene[data-scene="slender"] {
+  --sc-cap: #e5efe9;
+  --sc-cap2: #93a89e;
+  background: #040605;
+}
+.ms-scene[data-scene="slender"] .sc-sky {
+  background: linear-gradient(180deg, #030504, #0b120f 60%, #030504);
+}
+.ms-scene[data-scene="slender"] .sc-blur2 {
+  filter: blur(2.2px);
+  opacity: 0.9;
+}
+.ms-scene[data-scene="slender"] .sc-blur1 {
+  filter: blur(0.8px);
+}
+.ms-scene[data-scene="slender"] .sc-figure {
+  opacity: 0;
+  animation: sc-figure 46s ease-in-out infinite;
+  filter: blur(1.2px);
+}
+@keyframes sc-figure {
+  0%,
+  62% {
+    opacity: 0;
+  }
+  70%,
+  78% {
+    opacity: 0.55;
+  }
+  86%,
+  100% {
+    opacity: 0;
+  }
+}
+.ms-scene[data-scene="slender"] .sc-fog {
+  background:
+    radial-gradient(
+      45% 30% at 20% 70%,
+      rgba(160, 190, 175, 0.13),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 26% at 70% 60%,
+      rgba(160, 190, 175, 0.1),
+      transparent 70%
+    ),
+    radial-gradient(
+      80% 22% at 50% 96%,
+      rgba(160, 190, 175, 0.14),
+      transparent 70%
+    );
+  animation: sc-drift 26s ease-in-out infinite alternate;
+}
+.ms-scene[data-scene="slender"] .sc-flashlight {
+  --mx: 50%;
+  --my: 55%;
+  background: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 248, 220, 0.08) 0,
+    rgba(255, 248, 220, 0.04) 90px,
+    rgba(0, 0, 0, 0.18) 200px,
+    rgba(0, 0, 0, 0.72) 420px
+  );
+  z-index: 3;
+}
+.ms-scene[data-scene="slender"] .sc-static {
+  z-index: 4;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.07) 0 1px,
+      transparent 1px 3px
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  animation: sc-static 46s steps(1) infinite;
+}
+@keyframes sc-static {
+  0%,
+  68% {
+    opacity: 0;
+  }
+  69% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.15;
+  }
+  71% {
+    opacity: 0.6;
+  }
+  72%,
+  76% {
+    opacity: 0.22;
+  }
+  77%,
+  100% {
+    opacity: 0;
+  }
+}
+.ms-scene[data-scene="slender"] .sc-hud {
+  inset: 18px 22px auto auto;
+  z-index: 5;
+}
+.ms-scene[data-scene="slender"] .sc-pages {
+  font:
+    700 11px ui-monospace,
+    Consolas,
+    monospace;
+  letter-spacing: 2px;
+  color: #e8ece6;
+  text-shadow: 0 0 6px #000;
+  opacity: 0.8;
+}
+.ms-scene[data-scene="slender"] .sc-pages b {
+  color: #97c1ad;
+}
+
+/* ---------- Friday the 13th · Camp Crystal Lake ---------- */
+.ms-scene[data-scene="jason"] {
+  --sc-cap: #f1e3c8;
+  --sc-cap2: #a7b9b4;
+  background: #050a0d;
+}
+.ms-scene[data-scene="jason"] .sc-sky {
+  background:
+    radial-gradient(
+      60% 45% at 72% 16%,
+      rgba(190, 215, 225, 0.12),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #04070f 0%, #0b1724 40%, #14252f 56%, #0a141a 62%);
+}
+.ms-scene[data-scene="jason"] .sc-lake {
+  top: auto;
+  height: 40%;
+  bottom: 8%;
+}
+.ms-scene[data-scene="jason"] .sc-water {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #0e1f28, #081218 70%, #050a0d);
+}
+.ms-scene[data-scene="jason"] .sc-reflect {
+  position: absolute;
+  left: 66%;
+  top: 4%;
+  width: 12%;
+  height: 70%;
+  transform: translateX(-50%);
+}
+.ms-scene[data-scene="jason"] .sc-reflect i {
+  position: absolute;
+  left: calc(50% + var(--o, 0%));
+  top: var(--y);
+  width: var(--w);
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(240, 240, 225, 0.45);
+  transform: translateX(-50%);
+  animation: sc-shimmer 3.2s ease-in-out var(--dl) infinite alternate;
+  filter: blur(1.4px);
+}
+@keyframes sc-shimmer {
+  from {
+    transform: translateX(-62%) scaleX(0.6);
+    opacity: 0.25;
+  }
+  to {
+    transform: translateX(-38%) scaleX(1.25);
+    opacity: 0.75;
+  }
+}
+.ms-scene[data-scene="jason"] .sc-mist {
+  top: auto;
+  height: 30%;
+  bottom: 14%;
+  background:
+    radial-gradient(
+      60% 50% at 30% 60%,
+      rgba(190, 210, 215, 0.13),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 45% at 75% 55%,
+      rgba(190, 210, 215, 0.1),
+      transparent 70%
+    );
+  animation: sc-drift 30s ease-in-out infinite alternate;
+  filter: blur(4px);
+}
+.ms-scene[data-scene="jason"] .sc-flies i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #f6e58d;
+  box-shadow: 0 0 8px 2px rgba(246, 229, 141, 0.6);
+  animation: sc-fly var(--d) ease-in-out var(--dl) infinite;
+}
+@keyframes sc-fly {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(26px, -18px);
+    opacity: 0.2;
+  }
+  70% {
+    opacity: 0.85;
+  }
+  85% {
+    transform: translate(-14px, -30px);
+    opacity: 0;
+  }
+}
+
+/* ---------- FNaF · show stage ---------- */
+.ms-scene[data-scene="fnaf"] {
+  --sc-cap: #f4e9ff;
+  --sc-cap2: #c4a6ef;
+  --fz-tile: 28px;
+  background: #140d1c;
+}
+.ms-scene[data-scene="fnaf"] .sc-wall {
+  background:
+    radial-gradient(
+      70% 50% at 50% 30%,
+      rgba(255, 226, 170, 0.1),
+      transparent 62%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.03) 0 2px,
+      transparent 2px 46px
+    ),
+    linear-gradient(180deg, #221a2c, #181122 55%, #120c1a);
+}
+.ms-scene[data-scene="fnaf"] .sc-posters {
+  opacity: 0.55;
+}
+.ms-scene[data-scene="fnaf"] .sc-eye {
+  fill: #f8f3d8;
+  animation: sc-blink 7s steps(1) infinite;
+}
+@keyframes sc-blink {
+  0%,
+  93%,
+  100% {
+    opacity: 1;
+  }
+  94%,
+  96% {
+    opacity: 0.05;
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-band {
+  animation: sc-sway 9s ease-in-out infinite alternate;
+  transform-origin: 800px 760px;
+}
+@keyframes sc-sway {
+  from {
+    transform: rotate(-0.4deg);
+  }
+  to {
+    transform: rotate(0.4deg);
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-spots {
+  mix-blend-mode: screen;
+}
+.ms-scene[data-scene="fnaf"] .sc-spots::before,
+.ms-scene[data-scene="fnaf"] .sc-spots::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  width: 52%;
+  height: 120%;
+  transform-origin: 50% 0;
+  background: conic-gradient(
+    from 168deg at 50% 0%,
+    transparent 0deg,
+    rgba(255, 236, 190, 0.13) 6deg,
+    rgba(255, 236, 190, 0.05) 11deg,
+    transparent 12deg
+  );
+}
+.ms-scene[data-scene="fnaf"] .sc-spots::before {
+  left: 4%;
+  animation: sc-spot 11s ease-in-out infinite alternate;
+}
+.ms-scene[data-scene="fnaf"] .sc-spots::after {
+  right: 4%;
+  transform: scaleX(-1);
+  animation: sc-spot2 13s ease-in-out infinite alternate;
+}
+@keyframes sc-spot {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+@keyframes sc-spot2 {
+  from {
+    transform: scaleX(-1) rotate(-9deg);
+  }
+  to {
+    transform: scaleX(-1) rotate(8deg);
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-pizzas i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(1px);
+  background:
+    radial-gradient(circle at 30% 35%, #b32b22 0 9%, transparent 10%),
+    radial-gradient(circle at 64% 42%, #b32b22 0 8%, transparent 9%),
+    radial-gradient(circle at 45% 70%, #b32b22 0 9%, transparent 10%),
+    radial-gradient(circle, #f3c35a 0 62%, #c8862f 63% 74%, #8d5420 75%);
+  animation: sc-pz var(--d) linear var(--dl) infinite;
+}
+@keyframes sc-pz {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  50% {
+    transform: translate(30px, -26px) rotate(calc(var(--r) / 2));
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--r));
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-tiles {
+  background:
+    repeating-conic-gradient(#121014 0 25%, #d8d0bb 0 50%) 50% 0 /
+      calc(var(--fz-tile) * 2) calc(var(--fz-tile) * 2) repeat-x,
+    repeating-conic-gradient(#121014 0 25%, #d8d0bb 0 50%) 50% 100% /
+      calc(var(--fz-tile) * 2) calc(var(--fz-tile) * 2) repeat-x;
+  background-size: calc(var(--fz-tile) * 2) calc(var(--fz-tile) * 2);
+  -webkit-mask: linear-gradient(
+    #000 0 var(--fz-tile),
+    transparent 0 calc(100% - var(--fz-tile) * 2),
+    #000 0
+  );
+  mask: linear-gradient(
+    #000 0 var(--fz-tile),
+    transparent 0 calc(100% - var(--fz-tile) * 2),
+    #000 0
+  );
+  opacity: 0.85;
+}
+.ms-scene[data-scene="fnaf"] .sc-bunting {
+  top: calc(var(--fz-tile) + 2px);
+  bottom: auto;
+  height: calc(var(--fz-tile) * 0.7);
+  opacity: 0.8;
+  background: linear-gradient(
+      90deg,
+      #8b5cf6 25%,
+      #e0503f 0 50%,
+      #f2c230 0 75%,
+      #2dd4bf 0
+    )
+    50% 0 / calc(var(--fz-tile) * 4) 100% repeat-x;
+  -webkit-mask: conic-gradient(
+      from -45deg at bottom,
+      #0000,
+      #000 1deg 89deg,
+      #0000 90deg
+    )
+    50% 0 / var(--fz-tile) 100% repeat-x;
+  mask: conic-gradient(
+      from -45deg at bottom,
+      #0000,
+      #000 1deg 89deg,
+      #0000 90deg
+    )
+    50% 0 / var(--fz-tile) 100% repeat-x;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.5));
+}
+.ms-scene[data-scene="fnaf"] .sc-purple {
+  top: auto;
+  height: 75%;
+  left: -10%;
+  right: -10%;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    70% 90% at 50% 100%,
+    rgba(168, 85, 247, 0.38),
+    rgba(124, 58, 237, 0.16) 40%,
+    transparent 74%
+  );
+  animation: sc-purple 7s linear infinite;
+}
+@keyframes sc-purple {
+  0%,
+  44%,
+  52%,
+  81%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.45;
+  }
+  46% {
+    opacity: 0.95;
+  }
+  47% {
+    opacity: 0.55;
+  }
+  48%,
+  51% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 0.6;
+  }
+  83% {
+    opacity: 1;
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-cctv {
+  z-index: 4;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1px 3px
+    ),
+    radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.5));
+}
+.ms-scene[data-scene="fnaf"] .sc-cctv::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22%;
+  top: -22%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: sc-scan 6s linear infinite;
+}
+@keyframes sc-scan {
+  to {
+    top: 122%;
+  }
+}
+.ms-scene[data-scene="fnaf"] .sc-caption {
+  bottom: calc(var(--fz-tile) * 2 + 12px);
+}
+.ms-scene[data-scene="fnaf"] .sc-caption span {
+  font-style: normal;
+  font-family: ui-monospace, Consolas, monospace;
+  color: #fb7185;
+}
+
+/* Motion preferences */
+.ms-scene[data-motion="none"] *,
+.ms-scene[data-motion="none"] *::before,
+.ms-scene[data-motion="none"] *::after {
+  animation: none !important;
+}
+.ms-scene[data-motion="reduced"] .sc-leaves i,
+.ms-scene[data-motion="reduced"] .sc-pizzas i,
+.ms-scene[data-motion="reduced"] .sc-static,
+.ms-scene[data-motion="reduced"] .sc-headlights {
+  animation: none !important;
+}
+.ms-scene[data-motion="reduced"] .sc-leaves,
+.ms-scene[data-motion="reduced"] .sc-static {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ms-scene *,
+  .ms-scene *::before,
+  .ms-scene *::after {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+  .ms-scene .sc-leaves,
+  .ms-scene .sc-static {
+    display: none;
+  }
+}
+
+.ms-scene[data-scene="aurora"],.ms-scene[data-scene="nebula"],.ms-scene[data-scene="lava"] { background:#0c1220; }
+.ms-scene .sc-ambient i { position:absolute;inset:-50%;filter:blur(30px);opacity:.55;animation:ms-ambient-drift 18s ease-in-out infinite alternate;animation-delay:var(--dl);transform:rotate(calc(var(--i)*80deg)); }
+.ms-scene[data-scene="aurora"] .sc-ambient i { background:radial-gradient(ellipse at 30% 40%,#47ffb04d,transparent 38%),radial-gradient(ellipse at 65% 60%,#77aaff77,transparent 48%); }
+.ms-scene[data-scene="nebula"] .sc-ambient i { background:radial-gradient(ellipse at 30% 40%,#f279ff66,transparent 38%),radial-gradient(ellipse at 65% 60%,#563bff88,transparent 48%); }
+.ms-scene[data-scene="lava"] .sc-ambient i { background:radial-gradient(ellipse at 30% 40%,#ff4b1677,transparent 38%),radial-gradient(ellipse at 65% 60%,#ffb53377,transparent 48%); }
+.ms-scene[data-scene="matrix"] { background:#031009; }
+.ms-scene .sc-code-rain i { position:absolute;left:var(--x);top:-110px;color:#5aff96;font:15px/1.4 monospace;font-style:normal;text-shadow:0 0 8px #3aff85;animation:ms-code-fall var(--d) linear infinite;animation-delay:var(--dl); }
+@keyframes ms-code-fall { from{transform:translateY(-100%);opacity:0}20%{opacity:.8}to{transform:translateY(650px);opacity:0} }
+@keyframes ms-ambient-drift { from{translate:-7% -3%;rotate:-10deg}to{translate:7% 3%;rotate:10deg} }
+.ms-scene[data-motion="none"] *,.ms-scene[data-motion="reduced"] * { animation:none!important;transition:none!important; }
+.ms-scene[data-motion="none"] .sc-code-rain i,.ms-scene[data-motion="reduced"] .sc-code-rain i { top:0;opacity:.35; }
+.ms-bar-scene .sc-land svg { object-fit:cover; }
+@media(prefers-reduced-motion:reduce){.ms-scene *{animation:none!important;transition:none!important}}
+
+.ms-scene[data-scene="tidal"] { background:linear-gradient(150deg,#071e2a,#154f5c); }
+.ms-scene .sc-tidal-light i { position:absolute;left:calc(10% + var(--i,0)*20%);top:-25%;height:150%;width:20%;background:linear-gradient(100deg,transparent,#91f5e512,transparent);transform:rotate(24deg);animation:ms-tidal-light 14s ease-in-out infinite alternate; }
+.ms-scene .sc-tidal-light i:nth-child(2){left:40%;animation-delay:-5s}.ms-scene .sc-tidal-light i:nth-child(3){left:75%;animation-delay:-9s}
+.ms-scene .sc-tidal-water { inset:0 -10%;animation:ms-tidal-sway 12s ease-in-out infinite alternate; }
+.ms-scene[data-scene="starlight"] { background:radial-gradient(ellipse at 70% 70%,#44346388,transparent 70%),#14162b; }
+.ms-scene .sc-starlight-orbit i { position:absolute;width:90%;height:45%;left:30%;top:45%;border:1px solid #c1a6ff22;border-radius:50%;transform:rotate(-25deg);animation:ms-tidal-sway 20s ease-in-out infinite alternate; }
+.ms-scene .sc-starlight-orbit i:nth-child(2){top:55%;width:100%;animation-delay:-8s}.ms-scene .sc-starlight-orbit i:nth-child(3){top:65%;width:110%;animation-delay:-14s}
+.ms-scene[data-scene="daybreak"] { background:linear-gradient(170deg,#f9eee5,#ead7cf); }
+.ms-scene .sc-daybreak-cloud i { position:absolute;left:-15%;top:calc(22% + var(--i,0)*20%);height:15%;width:80%;background:radial-gradient(ellipse,#fff8e95c,transparent 65%);animation:ms-daybreak-cloud 24s ease-in-out infinite alternate; }
+.ms-scene .sc-daybreak-cloud i:nth-child(2){top:48%;left:50%;animation-delay:-8s}.ms-scene .sc-daybreak-cloud i:nth-child(3){top:72%;left:15%;animation-delay:-16s}
+@keyframes ms-tidal-light { to{translate:18% 0;opacity:.4} }
+@keyframes ms-tidal-sway { to{translate:3% 2%} }
+@keyframes ms-daybreak-cloud { to{translate:18% -3%} }

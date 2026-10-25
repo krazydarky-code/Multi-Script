@@ -1,0 +1,426 @@
+{
+  "revision": "multi-script-ultra-handbook-6488",
+  "skillsSha256": "344c92d578a5eca3c931aaf39cc9758899b885a89cb3e9a1ab4a81f946a0aaf4",
+  "manuals": {
+    "ultragui": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "a6258ff3f89c9a33fc4e1bbe4a7f348df2fb3750c47bf365dabc93839261690d"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "2ce6012f0df4cb64a4e1529c050ed649cec34173823db5b12ccb9d1358a5e992"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "d24c33cea8450a3211b182bffcd81d977ab722b411afb1356d2d4341e00a0940"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "3953e65c31f852f2f7343f08ca18110873f6d50ccee86d7cfe20176b05989446"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "413a777723c6874b60d34214b8fa68b0511a20b316c938f430feac047c9b2873"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "af298a2df9b110e3ec0d57d1f8f19a016042cd95efd1bc76428bf3a888fed873"
+        }
+      },
+      "routes": "01e64cb0e3f4df56da1349a49f3978d7b957b06e410433fc820af2dae36d4ab0",
+      "exits": "93767925494d7cddcbcff5488567a4a6af6ec8271af83d8ce99b7076dd15ea8e",
+      "acceptance": "4822cff1cbfb4ac2f50397c5c0d21d0d9835e924217f31423649c1eaf7ca560e",
+      "diagnostics": "13e178c4b1a9a86f8ea027a729398709307df451c8cac42442590e14d98b5c9a"
+    },
+    "ultraanimation": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "72b05c83d5c07c1849ec76c596e4b00f6c306ce2fdc61a153aac88574ebcfdd4"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "432bbfc7f913e016034b739854a76469f6b01042c4e2cc132f4a62d67bfb24d8"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "787d97038dde54b0cff9b25ada14fa6a2fd8e0b874e61d8ea007b0f4e7e21788"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "fd4ff631dd08a496b620bf5849234d8e732c69953b7a896754b3f613471a5475"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "cf1bd38c160d2671c9671aafafbd970abbcdb62f75d93e08c426ed6226990044"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "f8c594c44c48c3e6df9e5a4698f15ccea03e361107c14cdb3badb83115ae3a11"
+        }
+      },
+      "routes": "e1cec8f63a2ca731f9bb9ef78e3bcab107f4cfd4f03205a137ddeafc8ed1cfb4",
+      "exits": "0a8ac095017c7b61058bcff04a7bc69b30b0bb1eddaadcc3b48733728aedb510",
+      "acceptance": "67ea67b71e3c025016330c65c4ab7891d375716bcd29cd066a6ca4b05cf90598",
+      "diagnostics": "e80c77966b137b82082df6683b0d3360cdbc1978721959cd32e1744554d9c838"
+    },
+    "ultravfx": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "02ef7059bdc4ab989e93fe786d40d387b0ff3b42aef7fc31a862508cbe05670a"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "3b1fbdabed62643e6e1bb59b3635af3cae01bb75931f83075018a091c4da5818"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "6d6f6dfdc2f2e57d11f5ea5e4042fb178fe624382ff20f850c984fe6d8979adb"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "4d31d368e554a455a4ac59a6f69f7946897e23604bf351ec190cdf562956ed14"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "735d35234e068a341c05ff537627b1adefdea020145c143d80a627848e82ce10"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "ee8b7cdd3f22e309fd425cf38bf4052abe4cb7e1f839581db0ee5fc2905f0e2a"
+        }
+      },
+      "routes": "70cf0364a8887968b692a073ef14ea7167d74f0fd1ec8eae81df32cf6c40ddb1",
+      "exits": "14c2e32c88dad2963607fc3e0ed2a5b69718ddd4b59da07b4b8226bfee090f00",
+      "acceptance": "e1e1835dfdb3b110108440a8fde1bb18a23d33f26fb27de1c7f5d3746f10a024",
+      "diagnostics": "5b042bb020e3c6bb611a72138bd09162e13956c490c7d1d95c1646ec7d746c08"
+    },
+    "ultramodelling": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "e9ad9693258364b389432d5406ee00a2f24f5c49a798cc8639e6061546b82359"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "4fff99c20dfdc9df499e46c4d8d1208bf58b44e3a88cdd638d002f73c67d5dbb"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "d5f64b2e41b35642e8f3515eeb980834fc8ee5cf3b855215bf02f88ff7e5e2a8"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "585d97d6ce88d1f62a8b735e705627a6bdfdead1d8929bec09b03bc7a108667e"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "77538bc8d0b6582b2e6087357a6c0e3a8761222b6c91442e4175d2e00d2da199"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "2b6c4e0903c81ad0bb739842f6f813dcbf89fdcb279749cf02433b55119e4d0f"
+        }
+      },
+      "routes": "592f833900f364e57f59f2c5e36b28ea1bdc10e8ae8869d9035485bcfc7a198e",
+      "exits": "d4735b5b25ae585e3892a9fac73b17c14c0bfd1b7fee2dc47e564eeef159c2ba",
+      "acceptance": "bc109d6fe9e5ae550e0acac881ead302215ac36896fa91ff108540507fe843de",
+      "diagnostics": "4de6b45c36b6b4b8c031715790112bcf268845eb5625e61086e0b9b42f266676"
+    },
+    "ultraworld": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "12d5c154cf76d0d33fb16f33c55a856354834b8893b0ec992b51d43312d8181c"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "6bb8d9d4b4e9bb58c3c284813beb767ea544f3bbf6adbbe060c1f5fcc96db12b"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "bb6f2e9e87fd890b3fe1104d33d69c6b44d4f5a5c3849cb9d995c27cedec9601"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "eb66a24cb77497188deb661f6a476075c7e94366aa6ef2016b10324f58cfc895"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "912484abec707269c9dafeef14e3c8fd791a3326f381ec871b798e402e434a8d"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "a770d0131395377f68bc93c23512522e48cfa0ebcbe755f4e81b52d25aa61af9"
+        }
+      },
+      "routes": "43f2644e813a66f292099386214ae9a13096b1e95f6cd495409a8f42272008fe",
+      "exits": "88eaa1ee33e34af2003576a3a59dacc330d3e247def1786e9d9ff7153224a42f",
+      "acceptance": "342a5a265d670cd534f6abeca94bc525dc4d8264df0e5429b63a99dfb6a0f4f9",
+      "diagnostics": "1147c31feb1f187228d10ccc3df38efe7984ceacd5328528a33cb0f60c6b5344"
+    },
+    "ultragameplay": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "7dc0502c985ad49dd903f951bdbb59a2f8e2bffb02fb03b37543914701ecbfac"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "69dc98e778381c14a12c51b4395f2d6da02ae2a6f5b40fd9f589198aa334ef79"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "71e51488e126322851c2950eae5b35c9273abf606874107ed7d41b7254d1d34b"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "b22e3405c02d41044f0bdae06809f2df2a790480e743c883461d3898a89a2d17"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "f1638586cb2054bf0ffad89e504c85b9a7213ec5d208eab0cdcc8c778eb866e5"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "6f5bafefab908531b0deca8f236864500ac0953a3f5fb26b8c995dc6c0101ea1"
+        }
+      },
+      "routes": "155391cd7c8ac77dfb4687adad7fdb72f80a59949f1d1960313b029119458bbb",
+      "exits": "589a633328fc93de0a0d4c23ccea98108080e49dcec3d1954959a3dd32802dcb",
+      "acceptance": "0cf9940635e723efaa21167fdb95eaa9891975a97118c6129408f89e53a14e1f",
+      "diagnostics": "e1710c3a1b9616ff832027ac67a148e780d4aee4b1a5591ca11267c8fda383f7"
+    },
+    "ultraaudio": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "4570f6aa1703766495e2844400565c98e81f4305fd54c7e798cc66ef72895aff"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "a8c4e4bc37c14d10afef1cc4ab5142de7c362aff2833e4092312197778fdf471"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "28fcfc13570c0268fbc2061c78acd227fa64ba610bacb1df9a45969c0dcf5c1d"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "3eff35ab4d89cbf7f34f7722adadbbdf5fbac0513afba32cf319e525377a1d14"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "5b7e6b3c820e4871cea0c436557c611e38353dadac38f3ef636684f60e4b9c2c"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "a15ad205ada0b0bec3bdc909b524fe44c32919dd21cb777de156857f80ea1a06"
+        }
+      },
+      "routes": "873d252080f1c1a3f90014151ff8bbfafa095419eace9d46e4ab7ea4a555d96a",
+      "exits": "1d3945c29f7d6373416cf88edae6f2c79bc6594e084cae4ab87f4c59a9333234",
+      "acceptance": "a7ed701a1f86bfc8d2123e0f0d626e5c7b8fd39f298f21ff9b65407ad5444b03",
+      "diagnostics": "454eeef1cfc04e5914c878cbb8c105428176d1f397c232701683d373212ac308"
+    },
+    "ultranetwork": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "7c604f0e5e87534e13b9e3cf1537c8974abebe67be8ac2e8e140f56ea05f1728"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "40d97972e537fda0fe9fffe1ca1b249138eeb2bbb6510e7340708f7621da12a7"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "dfe45767c791f3f2a1e4c4b2f3c4872b1916d5b5f9f42c13437148b545c64243"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "1f010926b72e0d399771aff2c88a20e120b1cf993a9b0cb8c053ba17a87c7660"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "acf32dc7de80319f9b3262372bb5e4e92835676d79fe3740771bc34cfea40b12"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "67c9664e0b3a5d063f92ea530da6db4d1dfd06a648c566b61f021af457a6f93b"
+        }
+      },
+      "routes": "7620097407b976f54935263f348e14b5a9938cff8144c85d08ecc407643514ae",
+      "exits": "562007f8cad68ee3719c325bd790e556d1460d9b8344b657833b683701ba9d77",
+      "acceptance": "d7ee913bf87bc9a4ed49391cc61e1c33995d2c62409d2eca67a906acca4f4524",
+      "diagnostics": "49aaf59d1987a15f6b6972e434a347999997326a5ac848df159b4f33ddb06958"
+    },
+    "ultraperformance": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "05bcdaac18bfd7809bb31608ea71a85c11a5d560f1ca302dd096b4b017d00e20"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "1bcd762bfbda1f72c2846b4897666c2e2aa8ab6d1bc930e6fd347c8cd9a85c5d"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "918edc9550429dd1d32e617b54f3b87de6461144d40452e78d8e57582b42347d"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "a13f23b11c585a27dfea24e4c138c5511e4014bc6aab2de912f7bdc25451ceb6"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "45dd04318108efe8976be99f49b0a1718ae964cd108ff8ccb0c4d75ffc3c8e46"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "f74c377fc6dbc226d84b40e1fc13139fffcb552941d14a8927f34f91e0c0c1b1"
+        }
+      },
+      "routes": "9f41764bd29fb10a9e86a9923b9d3401ec2a6b93707ef66574bf144ad49d88b3",
+      "exits": "b676cfb05ee934072cfd52960c71448004862435cea4d486c7be6518528d48f3",
+      "acceptance": "9f1d49545ec88fc755c187b970d741a4ea26751e3c47d868d78aefba7cf203ca",
+      "diagnostics": "d1955e21f9c169cf6f14345497b75d36ec668e04e2ca321355e0223cc0db2113"
+    },
+    "ultraengineering": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "8a0a40fb5c8c1d3234002eeb98ce7cf6cb9f3e9bbb7704853e4eb663e0ac6694"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "d6438b97b961ba4ee3a69a2fd091e9c5efef970ac3524448027f08e62d77dec5"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "b487b9c03567be5478c012f59a8647edabcdf9fb6637b9d75ca551036e4730fd"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "ae1cc0d5c5d446487a1125ed9a844f721de9681e63c2e25bc7324aa85800c472"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "b8b1b68ab8e11fa866d8fe5fd642f495090abd4095c1e8938f54bac5e5993822"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "85f66c2c8a167c8c95e6e0e1520622d291d5c895461bf3a996cc2dc7446dac3a"
+        }
+      },
+      "routes": "b6d7a498cf3ffd7f88605de43a9cae62a1280fa4fc18af7b44fc218b6439b305",
+      "exits": "7cb786c795be6ffa70db69264d27817c9a42e632c26b2b692929ddbb73e717d6",
+      "acceptance": "73ee3bfc06330d4326dbb0863b88f44abbdce830b6317a0ad288b3c4c4556847",
+      "diagnostics": "cf0fe7548ee3f2bfb30af2c0f7b6cb52a6cc09e128ef6e17a7359e744982e239"
+    },
+    "ultraaccessibility": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "cc850884163aa307282f067321bf24edb6b7d857ccc6a305092d24f5cd853da2"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "cf75c2429b5f91da6643f0e34a561c9af15f3b4f212dd887f4edfafef9f1cd16"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "b029377729ebdef17ccf2763fff41bbeae47dd3d5d0fd92509f340b05121e61b"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "bddbef7df6fcd218bb1b2ef2a16987e2366c1b173688f1a58ce0217f045d9f49"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "7c338751319aed7ae945d566c79034b4c989da6483d592779c4c5c72c2acbdde"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "574e20b6de6bf8db30c581f78fc6af261e11bbeec208263a9e1cfda7652bc23a"
+        }
+      },
+      "routes": "db6cb9d98059c3129c1163073ce9e10c3e4bdb9d3c5abc4d8ddc4f2c77479e4b",
+      "exits": "71020182d97fd0258224d4c1e57961f6fb119daa8982c3b43cbb4dcf0f30d03c",
+      "acceptance": "e766090208a35d745db9cf2122c4a6082faf8ea90707a985b1db39787a21e4af",
+      "diagnostics": "a3f9ddcbb78550ec2cf3f38de26aa8242c04704b531833783686fbf1ebc6a37d"
+    },
+    "ultraqa": {
+      "phases": {
+        "inspect": {
+          "count": 6,
+          "sha256": "76f1a6711c2570ad3d28225fdfe57aa3f3f60f42d903ff186dafb562e39a7698"
+        },
+        "design": {
+          "count": 6,
+          "sha256": "6ce604364b693b015089dc98839ef64410ea685a904ea163716ce4bac712d983"
+        },
+        "build": {
+          "count": 8,
+          "sha256": "417a5b08c94ab422ab3fd36f0dc0968eea8a495166606847334c7a4984b77363"
+        },
+        "integrate": {
+          "count": 6,
+          "sha256": "640037ba88ea88714ffb2b19bc73cd3be9045a3d3872d9c60c8b86ed5f3bfcca"
+        },
+        "verify": {
+          "count": 8,
+          "sha256": "12f24c4cb94e3a4e57f12468b5ae3d90f844fe5f0a1b20779b8fa1b878ad8532"
+        },
+        "failures": {
+          "count": 6,
+          "sha256": "e7707c57487e248b07638ae8e6d377a05fd258e42b17cbf1a09f53ca8496fb62"
+        }
+      },
+      "routes": "97c8b7e6c77ffc7a5994fff41c7ad80b6efb68c0f96688a9f9038801459804d1",
+      "exits": "bd7ce9783f9fa8443c92c6839ff3c8327434c879c9f73bdc88b3c79a2c438c45",
+      "acceptance": "86f5b641f0fd4096ae52fe57b8e3ae31dafec36d096ea2afaf2e41ef6e3c8a4a",
+      "diagnostics": "257fa7e567e13c05efb80c6fe5908d42ff25f31b9b92db93d3360ecf1dd1b5ec"
+    }
+  },
+  "themes": {
+    "studded": "Raised brick surfaces, consistent tile scale, controlled outlines and a small accent palette. Keep studs below readable text; use a verified repeatable texture or native shapes, never an invented asset ID.",
+    "cartoon": "Readable exaggerated silhouettes, deliberate chunky spacing and expressive but bounded feedback. Keep icon, type, border and motion weights coherent across screens.",
+    "minimal": "Prioritize spacing, hierarchy, concise labels and complete states. Reduce visual ornament while keeping generous input targets and clear focus.",
+    "horror": "Restrained values/materials and atmospheric pacing, with readable essential information and calm transitions. Darkness cannot hide controls or error feedback.",
+    "tactical": "Disciplined alignment, controlled accent/status colors, legible numeric data and predictable navigation. Use labels and icons alongside state colors.",
+    "fantasy": "Coherent material/frame language, grouped equipment information and restrained ornament. Rarity needs text/icon information in addition to color.",
+    "pixel": "Choose a base pixel density and scaling rule. Preserve crisp tiles/icons and readable typography across viewports; do not mix accidental fractional scales.",
+    "pastel": "Soft surfaces and repeated friendly components with sufficient painted text/state contrast. Muted color must not erase disabled, focused or error states.",
+    "holographic": "Use deliberate transparent layers and luminous accents within native capabilities. Maintain a stable reading surface; do not promise world-aware GUI blur."
+  },
+  "production": {
+    "gui": {
+      "inspect": "Survey StarterGui and runtime PlayerGui, existing ScreenGuis/controllers, StarterPlayer scripts, ReplicatedStorage state/remotes and the server handlers for inventory, purchases and rewards. Record the owner, state source, local action, authoritative request, existing token module and objects to preserve for each requested screen. Identify framework/Rojo/generated-source ownership before choosing an edit tool. Do not create a second menu, competing controller or duplicate remote just because inspection returned an incomplete page. Confirm a specific target path and reuse valid results until the project changes.",
+      "design": "Translate the user's exact style into one token sheet: semantic surface/text/status colors, type and numeric scale, spacing, panel silhouette, border/depth, icon family, texture frequency and motion timing. Plan normal, focused, pressed, disabled, pending, empty, error and success states. For each reference record its source, observed proportions and the principle being adapted. Inspect the image rather than inventing details from a search snippet. Studded is a restrained raised-brick material language; cartoon uses readable exaggerated forms; tactical uses disciplined hierarchy. Preserve the existing visual vocabulary unless replacement was requested. Decide how the screen adapts to touch/gamepad, safe areas and long localized content before adding ornament.",
+      "build": "Use ScreenGui for the screen root and native layout objects for managed lists/grids. Mix scale for relationships with offset for padding and legible detail; apply AnchorPoint and sensible size/aspect constraints. Give each layout property one owner: do not overwrite UIListLayout/UIGridLayout positioning in a frame loop. Use readable TextSize with wrapping/content growth where appropriate; bound deliberate TextScaled usage instead of combining competing sizing rules. Choose ScreenInsets for actual interactive safe areas rather than blindly disabling insets. Use verified image IDs and intentional tile/slice scale; layered frames can express depth without inventing CSS blur or box-shadow APIs. Build reusable controls with an accessible hit area even when the visible glyph is small.",
+      "integrate": "Connect Activated through the existing controller and trace input \u2192 validation \u2192 state \u2192 visual feedback for every visible action. A shop must use real item definitions, authoritative price/balance/result and pending/refused/retry states; a decorative purchase button is unfinished. Inventory needs stable item keys, selection, filter/sort, empty state and authorized equip/use actions. HUD values come from actual state events. Local presentation may predict feedback but cannot grant currency, purchases or damage. Maintain one modal/navigation state, focus capture/return, back/cancel and input-lock ownership. Cancel/retarget old tweens and guard completion with a transition generation so a stale close cannot hide a reopened screen. Initialize idempotently and tear down signals, render bindings, temporary instances and input locks on destroy/respawn.",
+      "verify": "Exercise the actual runtime PlayerGui through its normal entry point. Check desktop and a narrow/mobile viewport, touch reach, gamepad selection if supported, long names/numbers, safe insets, stacking, scroll extent and texture scale. Activate every control; test repeated open/close, rapid reopen during a tween, pending requests, server refusal, missing assets, empty inventory and respawn. Compare an actual capture against the token sheet and observed references; a hierarchy dump does not verify appearance. Inspect output and listener/instance growth after repeated use. Report authored hierarchy/source, applied changes, live Play/input tests and visual evidence separately. If capture or Play is unavailable, keep those checks unverified and finish the feasible implementation. Read final source back and use an advertised syntax/analysis tool or an actual Luau compiler when available. Requiring a ModuleScript runs it and is not a compile-only check; unavailable restricted compilation stays explicitly unverified.",
+      "failures": "Find the failed layer before redesigning. Invisible GUI: check correct StarterGui/runtime PlayerGui owner, Enabled/Visible, LocalScript startup and errors. Dead/double buttons: check the actual Activated target, duplicate initialization and in-flight ownership. Phone clipping: inspect anchors, content growth, constraints and safe insets; don't shrink all labels. Jitter: check layout/tween competition and stale callbacks. A closed panel blocking gameplay: release its backdrop, focus and input lock. Missing icons: verify asset permission/ID and show a usable fallback. Currency reverting: inspect authoritative result binding. Large inventories need bounded/virtualized rows and event-driven diffs, not rebuilding the whole screen every frame. Preserve working adjacent screens while repairing the first concrete defect."
+    },
+    "animation": {
+      "inspect": "Identify the exact target rig and classify the job as authored clip, playback controller, locomotion, combat, tool alignment, NPC/creature, IK/procedural overlay, face, cinematic or diagnosis. Read the actual joint/bone graph, scale, rest transforms, Humanoid/AnimationController/Animator, Animate script, assets, remotes and competing controllers. Distinguish R6, R15, custom rigid and skinned rigs; never assume human part names on a creature. Record asset ownership/permission and whether the clip is local editable source or a usable published asset. Select the real server/client execution context and exact tool schema; a connection label is not rig inspection.",
+      "design": "Plan anticipation, decisive contact/action, follow-through and recovery with clear silhouette at the gameplay camera distance. For locomotion define gait phase, planted contacts, stride/cycle speed and a compatible loop seam. For combat define startup, authoritative active interval, recovery, interruption and return to locomotion. Create a manifest of purpose, rig, actual asset ID or explicit unavailable placeholder, priority, loop, fade/speed, markers and permitted owner. Decide which layer owns movement, pose, camera, audio, VFX and damage. An authored root displacement is not automatically authoritative world travel. Use references for timing, weight and arcs without copying another rig's channels or inventing a published upload.",
+      "build": "Author/reuse editable clips on the actual rig and keep their source. Integrate with the server-created/replicated Animator after the rig is in Workspace; load through Animator:LoadAnimation and cache tracks per rig lifetime instead of loading on every trigger. Set purposeful priority, loop, weight and fade behavior. Length may be zero while loading, so timing must not assume immediate availability. Track one owner per transform/channel; procedural overlays and IK must respect the animation evaluation phase and current rig APIs. Feature-check modern graph/constraint APIs against the installed Studio documentation before adopting them. Graph parameter names/types come from the actual authored graph; Speed and Grounded are examples, not universal built-ins. Avoid replacing a working Animate/controller just to add one action.",
+      "integrate": "Player presentation may start responsively on the owning client using the correctly replicated Animator; non-player animation that must replicate is loaded/started on the server. Verify the actual ownership setup rather than generalizing a solo test. Bind marker signals before playback and use named markers for cosmetic timing. Damage, cooldowns, inventory and hit validation remain server-owned and must not trust a client marker or animation ID. Blend locomotion/actions with explicit entry/exit/interruption rules. Cache and disconnect marker/track signals; distinguish playback stopping from complete fade-out when cleaning up. Cinematics own a cancellation token, saved camera/control state, render binding and one cleanup path for normal finish, error, death, respawn and replacement. Align weapon grips/attachments to the actual hand and rig rather than eyeballing an unrelated asset.",
+      "verify": "Play the real clip/controller at normal and slow speed on the intended rig. Check contacts, arcs, deformation extremes, loop seams, foot sliding, priority/weight transitions and repeated triggers. Exercise locomotion \u2192 action \u2192 interruption \u2192 recovery, equip/unequip, jumping/falling/landing, death/respawn, target destruction and missing/denied assets. Use a multi-client/server test for replication claims and test in the published ownership context when asset permissions matter. Inspect logs, active track/connection counts and repeated NPC density. Capture a short recording or equivalent temporal evidence; a single still frame cannot prove a transition. Report clip source, real IDs, controller paths, ownership decisions, tests and unresolved publishing/device checks separately. Read final source back and use an advertised syntax/analysis tool or an actual Luau compiler when available. Requiring a ModuleScript runs it and is not a compile-only check; unavailable restricted compilation stays explicitly unverified.",
+      "failures": "No playback: inspect asset permission, loading errors, Animator ancestry/Workspace presence and rig compatibility. Track time advances but pose does not: inspect actual channels, priority/weight and competing transform writers. Owner sees it but peers do not: verify server-created Animator, correct character/owner, NPC server playback and a real multi-client reproduction. Popping/foot sliding: compare rest pose, loop seam, contacts, movement speed and fades before adding keys. Missing marker: verify exact case/name, signal hookup before playback, loop/retrigger behavior and early stop. IK instability: inspect chain, target/pole reach and blend/cleanup. Cutscene leaves a Scriptable camera: repair the shared exit path. Never bypass restricted capabilities, fabricate IDs or claim that a local KeyframeSequence was published; preserve source and provide an explicit upload/permission handoff."
+    }
+  },
+  "coreStyles": {
+    "stylized": "Stylized / illustrative: exaggerate readable primary forms before surface detail. Organize large, medium and small masses with deliberate negative space; reserve saturated accents and sharp contrast for interaction or narrative focus. Make bevels, normal treatment and material roughness agree with the chosen viewing distance. Use a controlled palette and lighting separation so silhouettes survive busy scenes. Keep expressive animation poses and VFX shapes in the same shape language. Test at gameplay distance and low quality; decorative texture noise must not replace form.",
+    "realistic": "Grounded / realistic: establish real-world scale, lens and exposure first. Use plausible material response with deliberate roughness variation, edge treatment and wear tied to use rather than uniform noise. Match texel density and light response between assets; inspect the target renderer and color pipeline instead of trusting a source render. Keep UI legible against changing lighting with restrained surfaces and semantic contrast. Reference real construction, anatomy and motion; do not equate realism with more polygons, bloom or full-screen fog.",
+    "pixel": "Pixel / low resolution: pick a base resolution, asset pixel density, camera scaling rule and palette before drawing. Keep sprite, UI, outline and effect pixels coherent; avoid accidental fractional movement, filtering and mixed pixel scales. Author strong clusters and silhouette, then test animation spacing at the actual frame cadence. Deliberate subpixel rendering is a project choice, not an unnoticed import artifact. Inspect nearest-neighbor scaling, atlas borders, camera movement and readable text in the shipped viewport.",
+    "minimal": "Minimal / software: make the primary task obvious through spacing, alignment, typography and action hierarchy. Use a small token system, purposeful density, clear states and native interaction expectations. Reduce decorative chrome while retaining accessible hit areas, labels, focus and feedback. A subtle icon can have a generous invisible hit target. Test real content, long labels, empty/error/loading states and keyboard flow. Motion should explain changes of state and respect reduced-motion preferences; every gradient or shadow must have a purpose.",
+    "atmospheric": "Atmospheric / cinematic: define the story beat, focal plane, light direction and depth layers before adding atmosphere. Use lighting, framing, sound and pacing to support the player objective. Protect navigable surfaces and interactive objects from crushed shadows, excessive bloom, fog or color grading. Keep exposure behavior, camera motion and intensity changes comfortable. Test both a still composition and traversal through it; a single staged beauty shot cannot establish a playable environment. Use bounded effects and a reduced-motion path."
+  }
+}

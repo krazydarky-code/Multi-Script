@@ -1,0 +1,6 @@
+10:04:24 [figma] launching  (C:\Users\Claudiu\AppData\Local\Programs\Python\Python311\python.exe C:\Users\Claudiu\Documents\Codex\2026-10-16\do-x20\work\source\Multi-Script\runtime\launch_figma_mcp.py)
+
+10:04:24 [figma] MCP server up  (9 tools advertised)
+
+PASS actual manager/native Figma discovery, exact routing, real offline-file state, preserved MCP isError and write no-replay classification.
+

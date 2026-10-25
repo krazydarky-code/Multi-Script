@@ -1,0 +1,1 @@
+PASS shipped Figma native handlers with API mock: actual node creation/update/read-back/layout/font loading/vector import/capture/selection/deletion calls; validates before mutations and rejects read-only, locks, external SVGs and stale/off-page targets. Live Figma host remains unverified.

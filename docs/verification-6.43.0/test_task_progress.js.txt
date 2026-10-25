@@ -1,0 +1,1 @@
+PASS explicit task checklist: evidence-required completion, preserved scope, blocked/reopened steps, stale-run rejection and bounded restoration.

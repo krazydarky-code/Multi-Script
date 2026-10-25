@@ -1,0 +1,11 @@
+const assert=require('assert'),{create}=require('../extension/updates');
+(async()=>{let now=1800000000000,prefs={},calls=[],fail=true,state={ok:true,current:'6.49.9',configured:true,setupReady:true,nextCheckAt:now+3600000,lastCheckError:'Server cooldown'};
+ const original=Date.now;Date.now=()=>now;
+ try{const options={chrome:{runtime:{getManifest:()=>({version:'6.49.9'}),onUpdateAvailable:{addListener(){}}},management:{getSelf:async()=>({installType:'development'})},alarms:{get:async()=>({}),onAlarm:{addListener(){}}}},nativeCall:async(_,args)=>{calls.push(args.action);if(args.action==='status')return{...state};return fail?{ok:false,error:'Offline'}:{ok:true,current:'6.49.9',available:false};},tabs:{list:async()=>({ok:true,participants:[]})},storageGet:async()=>({...prefs}),storageSet:async x=>Object.assign(prefs,x),stopBridge:async()=>({ok:true}),reload(){}};
+ let updater=create(options);assert((await updater.handle({op:'automatic'})).skipped);assert(!(await updater.handle({op:'check'})).ok);assert(!calls.includes('check'),'Neither manual nor automatic checks bypass server cooldown');
+ state.nextCheckAt=0;state.lastCheckError=null;assert(!(await updater.handle({op:'check'})).ok);assert.strictEqual(prefs.msUpdateFailureCount,1);assert.strictEqual(prefs.msUpdateRetryAt,now+900000);
+ updater=create(options);calls=[];assert((await updater.handle({op:'automatic'})).skipped);assert.deepStrictEqual(calls,[],'Worker restart preserves local retry backoff');
+ now+=16*60000;assert(!(await updater.handle({op:'automatic'})).ok);assert.strictEqual(prefs.msUpdateFailureCount,2);assert.strictEqual(prefs.msUpdateRetryAt,now+1800000);
+ now+=31*60000;fail=false;assert((await updater.handle({op:'automatic'})).ok);assert.strictEqual(prefs.msUpdateFailureCount,0);assert.strictEqual(prefs.msUpdateRetryAt,null);assert.strictEqual(prefs.msUpdateLastError,null);
+ console.log('PASS persistent updater backoff, server-directed cooldown for manual/automatic checks, worker restart and clean successful recovery.');
+ }finally{Date.now=original;}})().catch(e=>{console.error(e.stack);process.exit(1)});

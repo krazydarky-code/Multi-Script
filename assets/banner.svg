@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360">
+ <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101017"/><stop offset="1" stop-color="#1b1930"/></linearGradient><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#7c6cf2"/><stop offset="1" stop-color="#2aa981"/></linearGradient></defs>
+ <rect width="1200" height="360" rx="28" fill="url(#bg)"/><circle cx="1040" cy="80" r="180" fill="#7c6cf2" opacity=".08"/><circle cx="110" cy="330" r="190" fill="#2aa981" opacity=".07"/>
+ <text x="88" y="166" fill="url(#g)" font-family="Arial,sans-serif" font-size="82" font-weight="800">Multi-Script</text>
+ <text x="92" y="222" fill="#dedde8" font-family="Arial,sans-serif" font-size="26">One customizable AI studio for every engine.</text>
+ <text x="92" y="278" fill="#8d8b9e" font-family="Arial,sans-serif" font-size="19">Roblox  •  Unity  •  Godot  •  Blender  •  MCP</text>
+</svg>

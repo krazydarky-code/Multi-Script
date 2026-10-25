@@ -1,0 +1,10 @@
+{
+  "primaryEdition": "dev",
+  "publicBuild": "frozen",
+  "publicCompanion": {
+    "file": "Multi-Script-6.42.0-Public.zip",
+    "version": "6.42.0",
+    "sha256": "68f18ad699c69d14be6de9c07c7f6f46e7b2055ecdd932d26e30aa0b0ffed6dc",
+    "sourceRelease": "v6.49.9"
+  }
+}

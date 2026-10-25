@@ -1,0 +1,186 @@
+{
+  "product": "Multi-Script",
+  "version": "6.49.9",
+  "catalogue": {
+    "skills": 249,
+    "directTools": 279,
+    "virtualSpecialists": 263,
+    "robloxSkills": 54,
+    "robloxVirtualSpecialists": 90,
+    "advertisedDirectTools": 122,
+    "legacyInstructionAliases": 157
+  },
+  "providers": 15,
+  "engines": [
+    "roblox",
+    "unity",
+    "godot",
+    "blender",
+    "figma",
+    "general"
+  ],
+  "robloxCompanion": {
+    "version": "6.49.9",
+    "diagnosticOnly": false,
+    "companionTools": 26,
+    "defaultPermission": "off",
+    "permissionTiers": {
+      "read": 8,
+      "project": 17,
+      "full": 26
+    },
+    "allowedEndpoints": [
+      "GET /status",
+      "GET /catalog",
+      "POST /plugin/heartbeat",
+      "POST /plugin/register",
+      "GET /plugin/next",
+      "POST /plugin/result",
+      "POST /plugin/unregister",
+      "POST /plugin/toolset",
+      "GET /plugin/console"
+    ],
+    "security": {
+      "loopbackOnly": true,
+      "explicitOptIn": true,
+      "inMemoryBearerToken": true,
+      "noHttpEnqueue": true,
+      "allowlistedHandlersOnly": true,
+      "arbitraryCodeEvaluation": false,
+      "boundedQueue": 32,
+      "jobTimeoutSeconds": 180
+    }
+  },
+  "quality": {
+    "criticRoundsMaximum": 3,
+    "liveSchemaRequired": true,
+    "nativeReadBackRequired": true,
+    "promptRewritingIndependent": true
+  },
+  "future": {
+    "vscodeExtension": "deferred; design only after browser extension, bridge, schemas, and plugin remain stable"
+  },
+  "arena": {
+    "defaultProfile": "opus55",
+    "routingCanBeDisabled": true,
+    "disabledBehavior": "normal engine or engine-free startup with no Direct Max starter or per-turn envelope"
+  },
+  "capabilityVisibility": {
+    "directTools": "always included in list_commands and addressable as server multiscript",
+    "skills": "searchable through ms_list_skills/ms_recommend_skills/ms_get_skill",
+    "specialists": "searchable through ms_list_virtual_tools and coordinated by ms_studio_director",
+    "nativeCounts": "reported separately and never presented as total product capability"
+  },
+  "directTools": 279,
+  "engineToolkit": {
+    "tools": {
+      "blender": 45,
+      "roblox": 47,
+      "unity": 46,
+      "godot": 40
+    },
+    "total": 178,
+    "transport": "translated onto each engine's own MCP server (Roblox execute_luau, Blender/Unity MCP) or file-native (Godot project files)",
+    "visibleWhen": "only for engines with a configured MCP server"
+  },
+  "terminal": {
+    "startsBridgeFrom": "chat-bar terminal icon via Chrome Native Messaging",
+    "oneTimeSetup": "Setup.bat / MacOS_Setup.command",
+    "startBat": "manual no-setup fallback included"
+  },
+  "creativeProduction": {
+    "version": "6.49.9",
+    "styleProfiles": 13,
+    "iconPackTool": "ms_create_icon_pack",
+    "externalAssetWorkflow": true,
+    "providerAwarePromptLayer": true
+  },
+  "studioHub": {
+    "version": "6.49.9",
+    "customSkills": true,
+    "workshop": "local + deployable authenticated community service",
+    "cowork": "shared leased task board with acceptance checks, evidence and blockers",
+    "recording": "max 5 seconds, MJPEG AVI + vision contact sheet",
+    "ultra": "last stop on reasoning slider",
+    "providerVerification": "docs/PROVIDER_QA_6.38.md",
+    "codeFlight": "dedicated tab; real icon, three worlds, Arcade/Practice, precision score, visibility pause",
+    "themes": 31,
+    "skillActivation": "per-project/engine activation, candidates/user-verified, Markdown import and pinned library workflows",
+    "providerSessions": "explicit supported-tab discovery, bounded local briefs, atomic task assignment and acknowledged dispatch receipts",
+    "mobile": "opt-in paired LAN phone remote; task status, queued follow-ups, queue pause/resume and Stop; disabled at boot",
+    "taskProgress": "explicit run-scoped steps, evidence-gated reported completion, blockers and remaining count",
+    "ultraManuals": {
+      "count": 12,
+      "transport": "Local ms_ultra_manual; relevance-selected bounded excerpts plus complete six-section methods on demand",
+      "training": "In-context instructions, not changes to model weights",
+      "craftRevision": "6.49.3",
+      "enginePlaybooks": [
+        "roblox",
+        "godot",
+        "unity",
+        "blender",
+        "workspace",
+        "figma"
+      ],
+      "styleDirections": 5,
+      "referencesReviewed": "2026-10-24",
+      "skillWorkflowRevision": "multi-script-workflows-v6",
+      "canonicalPack": "runtime/ultra-handbook.json",
+      "phaseCheckpoints": 564,
+      "phaseExitCriteria": 72,
+      "acceptanceChecks": 72,
+      "diagnosticCases": 48,
+      "skillApplicationGuides": 249,
+      "detailTransport": "Full or phase-specific read; compact startup/task routing; no new permissions."
+    }
+  },
+  "figmaCompanion": {
+    "tools": 9,
+    "launcher": "launch_figma_mcp.py",
+    "plugin": "figma-plugin/manifest.json",
+    "port": 17616,
+    "scope": "Paired current page; Read or Edit permission enforced in relay and plugin",
+    "liveHostVerified": false
+  },
+  "frontEndTools": [
+    "ms_task_progress",
+    "ms_ultra_manual"
+  ],
+  "providerBenchmarks": "16-provider compatibility evidence, search/current filters and read-only local readiness diagnostics; no invented model ratings",
+  "updates": {
+    "channel": "dev",
+    "configured": true,
+    "transport": "Native Messaging for registered unpacked Dev; browser update service for managed installs",
+    "verification": "Pinned RSA/SHA-256 signed metadata, archive hash, stable identity and safe managed paths",
+    "apply": "Explicit idle apply and reload; preserves settings/private data; journaled rollback",
+    "setup": "docs/UPDATES.md",
+    "repository": "krazydarky-code/Multi-Script",
+    "feed": "https://github.com/krazydarky-code/Multi-Script/releases/latest/download/dev-update.json",
+    "automation": ".github/workflows/release.yml",
+    "postInstallSetup": "native-host-v1"
+  },
+  "blenderWorkspace": {
+    "version": "6.49.9",
+    "backend": "Real background Blender 4.5 LTS or compatible installed Blender",
+    "portableRuntime": "Hash-pinned official Windows x64/ARM64 packages; real native integration tested on Windows x64.",
+    "runtimeManifest": "runtime/blender-runtime.json",
+    "ui": "Three.js 0.180.0 + lil-gui 0.21.0, locally bundled",
+    "entry": "Chatbar cube icon or extension popup \u2192 Open Blender Workspace",
+    "projectStorage": "runtime/studio-data/blender-workspace",
+    "aiTool": "ms_blender_workspace",
+    "existingToolset": "ms_blender_* with auto/connected/workspace target",
+    "saveFormats": [
+      "blend",
+      "glb",
+      "fbx"
+    ],
+    "exactCapture": "Cycles CPU PNG",
+    "permissions": "Authenticated same-origin loopback UI; normal engine/session boundaries; Python runs with local user permissions.",
+    "sessionControls": "In-workspace Multi-Script panel: provider selection, task steps, context-checked follow-up queue, Stop and settings",
+    "companion": "Explicit per-engine opt-in prepares/resumes the same real Blender project before starting a connected Roblox/Unity/Godot session.",
+    "materialPreview": "Local studio IBL plus cached procedural base-color texture baking; native shaders remain intact. Exact effects/lighting require a Blender render.",
+    "persistence": "Native .blend saved before preview export; stopped-worker snapshot/preview restored from disk with a Resume Blender control.",
+    "handoff": "Validated Unity FBX / Godot GLB project-folder copy or pinned Roblox GLB download. Existing assets require explicit overwrite. Import verification remains a separate engine operation."
+  },
+  "build": "6.49.9-github-migration"
+}

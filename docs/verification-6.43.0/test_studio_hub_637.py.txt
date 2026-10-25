@@ -1,0 +1,13 @@
+test_community_http_auth_identity_and_remote_client (__main__.HubTests.test_community_http_auth_identity_and_remote_client) ... ok
+test_concurrent_claim_has_one_winner_and_requires_owner (__main__.HubTests.test_concurrent_claim_has_one_winner_and_requires_owner) ... ok
+test_lease_expiration_and_release (__main__.HubTests.test_lease_expiration_and_release) ... ok
+test_public_limits_and_dev_has_no_product_caps (__main__.HubTests.test_public_limits_and_dev_has_no_product_caps) ... ok
+test_publish_review_install_persist_and_ownership (__main__.HubTests.test_publish_review_install_persist_and_ownership) ... ok
+test_rate_size_capacity_and_server_identity (__main__.HubTests.test_rate_size_capacity_and_server_identity) ... ok
+test_recording_is_real_bounded_avi_with_frames (__main__.HubTests.test_recording_is_real_bounded_avi_with_frames) ... ok
+test_reference_blocks_private_and_connection_hides_token (__main__.HubTests.test_reference_blocks_private_and_connection_hides_token) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.271s
+
+OK

@@ -1,0 +1,9 @@
+# Multi-Script 6.48.5 verification
+
+Compare the 6.48.3 legacy startup, the 6.48.4 full-standards startup and the selected compact startup with the same shipped provider transport, current tools and deterministic responses. ClickUp, ChatGPT and Gemini each perform actual local skill retrieval and editable SVG creation after discovery. Task payloads must retain identical Ultra execution methods/manuals across the three variants. This comparison measures transport, instruction size and preservation; it does not establish that one real model produces better artwork or code.
+
+The compact startup preserves the v24 core standards and task-time specialist retrieval. Full manuals are not dumped into initialization. A character or line budget too small for the complete handshake fails before typing, rather than sending an incomplete contract. The scope tests retain a relevant full-method requirement when web research is skipped, reject unrelated skill receipts, and verify effort demotion and unavailable-tool boundaries.
+
+The eight restored skills and two Blender specialist workflows are tested through the real local catalog, not just string presence. The 241 base definitions are hashed independently and remain unchanged. Tool workflows are guidance; only advertised native tools can mutate a project. Provider tests retain private ClickUp AI boundaries, quiet thinking, native-menu overlap, native composer dialogs, command schemas and uncertain-send no-replay behavior.
+
+Suite receipts and local signed upgrade proofs are delivered with the package. These are reduced DOM and deterministic provider-model tests, with real Python local built-ins. They do not certify every authenticated account, model variation or external service. GitHub publication is unavailable while the publishing account remains suspended.

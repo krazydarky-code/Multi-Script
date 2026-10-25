@@ -1,0 +1,1 @@
+PASS shipped Figma iframe/UI + real localhost HTTP/CORS + real stdio MCP: one-use pairing, native frame/text creation and read-back through API fixture, permission revocation and disconnect. Actual Figma host/account remains unverified.

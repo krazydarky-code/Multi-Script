@@ -1,0 +1,83 @@
+{
+  "notes": "Commands vary by MCP server implementation. Copy the exact stdio start command from the server you installed; do not guess package names.",
+  "engines": {
+    "unity": {
+      "displayName": "Unity",
+      "serverId": "unity",
+      "commandExample": "uvx --from mcpforunityserver==10.2.0 mcp-for-unity --transport stdio",
+      "recommendedChecks": [
+        "compile scripts",
+        "read Console errors",
+        "open test scene",
+        "enter Play mode"
+      ],
+      "repository": "https://github.com/CoplayDev/unity-mcp",
+      "version": "10.2.0",
+      "unityPackageGitUrl": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#v10.2.0",
+      "requirements": [
+        "Unity 2021.3 LTS through Unity 6.x",
+        "Python 3.10+",
+        "uv/uvx",
+        "MCP for Unity package installed in the project"
+      ]
+    },
+    "godot": {
+      "displayName": "Godot",
+      "serverId": "godot",
+      "commandExample": "npx -y @coding-solo/godot-mcp@0.1.1",
+      "recommendedChecks": [
+        "parse project",
+        "run headless tests",
+        "open main scene",
+        "read debugger output"
+      ],
+      "repository": "https://github.com/Coding-Solo/godot-mcp",
+      "version": "0.1.1",
+      "requirements": [
+        "Godot Engine",
+        "Node.js 18+ and npm/npx"
+      ],
+      "environment": {
+        "GODOT_PATH": "Optional Godot executable path",
+        "DEBUG": "true for diagnostics"
+      }
+    },
+    "unreal": {
+      "displayName": "Unreal Engine",
+      "serverId": "unreal",
+      "commandExample": "<command from your Unreal MCP server documentation>",
+      "recommendedChecks": [
+        "compile C++/Blueprints",
+        "read Output Log",
+        "open map",
+        "run PIE"
+      ]
+    },
+    "blender": {
+      "displayName": "Blender",
+      "serverId": "blender",
+      "commandExample": "<command from your Blender MCP server documentation>",
+      "recommendedChecks": [
+        "inspect scene",
+        "validate transforms",
+        "check topology/UVs",
+        "export then re-import"
+      ]
+    },
+    "figma": {
+      "displayName": "Figma",
+      "serverId": "figma",
+      "commandExample": "launch_figma_mcp.py",
+      "requirements": [
+        "Figma desktop with an editable file",
+        "Import figma-plugin/manifest.json and pair the current page"
+      ],
+      "recommendedChecks": [
+        "figma_status reports connected and edit",
+        "read native node IDs back",
+        "export real frame capture"
+      ],
+      "documentation": "docs/FIGMA.md"
+    }
+  }
+}

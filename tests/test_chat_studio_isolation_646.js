@@ -1,0 +1,17 @@
+const assert=require('assert'),h=require('../tools/studio_harness');
+(async()=>{let calls=0;const x=await h.open({url:'https://arena.ai/text/direct',provider:'providers/arena.js',bridge:'up',stateHook:true,tools:[{name:'godot/run_project',server:'godot',inputSchema:{type:'object',properties:{projectPath:{type:'string'}},required:['projectPath']}},{name:'ms_get_skill',server:'zeroscript',inputSchema:{type:'object',properties:{skill_id:{type:'string'}},required:['skill_id']}}],toolHandler:async()=>{calls++;return{ok:true,text:'actual output'};}});assert(x);
+ try{const p=x.page;await p.evaluate(()=>{Object.assign(__qa.A,{started:true,chatOnly:true,bridge:{connected:true,engines:[{id:'godot',connected:true,alive:true}],servers:[{id:'godot',alive:true,tools:20}]}});});
+  const prompt=await p.evaluate(()=>__qa.systemPrompt());assert(prompt.includes('Engine access is disabled'));assert(!prompt.includes('engines connected right now are'));assert(!prompt.includes('run_project'));assert(!prompt.includes('always connected by default'));assert.deepStrictEqual(await p.evaluate(()=>__qa.enhanceFacts().engines),[]);
+  await p.evaluate(()=>__qa.runTool({tool:'list_commands',arguments:{}}));
+  await p.evaluate(()=>{__qa.A.toolList.push({name:'ms_godot_scene_build',server:'zeroscript',inputSchema:{type:'object',properties:{}}});__qa.A.toolsAt=Date.now();});
+  const catalog=await p.evaluate(()=>__qa.runTool({tool:'list_commands',arguments:{}}));assert(catalog.includes('ms_task_progress'));assert(!catalog.includes('godot/run_project'));assert(!catalog.includes('ms_godot_scene_build'),'General server engine facades must also be hidden');
+  const servers=await p.evaluate(()=>__qa.runTool({tool:'list_mcp_servers',arguments:{}}));assert(!servers.includes('- godot:'));
+  assert((await p.evaluate(()=>__qa.runTool({tool:'godot/run_project',arguments:{projectPath:'C:/project'}}))).startsWith('ERROR'));assert.strictEqual(calls,0);
+  await p.evaluate(()=>{const list=document.createElement('ol');list.className='flex-col-reverse';list.innerHTML='<div class="mx-auto justify-end"><div class="prose">Build a project plan</div></div>';document.body.append(list);__qa.A.running=true;__qa.A.loopKey=null;__qa.beginTaskProgress('Build a project plan');window.initialRunId=__qa.readTaskProgress().id;history.pushState({},'','/c/freshly-assigned-task');});
+  assert.strictEqual(await p.evaluate(()=>__qa.readTaskProgress()?.id),await p.evaluate(()=>initialRunId));
+  const current=await p.evaluate(()=>__qa.runTool({tool:'ms_task_progress',arguments:{action:'read'}}));assert(current.includes(await p.evaluate(()=>initialRunId)));
+  const stale=await p.evaluate(()=>__qa.runTool({tool:'ms_task_progress',arguments:{action:'plan',run_id:'wrong-old-run',steps:[{id:'one',title:'A concrete step'}]}}));assert(stale.includes('Current run_id:'));assert(stale.startsWith('ERROR'));
+  await p.evaluate(()=>{history.pushState({},'','/c/different-existing-chat');});assert.strictEqual(await p.evaluate(()=>__qa.readTaskProgress()),null,'An assigned ledger cannot follow a second conversation change');
+  assert.deepStrictEqual(x.errors,[]);console.log('PASS engine-free system prompt/catalog/enhancement/dispatch with globally connected Godot, fresh URL run-ID adoption, current-ID discovery and stale context rejection.');
+ }finally{await x.close();}
+})().catch(error=>{console.error(error.stack);process.exitCode=1;});

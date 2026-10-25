@@ -1,0 +1,5 @@
+PASS vani: hidden source/chip isolation, quoted alerts, stable IDs, React remount lock, scoped send, guest vision and preferred composer
+PASS venice: hidden source/chip isolation, quoted alerts, stable IDs, React remount lock, scoped send
+PASS crax: hidden source/chip isolation, quoted alerts, stable IDs, React remount lock, scoped send
+PASS clickup: hidden source/chip isolation, quoted alerts, stable IDs, React remount lock, scoped send
+PASS shared transport boundary matrix.

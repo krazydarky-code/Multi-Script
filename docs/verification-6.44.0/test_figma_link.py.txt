@@ -1,0 +1,2 @@
+PASS Figma real loopback HTTP and stdio MCP: paired origin/host/token guards, read/edit gates, native result receipts, stale timeout/no replay, current file status and real catalog handshake. Figma application is simulated separately.
+

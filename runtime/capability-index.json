@@ -1,0 +1,1002 @@
+{
+  "version": "4.9.1",
+  "totalSkills": 249,
+  "policy": {
+    "minimumStackSize": 3,
+    "preferredStackSize": 5,
+    "roles": [
+      "design",
+      "implementation",
+      "polish",
+      "optimization",
+      "validation"
+    ],
+    "executionRule": "Selecting skills is preparation. The agent must execute their steps through real connected MCP tools and verify the result."
+  },
+  "engines": {
+    "roblox": {
+      "skillCount": 54,
+      "domains": {
+        "architecture-code": {
+          "skillIds": [
+            "roblox-architecture-services",
+            "code-quality",
+            "scripting-power"
+          ],
+          "roles": {
+            "design": [
+              "roblox-architecture-services"
+            ],
+            "implementation": [
+              "code-quality",
+              "scripting-power"
+            ]
+          }
+        },
+        "persistence-economy": {
+          "skillIds": [
+            "roblox-data-store-safety",
+            "roblox-inventory-system",
+            "roblox-crafting-system",
+            "roblox-monetization-receipts",
+            "game-systems",
+            "roblox-profile-session-locking",
+            "roblox-analytics-telemetry"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-data-store-safety",
+              "roblox-inventory-system",
+              "roblox-crafting-system",
+              "roblox-monetization-receipts",
+              "roblox-profile-session-locking",
+              "roblox-analytics-telemetry"
+            ],
+            "design": [
+              "game-systems"
+            ]
+          }
+        },
+        "multiplayer-networking": {
+          "skillIds": [
+            "roblox-remote-security",
+            "roblox-matchmaking-teleport",
+            "roblox-anti-exploit"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-remote-security",
+              "roblox-matchmaking-teleport",
+              "roblox-anti-exploit"
+            ]
+          }
+        },
+        "testing-release": {
+          "skillIds": [
+            "roblox-automated-testing",
+            "fix-errors"
+          ],
+          "roles": {
+            "validation": [
+              "roblox-automated-testing",
+              "fix-errors"
+            ]
+          }
+        },
+        "input-camera-character": {
+          "skillIds": [
+            "roblox-character-controller",
+            "roblox-camera-system",
+            "roblox-cross-platform-input",
+            "roblox-vehicle-system",
+            "roblox-avatar-accessories"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-character-controller",
+              "roblox-camera-system",
+              "roblox-cross-platform-input",
+              "roblox-vehicle-system",
+              "roblox-avatar-accessories"
+            ]
+          }
+        },
+        "ui-ux": {
+          "skillIds": [
+            "roblox-responsive-ui",
+            "roblox-accessibility"
+          ],
+          "roles": {
+            "polish": [
+              "roblox-responsive-ui"
+            ],
+            "implementation": [
+              "roblox-accessibility"
+            ]
+          }
+        },
+        "design-production": {
+          "skillIds": [
+            "roblox-quest-system",
+            "roblox-dialogue-system",
+            "roblox-localization"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-quest-system",
+              "roblox-dialogue-system",
+              "roblox-localization"
+            ]
+          }
+        },
+        "combat-abilities": {
+          "skillIds": [
+            "roblox-melee-combat",
+            "roblox-ranged-combat",
+            "roblox-ability-framework"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-melee-combat",
+              "roblox-ranged-combat",
+              "roblox-ability-framework"
+            ]
+          }
+        },
+        "ai-navigation": {
+          "skillIds": [
+            "roblox-npc-behavior",
+            "roblox-pathfinding-navigation",
+            "roblox-passes-subscriptions",
+            "npc-pathfinding"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-npc-behavior",
+              "roblox-pathfinding-navigation",
+              "roblox-passes-subscriptions",
+              "npc-pathfinding"
+            ]
+          }
+        },
+        "world-levels": {
+          "skillIds": [
+            "roblox-procedural-worlds"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-procedural-worlds"
+            ]
+          }
+        },
+        "physics-simulation": {
+          "skillIds": [
+            "roblox-physics-network-ownership"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-physics-network-ownership"
+            ]
+          }
+        },
+        "performance-platform": {
+          "skillIds": [
+            "roblox-memory-store-messaging",
+            "roblox-performance-profiling",
+            "roblox-mobile-console-qa",
+            "roblox-streaming-enabled"
+          ],
+          "roles": {
+            "optimization": [
+              "roblox-memory-store-messaging",
+              "roblox-performance-profiling"
+            ],
+            "implementation": [
+              "roblox-mobile-console-qa",
+              "roblox-streaming-enabled"
+            ]
+          }
+        },
+        "audio": {
+          "skillIds": [
+            "roblox-audio-vfx-lighting"
+          ],
+          "roles": {
+            "polish": [
+              "roblox-audio-vfx-lighting"
+            ]
+          }
+        },
+        "animation": {
+          "skillIds": [
+            "roblox-pro-animation"
+          ],
+          "roles": {
+            "polish": [
+              "roblox-pro-animation"
+            ]
+          }
+        },
+        "studio-craft": {
+          "skillIds": [
+            "roblox-studio-gui-composition"
+          ],
+          "roles": {
+            "polish": [
+              "roblox-studio-gui-composition"
+            ]
+          }
+        },
+        "native-toolcraft": {
+          "skillIds": [
+            "roblox-native-building-generator",
+            "roblox-native-path-fence-builder",
+            "roblox-native-scatter-dressing",
+            "roblox-native-model-editing",
+            "roblox-native-gameplay-kit",
+            "roblox-native-ui-kit-screens",
+            "roblox-native-terrain-blockout",
+            "roblox-native-lighting-atmosphere",
+            "roblox-native-animation-tween",
+            "roblox-native-effects",
+            "roblox-native-collision-physics",
+            "roblox-native-project-audit-loop"
+          ],
+          "roles": {
+            "implementation": [
+              "roblox-native-building-generator",
+              "roblox-native-path-fence-builder",
+              "roblox-native-gameplay-kit",
+              "roblox-native-animation-tween"
+            ],
+            "polish": [
+              "roblox-native-scatter-dressing",
+              "roblox-native-model-editing",
+              "roblox-native-lighting-atmosphere"
+            ],
+            "design": [
+              "roblox-native-ui-kit-screens",
+              "roblox-native-terrain-blockout"
+            ],
+            "validation": [
+              "roblox-native-effects",
+              "roblox-native-project-audit-loop"
+            ],
+            "optimization": [
+              "roblox-native-collision-physics"
+            ]
+          }
+        },
+        "vfx": {
+          "skillIds": [
+            "vfx-assets"
+          ],
+          "roles": {
+            "polish": [
+              "vfx-assets"
+            ]
+          }
+        }
+      }
+    },
+    "unity": {
+      "skillCount": 45,
+      "domains": {
+        "architecture-code": {
+          "skillIds": [
+            "unity-project-architecture",
+            "unity-serialization-migrations",
+            "unity-dots-ecs",
+            "unity-package-management",
+            "unity-editor-tooling",
+            "unity-assembly-definitions",
+            "unity-scriptable-objects",
+            "unity-prefab-workflows"
+          ],
+          "roles": {
+            "design": [
+              "unity-project-architecture"
+            ],
+            "implementation": [
+              "unity-serialization-migrations",
+              "unity-dots-ecs",
+              "unity-package-management",
+              "unity-editor-tooling",
+              "unity-assembly-definitions",
+              "unity-scriptable-objects",
+              "unity-prefab-workflows"
+            ]
+          }
+        },
+        "world-levels": {
+          "skillIds": [
+            "unity-scene-management",
+            "unity-procedural-generation"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-scene-management",
+              "unity-procedural-generation"
+            ]
+          }
+        },
+        "design-production": {
+          "skillIds": [
+            "unity-localization"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-localization"
+            ]
+          }
+        },
+        "testing-release": {
+          "skillIds": [
+            "unity-build-pipeline",
+            "unity-test-framework"
+          ],
+          "roles": {
+            "validation": [
+              "unity-build-pipeline",
+              "unity-test-framework"
+            ]
+          }
+        },
+        "input-camera-character": {
+          "skillIds": [
+            "unity-input-system",
+            "unity-cinemachine"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-input-system",
+              "unity-cinemachine"
+            ]
+          }
+        },
+        "ui-ux": {
+          "skillIds": [
+            "unity-ugui",
+            "unity-ui-toolkit"
+          ],
+          "roles": {
+            "polish": [
+              "unity-ugui",
+              "unity-ui-toolkit"
+            ]
+          }
+        },
+        "animation": {
+          "skillIds": [
+            "unity-animator-state-machines",
+            "unity-playables-timeline",
+            "unity-xr-interaction"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-animator-state-machines",
+              "unity-playables-timeline",
+              "unity-xr-interaction"
+            ]
+          }
+        },
+        "physics-simulation": {
+          "skillIds": [
+            "unity-physics"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-physics"
+            ]
+          }
+        },
+        "ai-navigation": {
+          "skillIds": [
+            "unity-navigation-ai"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-navigation-ai"
+            ]
+          }
+        },
+        "textures-art": {
+          "skillIds": [
+            "unity-urp-rendering",
+            "unity-hdrp-rendering",
+            "unity-shader-graph",
+            "unity-terrain-worldbuilding"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-urp-rendering",
+              "unity-hdrp-rendering"
+            ],
+            "polish": [
+              "unity-shader-graph"
+            ],
+            "validation": [
+              "unity-terrain-worldbuilding"
+            ]
+          }
+        },
+        "vfx": {
+          "skillIds": [
+            "unity-vfx-graph"
+          ],
+          "roles": {
+            "polish": [
+              "unity-vfx-graph"
+            ]
+          }
+        },
+        "persistence-economy": {
+          "skillIds": [
+            "unity-save-system"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-save-system"
+            ]
+          }
+        },
+        "multiplayer-networking": {
+          "skillIds": [
+            "unity-netcode"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-netcode"
+            ]
+          }
+        },
+        "audio": {
+          "skillIds": [
+            "unity-audio-mixer"
+          ],
+          "roles": {
+            "polish": [
+              "unity-audio-mixer"
+            ]
+          }
+        },
+        "performance-platform": {
+          "skillIds": [
+            "unity-profiler-memory",
+            "unity-platform-optimization",
+            "unity-addressables"
+          ],
+          "roles": {
+            "optimization": [
+              "unity-profiler-memory",
+              "unity-platform-optimization"
+            ],
+            "implementation": [
+              "unity-addressables"
+            ]
+          }
+        },
+        "native-toolcraft": {
+          "skillIds": [
+            "unity-native-building-generator",
+            "unity-native-path-fence-builder",
+            "unity-native-scatter-dressing",
+            "unity-native-model-editing",
+            "unity-native-gameplay-kit",
+            "unity-native-ui-kit-screens",
+            "unity-native-terrain-blockout",
+            "unity-native-material-lighting",
+            "unity-native-animation-controller",
+            "unity-native-navmesh-ai",
+            "unity-native-particles-vfx",
+            "unity-native-project-audit-loop"
+          ],
+          "roles": {
+            "implementation": [
+              "unity-native-building-generator",
+              "unity-native-path-fence-builder",
+              "unity-native-gameplay-kit",
+              "unity-native-animation-controller",
+              "unity-native-navmesh-ai"
+            ],
+            "polish": [
+              "unity-native-scatter-dressing",
+              "unity-native-model-editing",
+              "unity-native-material-lighting",
+              "unity-native-particles-vfx"
+            ],
+            "design": [
+              "unity-native-ui-kit-screens",
+              "unity-native-terrain-blockout"
+            ],
+            "validation": [
+              "unity-native-project-audit-loop"
+            ]
+          }
+        }
+      }
+    },
+    "godot": {
+      "skillCount": 45,
+      "domains": {
+        "architecture-code": {
+          "skillIds": [
+            "godot-project-architecture",
+            "godot-signals-events",
+            "godot-autoload-services",
+            "godot-uid-resource-moves",
+            "godot-csharp-integration",
+            "godot-groups-composition",
+            "godot-editor-plugins",
+            "godot-resources-data"
+          ],
+          "roles": {
+            "design": [
+              "godot-project-architecture"
+            ],
+            "implementation": [
+              "godot-signals-events",
+              "godot-autoload-services",
+              "godot-csharp-integration",
+              "godot-groups-composition",
+              "godot-editor-plugins",
+              "godot-resources-data"
+            ],
+            "polish": [
+              "godot-uid-resource-moves"
+            ]
+          }
+        },
+        "world-levels": {
+          "skillIds": [
+            "godot-scene-composition",
+            "godot-tilemap-2d",
+            "godot-gridmap-3d",
+            "godot-procedural-generation"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-scene-composition",
+              "godot-tilemap-2d",
+              "godot-gridmap-3d",
+              "godot-procedural-generation"
+            ]
+          }
+        },
+        "ai-navigation": {
+          "skillIds": [
+            "godot-gdscript-style",
+            "godot-navigation"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-gdscript-style",
+              "godot-navigation"
+            ]
+          }
+        },
+        "testing-release": {
+          "skillIds": [
+            "godot-export-pipeline",
+            "godot-gut-testing",
+            "godot-import-pipeline"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-export-pipeline",
+              "godot-import-pipeline"
+            ],
+            "validation": [
+              "godot-gut-testing"
+            ]
+          }
+        },
+        "design-production": {
+          "skillIds": [
+            "godot-localization"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-localization"
+            ]
+          }
+        },
+        "input-camera-character": {
+          "skillIds": [
+            "godot-input-map",
+            "godot-characterbody-2d",
+            "godot-characterbody-3d"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-input-map",
+              "godot-characterbody-2d",
+              "godot-characterbody-3d"
+            ]
+          }
+        },
+        "ui-ux": {
+          "skillIds": [
+            "godot-control-ui",
+            "godot-accessibility"
+          ],
+          "roles": {
+            "polish": [
+              "godot-control-ui"
+            ],
+            "implementation": [
+              "godot-accessibility"
+            ]
+          }
+        },
+        "animation": {
+          "skillIds": [
+            "godot-animation-player-tree"
+          ],
+          "roles": {
+            "polish": [
+              "godot-animation-player-tree"
+            ]
+          }
+        },
+        "physics-simulation": {
+          "skillIds": [
+            "godot-physics-2d",
+            "godot-physics-3d"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-physics-2d",
+              "godot-physics-3d"
+            ]
+          }
+        },
+        "textures-art": {
+          "skillIds": [
+            "godot-shader-language"
+          ],
+          "roles": {
+            "polish": [
+              "godot-shader-language"
+            ]
+          }
+        },
+        "performance-platform": {
+          "skillIds": [
+            "godot-gpu-particles",
+            "godot-debugger-profiler",
+            "godot-web-mobile-optimization"
+          ],
+          "roles": {
+            "optimization": [
+              "godot-gpu-particles",
+              "godot-web-mobile-optimization"
+            ],
+            "validation": [
+              "godot-debugger-profiler"
+            ]
+          }
+        },
+        "audio": {
+          "skillIds": [
+            "godot-audio-buses"
+          ],
+          "roles": {
+            "polish": [
+              "godot-audio-buses"
+            ]
+          }
+        },
+        "persistence-economy": {
+          "skillIds": [
+            "godot-save-system"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-save-system"
+            ]
+          }
+        },
+        "multiplayer-networking": {
+          "skillIds": [
+            "godot-multiplayer-api"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-multiplayer-api"
+            ]
+          }
+        },
+        "native-toolcraft": {
+          "skillIds": [
+            "godot-native-building-generator",
+            "godot-native-path-fence-builder",
+            "godot-native-scatter-dressing",
+            "godot-native-model-editing",
+            "godot-native-gameplay-kit",
+            "godot-native-ui-kit-screens",
+            "godot-native-terrain-blockout",
+            "godot-native-shader-library",
+            "godot-native-environment-lighting",
+            "godot-native-sprite-animation",
+            "godot-native-audio-export",
+            "godot-native-project-audit-loop"
+          ],
+          "roles": {
+            "implementation": [
+              "godot-native-building-generator",
+              "godot-native-path-fence-builder",
+              "godot-native-gameplay-kit",
+              "godot-native-sprite-animation"
+            ],
+            "polish": [
+              "godot-native-scatter-dressing",
+              "godot-native-model-editing",
+              "godot-native-shader-library",
+              "godot-native-environment-lighting"
+            ],
+            "design": [
+              "godot-native-ui-kit-screens",
+              "godot-native-terrain-blockout"
+            ],
+            "validation": [
+              "godot-native-audio-export",
+              "godot-native-project-audit-loop"
+            ]
+          }
+        }
+      }
+    },
+    "blender": {
+      "skillCount": 31,
+      "domains": {
+        "textures-art": {
+          "skillIds": [
+            "blender-project-setup",
+            "blender-unit-scale",
+            "blender-reference-blockout",
+            "blender-hard-surface-modeling",
+            "blender-low-poly-modeling",
+            "blender-topology-cleanup",
+            "blender-uv-unwrapping",
+            "blender-pbr-materials",
+            "blender-lod-generation",
+            "blender-collision-meshes",
+            "blender-batch-validation",
+            "blender-texture-baking"
+          ],
+          "roles": {
+            "implementation": [
+              "blender-project-setup",
+              "blender-unit-scale",
+              "blender-reference-blockout",
+              "blender-hard-surface-modeling",
+              "blender-low-poly-modeling",
+              "blender-topology-cleanup",
+              "blender-uv-unwrapping",
+              "blender-pbr-materials",
+              "blender-lod-generation",
+              "blender-collision-meshes",
+              "blender-batch-validation",
+              "blender-texture-baking"
+            ]
+          }
+        },
+        "testing-release": {
+          "skillIds": [
+            "blender-fbx-export",
+            "blender-roblox-export",
+            "blender-gltf-export"
+          ],
+          "roles": {
+            "implementation": [
+              "blender-fbx-export",
+              "blender-roblox-export",
+              "blender-gltf-export"
+            ]
+          }
+        },
+        "animation": {
+          "skillIds": [
+            "blender-rigging-humanoid",
+            "blender-shape-keys"
+          ],
+          "roles": {
+            "implementation": [
+              "blender-rigging-humanoid",
+              "blender-shape-keys"
+            ]
+          }
+        },
+        "native-toolcraft": {
+          "skillIds": [
+            "blender-native-building-modeling",
+            "blender-native-prop-modeling",
+            "blender-native-level-blockout",
+            "blender-native-terrain-environment",
+            "blender-native-material-authoring",
+            "blender-native-rigging-weights",
+            "blender-native-animation-motion",
+            "blender-native-mesh-cleanup-lod",
+            "blender-native-scene-render",
+            "blender-native-vfx-presets",
+            "blender-native-curves-paths",
+            "blender-native-export-pipeline"
+          ],
+          "roles": {
+            "implementation": [
+              "blender-native-building-modeling",
+              "blender-native-prop-modeling",
+              "blender-native-rigging-weights",
+              "blender-native-animation-motion",
+              "blender-native-curves-paths"
+            ],
+            "design": [
+              "blender-native-level-blockout",
+              "blender-native-terrain-environment"
+            ],
+            "polish": [
+              "blender-native-material-authoring",
+              "blender-native-scene-render",
+              "blender-native-vfx-presets"
+            ],
+            "optimization": [
+              "blender-native-mesh-cleanup-lod"
+            ],
+            "validation": [
+              "blender-native-export-pipeline"
+            ]
+          }
+        },
+        "modeling": {
+          "skillIds": [
+            "blender-geometry-nodes",
+            "blender-sculpt-retopology"
+          ],
+          "roles": {
+            "implementation": [
+              "blender-geometry-nodes",
+              "blender-sculpt-retopology"
+            ]
+          }
+        }
+      }
+    },
+    "figma": {
+      "skillCount": 10,
+      "domains": {
+        "ui-ux": {
+          "skillIds": [
+            "figma-file-architecture",
+            "figma-auto-layout",
+            "figma-components",
+            "figma-variables",
+            "figma-design-tokens",
+            "figma-responsive-constraints",
+            "figma-accessibility",
+            "figma-game-ui",
+            "figma-prototyping"
+          ],
+          "roles": {
+            "design": [
+              "figma-file-architecture",
+              "figma-design-tokens"
+            ],
+            "polish": [
+              "figma-auto-layout",
+              "figma-components",
+              "figma-variables",
+              "figma-responsive-constraints",
+              "figma-accessibility",
+              "figma-game-ui"
+            ],
+            "implementation": [
+              "figma-prototyping"
+            ]
+          }
+        },
+        "engineering": {
+          "skillIds": [
+            "figma-developer-handoff"
+          ],
+          "roles": {
+            "implementation": [
+              "figma-developer-handoff"
+            ]
+          }
+        }
+      }
+    },
+    "general": {
+      "skillCount": 57,
+      "domains": {
+        "design-production": {
+          "skillIds": [
+            "general-intent-expansion",
+            "notion-hybrid-agent-routing",
+            "general-anti-generic-design",
+            "general-creative-direction",
+            "general-scope-smart-defaults",
+            "general-reference-decomposition"
+          ],
+          "roles": {
+            "implementation": [
+              "general-intent-expansion",
+              "notion-hybrid-agent-routing",
+              "general-creative-direction",
+              "general-reference-decomposition"
+            ],
+            "design": [
+              "general-anti-generic-design"
+            ],
+            "polish": [
+              "general-scope-smart-defaults"
+            ]
+          }
+        },
+        "ui-ux": {
+          "skillIds": [
+            "general-accessibility-pass",
+            "general-responsive-design",
+            "canvas-to-figma-import",
+            "check-clean-ui",
+            "general-ui-art-direction",
+            "general-component-states",
+            "canvas-svg-ui"
+          ],
+          "roles": {
+            "design": [
+              "general-responsive-design"
+            ],
+            "implementation": [
+              "general-accessibility-pass",
+              "canvas-to-figma-import",
+              "general-component-states",
+              "canvas-svg-ui"
+            ],
+            "validation": [
+              "check-clean-ui"
+            ],
+            "polish": [
+              "general-ui-art-direction"
+            ]
+          }
+        },
+        "testing-release": {
+          "skillIds": [
+            "general-final-polish-loop",
+            "general-quality-scorecard"
+          ],
+          "roles": {
+            "implementation": [
+              "general-final-polish-loop",
+              "general-quality-scorecard"
+            ]
+          }
+        },
+        "engineering": {
+          "skillIds": [
+            "discover-project"
+          ],
+          "roles": {
+            "validation": [
+              "discover-project"
+            ]
+          }
+        },
+        "modeling": {
+          "skillIds": [
+            "check-props"
+          ],
+          "roles": {
+            "validation": [
+              "check-props"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "productionContractVersion": "6.36.1",
+  "creativeProductionLayer": "6.36.1"
+}

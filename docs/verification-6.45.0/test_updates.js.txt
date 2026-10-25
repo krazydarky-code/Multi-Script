@@ -1,0 +1,1 @@
+PASS updater install-type separation, all active/draft/queue/unconfirmed guards, explicit idle apply/reload, saved preferences, automatic-check opt-out, managed-store path and unknown-install refusal.

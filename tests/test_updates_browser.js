@@ -1,0 +1,9 @@
+const assert=require('assert'),fs=require('fs'),path=require('path'),h=require('../tools/studio_harness');
+(async()=>{for(const theme of ['light','dark']){
+ const x=await h.open({theme,width:390,height:844,updateState:{ok:true,configured:true,current:'6.45.0',staged:'6.49.9',automatic:false,root:'C:/Multi-Script'},storage:{msMenuPrefs:{theme:theme==='light'?'paper':'midnight'}}});assert(x);
+ try{const p=x.page;await p.click('#zs-switch');await p.click('[data-tab="help"]');await p.waitForFunction(()=>document.querySelector('#ms-update-status')?.textContent.includes('6.49.9'));assert(await p.isEnabled('#ms-update-apply'));assert(!await p.isChecked('#ms-update-auto'));const section=p.locator('.zs-menu-sec').filter({has:p.locator('#ms-update-check')});if(await section.evaluate(el=>el.classList.contains('collapsed')))await section.locator('.zs-sec-label').click();await p.click('#ms-update-check');await p.waitForFunction(()=>document.querySelector('#ms-update-status')?.textContent.includes('6.49.9'));assert(await p.isEnabled('#ms-update-check'));const bounds=await p.locator('#ms-update-status').boundingBox();assert(bounds.width>150&&bounds.width<390);assert.deepStrictEqual(x.errors,[]);fs.mkdirSync('test-results/update-browser',{recursive:true});await p.screenshot({path:`test-results/update-browser/${theme}.png`});}
+ finally{await x.close();}
+ }
+ const x=await h.open({});assert(x);try{await x.page.click('#zs-switch');await x.page.click('[data-tab="help"]');await x.page.waitForFunction(()=>document.querySelector('#ms-update-status')?.textContent.includes('not configured'));assert(await x.page.isDisabled('#ms-update-apply'));assert.deepStrictEqual(x.errors,[]);}finally{await x.close();}
+ console.log('PASS real Help/Updates UI, narrow light/dark layouts, staged/unconfigured truthfulness, saved automatic preference and trusted Check action.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

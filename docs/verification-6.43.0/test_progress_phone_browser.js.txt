@@ -1,0 +1,1 @@
+PASS real headless desktop/phone flow: explicit task checklist/evidence, dark/light independent themes, 390px and reduced motion; trusted-click LAN enable, one-time pairing, authenticated HTTP frontend, live progress, queued follow-up, pause/resume/Stop receipts and device revocation/disable.

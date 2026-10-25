@@ -1,0 +1,1 @@
+PASS 60 engine/manual combinations, detailed craft/style/reference retrieval, manifest load order, bounded prompt budget, mode scoping and actual Software Builder local-tool routing.

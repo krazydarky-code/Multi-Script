@@ -1,0 +1,1 @@
+PASS opt-in phone service: real HTTP, pairing expiry/replay/rate limits, cookie auth, host/origin checks, bounded actions, opaque contexts, at-most-once dispatch, stale status and revocation.

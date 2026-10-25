@@ -1,0 +1,9 @@
+# Multi-Script 6.35.0 — reliable bridge, accents for every theme, Special themes
+
+- **Your accent applies to every theme.** Scream, Michael Myers, Slenderman and Jason used to force their own accent and ignore yours. They now start with their signature colour but follow any accent you pick, including in tabs, borders, the chat bar and the menu frame (existing custom accents are respected automatically).
+- **Special themes section.** The animated scene themes (Fazbear's Pizzeria, Scream, Michael Myers, Slenderman, Jason) now have their own "Special themes" group under the normal themes in Appearance.
+- **Bridge: no more restart loops for missing tools.** When a launcher's prerequisite is missing (Node.js/npx for Godot, uv/uvx for Unity and Blender, Roblox Studio's MCP), the launcher exits with code 78. The bridge then logs one clear "needs setup" line and retries only every 10 minutes instead of respawning every few seconds. A tools refresh no longer respawns it either.
+- **Windows: fixed "auto-restart failed: [Errno 22] Invalid argument".** Console output can no longer break a restart: logging and the startup spinner ignore the Windows console errors that used to abort it.
+- **macOS: fixed Blender (uv) exiting with code 126.** "realpath: command not found … runtime/python: No such file" happened because macOS before 13 has no `realpath` and uv's script shims need it. Launchers now provide a small portable `realpath` when the system has none, and they start servers from a neutral working directory.
+- **Readable exit codes.** A server stopped by the bridge now reports 143 (terminated) instead of 241.
+- **Notion AI: no more endless "Starting Up".** If Notion's agent sits in its own warm-up with no text for 75 seconds, that turn is stopped and recovery takes over. The startup prompt gets one automatic nudge. When startup finishes, the chip reads "Session ready" instead of staying on "Starting Up".

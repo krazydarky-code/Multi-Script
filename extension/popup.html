@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { width: 300px; margin: 0; font-family: "Segoe UI", sans-serif; background: #16161a; color: #e8e8ec; }
+    .wrap { padding: 18px; }
+    h1 { font-size: 14px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+    .ver { font-size: 9.5px; font-weight: 500; letter-spacing: 0.2px;
+           color: rgba(255,255,255,0.55); background: none; border: none;
+           padding: 0; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #6b7280; }
+    .dot.on { background: #34d399;  }
+    .dot.warn { background: #fbbf24;  }
+    .row { font-size: 12px; opacity: 0.85; margin: 6px 0; }
+    button { width: 100%; margin-top: 8px; padding: 8px; border: 0; border-radius: 8px; cursor: pointer; font-size: 12px; }
+    .ghost { background: rgba(255,255,255,0.08); color: #e8e8ec; }
+    code { background: rgba(255,255,255,0.08); padding: 1px 5px; border-radius: 4px; }
+  button { min-height: 36px; font-weight: 600; border: 1px solid #36363b; }
+    button:hover { background: #303034; }
+    button:focus-visible { outline: 2px solid #ff8b45; outline-offset: 2px; }
+    h1 { font-size: 16px; margin-bottom: 16px; }
+    .wrap > .row { line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1><span id="dot" class="dot"></span> Multi-Script <span id="ver" class="ver"></span> <span style="font-size:9px;opacity:.6">AI Studio</span></h1>
+    <div class="row" id="state">Bridge: …</div>
+    <div class="row" id="tools"></div>
+    <div class="row" id="servers" style="white-space:pre-line; font-family:ui-monospace,monospace; opacity:0.75"></div>
+    <button class="ghost" id="reconnect">↻ Reconnect bridge</button>
+    <button class="ghost" id="restart">⟳ Restart MCP servers</button>
+    <button class="ghost" id="blender-workspace">◇ Open Blender Workspace</button>
+    <button class="ghost" id="settings">⚙ Open control center</button>
+    <div class="row" style="margin-top:10px; opacity:0.6">
+      Open your game engine, open a supported AI chat, then click the terminal icon in the Multi-Script bar to start the bridge.
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

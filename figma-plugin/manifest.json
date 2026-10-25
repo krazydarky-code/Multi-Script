@@ -1,0 +1,13 @@
+{
+  "name": "Multi-Script Figma Companion",
+  "id": "multi-script-local-companion",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["http://127.0.0.1:17616"],
+    "reasoning": "Pair with Multi-Script's loopback-only local MCP bridge to inspect and edit the current page. No external service is contacted."
+  }
+}

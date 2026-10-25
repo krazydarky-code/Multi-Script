@@ -1,0 +1,10 @@
+test_all_skills_have_real_delivery_contracts (__main__.Revamp.test_all_skills_have_real_delivery_contracts) ... ok
+test_cycles_project_boundaries_and_concurrent_resources (__main__.Revamp.test_cycles_project_boundaries_and_concurrent_resources) ... ok
+test_dependencies_resource_conflicts_and_progress (__main__.Revamp.test_dependencies_resource_conflicts_and_progress) ... ok
+test_legacy_db_migrates_without_losing_tasks (__main__.Revamp.test_legacy_db_migrates_without_losing_tasks) ... ok
+test_validation_and_expired_ownership (__main__.Revamp.test_validation_and_expired_ownership) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.379s
+
+OK

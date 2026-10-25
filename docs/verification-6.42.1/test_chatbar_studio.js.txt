@@ -1,0 +1,27 @@
+PASS Notion Auto uses a centered bottom viewport dock
+PASS Notion Auto stays a compact pill rather than filling the Agent canvas
+PASS Stop stays hidden while an engine is ready but no agent is running: {"hidden":true,"display":"none"}
+PASS no page errors: 
+PASS Notion bottom-row canvas stays motionless without padding feedback: {"spread":0,"top":770,"editorTop":707,"pads":["14px"]}
+PASS unpainted composer cannot move the stable Notion Auto dock
+PASS stable Notion Auto dock remains compact
+PASS window dock: centred pill at the bottom of the window
+PASS fit width: the pill hugs its content (690px vs composer 720px)
+PASS floating dock: right-aligned pill hugging the composer from outside
+PASS hidden items and style are applied
+PASS roomy size grows the controls
+PASS clicking Window moves the live bar to the bottom of the window
+PASS Align → Right pins it to the right edge
+PASS vertical nudge moves the bar
+PASS unticking Terminal hides the terminal button
+PASS bar preferences are persisted
+PASS Reset chat bar returns to the stable Notion Auto dock with every item visible
+PASS customiser: no page errors: 
+PASS provider portal keeps every chat-bar control in one contained row: {"parent":"composer","dir":"row","spread":0,"contained":true}
+PASS Claude page loads with no page errors (init-order crash regression): 
+PASS Claude: bar docks on the fieldset composer, above the editor
+PASS AI sites lists Claude as the active provider with its description
+PASS legacy hidden Studio preference hides the replacement New idea action
+PASS visibility editor reflects migrated New idea preference
+PASS New idea can be shown again after migration
+PASS chat bar studio (26 checks)

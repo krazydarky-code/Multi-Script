@@ -1,0 +1,1 @@
+PASS queue ordering, tool-result preservation, confirmed receipts, idle sends, context locks, capacity deferral, uncertain-send no replay, reload recovery, bounded storage and Stop pause

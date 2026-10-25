@@ -1,0 +1,3 @@
+# Multi-Script 4.5.2 — Prompt-Only Notion Routing
+
+The direct Notion model-selector attempt from 4.5.1 has been fully removed. Business Trial users can keep Notion on Auto and choose a preferred model from Multi-Script's own startup profile picker. Multi-Script inserts one compact, high-priority routing block before all shared skills and tools at the beginning of each new chat. Profiles cover GPT-5.6 Sol, Claude Opus 5, Kimi K3, and future Claude Opus 5.5. The implementation never clicks Notion's model picker, never imitates a model, and falls back honestly when Notion does not make the requested model eligible.

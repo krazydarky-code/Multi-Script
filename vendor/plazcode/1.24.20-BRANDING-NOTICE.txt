@@ -1,0 +1,15 @@
+PlazCode — official project and distribution
+
+Official repository and release channel:
+https://github.com/stoveez/PlazCode
+
+A modified copy or third-party distribution is not an official PlazCode release
+and must not be presented as endorsed or published by this project.
+Existing copyright, license and third-party attribution notices must remain intact.
+The software's GPL license and third-party licenses remain in effect; this notice
+neither revokes their copying/modification rights nor grants trademark permission.
+No claim is made that the name/logo is a registered trademark.
+
+This is an origin/branding notice, not copy protection. Client-side code can be
+modified. Update SHA256 verification detects packages differing from the expected
+feed hash; it does not prove who authored a derivative or prevent redistribution.

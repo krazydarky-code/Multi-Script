@@ -1,0 +1,1 @@
+PASS screenshot-shaped Arena failure overrides partial prose, pauses/unverifies the task, preserves earlier call evidence, blocks replay, explicitly resumes after native Retry, and flags structured tool errors

@@ -1,0 +1,1 @@
+PASS settings sweep (496 controls operated on notion + claude; all themes x sizes x tabs; bar options; resets; small viewports; hostile storage)

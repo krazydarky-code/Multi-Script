@@ -1,0 +1,11 @@
+{
+  "version": "4.5.15",
+  "channel": "Blender 4.5 LTS",
+  "reviewed": "2026-10-24",
+  "checksums": "https://mirror.blender.org/release/Blender4.5/blender-4.5.15.sha256",
+  "license": "https://www.blender.org/about/license/",
+  "platforms": {
+    "windows-x64": {"file": "blender-4.5.15-windows-x64.zip", "sha256": "52dd02fd74877fa08e74b67d7854cf32468a232c02aaa19b6844c91285574f8d", "bytes": 398649826},
+    "windows-arm64": {"file": "blender-4.5.15-windows-arm64.zip", "sha256": "a095662a0c0063ccfb3d50760462d4a3cc74e6ee20880e85f639c28bc323db93", "bytes": 254753332}
+  }
+}

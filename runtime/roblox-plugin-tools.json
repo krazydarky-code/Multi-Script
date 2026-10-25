@@ -1,0 +1,685 @@
+{
+  "version": 2,
+  "tools": [
+    {
+      "name": "msrb_project_summary",
+      "description": "Read a bounded live project/service inventory through the elevated companion plugin.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "include_services": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "name": "msrb_get_selection",
+      "description": "Read the current Studio selection with paths and classes.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "msrb_get_tree",
+      "description": "Read a bounded instance tree rooted at path.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "depth": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "msrb_find_instances",
+      "description": "Find instances by name/class/tag under a bounded root.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "name": {
+            "type": "string"
+          },
+          "class_name": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        }
+      }
+    },
+    {
+      "name": "msrb_get_properties",
+      "description": "Read selected properties, attributes and tags from instances.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Dot path such as Workspace.Map.Door"
+            },
+            "maxItems": 100
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 80
+          }
+        },
+        "required": [
+          "paths"
+        ]
+      }
+    },
+    {
+      "name": "msrb_read_script",
+      "description": "Read one Script, LocalScript or ModuleScript source with a bounded result. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "max_chars": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 200000
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "path"
+        ]
+      }
+    },
+    {
+      "name": "msrb_search_scripts",
+      "description": "Search script names/source with bounded matches. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "root": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "plain": {
+            "type": "boolean"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "msrb_dependency_graph",
+      "description": "Find static require() dependencies between project scripts. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          }
+        }
+      }
+    },
+    {
+      "name": "msrb_export_snapshot",
+      "description": "Export a bounded JSON-safe snapshot of paths/classes/properties for review or diffing.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "root": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "depth": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 500
+          },
+          "properties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 40
+          }
+        },
+        "required": [
+          "root"
+        ]
+      }
+    },
+    {
+      "name": "msrb_validate_paths",
+      "description": "Check whether paths exist and report their classes.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Dot path such as Workspace.Map.Door"
+            },
+            "maxItems": 200
+          }
+        },
+        "required": [
+          "paths"
+        ]
+      }
+    },
+    {
+      "name": "msrb_set_selection",
+      "description": "Set Studio selection to exact existing paths.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Dot path such as Workspace.Map.Door"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "paths"
+        ]
+      }
+    },
+    {
+      "name": "msrb_create_instances",
+      "description": "Create a bounded batch of allowlisted instances. Source is never accepted here.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "instances": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "class_name": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "parent": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "properties": {
+                  "type": "object"
+                },
+                "attributes": {
+                  "type": "object"
+                },
+                "tags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "class_name",
+                "parent"
+              ]
+            }
+          }
+        },
+        "required": [
+          "instances"
+        ]
+      }
+    },
+    {
+      "name": "msrb_set_properties",
+      "description": "Set JSON-safe non-Source properties in a bounded batch.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "changes": {
+            "type": "array",
+            "maxItems": 200,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "properties": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "path",
+                "properties"
+              ]
+            }
+          }
+        },
+        "required": [
+          "changes"
+        ]
+      }
+    },
+    {
+      "name": "msrb_set_attributes",
+      "description": "Set or clear attributes in a bounded batch; use {\"__type\":\"Null\"} to clear an attribute.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "changes": {
+            "type": "array",
+            "maxItems": 200,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "attributes": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "path",
+                "attributes"
+              ]
+            }
+          }
+        },
+        "required": [
+          "changes"
+        ]
+      }
+    },
+    {
+      "name": "msrb_update_tags",
+      "description": "Add or remove CollectionService tags in a bounded batch.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "changes": {
+            "type": "array",
+            "maxItems": 200,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "add": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "remove": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        "required": [
+          "changes"
+        ]
+      }
+    },
+    {
+      "name": "msrb_reparent_instances",
+      "description": "Move instances to an existing parent. Refuses services and cycles.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "moves": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "parent": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                }
+              },
+              "required": [
+                "path",
+                "parent"
+              ]
+            }
+          }
+        },
+        "required": [
+          "moves"
+        ]
+      }
+    },
+    {
+      "name": "msrb_clone_instances",
+      "description": "Clone instances to an existing parent with optional new names.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "clones": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "parent": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "parent"
+              ]
+            }
+          }
+        },
+        "required": [
+          "clones"
+        ]
+      }
+    },
+    {
+      "name": "msrb_bulk_rename",
+      "description": "Rename exact instances with optional plain-text find/replace.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "changes": {
+            "type": "array",
+            "maxItems": 200,
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "description": "Dot path such as Workspace.Map.Door"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "name"
+              ]
+            }
+          }
+        },
+        "required": [
+          "changes"
+        ]
+      }
+    },
+    {
+      "name": "msrb_patch_script",
+      "description": "Apply exact-match source replacements to one script with optional all-match replacement. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "edits": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+              "type": "object",
+              "properties": {
+                "old_string": {
+                  "type": "string"
+                },
+                "new_string": {
+                  "type": "string"
+                },
+                "replace_all": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "old_string",
+                "new_string"
+              ]
+            }
+          }
+        },
+        "required": [
+          "path",
+          "edits"
+        ]
+      }
+    },
+    {
+      "name": "msrb_replace_script",
+      "description": "Replace the current editor source atomically, preserving concurrent user edits. Full access required. Sources over 32768 UTF-8 bytes automatically use msrb_source_transfer when selected; max 4 MiB, never clipped.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Dot path such as Workspace.Map.Door"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 4194304
+          }
+        },
+        "required": [
+          "path",
+          "source"
+        ]
+      }
+    },
+    {
+      "name": "msrb_delete_instances",
+      "description": "Delete exact instances after bridge/plugin trust checks. Services are refused. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Dot path such as Workspace.Map.Door"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "paths"
+        ]
+      }
+    },
+    {
+      "name": "msrb_checkpoint",
+      "description": "Create an explicit Studio undo waypoint.",
+      "permission": "project",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 100
+          }
+        }
+      }
+    },
+    {
+      "name": "msrb_undo",
+      "description": "Undo the latest Studio change. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "msrb_redo",
+      "description": "Redo the latest Studio change. Requires Full elevated mode.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "msrb_console_read",
+      "description": "Read actual Studio/bridge execution receipts and permitted output. Metadata is visible in Read; privileged output requires its original tier. Receipts are not project verification.",
+      "permission": "read",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "msrb_source_transfer",
+      "description": "Stage a large Script/LocalScript/ModuleScript source without executing it. begin captures the current editor buffer; append uses UTF-8 byte offsets and <=32768 bytes per chunk; commit atomically replaces only the unchanged buffer. status recovers uncertain commit outcomes; abort discards staging. Max 4 MiB. Prefer msrb_replace_script: the bridge chunks large sources automatically.",
+      "permission": "full",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "begin",
+              "append",
+              "commit",
+              "status",
+              "abort"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "transfer_id": {
+            "type": "string"
+          },
+          "total_bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4194304
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 32768
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}

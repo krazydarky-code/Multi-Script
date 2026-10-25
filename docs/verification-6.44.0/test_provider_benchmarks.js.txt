@@ -1,0 +1,1 @@
+PASS redesigned 16-provider evidence view, no invented ratings, search/current filters, read-only local diagnostics and desktop/mobile geometry.

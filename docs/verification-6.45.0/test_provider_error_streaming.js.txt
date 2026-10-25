@@ -1,0 +1,1 @@
+PASS native error waits for generation to finish, then pauses/unverifies and restores Resume instead of a stale Stop control.

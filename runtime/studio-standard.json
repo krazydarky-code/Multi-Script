@@ -1,0 +1,405 @@
+{
+  "version": "12.1",
+  "principles": [
+    "Inspect the real project and existing conventions before changing anything.",
+    "Preserve explicit requirements and infer only reversible defaults.",
+    "Build the smallest complete end-to-end result, not a plan-only substitute.",
+    "Treat player-facing clarity, accessibility, security, performance and recovery as product requirements.",
+    "Validate in the target engine, read back final state and report concrete evidence.",
+    "Keep changes reversible; document migrations, destructive operations and rollback triggers."
+  ],
+  "definitionOfDone": [
+    "Requested artifact exists in the real target project.",
+    "Primary flow and relevant edge, failure and interruption states work.",
+    "Compilation, import and runtime logs contain no unexplained errors.",
+    "Authority, persistence, privacy and abuse boundaries are reviewed where relevant.",
+    "Keyboard, controller, touch, localization and reduced-motion behavior are considered where relevant.",
+    "Performance is measured on the weakest intended target rather than assumed.",
+    "Automated or repeatable focused tests pass.",
+    "Final engine state is read back with screenshots, logs, metrics or structured state evidence."
+  ],
+  "evidence": [
+    "before/after project state",
+    "exact tools and affected assets",
+    "focused test output",
+    "clean engine logs",
+    "runtime or visual capture for player-facing changes",
+    "measured performance for material changes"
+  ],
+  "recovery": [
+    "Stop after repeated identical failures and inspect the root cause.",
+    "Never hide errors by deleting validation or weakening acceptance criteria.",
+    "Prefer a minimal rollback-safe fix, then rerun the same reproduction.",
+    "Disclose unresolved limitations instead of claiming completion."
+  ],
+  "engines": {
+    "roblox": [
+      "Use server authority for consequential state and validate/rate-limit remotes.",
+      "Test Edit, Server and Client contexts plus relevant device emulation.",
+      "Review StreamingEnabled, network ownership, DataStore idempotency and mobile budgets where relevant."
+    ],
+    "unity": [
+      "Wait for compilation, read Console errors and run focused EditMode or PlayMode tests.",
+      "Respect serialization, prefab, scene and assembly-definition boundaries.",
+      "Profile representative target hardware and validate build output."
+    ],
+    "godot": [
+      "Validate scene ownership, node paths, signals, resources and autoload lifecycle.",
+      "Run parser/headless checks and inspect debugger output.",
+      "Verify export presets and target-platform behavior."
+    ],
+    "blender": [
+      "Validate scale, axes, transforms, pivots, topology, normals, UVs, materials and naming.",
+      "Meet explicit triangle, texture, rig, animation and LOD budgets.",
+      "Round-trip the exported asset through the target engine."
+    ],
+    "figma": [
+      "Use reusable components, variants, variables, Auto Layout and semantic naming.",
+      "Cover responsive constraints, localization expansion, focus and interaction states.",
+      "Validate implementation handoff rather than stopping at a visual mockup."
+    ],
+    "general": [
+      "Choose tools from verified live schemas and keep cross-engine responsibilities explicit.",
+      "Coordinate art, design, engineering, audio, QA and production around one acceptance target.",
+      "Use milestone, risk, dependency and rollback evidence for meaningful work."
+    ]
+  },
+  "providerExecution": [
+    "The provider model remains the planner; Multi-Script improves its reasoning and native-tool use rather than replacing engine integrations.",
+    "Load only the smallest relevant skill/tool stack to protect context quality.",
+    "Inspect live schemas and project state before composing engine commands.",
+    "Prefer a few high-confidence calls with read-back over broad speculative batches.",
+    "Use exact tool errors as evidence; never retry an unchanged failing call.",
+    "Do not count guidance, plans, schemas or generated text as an engine result.",
+    "Preserve every explicit user requirement and infer only reversible defaults.",
+    "Finish with concise verified results, not internal process narration."
+  ],
+  "performance": [
+    "Declare target devices and measurable CPU, GPU, memory, network, load-time and asset budgets relevant to the task.",
+    "Capture a baseline before material optimization and compare the same scenario afterward.",
+    "Fix measured dominant costs first; avoid premature complexity.",
+    "Use scalable quality tiers and preserve gameplay/readability on the weakest target.",
+    "Include lifecycle cleanup, pooling, streaming and cancellation where applicable.",
+    "Reject improvements that move cost elsewhere without a better total player outcome."
+  ],
+  "resultQuality": [
+    "Functional completeness across happy, edge, interruption, failure and recovery states.",
+    "Visual, interaction and audio cohesion appropriate to the project’s style.",
+    "Secure authority, persistence and privacy boundaries where consequential.",
+    "Accessible keyboard, controller, touch, localization and reduced-motion behavior where relevant.",
+    "Deterministic or reproducible focused tests with clean logs.",
+    "Concrete final-state evidence from the real target engine."
+  ],
+  "toolDiscipline": [
+    "Choose tools from live advertised schemas; never invent a native command.",
+    "Route each call only to its designated provider/engine/server.",
+    "Normalize provider envelopes without changing semantic intent.",
+    "Parallelize only independent reads or independent engines; serialize dependent writes.",
+    "Use bounded calls, explicit limits and rollback-safe scopes.",
+    "If an integration is unavailable, report it and offer a non-destructive alternative rather than fabricating success."
+  ],
+  "skillToolIntegration": [
+    "Use the specialized skill and tool catalogues as the quality mechanism; do not replace them with a generic multiplier, preset or checklist.",
+    "For every creation request, coordinate all applicable disciplines at the same time around one shared player-facing target.",
+    "A short or poor prompt still receives broad design, implementation, polish, optimization and validation skill coverage with reversible project-appropriate defaults.",
+    "Each selected skill must contribute its concrete steps and gates; each selected direct or virtual tool must improve the aspect it owns.",
+    "Integrate gameplay, controls, camera, UI, animation, art, materials, lighting, VFX, audio and content when the feature touches them.",
+    "Always include architecture, lifecycle, failure recovery, performance, accessibility, target-platform behavior, testing and evidence as supporting disciplines.",
+    "Resolve conflicts between specialist recommendations in favor of explicit user intent, existing project conventions and measured engine evidence.",
+    "Execute through genuine live native-engine tools; internal skills and tools improve decisions but never count as the finished artifact.",
+    "Read back the connected final result and revise defects until every applicable specialist gate passes or a real blocker is disclosed."
+  ],
+  "capabilityMentalModel": [
+    "Skills and tools exist to improve the active model’s actual game-development capability, not to create visible process or named presets.",
+    "Every applicable specialist contributes concrete project changes to one shared deliverable.",
+    "Prompt brevity reduces stated detail, never the quality bar; infer reversible defaults from genre, project and target platform.",
+    "Improve design, craft, implementation, integration, performance, resilience and validation together.",
+    "Use exact live native tools and treat native artifact evidence—not internal output—as completion.",
+    "Continuously fix catalog gaps, routing gaps, shallow outputs and integration failures across every supported engine and provider."
+  ],
+  "developmentLifecycle": [
+    "intent and project discovery",
+    "design and measurable target",
+    "vertical-slice implementation",
+    "cross-discipline integration",
+    "edge/failure/platform coverage",
+    "profiling and optimization",
+    "critic-led correction",
+    "release evidence and rollback"
+  ],
+  "promptRewriting": {
+    "independentFromCapabilityEnhancement": true,
+    "modes": {
+      "off": "Preserve exact wording while skills/tools remain active.",
+      "suggest": "Offer an optional rewrite without blocking execution; skills/tools remain active.",
+      "automatic": "Silently clarify reversible details; skills/tools remain active."
+    },
+    "rule": "Never disable specialist execution quality because rewriting is off."
+  },
+  "perfectReleaseGate": [
+    "requested product works end to end",
+    "all applicable specialists contributed concrete native changes",
+    "connected systems agree on data, timing, style and ownership",
+    "failure, interruption, recovery and migration paths are covered",
+    "weakest-target performance is measured and acceptable",
+    "accessibility, localization and target inputs are covered where relevant",
+    "native tests, logs and final state read-back are clean",
+    "known limitations and rollback triggers are honest"
+  ],
+  "menuSettingsCoverage": {
+    "promptRewriting": "off/suggest/automatic; skills always active",
+    "productionChecks": "fast/balanced/rigorous",
+    "creativeSurface": "auto/engine/figma/canvas",
+    "specialistDepth": "focused/full/maximum",
+    "usageOptimizer": "off/balanced/compact",
+    "customInstructions": "persisted user guidance",
+    "appearance": "identity/theme/accent/density/width/scale/font/corners/backdrop/motion/default tab/status overview",
+    "integrations": "ElevenLabs key status plus dynamic MCP add/remove/restart",
+    "notionRouting": "prompt-only preferred-model requests with honest fallback and no plan bypass",
+    "diagnostics": "provider, bridge, engines, tools and privacy-safe effective settings"
+  },
+  "zeroScriptEvolution": [
+    "retain reliable command parsing and local bridge execution",
+    "expand provider compatibility and recover from DOM/provider changes",
+    "support dynamic MCP servers beyond Roblox",
+    "improve AI game-development capability through deep skills/tools",
+    "separate optional prompt rewriting from always-on execution quality",
+    "verify real artifacts in their native engines"
+  ],
+  "accessBoundary": "Never bypass subscriptions, trials, access controls, model restrictions or human verification.",
+  "settingsInvariant": "Every setting has a validated effect and safe fallback; workflow preferences never lower correctness, integration, or completion quality.",
+  "portableSettings": {
+    "schema": 1,
+    "includes": [
+      "appearance",
+      "all provider behavior",
+      "usage optimizer",
+      "specialist depth",
+      "custom instructions",
+      "Notion preferred-model request"
+    ],
+    "excludes": [
+      "API keys",
+      "integration credentials",
+      "MCP launch commands",
+      "runtime state"
+    ],
+    "validation": "Reject unknown product/schema; sanitize every enum and bounded text field before atomic persistence."
+  },
+  "starterProfiles": {
+    "notion": "prompt-only preferred-model request with honest fallback",
+    "arena": "Arena Max prompt-only preference; Claude Opus 5.5 default; never picker automation or access bypass"
+  },
+  "sessionModes": {
+    "engine": "Roblox/Unity/Godot/Blender/other MCP native execution",
+    "chatStudio": "full specialist prompt without engine claims or tool calls"
+  },
+  "animationNativeStandard": [
+    "inspect real rig/skeleton/avatar and engine version",
+    "author or refine real clips/curves/keyframes through exact live tools",
+    "validate contacts, foot planting, root motion, loops and interruptions",
+    "synchronize gameplay events, hit windows, camera, VFX and audio",
+    "test retargeting, state transitions, frame-rate independence and networking",
+    "capture runtime playback from gameplay camera and fix visible defects"
+  ],
+  "vfxNativeStandard": [
+    "define anticipation-impact-sustain-dissipation timing",
+    "build real particles/trails/meshes/decals/shaders through live tools",
+    "bind effect lifecycle to gameplay events and cancellation",
+    "validate readability from gameplay camera and accessibility alternatives",
+    "profile overdraw, bounds, pooling, particles, shaders and memory",
+    "capture multi-angle runtime evidence and fix artifacts"
+  ],
+  "textureArtifactStandard": [
+    "choose direct engine, Canvas/SVG, Figma or DCC surface by deliverable",
+    "create the real texture/decal/UI art rather than only describing it",
+    "validate UV scale, seams, channels, color space, filtering and compression",
+    "integrate into real materials/UI and inspect under representative lighting",
+    "profile texture memory, atlasing, batching and distance readability",
+    "export/import round-trip and capture final evidence"
+  ],
+  "mcpParameterCompatibility": {
+    "liveSchemaOnly": true,
+    "recursiveValidation": [
+      "nested objects and arrays",
+      "defaults and nullable unions",
+      "enum and const",
+      "numeric/string/collection bounds",
+      "patterns",
+      "additionalProperties",
+      "oneOf/anyOf/allOf",
+      "local $ref and $defs"
+    ],
+    "retryPolicy": "one retry only for positively identified transient transport/editor disconnects",
+    "schemaDrift": "refresh catalogue, revalidate, never guess"
+  },
+  "settingsAudit": {
+    "integrations": "Keyless local WAV generation, optional ElevenLabs key status, plus dynamic MCP add/remove/restart"
+  },
+  "audioGeneration": {
+    "default": "local",
+    "apiKeyRequired": false,
+    "networkRequired": false,
+    "format": "WAV 44.1 kHz PCM16",
+    "classes": [
+      "UI clicks",
+      "impacts",
+      "explosions",
+      "lasers",
+      "whooshes",
+      "footsteps",
+      "rewards",
+      "alarms",
+      "rain",
+      "wind",
+      "engine hum"
+    ],
+    "optionalCloudProvider": "ElevenLabs",
+    "handoff": "Import through exact live engine MCP, configure compression/spatial/loop/bus settings, and test in context."
+  },
+  "productIntegrity": {
+    "canonicalManifest": "runtime/product-manifest.json",
+    "criticLoop": "three evidence-based rounds",
+    "versionDrift": "release-blocking",
+    "catalogueDrift": "release-blocking",
+    "pluginBoundary": "diagnostic-only",
+    "futureSurfaces": "reuse the bridge and schema validator; never fork execution semantics"
+  },
+  "robloxCompanionDiagnostics": [
+    "bridge/plugin version compatibility",
+    "official live native-tool count",
+    "bounded sanitized heartbeat",
+    "yielding heuristic risk scan",
+    "project content inventory",
+    "selection summary",
+    "sanitized Output report",
+    "opt-in permission-tiered allowlisted companion tools"
+  ],
+  "pluginBoundary": "opt-in-permission-tiered-companion",
+  "robloxCompanionSecurity": [
+    "off by default",
+    "read/project/full tiers",
+    "double permission checks",
+    "ephemeral bearer token",
+    "loopback-only transport",
+    "no HTTP enqueue endpoint",
+    "bounded queue and outputs",
+    "no arbitrary code evaluation"
+  ],
+  "creativeProductionV6361": {
+    "styleProfiles": [
+      "auto",
+      "anime",
+      "stylized-fantasy",
+      "low-poly",
+      "realistic-pbr",
+      "cyberpunk",
+      "dark-gothic",
+      "cozy-handpainted",
+      "retro-pixel",
+      "minimal-modern",
+      "sci-fi-hard-surface",
+      "toy-cartoon",
+      "luxury-gold"
+    ],
+    "disciplines": {
+      "uiUxGui": [
+        "information architecture",
+        "visual hierarchy",
+        "semantic design tokens",
+        "responsive constraints",
+        "complete interaction states",
+        "keyboard/touch/controller navigation",
+        "accessibility and contrast",
+        "runtime wiring and visual regression"
+      ],
+      "buildingEnvironment": [
+        "landmark and silhouette hierarchy",
+        "modular kit and reusable materials",
+        "believable scale and traversal",
+        "collision/pathfinding validation",
+        "lighting and set dressing",
+        "draw-call/instance/streaming budget"
+      ],
+      "modeling": [
+        "reference and proportion sheet",
+        "silhouette and topology",
+        "normals/UV/materials",
+        "pivots/collision/LODs",
+        "rig compatibility when animated",
+        "export-import round trip"
+      ],
+      "animation": [
+        "rig and bone validation",
+        "key-pose/timing specification",
+        "anticipation/contact/follow-through",
+        "interpolation and blend behavior",
+        "loop and interruption tests",
+        "in-engine playback evidence"
+      ],
+      "vfx": [
+        "shape language and timing layers",
+        "attachment/orientation and color language",
+        "particle/overdraw budgets",
+        "replication and ownership",
+        "cleanup and interruption safety",
+        "runtime visual evidence"
+      ],
+      "iconsTextures": [
+        "coherent grid and silhouette",
+        "stroke/fill/palette consistency",
+        "real editable source files and contact sheet",
+        "safe naming and manifest",
+        "import/upload instructions",
+        "target-engine assignment read-back"
+      ]
+    },
+    "assetDeliveryPolicy": [
+      "create actual files using available local generators or connected native tools",
+      "prefer native engine implementation when it directly satisfies the request",
+      "use hybrid source-plus-integration when external assets materially improve quality",
+      "never claim an asset was uploaded, imported, assigned or tested without returned evidence",
+      "preserve editable source and include exact paths/manifests"
+    ],
+    "providerPromptPolicy": [
+      "send active provider behavior, style, finish and asset-workflow choices through the common session prompt stack",
+      "retain provider-specific adapter notes and exact live tool schemas",
+      "do not claim access to a native system role when the provider adapter uses prompt injection"
+    ],
+    "completionPolicy": [
+      "implement",
+      "integrate",
+      "test",
+      "critique",
+      "repair",
+      "read back",
+      "report evidence"
+    ]
+  },
+  "practicalSkillPolicy": {
+    "modelWeightsTrained": false,
+    "runtime": "Skills are concrete in-context instructions delivered by the shared startup/refresh prompt and ms_get_skill. Native tools perform actual operations.",
+    "styles": [
+      "minimal",
+      "playful",
+      "pixel",
+      "scifi",
+      "fantasy",
+      "lowpoly",
+      "realistic",
+      "stylized",
+      "anime",
+      "brutalist"
+    ],
+    "criticPasses": 3,
+    "sources": [
+      "https://create.roblox.com/docs/ui/styling/editor",
+      "https://create.roblox.com/docs/animation/editor",
+      "https://create.roblox.com/docs/art/blender",
+      "https://create.roblox.com/docs/effects",
+      "https://create.roblox.com/docs/workspace",
+      "https://create.roblox.com/docs/scripting",
+      "https://create.roblox.com/docs/sound"
+    ]
+  }
+}

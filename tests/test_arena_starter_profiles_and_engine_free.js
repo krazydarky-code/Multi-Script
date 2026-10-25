@@ -1,0 +1,7 @@
+const fs=require("fs");const a=fs.readFileSync("extension/providers/arena.js","utf8"),m=fs.readFileSync("extension/core/main.js","utf8"),c=fs.readFileSync("extension/core/config.js","utf8"),css=fs.readFileSync("extension/overlay.css","utf8");
+for(const x of ["AUTO_ROUTING_PROFILES","Claude Opus 5.5 · Direct Max","zs.arena.autoRoutingProfile","getStartupProfilePrompt","routingProfileDiagnostics","automaticPicker:false","accessBypass:false","return \"\""])if(!a.includes(x))throw new Error("Arena starter missing "+x);
+if(/querySelector(?:All)?\([^\n)]*(model|picker)|\.click\(\)[^\n]{0,100}(opus55|requestedModel)/i.test(a))throw new Error("Arena starter must remain prompt-only, not picker automation");
+for(const x of ["zs-chat-only","Start without engine","startSession({chatOnly:true})","if (!A.chatOnly)","Chat studio active","Start ${startLabels.join","Start ${addonNames.join"])if(!m.includes(x))throw new Error("engine-free/multi-engine start missing "+x);
+for(const x of ["MULTI-SCRIPT CHAT STUDIO — NO ENGINE CONNECTED","filtered list_commands catalog exposes general","or claim project edits","label what still requires import or native-engine verification"])if(!c.includes(x))throw new Error("chat studio contract missing "+x);
+if(!css.includes("#zs-chat-only"))throw new Error("chat-only button unstyled");
+console.log("PASS Arena model-targeted Direct Max starter profiles and Roblox/Unity/Godot/Blender/engine-free startup");

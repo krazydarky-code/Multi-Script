@@ -1,0 +1,17 @@
+PASS deepseek: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS chatgpt: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS claude: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS gemini: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS kimi: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS glm: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS meta: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS qwen: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS arena: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS notion: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS promptql: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS superapp: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS vani: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS crax: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS venice: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS clickup: exact multiline Unicode send, one click, composer acknowledgement and new user role
+PASS 16 real-adapter transport fixtures (64 assertions).

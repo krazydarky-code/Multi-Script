@@ -1,0 +1,17 @@
+# Provider research and verification — 16 October 2026
+
+| Provider | Implemented | Verification and boundary |
+|---|---|---|
+| Existing providers | Existing adapters retained; shared studio skill prompt, Ultra and new actions | Content-script load contracts and selected existing parser, routing and UI regression suites. No claim that every model/account was tested live. |
+| Vani / c.vani.ai | Manifest/host registration, role-based adapter, own Vani settings tab, compatibility diagnostics and Plus-plan recommendation | Official product/docs researched. Both direct HTTP and browser navigation redirected to vani.ai marketing here. Authenticated composer, attachments, response roles and full local-tool exchange remain unverified. |
+| Crax / crax.gpt.lol | Role-based adapter and registration | Updated to the user-corrected URL https://crax.gpt.lol/. Direct browser navigation still returned ERR_NAME_NOT_RESOLVED on 16 October 2026. Live composer selectors remain unverified; no claim of working live support. |
+| Venice | Classic Chat adapter with actual composer, file-upload and message selectors | Live guest chat returned `MULTISCRIPT_VENICE_READY`. Read `textarea[name=prompt-textarea]`, `button[aria-label="Submit chat"]`, `[data-testid=user-message]` and `.assistant[data-testid=text-chat-message]` from the live DOM. Full extension/local-bridge exchange and image ingestion tested only in fixtures, not against an authenticated paid model. Agentic Chat is deliberately outside this adapter. |
+| ClickUp | Private Brain AI scope guard, role-based adapter and registration | Authenticated Brain UI unavailable. Fixture tests refuse ordinary team-channel composers. Official ClickUp API documentation alone does not establish a supported Brain inference/system-prompt API. Live support remains unverified. |
+
+The browser transport sends one plain-text JSON command per assistant response and returns its local result in a subsequent chat turn. It can continue across turns independently of a provider's native per-response function-call count. It does not alter provider quotas, subscriptions or access controls. On web chat surfaces, the extension's “system prompt” is a startup instruction message; it cannot claim an inaccessible privileged system role or permanent model-weight training.
+
+Vani's official site describes separate Chat and API products and paid-plan developer keys. The Plus recommendation is shown in the provider listing and its own settings tab; current prices are linked rather than hard-coded. [Vani product and plans](https://vani.ai/), [Vani documentation](https://vani.ai/docs).
+
+Venice documents its API base URL, Bearer authentication and system-message behavior. The extension adapter controls Classic Chat; it does not silently substitute API calls or expose an API key in page code. [Venice API reference](https://docs.venice.ai/api-reference/api-spec).
+
+Creative workflows use editable source assets, real imports and verified ownership/asset IDs. References used: [Roblox Style Editor](https://create.roblox.com/docs/ui/styling/editor), [Blender pipeline](https://create.roblox.com/docs/art/blender), [Animation Editor](https://create.roblox.com/docs/animation/editor), [effects](https://create.roblox.com/docs/effects), and [ForgeGUI's asset-export workflow](https://forgegui.com/my-games). ForgeGUI's service, proprietary implementation and branding were not copied or presented as bundled capabilities.

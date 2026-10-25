@@ -1,0 +1,5 @@
+Verified notion/auto theme combinations; contrast failures: 0
+Verified notion/window theme combinations; contrast failures: 0
+Verified claude/auto theme combinations; contrast failures: 0
+Verified claude/window theme combinations; contrast failures: 0
+PASS new theme matrix {"combinations":324,"contrast":18762,"paintedContrast":228,"motion":42,"screenshots":0}; independent menus/bars, composer portals, mobile, persistence, scene cleanup and motion preferences.

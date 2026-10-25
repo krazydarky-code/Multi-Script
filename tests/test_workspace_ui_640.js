@@ -1,0 +1,37 @@
+const fs=require('fs'),path=require('path'),assert=require('assert'),cp=require('child_process'),h=require('../tools/studio_harness');
+const root=path.resolve(__dirname,'..'),out=path.resolve(root,'../../../outputs');
+const rpc=(name,args)=>{const r=cp.spawnSync(process.env.MS_TEST_PYTHON||'python',['-X','utf8','tests/runtime_fixture_rpc.py'],{cwd:root,input:JSON.stringify({name,arguments:args}),encoding:'utf8'});if(r.status)throw Error(r.stderr);return JSON.parse(r.stdout);};
+(async()=>{
+ fs.mkdirSync(out,{recursive:true});
+ const a=JSON.parse(rpc('ms_cowork',{action:'create',title:'Build inventory UI',detail:'Match the existing tokens, then test phone and desktop.',resources:['src/ui'],priority:'high'}).text).task;
+ const b=JSON.parse(rpc('ms_cowork',{action:'create',title:'Implement save state',detail:'Keep existing keys and test isolated data.',resources:['src/data']}).text).task;
+ rpc('ms_cowork',{action:'claim',id:b.id,owner:'venice:other-worker'});rpc('ms_cowork',{action:'update',id:b.id,owner:'venice:other-worker',note:'Atomic writes implemented; migration tests in progress.'});
+ const c=JSON.parse(rpc('ms_cowork',{action:'create',title:'Verify UI icon imports',detail:'Check source SVG and imported bounds.',resources:['assets/icons']}).text).task;
+ rpc('ms_cowork',{action:'claim',id:c.id,owner:'deepseek:review-worker'});rpc('ms_cowork',{action:'complete',id:c.id,owner:'deepseek:review-worker',note:'Actual SVG files checked in this fixture; native engine import remains unverified.'});
+ for(const theme of ['dark','light']){
+  const x=await h.open({bridge:'up',host:'installed',theme,width:1440,height:1100,storage:{msExecutionEffort:'ultra',msMenuPreferences:{theme:theme==='light'?'frost':'mono',width:'studio',barTheme:theme==='light'?'auto':'matrix',barDock:'window',barFit:'fit'}},toolHandler:async m=>{try{return {ok:true,result:rpc(m.name,m.arguments||{})};}catch(e){return {ok:false,error:e.message};}}});assert(x);
+  try{
+   const p=x.page;await p.click('#zs-switch');await p.click('[data-tab="cowork"]');await p.waitForFunction(()=>document.querySelectorAll('[data-task-id]').length>=3);
+   assert.strictEqual(await p.locator('#ms-settings-page h2').textContent(),'Co-work');assert.strictEqual(await p.locator('.ms-nav-group').count(),5);
+   await p.locator('#ms-followup-enabled').check();await p.fill('#ms-followup-text','Keep the inventory gamepad accessible.');await p.click('#ms-followup-add');assert((await p.locator('#ms-followup-list').textContent()).includes('gamepad accessible'));
+   await p.click('#ms-followup-pause');assert((await p.locator('#ms-followup-state').textContent()).includes('Paused'));
+   await p.fill('#ms-cowork-title','Draft survives navigation');await p.click('[data-tab="agent"]');assert.strictEqual(await p.locator('#ms-settings-page h2').textContent(),'Agent');assert(await p.locator('.ms-section-jumps button').count()>=3);
+   await p.locator('[data-tab="agent"]').focus();await p.keyboard.press('ArrowDown');assert.strictEqual(await p.locator('#ms-settings-page h2').textContent(),'Tools & media');
+   await p.click('[data-tab="cowork"]');assert.strictEqual(await p.locator('#ms-cowork-title').inputValue(),'Draft survives navigation');assert((await p.locator('#ms-followup-list').textContent()).includes('gamepad accessible'));assert((await p.locator('#ms-followup-state').textContent()).includes('Paused'));
+   await p.locator('#ms-cowork-composer').evaluate(e=>e.open=false);await p.locator('#ms-cowork-board').scrollIntoViewIfNeeded();await p.locator('#zs-menu').screenshot({path:path.join(out,`Co-work-${theme}-6.41.0.png`)});
+   if(theme==='dark'){await p.locator(`[data-task-id="${a.id}"] [data-task-action="edit"]`).click();await p.fill('#ms-cowork-resources','src/ui/inventory');await p.click('#ms-cowork-add');await p.waitForFunction(id=>document.querySelector(`[data-task-id="${id}"]`).textContent.includes('src/ui/inventory'),a.id);}
+   await p.fill('#ms-cowork-search','save state');assert.strictEqual(await p.locator('[data-task-id]').count(),1);await p.fill('#ms-cowork-search','');
+   const card=p.locator(`[data-task-id="${b.id}"]`);await card.locator('summary').click();await card.locator('[data-task-action="history"]').click();await p.waitForFunction(id=>document.querySelector(`[data-task-history="${id}"]`).textContent.includes('Atomic writes'),b.id);
+   await p.fill('#zs-menu-q','Critic review');assert(/^[1-9][0-9]* matching sections$/.test(await p.locator('#ms-settings-page h2').textContent()));assert(await p.locator('#ms-critic-enabled').isVisible());await p.click('#ms-clear-search');assert.strictEqual(await p.locator('#ms-settings-page h2').textContent(),'Co-work');
+   await p.click('[data-tab="workshop"]');await p.waitForFunction(()=>document.querySelectorAll('[data-library-read]').length===12);
+   await p.locator('#ms-library-goal').evaluate(e=>e.value='g'.repeat(4501));await p.locator('[data-library-read]').first().click();await p.waitForFunction(()=>document.querySelector('#ms-library-preview').textContent.includes('executionWorkflow'));assert((await p.locator('#ms-library-preview').textContent()).includes('multi-script-workflows-v6'));assert.strictEqual(JSON.parse(await p.locator('#ms-library-preview').textContent()).projectGoal.length,4000);await p.fill('#ms-library-goal','');
+   await p.locator('[data-skill-favorite]').first().click();await p.locator('#ms-library-favorites').check();await p.waitForFunction(()=>document.querySelectorAll('[data-library-read]').length===1);
+   await p.locator('#ms-library-favorites').uncheck();await p.waitForFunction(()=>document.querySelectorAll('[data-library-read]').length===12);
+   await p.locator('#ms-library-detail').evaluate(e=>e.open=false);await p.locator('.ms-skills-library').scrollIntoViewIfNeeded();await p.locator('#zs-menu').screenshot({path:path.join(out,`Skills-${theme}-6.41.0.png`)});
+   await p.fill('#ms-skill-name','Cobalt project workflow');await p.fill('#ms-skill-instructions','Inspect the actual project style and preserve spacing. Implement the requested interface, test gamepad focus and capture the result.');await p.click('#ms-skill-create');await p.waitForFunction(()=>window.__store.msCustomSkills?.some(x=>x.id==='custom-cobalt-project-workflow'));assert((await p.locator('#ms-installed-skills').textContent()).includes('Cobalt project workflow'));assert(JSON.parse(rpc('ms_get_skill',{skill_id:'custom-cobalt-project-workflow'}).text).executionWorkflow);await p.click('[data-uninstall-skill="custom-cobalt-project-workflow"]');await p.waitForFunction(()=>window.__store.msCustomSkills?.length===0);
+   await p.click('[data-tab="agent"]');await p.locator('#ms-effort-slider').scrollIntoViewIfNeeded();await p.locator('#zs-menu').screenshot({path:path.join(out,`Settings-${theme}-6.41.0.png`)});
+   await p.setViewportSize({width:390,height:844});await p.click('[data-tab="cowork"]');const bounds=await p.locator('#zs-menu').boundingBox();assert(bounds.x>=0&&bounds.width<=390);
+   assert(await p.locator('#zs-pane').evaluate(e=>e.scrollWidth<=e.clientWidth+2),'Narrow content must not overflow horizontally');assert.deepStrictEqual(x.errors,[]);console.log('PASS',theme,'real skill browse/read/favorites/install, co-work queue/drafts/filter/history, grouped keyboard/search navigation and narrow layout');
+  }finally{await x.close();}
+ }
+})().catch(e=>{console.error(e.stack);process.exit(1)});

@@ -1,0 +1,1 @@
+PASS two real provider content chains: scoped tab discovery, explicit remote startup/cancel, atomic task assignment through real Python board, acknowledged prompt send, background opt-in, local brief read, duplicate receipt suppression, stale-context rejection and mobile-width dashboard.

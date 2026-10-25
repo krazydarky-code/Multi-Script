@@ -1,0 +1,193 @@
+{
+  "scripts": [
+    {
+      "file": "test_studio_revamp_637.js",
+      "exitCode": 0,
+      "seconds": 9.83,
+      "skipped": false
+    },
+    {
+      "file": "test_new_provider_transport_637.js",
+      "exitCode": 0,
+      "seconds": 4.23,
+      "skipped": false
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 1.11,
+      "skipped": false
+    },
+    {
+      "file": "test_settings_customization.js",
+      "exitCode": 0,
+      "seconds": 0.23,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_production_6361.js",
+      "exitCode": 0,
+      "seconds": 0.34,
+      "skipped": false
+    },
+    {
+      "file": "test_chatbar_studio.js",
+      "exitCode": 0,
+      "seconds": 21.02,
+      "skipped": false
+    },
+    {
+      "file": "test_parser_repair.js",
+      "exitCode": 0,
+      "seconds": 0.31,
+      "skipped": false
+    },
+    {
+      "file": "test_cross_provider_tool_matrix.js",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false
+    },
+    {
+      "file": "test_required_param_contract.js",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_tool_routing.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false
+    },
+    {
+      "file": "test_enhancer_send_gate.js",
+      "exitCode": 0,
+      "seconds": 0.28,
+      "skipped": false
+    },
+    {
+      "file": "test_enhancer_browser_send.js",
+      "exitCode": 0,
+      "seconds": 28.3,
+      "skipped": false
+    },
+    {
+      "file": "test_superapp_provider.js",
+      "exitCode": 0,
+      "seconds": 10.56,
+      "skipped": false
+    },
+    {
+      "file": "test_local_memory.js",
+      "exitCode": 0,
+      "seconds": 0.33,
+      "skipped": false
+    },
+    {
+      "file": "test_menu_settings_scope.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_code_mode_636.js",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_hub_637.py",
+      "exitCode": 0,
+      "seconds": 1.81,
+      "skipped": false
+    },
+    {
+      "file": "test_workspace_636.py",
+      "exitCode": 0,
+      "seconds": 9.08,
+      "skipped": false
+    },
+    {
+      "file": "test_all_skills_and_tools.py",
+      "exitCode": 0,
+      "seconds": 38.66,
+      "skipped": false
+    },
+    {
+      "file": "test_model_improvement_layer.py",
+      "exitCode": 0,
+      "seconds": 3.12,
+      "skipped": false
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 2.52,
+      "skipped": false
+    },
+    {
+      "file": "test_engine_schema_assurance_69.py",
+      "exitCode": 0,
+      "seconds": 2.66,
+      "skipped": false
+    },
+    {
+      "file": "test_bridge_builtins.py",
+      "exitCode": 0,
+      "seconds": 1.7,
+      "skipped": false
+    },
+    {
+      "file": "test_tool_parameter_contracts.py",
+      "exitCode": 0,
+      "seconds": 1.47,
+      "skipped": false
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 2.11,
+      "skipped": false
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 19.38,
+      "skipped": false
+    },
+    {
+      "file": "test_studio_craft_skills.py",
+      "exitCode": 0,
+      "seconds": 0.16,
+      "skipped": false
+    },
+    {
+      "file": "test_full_spectrum_skill_mesh.py",
+      "exitCode": 0,
+      "seconds": 0.5,
+      "skipped": false
+    },
+    {
+      "file": "test_universal_capability_foundation.py",
+      "exitCode": 0,
+      "seconds": 0.77,
+      "skipped": false
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false
+    },
+    {
+      "file": "test_critic_loop_613.py",
+      "exitCode": 0,
+      "seconds": 0.59,
+      "skipped": false
+    }
+  ],
+  "passed": 31,
+  "total": 31,
+  "liveProviderBoundaries": "PROVIDER_QA_6.37.md"
+}

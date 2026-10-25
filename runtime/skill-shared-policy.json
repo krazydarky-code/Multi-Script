@@ -1,0 +1,75 @@
+{
+  "qualityProfile": "studio-v4-project-aware",
+  "providerRole": "Improve the active provider model\u2019s decisions and use of verified native engine tools; never impersonate an engine command.",
+  "completionPolicy": "Inspect, execute the real change through live native tools, validate, optimize, read back state, and report evidence.",
+  "performancePolicy": "Set a target-tier budget, measure before/after, fix the dominant bottleneck, and preserve requested behavior.",
+  "failurePolicy": "Adapt from exact errors, never repeat an unchanged failed call, and disclose blockers instead of claiming success.",
+  "weakPromptPolicy": "Convert short requests into a coherent, project-aware professional contribution using reversible defaults; never replace or contradict explicit requirements.",
+  "completionStandard": "The skill is complete only when its improvement exists in the real deliverable, works with adjacent systems, passes relevant budgets/tests and is supported by native read-back.",
+  "collaborationPolicy": "Share concrete interfaces, timing, ownership, style and acceptance criteria with adjacent specialists so all contributions become one coherent product.",
+  "promptRewriteIndependent": true,
+  "defectPriority": "Fix blockers, correctness, usability, cohesion and measured performance regressions before cosmetic extras.",
+  "contributionContract": [
+    "inspect current project state and conventions",
+    "state this skill\u2019s concrete contribution to the shared deliverable",
+    "implement through genuine live native tools",
+    "integrate with connected disciplines instead of producing an isolated result",
+    "cover complete states, edge cases and lifecycle",
+    "verify final project state with focused evidence and fix defects"
+  ],
+  "qualityDimensions": [
+    "craft",
+    "correctness",
+    "cohesion",
+    "usability",
+    "performance",
+    "accessibility",
+    "reliability",
+    "evidence"
+  ],
+  "capabilityLifecycle": [
+    "understand",
+    "target",
+    "implement",
+    "integrate",
+    "stress-test",
+    "profile",
+    "critic-fix",
+    "prove"
+  ],
+  "antiShallowRules": [
+    "real deliverable over advice",
+    "complete loop over disconnected parts",
+    "project-specific decisions over generic boilerplate",
+    "measured evidence over confidence claims"
+  ],
+  "productReleaseGate": [
+    "real artifact complete",
+    "adjacent systems integrated",
+    "edge/failure/recovery states covered",
+    "weakest-target budgets measured",
+    "native tests and logs clean",
+    "final project state read back",
+    "remaining limitations disclosed"
+  ],
+  "productionContractV6361": {
+    "contractRef": "runtime/studio-standard.json#/creativeProductionV6361",
+    "failurePolicy": "Classify schema, transport, editor, build and runtime failures; after a repeated failure inspect current state, make a minimal reversible repair, rerun the reproduction and disclose unresolved blockers.",
+    "providerModelOwnsExecution": true,
+    "toolDiscipline": [
+      "use live schemas only",
+      "no plan-only substitution or invented evidence",
+      "do not claim import/upload without confirmation"
+    ],
+    "version": "6.36.1",
+    "workflow": [
+      "inspect",
+      "select relevant skills/tools",
+      "implement",
+      "integrate",
+      "test",
+      "critique and repair",
+      "read back and prove"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "multi-script-blender-workspace",
+  "private": true,
+  "version": "6.49.9",
+  "type": "module",
+  "scripts": {"build": "node build.mjs"},
+  "dependencies": {"three": "0.180.0", "lil-gui": "0.21.0"},
+  "devDependencies": {"esbuild": "0.25.11"}
+}

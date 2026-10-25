@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm');
+const code=fs.readFileSync('extension/providers/notion.js','utf8'),main=fs.readFileSync('extension/core/main.js','utf8');
+for(const forbidden of ['tryPreferredModelRouting','modelSelectorControl','exactModelMatch','visible-picker+prompt','directModelPresets','BEHAVIOR CONTRACT','ANTI-COLLAPSE','role-play Claude Opus 5 if it is unavailable.\nBEHAVIOR'])if(code.includes(forbidden))throw new Error('forbidden direct/emulation content: '+forbidden);
+const store=new Map(),localStorage={getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,String(v)),removeItem:k=>store.delete(k)};
+const c={console,window:{localStorage},localStorage,document:{documentElement:{dataset:{}},querySelectorAll:()=>[]},location:{pathname:'/chat',search:'',hash:'',href:'https://example.com/chat'},setTimeout,clearTimeout,MutationObserver:function(){this.observe=()=>{}},KeyboardEvent:function(){}};c.globalThis=c;vm.createContext(c);vm.runInContext(code+'\n;globalThis.__P=ZSProvider;',c);const P=c.__P;
+for(const [id,model] of [['opus55','Claude Opus 5.5'],['opus','Claude Opus 5'],['gpt','GPT-5.6 Sol'],['kimi','Kimi K3'],['luna','GPT-6 Luna']]){P.setAutoRoutingProfile(id);const d=P.routingProfileDiagnostics(),prompt=P.getStartupProfilePrompt();if(!d.promptReady||d.requestedModel!==model||!d.includesSharedSystem||!prompt.includes('Saved preference metadata: '+model)||!prompt.includes('cannot select, pin or change the model')||!prompt.includes('Never claim a model was selected without provider confirmation'))throw new Error(id+' honest preference metadata invalid');if(prompt.includes('route this request')||prompt.length>1200)throw new Error(id+' invalid model instruction');}
+for(const x of ['providerProfile ? base.replace','const custom = [autonomy, executionEffortPrompt(), coreStandards, MSStudio.criticPrompt(criticSettings), craft, sessionMode, blenderWorkspaceInstructions(), economy, skillMesh, providerBehavior','${profileProviderLabel} preferred model','Check selection','full shared Multi-Script studio prompt follows unchanged'])if(!main.includes(x))throw new Error('placement/UI missing '+x);
+P.setAutoRoutingProfile('');if(P.getStartupProfilePrompt()!=='')throw new Error('standard auto');
+if(P.routingProfileDiagnostics().directPickerInteraction!==false)throw new Error('direct picker flag');
+console.log('PASS saved preference metadata followed by shared Multi-Script system');
+
+if(code.includes('emphasis:')||code.includes('EXECUTION EMPHASIS'))throw new Error('model-specific emphasis remains');

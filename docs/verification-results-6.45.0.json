@@ -1,0 +1,528 @@
+{
+  "version": "6.45.0",
+  "date": "2026-10-18",
+  "passed": 30,
+  "total": 30,
+  "skipped": 0,
+  "results": [
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false,
+      "run": "verification-6.45-cache"
+    },
+    {
+      "file": "test_full_spectrum_skill_mesh.py",
+      "exitCode": 0,
+      "seconds": 0.78,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 19.33,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_skill_application_641.py",
+      "exitCode": 0,
+      "seconds": 0.92,
+      "skipped": false,
+      "run": "verification-6.45-publisher"
+    },
+    {
+      "file": "test_skill_packs.py",
+      "exitCode": 0,
+      "seconds": 0.92,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_studio_craft_skills.py",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 432.7,
+      "skipped": false,
+      "run": "verification-6.45-settings"
+    },
+    {
+      "file": "test_portable_settings_and_capability_floor.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 0,
+      "seconds": 3.25,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 13.89,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_ultra_manuals.js",
+      "exitCode": 0,
+      "seconds": 2.52,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 141.69,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_progress_themes.js",
+      "exitCode": 0,
+      "seconds": 17.8,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 60.42,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 32.36,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_ultra_craft.js",
+      "exitCode": 0,
+      "seconds": 2.75,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_updates.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_updates_browser.js",
+      "exitCode": 0,
+      "seconds": 11.47,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_update_manager.py",
+      "exitCode": 0,
+      "seconds": 1.3,
+      "skipped": false,
+      "run": "verification-6.45-cache"
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 35.72,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_clickup_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 48.17,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 46.5,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_figma_bridge.py",
+      "exitCode": 0,
+      "seconds": 1.14,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.16,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_tool_parameter_contracts.py",
+      "exitCode": 0,
+      "seconds": 0.36,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_update_download.py",
+      "exitCode": 0,
+      "seconds": 1.14,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    }
+  ],
+  "executionHistory": [
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 1,
+      "seconds": 0.19,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_full_spectrum_skill_mesh.py",
+      "exitCode": 0,
+      "seconds": 0.78,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 19.33,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_skill_application_641.py",
+      "exitCode": 0,
+      "seconds": 1.94,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_skill_packs.py",
+      "exitCode": 0,
+      "seconds": 0.92,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_studio_craft_skills.py",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "skipped": false,
+      "run": "verification-6.45-runtime"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 432.7,
+      "skipped": false,
+      "run": "verification-6.45-settings"
+    },
+    {
+      "file": "test_portable_settings_and_capability_floor.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 0,
+      "seconds": 3.25,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_skill_tool_mesh_prompt.js",
+      "exitCode": 0,
+      "seconds": 0.17,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 13.89,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_ultra_manuals.js",
+      "exitCode": 0,
+      "seconds": 2.52,
+      "skipped": false,
+      "run": "verification-6.45-ultra"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 141.69,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_progress_themes.js",
+      "exitCode": 0,
+      "seconds": 17.8,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 60.42,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 32.36,
+      "skipped": false,
+      "run": "verification-6.45-regression"
+    },
+    {
+      "file": "test_ultra_craft.js",
+      "exitCode": 0,
+      "seconds": 2.94,
+      "skipped": false,
+      "run": "verification-6.45-new"
+    },
+    {
+      "file": "test_updates.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-new"
+    },
+    {
+      "file": "test_updates_browser.js",
+      "exitCode": 1,
+      "seconds": 32.67,
+      "skipped": false,
+      "run": "verification-6.45-new"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 1,
+      "seconds": 0.64,
+      "skipped": false,
+      "run": "verification-6.45-new"
+    },
+    {
+      "file": "test_update_manager.py",
+      "exitCode": 0,
+      "seconds": 1.34,
+      "skipped": false,
+      "run": "verification-6.45-new"
+    },
+    {
+      "file": "test_updates_browser.js",
+      "exitCode": 0,
+      "seconds": 13.36,
+      "skipped": false,
+      "run": "verification-6.45-corrections"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false,
+      "run": "verification-6.45-corrections"
+    },
+    {
+      "file": "test_agentic_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 35.72,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_clickup_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 48.17,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_mobile_worker.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 46.5,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_figma_bridge.py",
+      "exitCode": 0,
+      "seconds": 1.14,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_mobile_bridge_wire.py",
+      "exitCode": 0,
+      "seconds": 1.16,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_tool_parameter_contracts.py",
+      "exitCode": 0,
+      "seconds": 0.36,
+      "skipped": false,
+      "run": "verification-6.45-integration"
+    },
+    {
+      "file": "test_ultra_craft.js",
+      "exitCode": 0,
+      "seconds": 2.75,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_updates.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_updates_browser.js",
+      "exitCode": 0,
+      "seconds": 11.47,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.3,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_update_download.py",
+      "exitCode": 0,
+      "seconds": 1.14,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_update_manager.py",
+      "exitCode": 0,
+      "seconds": 1.05,
+      "skipped": false,
+      "run": "verification-6.45-final"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.25,
+      "skipped": false,
+      "run": "verification-6.45-publisher"
+    },
+    {
+      "file": "test_skill_application_641.py",
+      "exitCode": 0,
+      "seconds": 0.92,
+      "skipped": false,
+      "run": "verification-6.45-publisher"
+    },
+    {
+      "file": "test_update_manager.py",
+      "exitCode": 0,
+      "seconds": 1.42,
+      "skipped": false,
+      "run": "verification-6.45-publisher"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.27,
+      "skipped": false,
+      "run": "verification-6.45-cache"
+    },
+    {
+      "file": "test_update_manager.py",
+      "exitCode": 0,
+      "seconds": 1.3,
+      "skipped": false,
+      "run": "verification-6.45-cache"
+    }
+  ],
+  "boundaries": [
+    "Publisher feed/key are intentionally unconfigured until the user creates a repository and initializes signing. No public GitHub release or installed browser/native-host upgrade is claimed.",
+    "Update tests use real signatures, actual local TLS and temporary filesystem installs; provider/editor APIs remain fixtures where indicated.",
+    "No signed-in Figma/ClickUp, all-account/provider certification, physical phone or native editor art-quality certification is claimed.",
+    "Historical baselines are not counted as a new full-suite run."
+  ]
+}

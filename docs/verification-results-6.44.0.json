@@ -1,0 +1,613 @@
+{
+  "version": "6.44.0",
+  "date": "2026-10-18",
+  "passed": 35,
+  "total": 35,
+  "skipped": 0,
+  "results": [
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.44-corrections"
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 32.5,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_shared_transport_edges_641.js",
+      "exitCode": 0,
+      "seconds": 1.94,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_figma_link.py",
+      "exitCode": 0,
+      "seconds": 1.41,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_clickup_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 47.72,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_engine_setup_guides_6271.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.44-clickup"
+    },
+    {
+      "file": "test_provider_failure_640.js",
+      "exitCode": 0,
+      "seconds": 6.94,
+      "skipped": false,
+      "run": "verification-6.44-clickup"
+    },
+    {
+      "file": "test_clickup_boundaries.js",
+      "exitCode": 0,
+      "seconds": 4.25,
+      "skipped": false,
+      "run": "verification-6.44-corrections"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 0.83,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_provider_benchmarks.js",
+      "exitCode": 0,
+      "seconds": 4.41,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 0,
+      "seconds": 3.23,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_creative_surfaces.py",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_engine_prefs_platform.py",
+      "exitCode": 0,
+      "seconds": 0.38,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_multi_engine_provider_reliability.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 116.19,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 9.59,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 60.45,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 411.28,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_studio_contracts_642.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 11.03,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_ultra_manuals.js",
+      "exitCode": 0,
+      "seconds": 2.72,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_vani_generation_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 26.22,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 23.17,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_figma_ui_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 5.97,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 46.58,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_venice_classic_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 31.44,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.76,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.67,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_bridge_builtins.py",
+      "exitCode": 0,
+      "seconds": 0.91,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.36,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_figma_bridge.py",
+      "exitCode": 0,
+      "seconds": 1.05,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 15.42,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    }
+  ],
+  "executionHistory": [
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.24,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_provider_transport_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 32.5,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_shared_transport_edges_641.js",
+      "exitCode": 0,
+      "seconds": 1.94,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_figma_link.py",
+      "exitCode": 0,
+      "seconds": 1.42,
+      "skipped": false,
+      "run": "verification-6.44-connections"
+    },
+    {
+      "file": "test_clickup_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 45.51,
+      "skipped": false,
+      "run": "verification-6.44-clickup"
+    },
+    {
+      "file": "test_engine_setup_guides_6271.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.44-clickup"
+    },
+    {
+      "file": "test_provider_failure_640.js",
+      "exitCode": 0,
+      "seconds": 6.94,
+      "skipped": false,
+      "run": "verification-6.44-clickup"
+    },
+    {
+      "file": "test_clickup_boundaries.js",
+      "exitCode": 0,
+      "seconds": 4.05,
+      "skipped": false,
+      "run": "verification-6.44-interface"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false,
+      "run": "verification-6.44-interface"
+    },
+    {
+      "file": "test_provider_benchmarks.js",
+      "exitCode": 0,
+      "seconds": 4.23,
+      "skipped": false,
+      "run": "verification-6.44-interface"
+    },
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 1,
+      "seconds": 10.11,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_creative_surfaces.py",
+      "exitCode": 0,
+      "seconds": 0.8,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_engine_prefs_platform.py",
+      "exitCode": 0,
+      "seconds": 0.38,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_figma_link.py",
+      "exitCode": 0,
+      "seconds": 1.41,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_multi_engine_provider_reliability.py",
+      "exitCode": 0,
+      "seconds": 0.39,
+      "skipped": false,
+      "run": "verification-6.44-safety"
+    },
+    {
+      "file": "test_clickup_boundaries.js",
+      "exitCode": 0,
+      "seconds": 4.25,
+      "skipped": false,
+      "run": "verification-6.44-corrections"
+    },
+    {
+      "file": "test_figma_plugin.js",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "skipped": false,
+      "run": "verification-6.44-corrections"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 1,
+      "seconds": 2.72,
+      "skipped": false,
+      "run": "verification-6.44-corrections"
+    },
+    {
+      "file": "test_content_script_load_contract.js",
+      "exitCode": 0,
+      "seconds": 0.83,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_new_theme_matrix.js",
+      "exitCode": 0,
+      "seconds": 116.19,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_progress_phone_browser.js",
+      "exitCode": 0,
+      "seconds": 9.59,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_provider_benchmarks.js",
+      "exitCode": 0,
+      "seconds": 4.41,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_provider_browser_matrix_641.js",
+      "exitCode": 0,
+      "seconds": 60.45,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_settings_sweep.js",
+      "exitCode": 0,
+      "seconds": 411.28,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_studio_contracts_642.js",
+      "exitCode": 0,
+      "seconds": 0.09,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 11.08,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_ultra_manuals.js",
+      "exitCode": 0,
+      "seconds": 2.41,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_vani_generation_lifecycle_642.js",
+      "exitCode": 0,
+      "seconds": 26.22,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_workspace_overhaul_642.js",
+      "exitCode": 0,
+      "seconds": 23.17,
+      "skipped": false,
+      "run": "verification-6.44-regression"
+    },
+    {
+      "file": "test_figma_ui_roundtrip.js",
+      "exitCode": 1,
+      "seconds": 12.28,
+      "skipped": false,
+      "run": "verification-6.44-figma-ui"
+    },
+    {
+      "file": "test_clickup_runtime_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 47.72,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_figma_ui_roundtrip.js",
+      "exitCode": 0,
+      "seconds": 5.97,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_provider_error_streaming.js",
+      "exitCode": 0,
+      "seconds": 3.23,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_ultra_integration_639.js",
+      "exitCode": 0,
+      "seconds": 11.03,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_ultra_manuals.js",
+      "exitCode": 0,
+      "seconds": 2.72,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_vani_runtime_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 46.58,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_venice_classic_roundtrip_641.js",
+      "exitCode": 0,
+      "seconds": 31.44,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_creative_asset_pack_6361.py",
+      "exitCode": 0,
+      "seconds": 0.64,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.24,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_mobile_remote.py",
+      "exitCode": 0,
+      "seconds": 0.76,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_product_manifest_plugin_613.py",
+      "exitCode": 0,
+      "seconds": 0.22,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_roblox_companion.py",
+      "exitCode": 0,
+      "seconds": 0.67,
+      "skipped": false,
+      "run": "verification-6.44-final"
+    },
+    {
+      "file": "test_bridge_builtins.py",
+      "exitCode": 0,
+      "seconds": 0.91,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_bridge_wire_638.py",
+      "exitCode": 0,
+      "seconds": 1.36,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_figma_bridge.py",
+      "exitCode": 0,
+      "seconds": 1.14,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_multi_engine_provider_reliability.py",
+      "exitCode": 0,
+      "seconds": 0.7,
+      "skipped": false,
+      "run": "verification-6.44-bridge"
+    },
+    {
+      "file": "test_dev_release_policy.py",
+      "exitCode": 0,
+      "seconds": 0.2,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    },
+    {
+      "file": "test_figma_bridge.py",
+      "exitCode": 0,
+      "seconds": 1.05,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    },
+    {
+      "file": "test_schema_repair_and_native_host.py",
+      "exitCode": 0,
+      "seconds": 15.42,
+      "skipped": false,
+      "run": "verification-6.44-packaging"
+    }
+  ],
+  "boundaries": [
+    "Figma and ClickUp live navigation reached login; user declined authenticated testing.",
+    "Figma API host is mocked, while the shipped plugin UI, HTTP service, stdio launcher and bridge manager are real.",
+    "Figma iframe browser test explicitly grants local-network-access, simulating the required user permission; browser security is not disabled.",
+    "Provider model/DOM fixtures are not all-account/model certification.",
+    "Historical full-suite baselines are not counted as a new complete run."
+  ]
+}

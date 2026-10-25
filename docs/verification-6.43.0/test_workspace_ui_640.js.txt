@@ -1,0 +1,2 @@
+PASS dark real skill browse/read/favorites/install, co-work queue/drafts/filter/history, grouped keyboard/search navigation and narrow layout
+PASS light real skill browse/read/favorites/install, co-work queue/drafts/filter/history, grouped keyboard/search navigation and narrow layout

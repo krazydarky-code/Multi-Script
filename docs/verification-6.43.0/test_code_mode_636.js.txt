@@ -1,0 +1,1 @@
+PASS 6.36 Code mode, add-ons, workspace catalogue and bar clash fix

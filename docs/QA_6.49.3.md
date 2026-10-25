@@ -1,0 +1,9 @@
+# Multi-Script 6.49.3 verification
+
+This release expands existing methods in place. The preservation fixture records all original manual checkpoint prefixes, routes, exits, acceptance and diagnostic cases, all nine original production-style texts, all five broad style methods and the original skill-definition hash. Tests require those originals to survive. The same 12 manual IDs, 249 skill definitions and existing tool actions remain.
+
+The handbook has 564 checks: the original 480 plus 84 direct additions to existing craft, accessibility and QA phases. All 25 supplied still-image studies have a filename, checksum, dimensions and observed qualities in the existing canonical method data. Static observations are distinguished from authored motion, runtime behavior and measured performance; screenshots and third-party artwork are not redistributed.
+
+Actual Python skill calls for all 249 IDs verify bounded ordinary guidance and effective phase additions. Existing GUI/animation workflows retain their original prefixes and gain the expanded detail without mutating cached original skills. Full-phase retrieval, read-only scope, native reference pagination and original licensed resources are retained. Shipped browser tests exercise the existing manual/skill paths, phase selection, startup budgets, craft matching and lower-effort gating with deterministic provider surfaces.
+
+These checks validate method preservation and delivery; they do not train model weights, guarantee every generated asset or certify native-device visual performance. Provider compatibility and native Blender persistence/material repairs from 6.49.2 remain in the build. The emitted verification and signed-upgrade reports record actual coverage. Public GitHub publishing remains blocked by the suspended publisher account.

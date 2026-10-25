@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "roblox": {
+      "command": "launch_studio_mcp.py",
+      "args": []
+    },
+    "unity": {
+      "command": "launch_unity_mcp.py",
+      "args": [],
+      "env": {
+        "DISABLE_TELEMETRY": "1"
+      }
+    },
+    "godot": {
+      "command": "launch_godot_mcp.py",
+      "args": [],
+      "env": {
+        "DEBUG": "false"
+      }
+    },
+    "blender": {
+      "command": "launch_blender_mcp.py",
+      "args": []
+    }
+  }
+}

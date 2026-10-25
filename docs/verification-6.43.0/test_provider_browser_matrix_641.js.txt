@@ -1,0 +1,17 @@
+PASS deepseek: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS chatgpt: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS claude: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS gemini: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS kimi: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS glm: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS meta: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS qwen: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS arena: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS notion: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS promptql: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS superapp: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS vani: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS crax: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS venice: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS clickup: real chain, roles, command parse, chip source, Agent/Ultra/Critic and skills UI
+PASS all 16 provider browser fixtures; 513 assertions.

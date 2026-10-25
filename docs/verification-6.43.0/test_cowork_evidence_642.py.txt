@@ -1,0 +1,9 @@
+test_completion_requires_checks_evidence_and_no_blocker (__main__.Evidence.test_completion_requires_checks_evidence_and_no_blocker) ... ok
+test_reopened_dependency_prevents_completion (__main__.Evidence.test_reopened_dependency_prevents_completion) ... ok
+test_schema_exposes_proof_fields (__main__.Evidence.test_schema_exposes_proof_fields) ... ok
+test_validation_scope_changes_and_permissions (__main__.Evidence.test_validation_scope_changes_and_permissions) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.178s
+
+OK
