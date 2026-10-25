@@ -7,7 +7,7 @@ from blender_workspace import Workspace
 import blender_portable
 assert blender_portable.discover(),'Prepare the real Blender runtime before this suite.'
 with tempfile.TemporaryDirectory(prefix='ms-game-blender-') as temp:
- root=Path(temp);w=Workspace(root/'workspace',0)
+ root=Path(temp).resolve();w=Workspace(root/'workspace',0)
  try:
   assert not w.status()['verified'] and not w.pipeline.begin(['godot'])['required'] and not w.running
   w.pipeline.configure({'engines':['godot','unity','roblox']})
