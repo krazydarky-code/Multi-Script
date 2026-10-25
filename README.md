@@ -7,7 +7,7 @@ Multi-Script connects supported AI chat websites to local tools for **Roblox Stu
 - **Publishing:** tested main commits publish only when the maintainer enables `MS_AUTOPUBLISH`. Writes are serial, matching draft assets are reused, and published versions remain immutable. [GitHub delivery safeguards](docs/GITHUB_DELIVERY.md).
 - **Verification:** local provider fixtures, native-editor tests, real engine checks and CI receipts document their coverage. They do not guarantee every live provider/account combination.
 
-# Multi-Script 6.49.9 Dev — deeper existing Ultra methods
+# Multi-Script 6.49.9 — deeper existing Ultra methods
 
 The **ChatGPT native transport** correction reads real editor documents, applies rich-text drafts in one native edit where supported, and ignores placeholder decorations. It retains exact-message checks and one acknowledged Send. Reload the extension **and refresh every provider tab** after merging the corrected extension files into an existing 6.49.9 installation; the MAIN-world editor bridge must reload too. A version-only updater cannot detect this same-version correction. Saved projects, configuration, skills and earlier features remain.
 
