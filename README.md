@@ -80,7 +80,7 @@ Run `python tools/release_check.py` for the packaging gate. Build with `python t
 
 Multi-Script remains GPL-3.0-or-later; see LICENSE and the third-party notices. [Discord support](https://discord.gg/5Q6vvNcpM6).
 
-Ultra now uses a selected-only violet/cyan treatment and bounded task-specific execution methods adapted from PlazCode 1.24.19. Lowering effort clears the visual activation and supersedes prior Ultra policies. Theme surfaces and live scenes remain intact, and reduced motion/forced colors are supported. [Integration details and attribution](docs/PLAZCODE_INTEGRATION.md).
+Lowering effort clears the visual activation and supersedes prior Ultra policies. Theme surfaces and live scenes remain intact, and reduced motion/forced colors are supported. [Integration details and attribution](docs/PLAZCODE_INTEGRATION.md).
 
 6.40 adds the searchable Skills library, the project-aware (now 241 after the 6.48.2 prune) skill contracts, grouped settings navigation, queued co-work follow-ups and a dependency/resource-aware shared task board. Native generation errors pause with task-unverified status; green chips describe individual tool calls. [Workspace revamp guide](docs/WORKSPACE_REVAMP_6.40.md).
 
