@@ -1,0 +1,4 @@
+-- story intro server
+-- Source: Brickwire (MIT). Adapt to the project; {{KEY}} placeholders are option values to replace. Not tested in real Studio.
+-- Brickwire back-story (server): plays the story to a player on their FIRST visit only (remembered in a DataStore).
+-- Edit FRAMES: { shots = {BrickwireCinema shots}, text = "subtitle", speaker = "Name", time = seconds }. Replay: player attribute ReplayStory = true.

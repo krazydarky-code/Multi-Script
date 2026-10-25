@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Project-aware skill contracts. Adaptation policy informed by PlazCode 1.24.19
+"""Project-aware skill contracts. Adaptation policy informed by upstream GPL source 1.24.19
 core/skills-ui.js; authored for Multi-Script's existing engines and real schemas.
 Skill content remains reference data, never permission or a tool implementation.
 """

@@ -52,9 +52,9 @@ against the wrong box.
 a deliberately absurd gutter, a 360px viewport and a bar pushed to the far left — and asserts the
 panel's left edge is never negative. 39/39 checks.
 
-## Notion AI: hardened detection, ported from PlazCode
+## Notion AI: hardened detection, ported from upstream GPL source
 
-PlazCode (1.18.74) is a derivative of Multi-Script with a considerably more mature Notion adapter —
+upstream GPL source (1.18.74) is a derivative of Multi-Script with a considerably more mature Notion adapter —
 2,492 lines against our 466. The parts worth taking were the detection and transcript logic, so those
 were merged in; the IDE and `.exe` were left alone.
 

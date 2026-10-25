@@ -380,8 +380,13 @@ def _expand(tokens: list) -> dict:
     return out
 
 
+# Tools that only make sense for one engine but whose names do not carry the engine prefix.
+_NAME_ENGINE = {"ms_forge": "roblox"}
+
 def _engine_of(tool: dict) -> str:
     name = str(tool.get("name") or "")
+    if name in _NAME_ENGINE:
+        return _NAME_ENGINE[name]
     m = re.match(r"(?:ms_)?(roblox|unity|godot|blender)_", name)
     if m:
         return m.group(1)

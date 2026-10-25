@@ -27,9 +27,9 @@ Multi-Script now injects on Notion’s current `app.notion.com/chat` surface. Th
 
 The settings menu has a dedicated **Setup** category with live bridge/editor/composer checks, exact installation and editor-connection steps, a copyable checklist, Notion-specific routing guidance, and a map of every settings category.
 
-## Claude provider from the PlazCode reference
+## Claude provider from the upstream GPL source reference
 
-Claude on claude.ai and claude.com is now a first-class Multi-Script provider. Its adapter was selectively adapted from PlazCode’s GPL provider code and generalized for Multi-Script’s multi-engine bridge. It receives the same provider-independent enhancer, effort, pacing, recovery, verification, trust, skills, and tools as every other site. The PlazCode IDE, desktop executable, AgentScript runtime, and branding are not included.
+Claude on claude.ai and claude.com is now a first-class Multi-Script provider. Its adapter was selectively adapted from upstream GPL source’s GPL provider code and generalized for Multi-Script’s multi-engine bridge. It receives the same provider-independent enhancer, effort, pacing, recovery, verification, trust, skills, and tools as every other site. The upstream GPL source IDE, desktop executable, AgentScript runtime, and branding are not included.
 
 ## Universal prompt and effort harness
 

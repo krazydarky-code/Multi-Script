@@ -1,0 +1,22 @@
+{
+  "built": "2026-10-25T17:52:48Z",
+  "creator_docs": "4e795e65a41fd48624fd85442292a81baa6bb3f5 2026-10-24T10:11:10+00:00",
+  "luau_site": "c0eb09dc75b30cac6af600df0a4c07b4079a4b51 2026-10-20T08:50:02-07:00",
+  "studio_version": "0.744.0.7441077",
+  "counts": {
+    "class": 628,
+    "datatype": 49,
+    "enum": 518,
+    "global": 2,
+    "guide": 992,
+    "library": 11,
+    "luau": 25,
+    "luau-news": 36
+  },
+  "total": 2261,
+  "licenses": {
+    "creator-docs text": "CC-BY-4.0 (Roblox Corporation)",
+    "creator-docs code": "MIT (Roblox Corporation)",
+    "luau.org site": "MIT (Roblox Corporation)"
+  }
+}

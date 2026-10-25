@@ -8,7 +8,7 @@ local RunService = game:GetService("RunService")
 local CollectionService = game:GetService("CollectionService")
 local ChangeHistoryService = game:GetService("ChangeHistoryService")
 
-local PLUGIN_VERSION = "6.49.9"
+local PLUGIN_VERSION = "6.50.0"
 local DIAGNOSTIC_VERSION = 3
 local BRIDGE_URL = "http://127.0.0.1:17614"
 local STATUS_SECONDS = 5
@@ -104,7 +104,7 @@ local function label(parent,text,height,size)
  return make('TextLabel',parent,{BackgroundTransparency=1,Size=UDim2.new(1,0,0,height or 36),AutomaticSize=Enum.AutomaticSize.Y,Font=Enum.Font.Gotham,TextSize=size or 13,TextColor3=T.ink2,Text=text,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Left,TextYAlignment=Enum.TextYAlignment.Center})
 end
 local function button(parent,text,height)
- local b=make('TextButton',parent,{TextWrapped=true,BackgroundColor3=T.mono3,BorderSizePixel=0,Size=UDim2.new(1,0,0,height or 36),Font=Enum.Font.GothamSemibold,TextSize=13,TextColor3=T.ink,Text=text,AutoButtonColor=true});corner(b);hairline(b);return b
+ local b=make('TextButton',parent,{TextWrapped=true,BackgroundColor3=T.mono3,BorderSizePixel=0,Size=UDim2.new(1,0,0,height or 36),Font=Enum.Font.GothamMedium,TextSize=13,TextColor3=T.ink,Text=text,AutoButtonColor=true});corner(b);hairline(b);return b
 end
 local function card(parent,title)
  local box=make('Frame',parent,{BackgroundColor3=T.mono1,BorderSizePixel=0,Size=UDim2.new(1,0,0,0),AutomaticSize=Enum.AutomaticSize.Y});corner(box,10);hairline(box);pad(box,12);stack(box,8)
@@ -153,7 +153,7 @@ local projectButton=button(accessCard,'Project · objects and properties')
 local fullButton=button(accessCard,'Full · script editing and source transfer')
 local disableButton=button(accessCard,'Turn toolset off')
 U.search=make('TextBox',U.pages.Toolset,{Name='FindTool',Size=UDim2.new(1,0,0,38),BackgroundColor3=T.mono2,BorderSizePixel=0,Font=Enum.Font.Gotham,TextSize=13,TextColor3=T.ink,PlaceholderText='Find a tool…',PlaceholderColor3=T.ink3,Text='',ClearTextOnFocus=false});corner(U.search);pad(U.search,9)
-local registerMode,disableExecution,refreshConsole,syncToolSelection
+local registerMode,disableExecution,refreshConsole,syncToolSelection,refresh
 for _,tool in ipairs(TOOL_INFO) do
  local row=card(U.pages.Toolset,tool.name);local toggle=button(row,'',32);label(row,tool.description,66,12)
  U.toolRows[tool.name]={row=row,toggle=toggle,search=(tool.name..' '..tool.description):lower(),permission=tool.permission}

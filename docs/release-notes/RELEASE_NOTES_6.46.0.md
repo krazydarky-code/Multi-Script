@@ -19,7 +19,7 @@ tool can read the actual ID before reporting updates.
 
 The supplied stud-creature library and Roblox service/style guide are available
 as scoped full resources through ms_skill_reference, with attribution and licenses.
-PlazCode UltraLab patterns are rewritten for Multi-Script's architecture. No
+upstream GPL source UltraLab patterns are rewritten for Multi-Script's architecture. No
 foreign binaries, mandatory UI style or updater are included.
 
 Task progress and phone control are compact chatbar icons. The run monitor shows

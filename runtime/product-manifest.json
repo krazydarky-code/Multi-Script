@@ -1,9 +1,9 @@
 {
   "product": "Multi-Script",
-  "version": "6.49.9",
+  "version": "6.50.0",
   "catalogue": {
     "skills": 249,
-    "directTools": 279,
+    "directTools": 283,
     "virtualSpecialists": 263,
     "robloxSkills": 54,
     "robloxVirtualSpecialists": 90,
@@ -20,7 +20,7 @@
     "general"
   ],
   "robloxCompanion": {
-    "version": "6.49.9",
+    "version": "6.50.0",
     "diagnosticOnly": false,
     "companionTools": 26,
     "defaultPermission": "off",
@@ -71,7 +71,7 @@
     "specialists": "searchable through ms_list_virtual_tools and coordinated by ms_studio_director",
     "nativeCounts": "reported separately and never presented as total product capability"
   },
-  "directTools": 279,
+  "directTools": 283,
   "engineToolkit": {
     "tools": {
       "blender": 45,
@@ -182,5 +182,12 @@
     "persistence": "Native .blend saved before preview export; stopped-worker snapshot/preview restored from disk with a Resume Blender control.",
     "handoff": "Validated Unity FBX / Godot GLB project-folder copy or pinned Roblox GLB download. Existing assets require explicit overwrite. Import verification remains a separate engine operation."
   },
-  "build": "6.49.9-github-migration"
+  "build": "6.50.0-integrated-production",
+  "omni": {
+    "references": 522,
+    "reviewedModules": 6,
+    "tool": "ms_roblox_omni",
+    "loading": "on-demand",
+    "sourceInstallIsNotPlaytest": true
+  }
 }

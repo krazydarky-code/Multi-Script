@@ -28,7 +28,7 @@ No playback: inspect asset permission, loading errors, Animator ancestry/Workspa
 
 ## Sources and use
 
-Adapted from user-provided ProjectGUI and Ultraskills references. Provenance hashes are in PROVENANCE.json. UltraLab quality patterns retain GPL attribution under vendor/plazcode. Linked third-party image assets are not imported.
+Adapted from user-provided ProjectGUI and Ultraskills references. Provenance hashes are in PROVENANCE.json. UltraLab quality patterns retain GPL attribution under legal/upstream-gpl. Linked third-party image assets are not imported.
 
 - [Roblox UI/UX](https://create.roblox.com/docs/production/game-design/ui-ux-design)
 - [ScreenInsets](https://create.roblox.com/docs/reference/engine/enums/ScreenInsets)
@@ -54,3 +54,8 @@ User-supplied still-image studies improve existing methods and styles. They are 
 - Supplied image 23: A creature collection varies species silhouettes, body/head ratios and markings within a shared block/stud material language.
 - Supplied image 24: A grouped creature lineup uses recognizable heads, stances and palette variation at a shared presentation scale.
 - Supplied image 25: A multi-scale creature collection emphasizes connected primary masses, ears/limbs/tails and consistent raised surface detail.
+
+
+## OMNI reference and native kit extension
+
+Use `ms_roblox_omni` for bounded relevant reference queries or `action=recipe, recipe=pose` when it adds information needed for this task. The compressed catalogue retains 522 source entries; approximate screenshot values are starting points, not measured runtime values or asset permissions. Keep this manual and the existing style recipes. The optional native kit adds owned cleanup/signals, analytic springs, explicit theme tokens, panels/buttons/modals/progress and finite cosmetic bursts; install creates a fresh namespace and returns real source-readback evidence. Use `ms_forge` for generated illustration/texture/flipbook assets and its richer UI builders. Reuse loaded methods and actual project components. Apply useful increments through engine tools during the task, then verify real input, focus, performance and temporal behavior. Do not dump the catalogue or repeat setup/progress turns. Recipe pseudocode and still images do not prove implementation.

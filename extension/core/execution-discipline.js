@@ -11,11 +11,12 @@
  };
  const bare=n=>String(n||'').split('/').pop().split('.').pop();
  const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
- const localAsset=c=>/^(ms_create_icon_pack|ms_create_canvas_ui|ms_create_canvas_texture)$/.test(bare(c.tool));
+ const localAsset=c=>/^(ms_create_icon_pack|ms_create_canvas_ui|ms_create_canvas_texture|ms_forge)$/.test(bare(c.tool));
  const signature=c=>bare(c.tool)+'|'+JSON.stringify(stable(c.arguments||{}));
  function kind(call){const n=bare(call.tool),a=call.arguments||{};
-  if(/^(ms_task_progress|ms_get_skill|ms_list_skills|ms_recommend_skills|ms_ultra_manual|ms_studio_director|ms_full_spectrum_skill_mesh|list_commands|list_tools|more_output|list_mcp_servers|list_multiscript_capabilities)$/.test(n))return 'guidance';
-  if(/^(ms_fetch_reference|http_get|fetch_roblox_doc|web_search|search_web|ms_research_references)$/.test(n))return 'research';
+  if(n==='ms_roblox_omni')return a.action==='install'?'write':a.action==='references'||a.action==='analyze'?'research':a.action==='bundle'?'other':'guidance';
+  if(/^(ms_task_progress|ms_get_skill|ms_list_skills|ms_recommend_skills|ms_ultra_manual|ms_skill_reference|ms_studio_director|ms_full_spectrum_skill_mesh|list_commands|list_tools|more_output|list_mcp_servers|list_multiscript_capabilities)$/.test(n))return 'guidance';
+  if(/^(ms_fetch_reference|ms_roblox_docs|http_get|fetch_roblox_doc|web_search|search_web|ms_research_references)$/.test(n))return 'research';
   if(/screen_capture|screenshot|screen_record|capture_viewport/.test(n))return 'capture';
   if(/^(start_stop_play|run_project|stop_project|start_play|stop_play)$/.test(n))return 'runtime';
   if(/^msrb_/.test(n)){if(n==='msrb_source_transfer')return a.action==='commit'?'write':a.action==='status'?'read':'other';if(/^msrb_(project_summary|get_|find_|read_|search_|dependency_|export_|validate_|console_read)/.test(n))return 'read';return /^(msrb_(create_instances|set_properties|set_attributes|update_tags|reparent_instances|clone_instances|bulk_rename|patch_script|replace_script|delete_instances|undo|redo))$/.test(n)?'write':'other';}
@@ -36,7 +37,7 @@
   if((trace.failures[key]||0)>=2)reason='This exact command failed twice. Do not replay it unchanged. Fix the reported schema/API/context issue or report the specific blocker.';
   if(type==='guidance'&&/^(ms_get_skill|ms_ultra_manual|ms_studio_director)$/.test(bare(call.tool))&&(trace.guidanceReads?.[key]?.count||0)>=2)reason='This full method already returned the same guidance twice. Reuse its instructions and advance the requested work or report the precise blocker; do not reload the same skill/manual unchanged.';
    if(type==='read'&&(trace.reads[key]?.count||0)>=2)reason='The same scope already returned the same observation twice without an intervening successful write. Reuse that evidence, inspect a specific new question, or implement the requested slice. A failed/truncated query does not prove the place is empty.';
-  if(type==='write'&&!localAsset(call)&&trace.requireResearch&&!trace.researched&&!trace.researchUnavailable){const tool=trace.names.find(n=>/^(ms_fetch_reference|http_get|fetch_roblox_doc|ms_research_references)$/.test(bare(n)));if(tool)reason='Before a substantial Ultra creative write, fetch a real reference or uncertain API with '+tool+' using its live schema. Retain the source/observation in working context; no progress-tool call is required. If access fails, report the exact limitation and continue feasible work; do not invent research.';}
+  if(type==='write'&&!localAsset(call)&&trace.requireResearch&&!trace.researched&&!trace.researchUnavailable){const tool=trace.names.find(n=>/^(ms_fetch_reference|http_get|fetch_roblox_doc|ms_research_references)$/.test(bare(n)))||trace.names.find(n=>bare(n)==='ms_roblox_docs');if(tool)reason='Before a substantial Ultra creative write, fetch a real reference or uncertain API with '+tool+' using its live schema. Retain the source/observation in working context; no progress-tool call is required. If access fails, report the exact limitation and continue feasible work; do not invent research.';}
   if(!reason&&type==='write'&&!localAsset(call)&&trace.effort==='ultra'&&trace.requireSkill&&!trace.skillLoaded&&trace.names.some(n=>/^(ms_get_skill|ms_ultra_manual)$/.test(bare(n))))reason='Load a relevant full skill with ms_get_skill or the applicable ms_ultra_manual before a major Ultra build, including when the user skips web research. An unrelated loaded workflow does not satisfy this step. A list of skill names is not the production method. Keep the current plan and fetched references; do not repeat discovery.';
   if(!reason)return {blocked:false};trace.stalls++;return {blocked:true,pause:trace.stalls>=3,feedback:'ERROR: command NOT RUN. '+reason};
  }

@@ -1,0 +1,3 @@
+-- egg hatching server
+-- Source: Brickwire (MIT). Adapt to the project; {{KEY}} placeholders are option values to replace. Not tested in real Studio.
+-- Brickwire egg hatching (server). Pets are rolled HERE; the client only plays the hatch. Two prompts: Hatch and Hatch x3.

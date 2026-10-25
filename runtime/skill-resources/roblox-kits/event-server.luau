@@ -1,0 +1,4 @@
+-- event start server
+-- Source: Brickwire (MIT). Adapt to the project; {{KEY}} placeholders are option values to replace. Not tested in real Studio.
+-- Brickwire event start (server): countdown, fly-over of the zone and "EVENT STARTED!" for EVERY player.
+-- Start it: set this script's attribute Start = true (from any server code), or every EVERY seconds (0 = manual only).

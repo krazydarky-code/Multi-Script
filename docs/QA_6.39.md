@@ -1,10 +1,10 @@
-# Multi-Script 6.39.0 — PlazCode Ultra integration and regression verification
+# Multi-Script 6.39.0 — upstream GPL source Ultra integration and regression verification
 
 **44/44 test scripts passed:** 28 JavaScript/browser suites and 16 Python suites. Additional visual checks passed for the actual Agent Critic/Ultra controls and the direct New idea bar in dark and light themes. Test filenames containing earlier version numbers are maintained regression suites rerun against 6.39.0. The complete background worker and its imports were evaluated; its actual pacing-message handler persisted leases and returned an explicit error on simulated storage failure. Legacy Studio visibility settings migrate to New idea and remain editable.
 
 ## New in this release
 
-Adapted the supplied PlazCode 1.24.19 task-routing algorithm and efficient execution policy, using Multi-Script identifiers and its existing transport. Eight bounded task-specific methods cover interfaces, engineering, diagnosis, performance, data, worlds, assets and motion. The source GPL license and provenance are retained. No separately licensed art/skill bundle, foreign runtime or provider-specific handshake was imported. See [integration details](PLAZCODE_INTEGRATION.md).
+Adapted the supplied upstream GPL source 1.24.19 task-routing algorithm and efficient execution policy, using Multi-Script identifiers and its existing transport. Eight bounded task-specific methods cover interfaces, engineering, diagnosis, performance, data, worlds, assets and motion. The source GPL license and provenance are retained. No separately licensed art/skill bundle, foreign runtime or provider-specific handshake was imported. See [integration details](SOURCE_METHODS.md).
 
 Native keyboard slider activation, demotion, saved hydration, reset, menu rebuild, dark/light colors, live Matrix bar, portal placement, reduced motion, forced colors and a 390 px viewport were exercised in real Chromium. Ultra accent and instructions retire on lower effort; Critic remains independent. The full shipped Venice content chain demonstrably received the new interface methods before real skill retrieval/SVG generation. A test catalogue mismatch caused by a previously installed fixture skill was resolved by giving each suite an isolated temporary Studio data directory; no user data was removed.
 

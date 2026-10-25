@@ -20,10 +20,11 @@ const code=studio.ultraMethodsPrompt('Fix this function',{engines:['workspace']}
 assert(code.includes('Method: engineering')&&!code.includes('Roblox context:'));
 const repeated=studio.ultraMethodsPrompt('menu '.repeat(200));
 assert.strictEqual(repeated.match(/Method: interface/g).length,1);
-for(const forbidden of ['plazcode_skills','bundled-ultra-','THINK=ultracode','###LUA###'])assert(!task.includes(forbidden),'Foreign transport leaked: '+forbidden);
+const sourceName=JSON.parse(fs.readFileSync(path.join(root,'legal/upstream-gpl/SOURCE.json'),'utf8')).originName;
+for(const forbidden of [sourceName.toLowerCase()+'_skills','bundled-ultra-','THINK=ultracode','###LUA###'])assert(!task.includes(forbidden),'Foreign transport leaked: '+forbidden);
 assert(task.includes('No second handshake')&&task.includes('latest user setting is EFFORT=ultra'));
 assert(main.includes('stop applying previous Ultra methods and research requirements'));
-assert(fs.existsSync(path.join(root,'vendor/plazcode/LICENSE')));
+assert(fs.existsSync(path.join(root,'legal/upstream-gpl/LICENSE')));
 
 (async()=>{
   fs.mkdirSync(out,{recursive:true});

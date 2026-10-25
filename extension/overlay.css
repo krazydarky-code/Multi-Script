@@ -3260,7 +3260,7 @@ html.zs-light .zs-creative-style-opt.active,html.zs-light .zs-creative-finish-op
 #zs-root details { margin-top:12px; } #zs-root details summary { cursor:pointer; }
 
 
-/* Ultra treatment adapted from PlazCode 1.24.19 overlay.css, GPL-3.0-or-later.
+/* Ultra treatment adapted from upstream GPL source 1.24.19 overlay.css, GPL-3.0-or-later.
    Multi-Script uses its native range and keeps theme surfaces/scenes intact. */
 #ms-effort-indicator[hidden],#ms-ultra-summary[hidden] { display:none!important; }
 #ms-effort-indicator { margin-left:5px;font-size:10px;letter-spacing:.02em; }

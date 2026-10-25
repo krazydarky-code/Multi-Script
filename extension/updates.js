@@ -6,6 +6,13 @@ function create({chrome,nativeCall,tabs,storageGet,storageSet,stopBridge,reload}
  const current=()=>chrome.runtime.getManifest?.().version||'';
  const newer=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<4;i++){if((x[i]||0)!==(y[i]||0))return (x[i]||0)>(y[i]||0);}return false;};
  const fail=message=>{throw Error(message);};
+ async function announce(state){
+  if(!state?.ok)return;
+  const version=state.staged||state.pending||null;
+  const available=version&&newer(version,current())?String(version):null;
+  const saved=await storageGet(['msUpdateAvailableVersion']);
+  if((saved.msUpdateAvailableVersion||null)!==available)await storageSet({msUpdateAvailableVersion:available});
+ }
  async function installType(){try{return (await chrome.management.getSelf()).installType;}catch{return 'unknown';}}
  async function idle(){const r=await tabs.list();if(!r.ok||!Array.isArray(r.participants)||r.participants.some(t=>!t.ok||t.running||t.starting||t.generating||t.hasDraft||t.queuePending||t.sendUnconfirmed||t.enhancing))fail('Finish or stop active chats, resolve drafts and queued prompts, and reload disconnected provider tabs before updating.');return r;}
  async function nativeState(prefs,own=false){
@@ -18,6 +25,7 @@ function create({chrome,nativeCall,tabs,storageGet,storageSet,stopBridge,reload}
   const mismatch=!!(current()&&state.current&&current()!==state.current);
   const completedUpdate=mismatch&&newer(state.current,current())&&state.lastUpdate?.version===state.current;
   const needsReload=completedUpdate&&!state.recoveryRequired&&!state.busy&&!state.setupPending;
+  await announce(state);
   return {...state,automatic:prefs.msUpdatesAutomatic!==false,extensionVersion:current(),operation,busy:!!(state.busy||(!own&&operation)),needsReload,setupMismatch:mismatch&&!completedUpdate&&!state.busy&&!state.recoveryRequired,setupNeeded:state.setupReady===false,checkedAt:prefs.msUpdateLastCheck||null,lastError:prefs.msUpdateLastError||state.lastCheckError||null};
  }
  async function handle(msg){
@@ -32,7 +40,8 @@ function create({chrome,nativeCall,tabs,storageGet,storageSet,stopBridge,reload}
     if(!storePending)return {ok:false,error:'No browser-managed update is pending.'};
     await idle();await storageSet({msStoreUpdatePending:null});reload();return {ok:true,reloading:true};
    }
-   if(msg.op==='check')try{const result=await chrome.runtime.requestUpdateCheck();if(result.status==='update_available'){storePending=result.version;await storageSet({msStoreUpdatePending:result.version});}return {ok:true,managed:true,result,pending:storePending,automatic:true};}catch(error){return {ok:false,managed:true,error:String(error.message||error)};}
+   if(msg.op==='check')try{const result=await chrome.runtime.requestUpdateCheck();if(result.status==='update_available'){storePending=result.version;await storageSet({msStoreUpdatePending:result.version});}await announce({ok:true,pending:storePending});return {ok:true,managed:true,result,pending:storePending,automatic:true};}catch(error){return {ok:false,managed:true,error:String(error.message||error)};}
+   await announce({ok:true,pending:storePending});
    return {ok:true,managed:type!=='unknown',unknown:type==='unknown',pending:storePending,automatic:true};
   }
   if(msg.op==='status')return nativeState(prefs);
@@ -83,6 +92,7 @@ function create({chrome,nativeCall,tabs,storageGet,storageSet,stopBridge,reload}
    const result=await nativeCall('update',{action:'check'},240000);
    if(!result.ok)fail(result.error||'Could not download the signed update.');
    await storageSet({msUpdateLastCheck:Date.now(),msUpdateLastError:null,msUpdateFailureCount:0,msUpdateRetryAt:null});
+   await announce(result);
    return {...result,busy:false,automatic:prefs.msUpdatesAutomatic!==false};
   }catch(error){
    const message=String(error?.message||error);await storageSet({msUpdateLastError:message});
@@ -101,7 +111,7 @@ function create({chrome,nativeCall,tabs,storageGet,storageSet,stopBridge,reload}
    }
   }
  }
- chrome.runtime.onUpdateAvailable?.addListener(info=>{storePending=info.version;void storageSet({msStoreUpdatePending:info.version}).catch(()=>{});});
+ chrome.runtime.onUpdateAvailable?.addListener(info=>{storePending=info.version;void storageSet({msStoreUpdatePending:info.version,msUpdateAvailableVersion:info.version}).catch(()=>{});});
  chrome.alarms?.onAlarm.addListener(a=>{if(a.name==='ms-release-check')void safeHandle({op:'automatic'});if(a.name==='ms-finish-setup')void safeHandle({op:'finish_setup',automatic:true});});
  // Preserve the existing alarm across service-worker restarts.
  if(chrome.alarms?.get)Promise.resolve(chrome.alarms.get('ms-release-check')).then(alarm=>{if(!alarm)chrome.alarms.create('ms-release-check',{delayInMinutes:5,periodInMinutes:15});}).catch(()=>{});

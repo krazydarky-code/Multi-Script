@@ -55,7 +55,8 @@ for sid in skills:
 for sid,v in skills.items():
  got=json.loads(call('ms_recommend_skills',{'objective':v['name'],'engine':v.get('engine') or '', 'limit':10})['text']);assert isinstance(got['recommendations'],list),sid
 # Exercise all 20 built-ins and every enum-heavy branch.
-assert len(b.BUILTIN_TOOLS)==279 and len(b.BUILTIN_TOOL_NAMES)==279
+expected_tools=json.load(open(ROOT/'runtime'/'product-manifest.json',encoding='utf-8'))['catalogue']['directTools']
+assert len(b.BUILTIN_TOOLS)==expected_tools and len(b.BUILTIN_TOOL_NAMES)==expected_tools
 class FakeAudio:
  def status(self): return {'provider':'ElevenLabs','configured':True}
  def list_generated_audio(self,limit): return {'count':0,'assets':[]}

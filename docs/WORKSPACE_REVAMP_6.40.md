@@ -28,4 +28,4 @@ Structured tool failures (`ok:false`, `success:false`, `isError:true`, failed st
 
 ## Source integration
 
-PlazCode 1.24.19 `core/cowork.js` informed the bounded queue, receipts and context-aware delivery implementation; `core/skills-ui.js` informed project adaptation of reference skills. Both were rewritten into Multi-Script's existing runtime/transport and visual system, using Multi-Script symbols. The GPL license/provenance remain in `vendor/plazcode`; no separately licensed art, SyphoDev pack, alternate tool server, IDE binary or provider-specific approval policy was imported. See `THIRD_PARTY_NOTICES.md`.
+upstream GPL source 1.24.19 `core/cowork.js` informed the bounded queue, receipts and context-aware delivery implementation; `core/skills-ui.js` informed project adaptation of reference skills. Both were rewritten into Multi-Script's existing runtime/transport and visual system, using Multi-Script symbols. The GPL license/provenance remain in `legal/upstream-gpl`; no separately licensed art, SyphoDev pack, alternate tool server, IDE binary or provider-specific approval policy was imported. See `THIRD_PARTY_NOTICES.md`.

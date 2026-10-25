@@ -201,7 +201,7 @@ def _enable_ansi_colors():
 HOST = "127.0.0.1"
 # Keep in sync with extension/manifest.json "version" - printed at
 # startup so a user's terminal output alone tells us which build they're on.
-BRIDGE_VERSION = "6.49.9"
+BRIDGE_VERSION = "6.50.0"
 PORT = int(os.environ.get("ZS_BRIDGE_PORT", "17613"))
 # The Multi-Script folder this bridge runs from (parent of runtime/). Sent to the extension so a
 # stale copy left running from another folder can be named in the diagnosis.
@@ -1537,6 +1537,12 @@ BUILTIN_TOOLS = [
          "expected_properties": {"type": "object", "description": "Optional exact name->value pairs to assert"},
          "studio_id": {"type": "string"}},
       "required": ["path"]}},
+    {"name": "ms_roblox_ui_audit", "description": "Measure a real GUI inside Roblox Studio and report what a player would see wrong: text that does not fit, very small text, low text contrast (with UIStroke taken into account), emoji in text, buttons smaller than a finger, objects off screen or cut off by the screen edge, zero-size objects, empty lists, lists whose canvas cannot scroll, images that did not load, and buttons covering each other. target=starter audits StarterGui in Edit mode; target=player audits the PlayerGui during a play test. root narrows it to one ScreenGui or frame path. Run it after building or changing any UI, fix everything it reports, run it again until clean, then screen_capture.",
+     "inputSchema": {"type": "object", "properties": {
+         "target": {"type": "string", "enum": ["starter", "player"], "description": "starter = StarterGui (Edit), player = PlayerGui (during play)"},
+         "root": {"type": "string", "description": "Optional path, e.g. StarterGui.ShopGui or StarterGui.ShopGui.Window"},
+         "studio_id": {"type": "string"}},
+      "required": []}},
     {"name": "ms_roblox_script_audit", "description": "Read the real Luau source of one or more scripts in the live place and audit it for the mistakes that actually break Roblox games: server/client boundary violations, unguarded RemoteEvent handlers, deprecated APIs, unbounded loops or waits, missing task.wait in loops, and unsanitized player input. Returns findings tied to the exact script and line where the tool can see them. Read-only.",
      "inputSchema": {"type": "object", "properties": {
          "paths": {"type": "array", "items": {"type": "string"}, "description": "Script instance paths to audit, e.g. ServerScriptService.GameLoop"},
@@ -2532,7 +2538,7 @@ MANDATORY_SKILL_TRIGGERS = {
     "check-props": _props_requested,
     "check-clean-ui": ("ui", "gui", "hud", "menu", "screen", "button", "shop", "store", "interface", "inventory", "backpack", "hotbar", "popup", "pop-up", "dialog", "dialogue", "leaderboard", "scoreboard", "health bar", "stamina bar", "progress bar", "bar", "minimap", "settings", "options", "codes", "redeem", "daily reward", "quest log", "tooltip", "notification", "toast", "loading screen", "title screen", "main menu", "pause", "crosshair", "timer", "counter", "label", "textbox", "slider", "toggle", "checkbox", "dropdown", "tab", "panel", "frame", "window", "overlay", "cursor", "icon", "billboard", "surface gui", "rebirth screen", "skip button", "claim", "studded", "studs", "lego", "skeuomorphic", "steampunk", "neumorphism", "neubrutalism", "claymorphism", "glassmorphism", "gacha", "halftone", "sticker", "blueprint", "y2k", "bento", "ui style", "ui theme", "viewport", "viewportframe", "3d icon", "3d model in ui", "item preview", "pet card", "brainrot"),
     "scripting-power": ("optimize", "optimise", "optimized", "optimization", "performance", "faster", "slow", "lag", "laggy", "fps", "memory", "leak", "leaks", "profiler", "benchmark", "efficient", "refactor", "framework", "architecture", "modulescript", "oop", "metatable", "typed", "async", "promise", "promises", "coroutine", "parallel", "actor", "actors", "multithread", "signal", "signals", "cleanup", "pooling", "debounce", "cooldown", "remote", "remotes", "remoteevent", "remotefunction", "bandwidth", "networking", "buffer", "buffers", "exploit", "exploits", "exploiter", "exploiters", "cheat", "cheats", "cheater", "cheaters", "anticheat", "anti-cheat", "secure", "security", "validate", "validation", "datastore", "datastores", "profilestore", "profileservice", "session lock", "receipt", "memorystore", "messagingservice", "raycast", "raycasts", "hitbox", "hitboxes", "collision group", "collision groups", "network ownership", "streamingenabled", "rojo", "wally", "selene", "stylua", "luau-lsp", "github", "jest", "testez", "unit test", "unit tests", "roblox-ts", "linter", "lint", "debugging", "breakpoint", "breakpoints", "tween", "tweens", "renderstepped", "heartbeat", "runservice", "contextactionservice", "userinputservice", "keybind", "keybinds", "strict mode", "table.create", "collectionservice", "best practice", "best practices", "clean code", "professional code", "pro code", "open cloud", "opencloud", "httpservice", "http request", "input action", "gamepad", "controller support", "constraint", "physics"),
-    "game-systems": ("simulator", "tycoon", "clicker", "idle", "obby", "obstacle course", "coin", "collect", "collectible", "currency", "cash", "money", "gold", "gem", "points", "score", "xp", "experience", "level up", "leveling", "rebirth", "prestige", "egg", "hatch", "pet", "quest", "mission", "reward", "daily", "streak", "shop", "store", "buy", "sell", "upgrade", "unlock", "multiplier", "boost", "gamepass", "game pass", "developer product", "robux", "leaderboard", "economy", "inventory", "crafting", "mining", "farming", "fishing", "harvest", "wave", "round", "lobby", "match", "team", "checkpoint", "stage", "race", "horror", "survival", "battle royale", "minigame", "mini game", "game mode", "stud", "progression", "save data", "datastore", "subscription", "subscriptions", "teleport", "teleporting", "matchmaking", "analytics", "live ops", "liveops", "daily reward", "daily rewards", "trading", "trade", "leaderboard data", "badge", "badges", "monetization", "monetisation"),
+    "game-systems": ("simulator", "tycoon", "clicker", "idle", "obby", "obstacle course", "coin", "collect", "collectible", "currency", "cash", "money", "gold", "gem", "points", "score", "xp", "experience", "level up", "leveling", "rebirth", "prestige", "egg", "hatch", "pet", "quest", "mission", "reward", "daily", "streak", "shop", "store", "buy", "sell", "upgrade", "unlock", "multiplier", "boost", "gamepass", "game pass", "developer product", "robux", "leaderboard", "economy", "inventory", "crafting", "mining", "farming", "fishing", "harvest", "wave", "round", "lobby", "match", "team", "checkpoint", "stage", "race", "horror", "survival", "battle royale", "minigame", "mini game", "game mode", "stud", "progression", "save data", "datastore", "subscription", "subscriptions", "teleport", "teleporting", "matchmaking", "analytics", "live ops", "liveops", "daily reward", "daily rewards", "trading", "trade", "leaderboard data", "badge", "badges", "monetization", "monetisation", "cutscene", "case opening", "egg hatch", "dice roll", "intro sequence"),
     "npc-pathfinding": ("npc", "enemy", "enemies", "monster", "zombie", "boss", "mob", "creature", "animal", "follower", "guard", "villager", "shopkeeper", "vendor", "patrol", "chase", "follow", "pathfind", "pathfinding", "navigate", "bot", "drone", "wander", "flee", "hunter", "killer", "ghost", "spider", "dog", "cat", "bear", "skeleton", "wolf", "dragon", "alien", "horror", "pet", "companion", "minion"),
     "vfx-assets": ("vfx", "beam", "trail", "shockwave", "slash", "aura", "portal", "teleport", "muzzle", "tracer", "impact frame", "camera shake", "screen shake", "post processing", "post-processing", "colorcorrection", "color correction", "depth of field", "atmosphere", "cinematic", "mood", "sunset", "sunrise", "night", "moody", "emitter", "emitters", "hit effect", "pickup effect", "level up", "lightning bolt", "effect", "particle", "light", "lighting", "glow", "neon", "fire", "smoke", "explosion", "magic", "spell", "spark", "trail", "beam", "aura", "shockwave", "fog", "atmosphere", "bloom", "blur", "shadow", "rain", "snow", "lightning", "toolbox", "asset", "free model", "creator store", "jumpscare", "jump scare", "scare", "flicker", "flashlight", "skybox", "sky", "horror", "dust", "confetti", "sparkle", "burst", "impact", "hit effect", "audio", "sound", "music", "sfx", "sound effect", "acoustic", "reverb"),
 }
@@ -2973,6 +2979,27 @@ def _roblox_build_verifier(args, manager):
     }, indent=2), "images": []}
 
 
+def _roblox_ui_audit(args, manager):
+    import ui_audit
+    if _roblox_catalogue(manager) is None:
+        return _roblox_unavailable("UI auditing", manager)
+    target = "player" if str(args.get("target") or "starter").lower() == "player" else "starter"
+    call = {"code": ui_audit.build_code(target, args.get("root") or ""), "datamodel_type": "Client" if target == "player" else "Edit"}
+    sid = str(args.get("studio_id") or "").strip()
+    if not sid:
+        sid, _reason = _facade_roblox_studio_id(args, manager)
+    if sid:
+        call["studio_id"] = sid
+    try:
+        r = manager.call_on_server("roblox", "execute_luau", call, 60)
+    except Exception as e:
+        return {"text": json.dumps({"ok": False, "error": f"Studio did not run the audit: {e}"}), "images": []}
+    if not isinstance(r, dict) or r.get("ok") is False:
+        err = (r or {}).get("error") if isinstance(r, dict) else None
+        return {"text": json.dumps({"ok": False, "error": f"Studio did not run the audit: {err or 'no answer'}. If several Studios are open pass studio_id; for target=player start a play test first."}), "images": []}
+    return {"text": json.dumps(ui_audit.summarize(ui_audit.parse(r.get("text"))), indent=1), "images": []}
+
+
 def _roblox_script_audit(args, manager):
     paths = [str(p).strip() for p in (args.get("paths") or []) if str(p).strip()]
     scope = str(args.get("scope") or "").strip()
@@ -3025,6 +3052,18 @@ def _roblox_script_audit(args, manager):
                                  "evidence": f"{hits} total occurrences", "fix": fix or None})
         for sev, ln, meaning, evidence, fix in _script_source_checks(src):
             findings.append({"severity": sev, "line": ln, "rule": meaning, "evidence": evidence, "fix": fix})
+        try:
+            import luau_lint, roblox_docs
+            ctx = "server" if re.search(r"ServerScriptService|ServerStorage", p) else ("client" if re.search(r"StarterPlayer|StarterGui|StarterPack|PlayerGui|StarterCharacter|ReplicatedFirst", p) else "auto")
+            src_lines = src.splitlines()
+            numbered = sum(1 for ln in src_lines if re.match(r"^\s*\d+\s*[|:]", ln))
+            plain = "\n".join(re.sub(r"^\s*\d+\s*[|:] ?", "", ln, count=1) for ln in src_lines) if src_lines and numbered >= 0.8 * len(src_lines) else src
+            for f in luau_lint.analyze(plain, roblox_docs.known_globals(), context=ctx, want=("syntax", "scope", "context")):
+                if f["severity"] == "info": continue
+                ev = src_lines[f["line"] - 1].strip()[:200] if f["line"] and f["line"] <= len(src_lines) else ""
+                findings.append({"severity": "high" if f["severity"] == "error" else "warn", "line": f["line"], "rule": f["message"], "evidence": ev, "fix": None})
+        except Exception:
+            pass
         order = {"high": 0, "warn": 1, "info": 2}
         findings.sort(key=lambda f: order.get(f["severity"], 3))
         audited.append({
@@ -4270,6 +4309,17 @@ def _native_facade_call(name, args, manager):
 
 def _builtin_call(name, arguments, manager):
     args = arguments or {}
+    if name=='ms_roblox_omni' and args.get('action')=='install':
+        import omni_gui
+        def install_omni(bundle, params):
+            target={'code':bundle['code'],'mode':'Edit'}
+            if params.get('studio_id'):target['studio_id']=params['studio_id']
+            receipt=_native_facade_call('ms_roblox_run_luau',target,manager)
+            if receipt is None:raise RuntimeError('Roblox Luau execution is not available; no modules were installed.')
+            # Return the real facade receipt. Never convert a server/tool error
+            # into a successful install or a screenshot/playtest claim.
+            return receipt
+        return omni_gui.call(args,install=install_omni)
     if name=='ms_blender_workspace':
         if args.get('action')=='handoff' and not manager.engine_enabled(args.get('engine')):raise RuntimeError('The target game engine is disabled in Multi-Script settings.')
         return BLENDER_WORKSPACE.tool(args)
@@ -4723,6 +4773,8 @@ def _builtin_call(name, arguments, manager):
         return {"text": json.dumps({"objective": args.get("objective"), "verdict": verdict, "scores": scores, "unscored": unscored, "priorityImprovements": priorities, "evidenceCount": len(evidence), "notes": args.get("notes") or []}, indent=2), "images": []}
     if name == "ms_roblox_build_verifier":
         return _roblox_build_verifier(args, manager)
+    if name == "ms_roblox_ui_audit":
+        return _roblox_ui_audit(args, manager)
     if name == "ms_roblox_script_audit":
         return _roblox_script_audit(args, manager)
     if name == "ms_roblox_playtest_director":
@@ -4994,7 +5046,7 @@ def _builtin_call(name, arguments, manager):
         contact_svg=f'<svg xmlns="http://www.w3.org/2000/svg" width="{cw}" height="{ch}" viewBox="0 0 {cw} {ch}"><rect width="100%" height="100%" fill="{bg}"/>{"".join(contact)}</svg>'
         contact_path=os.path.join(out_dir,base+"-contact-sheet.svg")
         with open(contact_path,"w",encoding="utf-8") as f:f.write(contact_svg)
-        manifest={"name":safe,"version":"6.49.9","style":style,"size":size,"colors":{"primary":fg,"accent":accent,"background":bg},"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"usage":{"individual":"Use individual SVGs as editable source assets; convert/upload them through the target engine's supported image pipeline when required.","sprite":"Sprite sheet uses symbol ids; inspect target SVG support before relying on external references.","roblox":"Roblox ImageLabels require a supported uploaded image asset ID; this local SVG pack does not automatically upload or assign IDs."}}
+        manifest={"name":safe,"version":"6.50.0","style":style,"size":size,"colors":{"primary":fg,"accent":accent,"background":bg},"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"usage":{"individual":"Use individual SVGs as editable source assets; convert/upload them through the target engine's supported image pipeline when required.","sprite":"Sprite sheet uses symbol ids; inspect target SVG support before relying on external references.","roblox":"Roblox ImageLabels require a supported uploaded image asset ID; this local SVG pack does not automatically upload or assign IDs."}}
         manifest_path=os.path.join(out_dir,base+"-manifest.json")
         with open(manifest_path,"w",encoding="utf-8") as f:json.dump(manifest,f,indent=2,ensure_ascii=False)
         return {"text":json.dumps({"created":True,"name":safe,"style":style,"size":size,"iconCount":len(files),"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"manifest":manifest_path,"colors":manifest["colors"],"importNotes":manifest["usage"]},indent=2),"images":[]}

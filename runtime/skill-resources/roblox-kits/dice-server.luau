@@ -1,0 +1,4 @@
+-- dice roll server
+-- Source: Brickwire (MIT). Adapt to the project; {{KEY}} placeholders are option values to replace. Not tested in real Studio.
+-- Brickwire dice roll in the style of Anime Dice (server). The ROLL button asks, the server rolls (odds = "1 in N"),
+-- applies a random mutation, grants, then the client shows the ticker above the head. Player attribute Luck boosts rares.

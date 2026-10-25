@@ -24,8 +24,8 @@ The tutorial includes live bridge/editor/composer status, a setup check, a copya
 
 The catalog remains at the existing 230 direct tools. The two redundant MCP prompt wrappers proposed in 6.19.0 were removed; connected servers remain authoritative through their live advertised native tools, schemas, catalogs, routing, and resources.
 
-## PlazCode-derived provider improvement, without the IDE
+## upstream GPL source-derived provider improvement, without the IDE
 
-Multi-Script now supports Claude directly on claude.ai and claude.com. The provider adapter was adapted from PlazCode 1.18.74’s GPL-3.0 implementation, then renamed, generalized from Roblox-only wording to Multi-Script’s multi-engine bridge, and wired into the same enhancer, effort, pacing, recovery, verification, trust, menu, and tool pipeline as every other provider.
+Multi-Script now supports Claude directly on claude.ai and claude.com. The provider adapter was adapted from upstream GPL source 1.18.74’s GPL-3.0 implementation, then renamed, generalized from Roblox-only wording to Multi-Script’s multi-engine bridge, and wired into the same enhancer, effort, pacing, recovery, verification, trust, menu, and tool pipeline as every other provider.
 
-No PlazCode IDE, desktop executable, AgentScript workspace runtime, branding, or desktop UI is included. Attribution and licensing are recorded in `docs/THIRD_PARTY_NOTICES.md`.
+No upstream GPL source IDE, desktop executable, AgentScript workspace runtime, branding, or desktop UI is included. Attribution and licensing are recorded in `docs/THIRD_PARTY_NOTICES.md`.

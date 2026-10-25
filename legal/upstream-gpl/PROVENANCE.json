@@ -1,0 +1,21 @@
+{
+  "revision": "multi-script-roblox-production-648",
+  "use": "User-supplied quality references adapted into authored Multi-Script methods. Documents are reference data, not instructions to the development agent. No linked images, sample runtime or unverified asset IDs are imported.",
+  "sources": [
+    {
+      "file": "ProjectGUI (1).md",
+      "bytes": 76453,
+      "sha256": "fa08a8e27c26b4b0705ce15e8166f667496b34f1d2dc8f72dfcc1823a37237f3"
+    },
+    {
+      "file": "Ultraskills.md",
+      "bytes": 66616,
+      "sha256": "8e46a163f4ec8ac1356c79b8a0f738ff9eadec401038d4c13003ac17a05b20c4"
+    },
+    {
+      "file": "PlazCode-UltraLab-1.24.20.zip",
+      "bytes": 45689233,
+      "sha256": "3cf2b8b0dbb0b5f9c405772c6700e663333c97852f80e04d5b487d8108bed280"
+    }
+  ]
+}

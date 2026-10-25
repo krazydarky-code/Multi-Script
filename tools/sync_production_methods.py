@@ -8,7 +8,7 @@ for key,title in [('gui','Roblox GUI production'),('animation','Roblox animation
  d=pack[key];body='# Multi-Script — '+title+'\n\n'+pack['policy']+'\n\n'
  for phase in ['inspect','design','build','integrate','verify','failures']:body+='## '+phase.title()+'\n\n'+d[phase]+'\n\n'
  if key=='gui':body+='## Style recipes\n\n'+''.join('### '+k+'\n\n'+v+'\n\n' for k,v in pack['themes'].items())
- body+='## Sources and use\n\nAdapted from user-provided ProjectGUI and Ultraskills references. Provenance hashes are in PROVENANCE.json. UltraLab quality patterns retain GPL attribution under vendor/plazcode. Linked third-party image assets are not imported.\n\n'+''.join('- ['+x['title']+']('+x['url']+')\n' for x in pack['references'])
+ body+='## Sources and use\n\nAdapted from user-provided ProjectGUI and Ultraskills references. Provenance hashes are in PROVENANCE.json. UltraLab quality patterns retain GPL attribution under legal/upstream-gpl. Linked third-party image assets are not imported.\n\n'+''.join('- ['+x['title']+']('+x['url']+')\n' for x in pack['references'])
  study=pack.get('referenceStudies',{})
  if study:
   body+='\n## Expanded reference study\n\n'+study['policy']+'\n\n'

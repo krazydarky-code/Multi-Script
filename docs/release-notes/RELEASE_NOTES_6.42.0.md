@@ -10,6 +10,6 @@ Skills gain project/engine activation, enable/disable controls, candidate/user-v
 
 Code Flight is fully rebuilt in its own Workspace tab with the actual Multi-Script icon, layered Terminal/Orbit/Dawn worlds, Arcade/Practice modes, precision scoring and keyboard/touch controls. Leaving the page pauses it. New idea is a smaller icon. Six additional themes include three live scenes shared by the menu and chatbar.
 
-PlazCode patterns were adapted to Multi-Script's runtime and transport; GPL attribution is retained. See [the workflow guide](../WORKSPACE_REVAMP_6.42.md) and [verification report](../QA_6.42.md). Provider authentication, account/model access and native editor coverage retain the previously documented limits.
+upstream GPL source patterns were adapted to Multi-Script's runtime and transport; GPL attribution is retained. See [the workflow guide](../WORKSPACE_REVAMP_6.42.md) and [verification report](../QA_6.42.md). Provider authentication, account/model access and native editor coverage retain the previously documented limits.
 
 Extract one complete edition, rerun Setup from its permanent folder, reload the extension/provider tabs and restart the bridge. Use a matching 6.42.0 extension/runtime pair.

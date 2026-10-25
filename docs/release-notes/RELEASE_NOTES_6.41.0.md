@@ -8,4 +8,4 @@ Selected skill results carry bounded execution/verification methods. Read-only d
 
 153 regression suites returned success, including all 16 provider browser fixtures, exact sends, 458 settings controls, three real-local-runtime exchanges, Lua/Luau checks and the full settings/theme sweep. A separate unauthenticated live probe records which providers were reachable. Authenticated/paid-model coverage and native editor/environment skips are explicit in [the verification report](../PROVIDER_QA_6.41.md).
 
-Both full-source editions include a reproducible test runner. The shared Unix helper now has LF line endings. PlazCode GPL provenance is preserved. Use a matching 6.41.0 extension/runtime pair and rerun Setup from the new permanent extraction folder.
+Both full-source editions include a reproducible test runner. The shared Unix helper now has LF line endings. upstream GPL source GPL provenance is preserved. Use a matching 6.41.0 extension/runtime pair and rerun Setup from the new permanent extraction folder.

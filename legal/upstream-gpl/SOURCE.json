@@ -1,0 +1,10 @@
+{
+  "originName": "PlazCode",
+  "licenses": [
+    "GPL-3.0-or-later"
+  ],
+  "notice": "NOTICE.md",
+  "originalNotice": "1.24.20-BRANDING-NOTICE.txt",
+  "retainedOriginalNotices": "ORIGINAL_NOTICES.md",
+  "productPolicy": "Required original notices are preserved here. This is a modified Multi-Script product, with no upstream product identity, installer, credentials, updater, IDE or affiliation."
+}

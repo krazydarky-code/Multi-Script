@@ -1,0 +1,4 @@
+-- case opening server
+-- Source: Brickwire (MIT). Adapt to the project; {{KEY}} placeholders are option values to replace. Not tested in real Studio.
+-- Brickwire case opening (server). The reward is rolled HERE (Cutscene.roll); the client only plays the animation.
+-- Edit POOL (chance = drop weight), PRICE / CURRENCY. Player attribute Luck (number) boosts rare drops.

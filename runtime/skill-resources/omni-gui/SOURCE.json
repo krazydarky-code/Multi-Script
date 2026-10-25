@@ -1,0 +1,15 @@
+{
+  "originalArchive": "omni-gui.zip",
+  "originalSha256": "16b4795980202c811314057e7bff2c05937e1d922a9fa6c23363341c02b48954",
+  "referenceCount": 522,
+  "catalogCompressedBytes": 160498,
+  "excludedRuntime": [
+    "nested duplicate backup ZIP",
+    "21 MB screenshot PDF",
+    "duplicate CSV/Luau catalogs",
+    "hardcoded-success verifier",
+    "empty component/template directories",
+    "unfinished global controllers and unsolicited combat/remotes"
+  ],
+  "keptOutsideRelease": "Original archives and PDF remain unchanged in user downloads and work/incoming-omni."
+}

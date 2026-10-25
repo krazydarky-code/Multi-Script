@@ -8,6 +8,185 @@ Persist update-host Retry-After/reset cooldowns across restarts. Inaccessible fe
 
 # Multi-Script 6.49.9 — ChatGPT native composer transport
 
+## Merged from 6.48.2 Dev - skills overhaul
+
+- Forge ui_kit is quick by default: at most 5 images per call (priority pieces first). Pass quick=false for the whole pack. Uploads run one batch after another, so fewer images means a shorter wait.
+
+- Fix: Forge backdrops were uploaded but never written into Studio. They are now stored as StringValues in ReplicatedStorage.ForgeBackdrops (name = picture name, value = rbxassetid).
+
+- Ultra start routine is shorter: one shallow Studio survey (services and StarterGui) instead of a deep survey before the first build. Deeper reads happen only when the task needs them. Safety rules (docs checks, nothing done until checked) are unchanged.
+
+- Forge ui_kit now draws the small shop pack by default instead of the full set, so it finishes much faster. Pass pack=full for everything.
+
+- Fix: the extension now always advertises ms_forge when its drawing module is loaded, so an older bridge no longer makes the chat reject it as an unknown command.
+
+- Fix: ms_forge was hidden from ms_find_tool when the search used engine=roblox (it had no Roblox engine tag). It is now tagged roblox.
+- Missing Forge or docs modules now print a reason to the log instead of silently disappearing.
+
+- New `ms_roblox_ui_audit` tool: measures the real GUI in Studio (text fit, contrast, tap size, off-screen, empty lists, unloaded images, overlapping buttons). 281 tools.
+- Skills answer now lists the built-in tools: offline docs, Forge, automatic code checker, UI inspector, expert templates and kits.
+- Clean UI and Code quality skills tell the AI to run the UI inspector and fix code-check findings; expert templates linked.
+
+**Forge in one call, upload packs, clean edges and new pieces** - asking for game art now ends with it installed and working.
+- One `ms_forge` call (ui_kit, vfx or backdrop) now draws the art, stores it, uploads it through Studio's upload_image (in batches of 20), writes `ReplicatedStorage.ForgeKit` or `ReplicatedStorage.ForgeVFX` (ScriptEditorService, falling back to Source), and builds a demo to screen_capture: `StarterGui.ForgeDemo` (a shop window, currency pills, buttons and an XP bar) or `workspace.ForgeVFX_Showroom` (every looping effect running). install=false only draws; demo=false skips the demo. Without Studio it draws and explains the manual route. The pipeline lives in `MSForge.run` in forge.js; main.js only supplies the bridge and Studio calls.
+- Upload packs: hud, shop, inventory, settings, leaderboard, dialogue, rewards, essentials (about 20 to 60 images) or full (about 120).
+- Clean edges: Forge now writes its own PNGs and bleeds edge colour into the transparent border at alpha 1, which reduces the dark fringes Roblox can show on scaled transparent images (the ImageLabel reference notes transparent pixels turn black on upload).
+- New art: light rays and a soft glow. New ForgeKit pieces: `Kit.reward` (spinning rays pop-up with ribbon title and claim button), `Kit.billboard` (name tag and health bar over a character), `Kit.loading` (loading screen over a Forge backdrop with a progress bar); `Kit.screen` accepts a parent so it works in Studio edit mode; `Kit.modal` can open instantly.
+- New `docs/FORGE.md` explains in plain words how to use it.
+- Checked: in Chromium, a full run of `MSForge.run` against the real bridge code with a stand-in Studio (fake upload ids) worked for a UI pack, a VFX set and a backdrop; all Luau sent to Studio (module install, demo, showroom) passes the docs check with no findings and a block-balance check. Not checked: a real Studio upload and execute_luau, the extension live in a chat, and the test suite.
+
+**Forge rebuilt inside the extension: no Python add-ons, about twice as much art, and a much richer ForgeKit** - Forge no longer needs numpy.
+- All drawing now happens in the browser extension with the built-in Canvas (`extension/core/forge.js`, loaded with the other content scripts). The bridge side (`runtime/forge_assets.py`, `runtime/forge_luau.py`) uses only the Python standard library: it stores the PNGs, serves them on 127.0.0.1 for Studio's upload_image, reads a local reference picture (PNG, JPG or WEBP) and writes the Luau. Setup no longer installs numpy.
+- UI kits grew from about 60 to about 120 pieces: new card, ribbon banner, xp, hp and mana bars, price tag, checkbox, radio, slider, input box, scrollbar, speech bubble, toast, gold/silver/bronze leaderboard rows, corner ribbon, gamepad selection ring, arrow and tick glyphs, minus and help buttons, and 30 item icons (adds sword, shield, potion, trophy, crown, key, chest, egg, paw, pickaxe, gear, cart, bag, scroll, clock, skull, flame, drop, leaf, ticket, rebirth, speed, ghost).
+- VFX grew to 27 textures (adds twinkle, cloud, crescent, rune ring, bubble, snowflake, leaf, droplet, swirl, hit star, feather, confetti, heart glow, wisp), 6 strips (adds sharp trail, chain, wave) and 8 flipbooks (adds portal swirl, splash, electric burst), with 27 presets (adds hit star, impact burst, ambient smoke, portal, electric, splash, level up, confetti, snow, leaves, bubbles, ghost wisp, hearts). Backdrops add stripes, grid and sunset.
+- ForgeKit adds Kit.screen (auto-scaling ScreenGui in device safe insets), Kit.modal (pop open and close), Kit.grid and Kit.list (scrolling, canvas grows), Kit.card (complete shop card), Kit.bar, Kit.priceTag, Kit.checkbox, Kit.radio, Kit.slider (mouse and touch drag), Kit.input, Kit.tabs (pages), Kit.bubble, Kit.leaderboardRow, Kit.toast (stacking), Kit.tooltip, Kit.divider, icons inside buttons, and gamepad selection on every control. ForgeVFX adds pooled bursts, VFX.combo, VFX.stop, size scaling and Wrap-mode beams. bind also returns a ready usage example.
+- Large sets are sent to the bridge in batches under 6 MB.
+- Checked: every set was drawn in Chromium and looked at; a full run (draw in the browser, store through the bridge, fetch from the localhost address, bind) worked for a UI kit, a VFX set and a backdrop; both Luau modules and their usage examples pass the docs check with no findings and a block-balance check; every API they use was confirmed in the offline reference; the bridge loads and dispatches the tool. Not checked: the extension running live in a chat, a real Studio upload_image round trip, the Luau running in Studio, and the test suite.
+
+**Forge: game art that turns into working UI and effects** - inspired by ForgeGUI (AI game-art sets with a consistent style and a Studio import), but local, free, and wired to real Roblox objects instead of stopping at pictures.
+- New tool `ms_forge` draws real transparent PNGs on this computer with anti-aliased shape rendering (needs numpy; Setup now installs it when it can).
+- `ui_kit`: a complete, matching set in one call - buttons in 4 states (normal, hover, pressed, disabled) in 4 colours, round close/back/plus/next/confirm buttons, panel, header, inner panel, slots for 7 rarities plus selected, tabs, progress bar, currency pill, toggle, badge, tooltip, and coin, gem, star, heart, bolt, lock and gift icons. 12 styles (simulator, cartoon, glossy, candy, anime, glass, neon, fantasy, scifi, minimal, horror, pixel), your own colours, small tweaks, or `reference_image` to copy a screenshot's palette. Every piece carries its 9-slice centre, and art is drawn at 2x.
+- `vfx`: 13 particle textures, 3 trail/beam strips, and 5 flipbooks at 1024x1024 (the size Roblox requires), all white on transparent so Color tints them, with 14 tuned ParticleEmitter presets.
+- `backdrop`: 16:9 backgrounds (burst, clouds, space, dungeon, sparkles) at 1920x1080 for thumbnails or 1024x576 for in-game screens.
+- The files are served on 127.0.0.1 so Studio's `upload_image` can upload them; `bind` then returns a ForgeKit ModuleScript (panel, button with real hover/pressed images, icon buttons, slots, progress, pill, toggle, tabs, badge, icons; all 9-sliced) or a ForgeVFX ModuleScript (burst, attach, trail, beam). Both modules pass the docs `check` and every property and enum they use was confirmed in the offline API reference.
+- check-clean-ui, vfx-assets, the always-on standards and Ultra (GUI and VFX build steps, start-up) now say when to use Forge, to look at the preview first, to upload through Studio and never type ids, and that Forge art does not relax the contrast, layout, input or capture rules.
+- Tool count is now 280 (tests and manifest updated). Startup standards are about 31.9k tokens. Per-task Ultra text unchanged (8970 characters on the inventory test request).
+- Checked: every output was rendered and looked at here; the bridge loads the tool and dispatches it; the Luau modules pass the docs check and a block-balance check. Not checked: running the Luau in Studio, an actual upload_image round trip, and the test suite.
+
+**Official Roblox and Luau docs, offline (2,261 pages)** - the AI can now look up the real answer instead of guessing.
+- New tool `ms_roblox_docs`, built from the open-source Roblox Creator Docs (snapshot of 24 Oct 2026, Studio 0.744) and the Luau docs: 992 guides, the full engine API (628 classes, 518 enums, 49 datatypes, 11 libraries, globals) and 61 Luau pages. About 3.5 MB, works with no internet. Licences (CC-BY-4.0 text, MIT code) and a notice are included.
+- `search` ranks pages by title, headings and text; `read` opens a page or jumps to a section or member; `api` confirms a name exists, its exact signature, dot or colon, where it is inherited from, and the replacement if it is deprecated; `check` scans a script for deprecated calls (wait, spawn, Humanoid:LoadAnimation, FindPartOnRay, BodyVelocity and 680 more), unknown classes, services or enum items, wrong-case members and dot/colon mistakes. It found no false alarms in the 36 Brickwire kits.
+- `tools/build_roblox_docs.py` rebuilds the docs from fresh clones of github.com/Roblox/creator-docs and github.com/luau-lang/site.
+- All 8 skills, the always-on standards and Ultra's start-up now tell the AI to confirm uncertain APIs and to run `check` on every script before writing it to Studio. Ultra counts a docs lookup as research.
+- The docs check found and fixed real mistakes in the skills: `Lighting.Technology` is deprecated (now LightingStyle and PrioritizeLightingQuality), `GuiService:IsTenFootInterface` is deprecated (now ViewportDisplaySize), and the UIShadow advice now uses its documented properties. It also found `Enum.Font.GothamSemibold` in the companion plugin, which the docs no longer list; it now uses GothamMedium. Reinstall the plugin to get that change.
+- The tool count is now 279; the two tests that pin the count and the product manifest were updated to match.
+- The startup standards block is about 31.2k tokens. Per-task Ultra text is unchanged (8970 characters on the inventory test request).
+- Not tested in Studio or a browser, and the test suite was not run. The tool was called directly through the bridge's own dispatch for search, read, api and check.
+
+**Final integration pass** - two wiring fixes found by reading the code against the existing tests.
+- The Ultra text had lost the "ms_skill_reference links" wording for GUI and animation that an existing test expects; it is back (per-task text 8970 characters, under the 9000 bound).
+- The reference reader (ms_skill_reference) is now treated as guidance, like the manuals, so reading the ready-made kits does not count as a write or an unexplained call. game-systems now lists the kits as a resource, like the other reference packs.
+- Static checks only: all Python compiles, all JavaScript passes syntax checks, all JSON parses, every update hash matches. The test suite and Studio were not run.
+
+**Brickwire's best parts, added and credited** - Brickwire 3.0 (MIT licence) has tested ready-made Luau systems and strict "done means checked" rules; Multi-Script now uses both.
+- New ready-made systems library: 36 Brickwire scripts (obby stages, kill bricks, pads, teleporters, coins, rounds, saved stats, daily reward, shop, inventory, HUD, menus, toasts, day and night, NPC dialog, VFX presets, camera fly-through, and the cutscene module with case, egg, dice, event and story scenes). The AI reads them on demand with the reference tool (skill game-systems), so the startup text does not carry them. The licence file is included.
+- game-systems gained two steps: use the closest kit and upgrade it to the existing rules (UpdateAsync with session locking, idempotent ProcessReceipt, validated remotes), and cutscene rules (server decides the result, camera and controls always restored, Skip from the first frame, longer pauses for rarer results). New trigger words: cutscene, case opening, egg hatch, dice roll, intro sequence.
+- code-quality gained "Done means checked": nothing is done until a check passed after the last change, tool results are never imitated, edits are small and reversible with a ChangeHistory waypoint.
+- Not copied: Brickwire's bridge, extension, panel and 50 generic skill templates (they are boilerplate with little content).
+- Ultra: its start-up block now points to the kit index, the inspect-to-failures order and the done-means-checked rule; two new Ultra methods (cutscene, and economy now points to the kits). The per-task text stays at 8922 characters for the inventory test request.
+- The startup standards block is now about 30.3k tokens (was 29.4k).
+- Kits were only run by Brickwire in a Luau VM with a stubbed Roblox API; nothing here was tested in Studio, and the test suite was not run.
+
+**Ultra manuals now give a step-by-step Roblox method** - each of the 12 manuals returns a six-step plan (inspect, design, build, integrate, verify, failures) written for Roblox Studio and its tools, and Ultra's start-up block now begins with a fixed survey routine.
+- The routine: list Studios, read state, one game-tree survey, note existing styles, currency/data code, remotes, Rojo and which tools exist, reuse what is there, keep a short notes ledger.
+- Per-task Ultra text is unchanged in size (8922 chars for the inventory test request, under the 9000 bound).
+- Not tested in Studio or a browser; the test suite was not run.
+
+**Ultra now starts properly when you select it** - selecting Ultra (or opening a session with Ultra already on) now sends a one-time start-up block with the first task.
+- It tells the AI to load the full skills and read the relevant manuals, and carries all 12 manuals' Roblox rules as standing rules for the session, kept silent. It is sent once per selection, only for Roblox work, and only at the Ultra level.
+- Switching to a lower level clears it; selecting Ultra again sends it again.
+- Not tested in Studio or in a live browser session; the existing test suite was not run.
+
+**Ultra: Roblox rules in every manual, per-manual doc links, new methods and a plain finish** - only the GUI and animation manuals had Roblox-specific content, every manual showed the same four doc links, and Ultra told the AI to finish with a long changes-and-verification report.
+- All 12 manuals now return their own Roblox standards (emoji-free GUI, finished measured screens, props in three passes, economy and server authority, networking limits, performance targets, audio, input, QA) and their own doc links. The modeling manual now says Parts-only requests stay Parts-only.
+- The per-task Ultra text now carries the relevant manual's Roblox rules instead of two generic sentences, kept inside the existing size limit.
+- Two new methods: props (shape first, three passes, one short finish line) and economy (sources and sinks, server-owned rolls, one ProcessReceipt). The interface and assets methods gained the emoji, finished-screen, contrast and picture-checking rules.
+- Ultra now finishes with a short plain line, not a long report; failures, unchecked items and anything needing the user are still said in one sentence.
+- Other engines are unchanged. Not tested in Studio; the existing test suite was not run.
+
+**Pack integration: Roblox services, security, platform and tooling rules (from the supplied skills pack)** - the best of the 24-skill pack was folded into our skills in short form, with nothing copied whole.
+- **Game systems**: monetization (passes, subscriptions, refunds, paid random items and policy checks), teleports and places (untrusted teleport data, access control, handoff), live ops and analytics (configs, timed events, daily rewards), data extras (versioned saves, MemoryStore), combat hit validation.
+- **Code quality**: a severity-ordered review method and a compact deprecated-API map, plus text filtering and chat rules.
+- **Scripting power**: more security (prompts, click detectors, ownership), networking channel choices, physics, input and character rules, Open Cloud and HttpService, testing and toolchain, the Studio tool loop.
+- **NPCs**: pooling and scaling. **Effects**: audio and engine lighting facts. **Fix errors**: silent failures (animation, sound, remotes).
+- Added trigger words so purchases, teleports, audio, Rojo and testing requests pick the right skills.
+- The pack's facts were not all re-verified against the docs, and nothing was tested in Studio.
+
+**Check-Props: tighter and better (about 27 pages read in total)** - rewritten from about 30,000 to 13,000 characters with the duplicated check rows and repeated rules removed.
+- **Short finished reply**: the AI now just says the prop is finished and where it is, in one normal line, with no list of parts, techniques or checks.
+- **Look**: shape first, three passes, the zoom-out test, never a plain box, trim, a second material, wear, a value ladder, consistent grid and palette.
+- **Added from this round**: block out and walk it before detailing, hero and background triangle budgets, batching of identical meshes, Massless and collision settings, texture sizes, trim and modular-kit grid, ambient occlusion baked into the colour map, and a lighting check.
+- Kept: Luau helpers and orientation traps, union rules, scale minimums, recipes for common props and buildings.
+- YouTube pages are blocked to the tools used here and Discord is private, so neither was read. Sources were Roblox docs, DevForum threads, art guides and a few articles.
+- Not tested in Studio.
+
+**No emojis in GUIs, and deeper game-systems, NPC, error and prop rules (from about 55 more pages read)** - emojis in interface text render as empty boxes or the wrong font, so the AI now draws icons instead.
+- **No emojis in any GUI text** (always on): titles, buttons, tabs, prices and toasts use words; icons are real images, drawn shapes, small 3D models or BuilderIcons glyphs. Added to the final review and the asset checks.
+- **Game systems** (+24 rules): developer-product receipts (one handler, no double grants), safe saving with session locking, simulator costs and pacing, pets and luck (weighted rolls, luck done correctly, pity), trading and duplication, rounds and matchmaking, leaderboards, DataStore limits and error codes.
+- **NPCs and pathfinding** (+14 rules): real agent defaults and failure causes, costs, modifiers and links, smooth movement and stutter fixes, sight and hearing, state machines, horror director patterns.
+- **Fix errors** (+9 rules): common error messages and causes, remotes that do not fire, debugger use, data and purchase errors.
+- **Props** (+6 rules): triangle, texture and part budgets, materials and SurfaceAppearance values, silhouette and readability.
+- Not tested in Studio or on a live model. Numbers marked as tune are starting points.
+
+**Check-Clean-UI: finished, measured, reviewed screens (from about 80 more pages)** - a candy shop came out as a pink shell: an empty panel, two unreadable tabs, a Buy button with nothing to buy. Read about 80 pages (about 73 usable: Roblox UI and text docs, Fortnite and Roblox shop guidance, WCAG contrast, tab, empty-state and button-state guides, DevForum critiques, juice and shadow articles; 7 failed or were empty) plus 27 searches, and wrote five new sections:
+- **Complete screens and shops** (7 rules): never an empty panel; stress data (zero, one, many, long names, missing picture, cannot afford, owned, locked); shop anatomy, item cards with states, a Buy button tied to the selected item, tab rules (count, names that fit the shop, two cues for the selected tab, readable inactive tabs, 44 to 48 px), reach and close button.
+- **Contrast check** (5 rules): the real WCAG formula to run on every text and icon pair, targets (4.5:1, 3:1), testing both ends of gradients, same-hue failures (pink on pink), minimum text sizes.
+- **Text fitting** (5 rules): TextScaled pitfalls, fixed sizes with measured fit, truncate or wrap, fonts and outlines.
+- **Candy and sweets style** (8 rules): 60-30-10 palette with several accents, readable tabs, gloss and shine sweep, candy stripes, matching sweets art.
+- **Final review** (7 rules): completeness, readability, pictures, hierarchy and spacing, behaviour, honesty. A short version is now in the always-on core rules.
+- **Bridge fix**: the rule text sent with each request is now fitted to a cap by priority (the style you named, the review and contrast checks, then the rest) instead of dropping a skill's whole rule set to a pointer when over the cap. The cap is 44k characters in total (was 32k), with up to 32k for UI. Skipped sections are listed by name and `ms_get_skill` can now load just those sections (`sections`) or just what an objective needs (`objective`), instead of the whole skill.
+- Not tested in Studio, and the new rules were not tried on a live model. The contrast formula and thresholds are the standard WCAG ones; shop and tab numbers come from design guides, not Roblox limits.
+
+**Better pictures in UI: real Creator Store search and checking** - fixes UI that came out with the wrong or broken art (a faint clover, a currency button showing an empty box, item tiles with unrelated pictures, a name cut off at the tile edge).
+- The asset search tool (ms_roblox_asset_scout) was sending Studio the wrong argument names, so the asset type and result count were ignored. It now uses the real ones and can search up to four phrasings at once, with tags, facets, verified creators first (relaxed if that finds nothing), free assets by default, and it attaches the real thumbnails of the first results so the AI can look at them before choosing. It still never invents an id.
+- New "Finding and checking assets" section (12 rules): decide the subject and style, search with several phrasings, look at the thumbnails, reject mismatches, baked-in text and solid backgrounds, check the picture at its final size and load status, keep ids in one swappable table, fall back to shapes, Parts or the built-in icon font instead of a bad match, build prices as an icon plus a number (not a special character that can show as an empty box), and finish every UI with a screen capture to look for empty boxes, wrong pictures, clipped or misspelt text and low contrast. A short version of this is now in the always-on core rules.
+- Not tested in Studio. The thumbnail download (it fetches thumbnails from Roblox's public thumbnail service on your machine, and quietly skips any that fail) and the new search arguments were checked only against a fake Studio, not a live one.
+
+**Check-Clean-UI: 3D models inside UI + the studded shop look** - the AI can now build a 3D object from Parts (or take a Creator Store model) and show it in the UI with a ViewportFrame, like the 3D item and pet renders in studded simulator shops. Built from about 35 more pages (ViewportFrame, WorldModel, Model, Camera, Toolbox and InsertService docs, plus DevForum threads on fitting models to a viewport, spinning, hover, performance, character and accessory issues, and viewport freezes); 4 pages failed to load.
+- New "3D in UI" section (12 rules): when to use a viewport instead of an image, setup order, cleaning a clone (strip scripts, anchor, no collision), the camera-fit maths from bounding box, field of view and aspect ratio, framing angles for cards, fixed viewport lighting and its limits, spin and hover without per-item loops, known quirks, characters in a WorldModel, model sources, and a blocky-creature build recipe.
+- The 3D rules work in any style and any screen (main menu character, loot reveal, weapon inspector, dialogue portrait, hologram panel and more), with per-style advice (cartoon, modern, horror, sci-fi, fantasy, glass), not only for shops.
+- New "Studded shop screen" section (8 rules) that describes the screenshot you sent: studded blue title bar with a red close square, gradient offer rows, gradient item tiles with 3D renders, lime studded price buttons, text with thick black outlines. It describes the structure and colours, not any game's art.
+- Added trigger words (viewport, 3d icon, item preview, pet card and others).
+- Not tested in Studio. Camera-fit maths and sizes come from docs and forum threads; viewport performance limits and freezing fixes are community reports, not official numbers. Animations inside viewports are marked unreliable.
+
+**Check-Clean-UI: 16 more styles and 3 technique sections** - built from about 85 more pages read (Creator Hub UI docs for rich text, 9-slice, scrolling frames, proximity prompts and styling, DevForum threads on 3D buttons, hover and ripple effects, style transitions and glass UI, plus pack listings and design references). 13 more pages failed to load or had no usable content and were not used.
+- New style sections, sent only when the request names them: studded (Lego-brick look, stud rows, tiled stud texture, brick thickness), skeuomorphic, steampunk, comic, clay and candy, neumorphism (with an accessibility warning), neubrutalism, Y2K and retro OS, pixel, paper and sticker, blueprint and terminal, holographic, aurora, low-poly, dark mode and bento, anime and gacha. The cartoon look is still the default when no style is named.
+- New technique sections: shine sweep, 3D button, ripple, radial progress, prize wheel, radial menu, typewriter, count-up, frosted-glass options; drag and drop, tabs, text boxes, rich text tags, scrolling lists, 9-slice, custom proximity prompts; inventory grid and rarity rules.
+- Not tested in Studio. Stud textures are never invented: they must come from the user or a confirmed asset. Some figures (palettes, sizes, timings) are design starting points, not engine limits.
+
+**VFX and Code Quality reworked (expert level)** - two always-on standards were rebuilt from about 105 pages read in full (official Creator Hub docs for particles, beams, trails, lighting, atmosphere, post-processing, sky, clouds, audio, performance, events, deferred signals, testing modes and the Roblox Lua style guide; DevForum threads on effects, lightning, sword slashes, camera shake, impact frames, player lifecycle, memory leaks and OOP; Game Programming Patterns; Trove, PartCache, Spr, Zap, Jest Roblox, StyLua and Selene). Another 14 search result lists were only skimmed. Pages that failed or said very little (for example the Light, Highlight, Bloom and DepthOfField class pages) were not used for numbers.
+- **VFX and Assets** now has 92 rules in 13 sections, sent only when a request touches them: particles (official limits, shapes, flipbooks, orientation, wind), 12 effect recipes (explosion, hit, pickup, aura, heal, projectile, fire and smoke, dust, rain and snow, portal and shield, splash, muzzle flash), beams and trails, mesh effects (slashes, shockwaves), lightning, lighting and mood (Future vs ShadowMap, light costs, mood recipes, Atmosphere, sky, clouds, materials), post-processing, camera shake and feedback, sound, animation-marker timing, performance (fill rate, level of detail, pooling, quality scaling) and style and polish. Toolbox safety rules are kept.
+- **Code Quality** gained 44 rules in 8 sections on top of the 71 it had: engineering practice, architecture and lifecycle (init then start, services and controllers, dependencies), patterns (state machine, signals, tag components, commands and queues, pools, dirty flags, fixed timestep, flyweight), typed classes, errors and results, events and player lifecycle (deferred signals, character order, leaks), testing and debugging, and style and review. Data, purchases and security rules are unchanged.
+- The bridge trigger list for VFX has about 30 more words (beam, trail, shockwave, slash, camera shake, post-processing, mood, cinematic and others).
+- Not tested in Studio. A few third-party figures (for example the Highlight cap of 255) come from community summaries and are marked as such in the rules.
+
+**Check-Clean-UI reworked: any UI, any style** - the UI standard is no longer one fixed cartoon look. It can now build any menu, HUD, shop, inventory, dialogue, quest log, settings, leaderboard, notification, loading screen, minimap, crafting, tooltip or on-part screen in any style the user asks for. The cartoon recipes are kept exactly as before and stay the default when the user names no style. New sections (133 rules in total, 19 sections; only the ones a request touches are sent): a design system (colour, contrast, type, spacing, hierarchy, touch targets, states), layout and responsive rules (scale, constraints, layout objects, safe areas, avoiding the default Roblox controls), 17 component recipes, eight style families (sleek modern, glass, horror, sci-fi, fantasy, minimal, retro, realistic), StyleSheet use, feel and motion, gamepad and console, accessibility, world UI (billboards, surface screens, proximity prompts), UI performance (build once, event-driven updates, pooled long lists, sprite sheets, cleanup) and assets, icons and fonts. A new optional `ruleSectionDefaults` field lets a section (here the cartoon look) be sent when no other style matched. Research: about 75 Creator Hub and DevForum pages read in full plus search results for another 30 or so (WCAG contrast and target size, Vide, Iris, virtualized lists, glass and blur, loading screens, button feel, design-system guides); pages that failed or were thin were not used. The StyleSheet rules are deliberately general and tell the model to read the class pages first, because that system is new and I could not confirm every detail. Not tested in Studio; the combined text is much larger than before, so it is delivered by section.
+
+**New skill: Scripting Power (241 skills in total)** - a mandatory, docs-backed skill for fast, safe, modern Luau. It carries 105 rules in 17 sections (Luau speed, native code and profiling, language features, types, library tricks, async and cleanup, networking, security, data, Parallel Luau, physics and queries, players and streaming, input and frame loop, architecture and style, tooling, lint-catchable bugs, debugging, optimisation) and only the sections a request touches are sent. Built from about 50 pages read in full: luau.org (performance, library, syntax, lint, recaps), the Creator Hub (native code gen, type checking, Parallel Luau, client-server security, remotes and bindables, DataStore limits, MicroProfiler, streaming, and the Players, WorldRoot, BasePart, CollectionService, MarketplaceService, ContextActionService and other class pages), Roblox's Lua style guide, the ProfileStore and DataStore best-practice posts, an optimisation guide, and the repos for Rojo, luau-lsp, Promise, RbxUtil, Jest Roblox, roblox-ts and Zap. Pages that did not load or were too thin were not used. One claim I first made from memory (that tick() is deprecated) was wrong according to the docs and was removed.
+The studio director's answer is now capped at about 32k characters of rules; whatever does not fit is a pointer to load with ms_get_skill (a 70k answer made sends slow).
+
+**Catalogue**
+- Cut the built-in skills from 906 to 240. Removed the templated families (professional, studio-craft, universal-mastery, presentation-craft and audio/NPC expansions, advanced Roblox). `runtime/skills.json` went from 10.6 MB to 1.7 MB.
+- Shared policy fields now live once in `runtime/skill-shared-policy.json` and are merged at load; `instructions` is derived from `steps`.
+- Fixed 23 skills that carried steps from the wrong domain and moved them to the right one.
+- Pack lists, capability index, product manifest and file hashes rebuilt to match; every skill has at least four valid related skills.
+
+**New always-on Roblox standards (7)**
+- check-clean-ui and check-props (full rules plus the full private check tables), code-quality, npc-pathfinding, game-systems, vfx-assets and fix-errors.
+- Each carries verified create.roblox.com doc references and official limits (DataStore limits and error codes, task library, raycasting, CollectionService, streaming, ProximityPrompt, GeometryService, UI classes, pathfinding, units, particles).
+- Selected automatically for Roblox requests by whole-word triggers (any physical object such as tree, boat, tank, car or stick triggers check-props); forced to the front of the director result with their full rules (up to five; code-quality sends only the sections the request touches).
+- The AI runs all checks privately and replies to the user in a few plain sentences without naming skills. Exception: asked for its main skills, it names the seven in plain words.
+
+**Startup prompt**
+- Short always-on rules plus a when-to-use-which guide for Roblox sessions.
+- The full text of the standards is sent once at startup, as many as fit under the provider's send limit (Clean UI and Props first). Added `startupCharBudget` for ChatGPT and Claude (their measured send caps minus a margin); a provider with no budget falls back to 50,000 characters instead of unlimited.
+- `tools/build_standards_prompt.py` regenerates that block from `runtime/skills.json`.
+
+**Bug fixes**
+- The chat site lagged, worst in long chats: on every streamed token the extension re-read the text of every turn twice. Quick checks now look at the newest turns only and are spaced at least 50-200 ms apart; a full pass still runs about every 1.5 s so older turns stay correct.
+- Sending was slow and often failed. The startup message was far too big (the full standards added up to 70k characters on top of a 26k base). Full standards at startup are now capped at 22k, the base prompt is cut from 26.5k to 21k by removing repeated "product scope / capability / settings" rules, and the other standards still arrive in full per task through the director. A send also now counts as accepted as soon as the site starts answering, not only when the box clears.
+- Raw command JSON could spill into the chat (long execute_luau commands sent as plain text were never hidden because the hider ignored anything over 600 characters). Fixed for Gemini, ChatGPT, Arena and GLM.
+- Tools: removed 39 Blender "specialists" that made no sense (shop HUD, multiplayer, NPC AI, save systems for Blender); 261 remain. The Roblox script audit was rewritten: it no longer reports noise (math.random, server containers), and now catches un-checked FindFirstChild, DataStore calls without pcall or BindToClose, SetAsync overwrites, InvokeClient, deprecated wait/spawn/delay/:connect/body movers/LoadAnimation, Instance.new parent argument, unvalidated remote arguments, per-frame allocations, and endless loops that yield further down.
+- "Message could not be sent - send acknowledgement was not confirmed" appeared far too fast (3.5 s). The wait now scales with message size (20 s minimum, up to 2 min), and Gemini's send-button waits scale the same way. The no-automatic-replay rule that prevents duplicate messages is unchanged.
+- Mandatory skills could be dropped from the director result when six higher-scoring skills existed; they are now placed first.
+- Trigger words matched inside other words ("ui" in "build"); now whole-word. The word "ai" no longer forces the NPC skill.
+- Wrong reference link on check-props (a Blender page) replaced.
+- Stale test pins fixed (Roblox companion tools 24 to 26; workflow revision v4 to v6); the two hand-written workflows are exempt from the generated-contract equality test.
+- Removed the three tests that only covered deleted skill families; all count pins updated.
+
+**Not done**
+- The test suite was not run on this build. Nothing has been used in a live Studio session.
+
 ChatGPT reads the native rich-text document rather than counting editor decorations as message text. Tiptap-backed composers receive one checked native transaction. Plain ProseMirror receives one escaped native paragraph edit; this uses neither a synthetic paste nor a text-file attachment. Older editors retain their bounded browser-editing fallback. Complete-draft verification, one Send click, native readiness, Stop/navigation protection and no replay after uncertain acknowledgement remain required.
 
 Composer IDs on non-editable wrappers now resolve to the real input. Native disabled/read-only fields keep their drafts. Browser insertion checks cancellation between chunks. CodeMirror same-length source corrections invalidate the previous code snapshot; unchanged reads do not rewrite attributes.
@@ -229,6 +408,185 @@ The studio director's answer is now capped at about 32k characters of rules; wha
 **Not done**
 - The test suite was not run on this build. Nothing has been used in a live Studio session.
 
+# 6.48.2 Dev - skills overhaul (ship build)
+
+- Forge ui_kit is quick by default: at most 5 images per call (priority pieces first). Pass quick=false for the whole pack. Uploads run one batch after another, so fewer images means a shorter wait.
+
+- Fix: Forge backdrops were uploaded but never written into Studio. They are now stored as StringValues in ReplicatedStorage.ForgeBackdrops (name = picture name, value = rbxassetid).
+
+- Ultra start routine is shorter: one shallow Studio survey (services and StarterGui) instead of a deep survey before the first build. Deeper reads happen only when the task needs them. Safety rules (docs checks, nothing done until checked) are unchanged.
+
+- Forge ui_kit now draws the small shop pack by default instead of the full set, so it finishes much faster. Pass pack=full for everything.
+
+- Fix: the extension now always advertises ms_forge when its drawing module is loaded, so an older bridge no longer makes the chat reject it as an unknown command.
+
+- Fix: ms_forge was hidden from ms_find_tool when the search used engine=roblox (it had no Roblox engine tag). It is now tagged roblox.
+- Missing Forge or docs modules now print a reason to the log instead of silently disappearing.
+
+- New `ms_roblox_ui_audit` tool: measures the real GUI in Studio (text fit, contrast, tap size, off-screen, empty lists, unloaded images, overlapping buttons). 281 tools.
+- Skills answer now lists the built-in tools: offline docs, Forge, automatic code checker, UI inspector, expert templates and kits.
+- Clean UI and Code quality skills tell the AI to run the UI inspector and fix code-check findings; expert templates linked.
+
+**Forge in one call, upload packs, clean edges and new pieces** - asking for game art now ends with it installed and working.
+- One `ms_forge` call (ui_kit, vfx or backdrop) now draws the art, stores it, uploads it through Studio's upload_image (in batches of 20), writes `ReplicatedStorage.ForgeKit` or `ReplicatedStorage.ForgeVFX` (ScriptEditorService, falling back to Source), and builds a demo to screen_capture: `StarterGui.ForgeDemo` (a shop window, currency pills, buttons and an XP bar) or `workspace.ForgeVFX_Showroom` (every looping effect running). install=false only draws; demo=false skips the demo. Without Studio it draws and explains the manual route. The pipeline lives in `MSForge.run` in forge.js; main.js only supplies the bridge and Studio calls.
+- Upload packs: hud, shop, inventory, settings, leaderboard, dialogue, rewards, essentials (about 20 to 60 images) or full (about 120).
+- Clean edges: Forge now writes its own PNGs and bleeds edge colour into the transparent border at alpha 1, which reduces the dark fringes Roblox can show on scaled transparent images (the ImageLabel reference notes transparent pixels turn black on upload).
+- New art: light rays and a soft glow. New ForgeKit pieces: `Kit.reward` (spinning rays pop-up with ribbon title and claim button), `Kit.billboard` (name tag and health bar over a character), `Kit.loading` (loading screen over a Forge backdrop with a progress bar); `Kit.screen` accepts a parent so it works in Studio edit mode; `Kit.modal` can open instantly.
+- New `docs/FORGE.md` explains in plain words how to use it.
+- Checked: in Chromium, a full run of `MSForge.run` against the real bridge code with a stand-in Studio (fake upload ids) worked for a UI pack, a VFX set and a backdrop; all Luau sent to Studio (module install, demo, showroom) passes the docs check with no findings and a block-balance check. Not checked: a real Studio upload and execute_luau, the extension live in a chat, and the test suite.
+
+**Forge rebuilt inside the extension: no Python add-ons, about twice as much art, and a much richer ForgeKit** - Forge no longer needs numpy.
+- All drawing now happens in the browser extension with the built-in Canvas (`extension/core/forge.js`, loaded with the other content scripts). The bridge side (`runtime/forge_assets.py`, `runtime/forge_luau.py`) uses only the Python standard library: it stores the PNGs, serves them on 127.0.0.1 for Studio's upload_image, reads a local reference picture (PNG, JPG or WEBP) and writes the Luau. Setup no longer installs numpy.
+- UI kits grew from about 60 to about 120 pieces: new card, ribbon banner, xp, hp and mana bars, price tag, checkbox, radio, slider, input box, scrollbar, speech bubble, toast, gold/silver/bronze leaderboard rows, corner ribbon, gamepad selection ring, arrow and tick glyphs, minus and help buttons, and 30 item icons (adds sword, shield, potion, trophy, crown, key, chest, egg, paw, pickaxe, gear, cart, bag, scroll, clock, skull, flame, drop, leaf, ticket, rebirth, speed, ghost).
+- VFX grew to 27 textures (adds twinkle, cloud, crescent, rune ring, bubble, snowflake, leaf, droplet, swirl, hit star, feather, confetti, heart glow, wisp), 6 strips (adds sharp trail, chain, wave) and 8 flipbooks (adds portal swirl, splash, electric burst), with 27 presets (adds hit star, impact burst, ambient smoke, portal, electric, splash, level up, confetti, snow, leaves, bubbles, ghost wisp, hearts). Backdrops add stripes, grid and sunset.
+- ForgeKit adds Kit.screen (auto-scaling ScreenGui in device safe insets), Kit.modal (pop open and close), Kit.grid and Kit.list (scrolling, canvas grows), Kit.card (complete shop card), Kit.bar, Kit.priceTag, Kit.checkbox, Kit.radio, Kit.slider (mouse and touch drag), Kit.input, Kit.tabs (pages), Kit.bubble, Kit.leaderboardRow, Kit.toast (stacking), Kit.tooltip, Kit.divider, icons inside buttons, and gamepad selection on every control. ForgeVFX adds pooled bursts, VFX.combo, VFX.stop, size scaling and Wrap-mode beams. bind also returns a ready usage example.
+- Large sets are sent to the bridge in batches under 6 MB.
+- Checked: every set was drawn in Chromium and looked at; a full run (draw in the browser, store through the bridge, fetch from the localhost address, bind) worked for a UI kit, a VFX set and a backdrop; both Luau modules and their usage examples pass the docs check with no findings and a block-balance check; every API they use was confirmed in the offline reference; the bridge loads and dispatches the tool. Not checked: the extension running live in a chat, a real Studio upload_image round trip, the Luau running in Studio, and the test suite.
+
+**Forge: game art that turns into working UI and effects** - inspired by ForgeGUI (AI game-art sets with a consistent style and a Studio import), but local, free, and wired to real Roblox objects instead of stopping at pictures.
+- New tool `ms_forge` draws real transparent PNGs on this computer with anti-aliased shape rendering (needs numpy; Setup now installs it when it can).
+- `ui_kit`: a complete, matching set in one call - buttons in 4 states (normal, hover, pressed, disabled) in 4 colours, round close/back/plus/next/confirm buttons, panel, header, inner panel, slots for 7 rarities plus selected, tabs, progress bar, currency pill, toggle, badge, tooltip, and coin, gem, star, heart, bolt, lock and gift icons. 12 styles (simulator, cartoon, glossy, candy, anime, glass, neon, fantasy, scifi, minimal, horror, pixel), your own colours, small tweaks, or `reference_image` to copy a screenshot's palette. Every piece carries its 9-slice centre, and art is drawn at 2x.
+- `vfx`: 13 particle textures, 3 trail/beam strips, and 5 flipbooks at 1024x1024 (the size Roblox requires), all white on transparent so Color tints them, with 14 tuned ParticleEmitter presets.
+- `backdrop`: 16:9 backgrounds (burst, clouds, space, dungeon, sparkles) at 1920x1080 for thumbnails or 1024x576 for in-game screens.
+- The files are served on 127.0.0.1 so Studio's `upload_image` can upload them; `bind` then returns a ForgeKit ModuleScript (panel, button with real hover/pressed images, icon buttons, slots, progress, pill, toggle, tabs, badge, icons; all 9-sliced) or a ForgeVFX ModuleScript (burst, attach, trail, beam). Both modules pass the docs `check` and every property and enum they use was confirmed in the offline API reference.
+- check-clean-ui, vfx-assets, the always-on standards and Ultra (GUI and VFX build steps, start-up) now say when to use Forge, to look at the preview first, to upload through Studio and never type ids, and that Forge art does not relax the contrast, layout, input or capture rules.
+- Tool count is now 280 (tests and manifest updated). Startup standards are about 31.9k tokens. Per-task Ultra text unchanged (8970 characters on the inventory test request).
+- Checked: every output was rendered and looked at here; the bridge loads the tool and dispatches it; the Luau modules pass the docs check and a block-balance check. Not checked: running the Luau in Studio, an actual upload_image round trip, and the test suite.
+
+**Official Roblox and Luau docs, offline (2,261 pages)** - the AI can now look up the real answer instead of guessing.
+- New tool `ms_roblox_docs`, built from the open-source Roblox Creator Docs (snapshot of 24 Oct 2026, Studio 0.744) and the Luau docs: 992 guides, the full engine API (628 classes, 518 enums, 49 datatypes, 11 libraries, globals) and 61 Luau pages. About 3.5 MB, works with no internet. Licences (CC-BY-4.0 text, MIT code) and a notice are included.
+- `search` ranks pages by title, headings and text; `read` opens a page or jumps to a section or member; `api` confirms a name exists, its exact signature, dot or colon, where it is inherited from, and the replacement if it is deprecated; `check` scans a script for deprecated calls (wait, spawn, Humanoid:LoadAnimation, FindPartOnRay, BodyVelocity and 680 more), unknown classes, services or enum items, wrong-case members and dot/colon mistakes. It found no false alarms in the 36 Brickwire kits.
+- `tools/build_roblox_docs.py` rebuilds the docs from fresh clones of github.com/Roblox/creator-docs and github.com/luau-lang/site.
+- All 8 skills, the always-on standards and Ultra's start-up now tell the AI to confirm uncertain APIs and to run `check` on every script before writing it to Studio. Ultra counts a docs lookup as research.
+- The docs check found and fixed real mistakes in the skills: `Lighting.Technology` is deprecated (now LightingStyle and PrioritizeLightingQuality), `GuiService:IsTenFootInterface` is deprecated (now ViewportDisplaySize), and the UIShadow advice now uses its documented properties. It also found `Enum.Font.GothamSemibold` in the companion plugin, which the docs no longer list; it now uses GothamMedium. Reinstall the plugin to get that change.
+- The tool count is now 279; the two tests that pin the count and the product manifest were updated to match.
+- The startup standards block is about 31.2k tokens. Per-task Ultra text is unchanged (8970 characters on the inventory test request).
+- Not tested in Studio or a browser, and the test suite was not run. The tool was called directly through the bridge's own dispatch for search, read, api and check.
+
+**Final integration pass** - two wiring fixes found by reading the code against the existing tests.
+- The Ultra text had lost the "ms_skill_reference links" wording for GUI and animation that an existing test expects; it is back (per-task text 8970 characters, under the 9000 bound).
+- The reference reader (ms_skill_reference) is now treated as guidance, like the manuals, so reading the ready-made kits does not count as a write or an unexplained call. game-systems now lists the kits as a resource, like the other reference packs.
+- Static checks only: all Python compiles, all JavaScript passes syntax checks, all JSON parses, every update hash matches. The test suite and Studio were not run.
+
+**Brickwire's best parts, added and credited** - Brickwire 3.0 (MIT licence) has tested ready-made Luau systems and strict "done means checked" rules; Multi-Script now uses both.
+- New ready-made systems library: 36 Brickwire scripts (obby stages, kill bricks, pads, teleporters, coins, rounds, saved stats, daily reward, shop, inventory, HUD, menus, toasts, day and night, NPC dialog, VFX presets, camera fly-through, and the cutscene module with case, egg, dice, event and story scenes). The AI reads them on demand with the reference tool (skill game-systems), so the startup text does not carry them. The licence file is included.
+- game-systems gained two steps: use the closest kit and upgrade it to the existing rules (UpdateAsync with session locking, idempotent ProcessReceipt, validated remotes), and cutscene rules (server decides the result, camera and controls always restored, Skip from the first frame, longer pauses for rarer results). New trigger words: cutscene, case opening, egg hatch, dice roll, intro sequence.
+- code-quality gained "Done means checked": nothing is done until a check passed after the last change, tool results are never imitated, edits are small and reversible with a ChangeHistory waypoint.
+- Not copied: Brickwire's bridge, extension, panel and 50 generic skill templates (they are boilerplate with little content).
+- Ultra: its start-up block now points to the kit index, the inspect-to-failures order and the done-means-checked rule; two new Ultra methods (cutscene, and economy now points to the kits). The per-task text stays at 8922 characters for the inventory test request.
+- The startup standards block is now about 30.3k tokens (was 29.4k).
+- Kits were only run by Brickwire in a Luau VM with a stubbed Roblox API; nothing here was tested in Studio, and the test suite was not run.
+
+**Ultra manuals now give a step-by-step Roblox method** - each of the 12 manuals returns a six-step plan (inspect, design, build, integrate, verify, failures) written for Roblox Studio and its tools, and Ultra's start-up block now begins with a fixed survey routine.
+- The routine: list Studios, read state, one game-tree survey, note existing styles, currency/data code, remotes, Rojo and which tools exist, reuse what is there, keep a short notes ledger.
+- Per-task Ultra text is unchanged in size (8922 chars for the inventory test request, under the 9000 bound).
+- Not tested in Studio or a browser; the test suite was not run.
+
+**Ultra now starts properly when you select it** - selecting Ultra (or opening a session with Ultra already on) now sends a one-time start-up block with the first task.
+- It tells the AI to load the full skills and read the relevant manuals, and carries all 12 manuals' Roblox rules as standing rules for the session, kept silent. It is sent once per selection, only for Roblox work, and only at the Ultra level.
+- Switching to a lower level clears it; selecting Ultra again sends it again.
+- Not tested in Studio or in a live browser session; the existing test suite was not run.
+
+**Ultra: Roblox rules in every manual, per-manual doc links, new methods and a plain finish** - only the GUI and animation manuals had Roblox-specific content, every manual showed the same four doc links, and Ultra told the AI to finish with a long changes-and-verification report.
+- All 12 manuals now return their own Roblox standards (emoji-free GUI, finished measured screens, props in three passes, economy and server authority, networking limits, performance targets, audio, input, QA) and their own doc links. The modeling manual now says Parts-only requests stay Parts-only.
+- The per-task Ultra text now carries the relevant manual's Roblox rules instead of two generic sentences, kept inside the existing size limit.
+- Two new methods: props (shape first, three passes, one short finish line) and economy (sources and sinks, server-owned rolls, one ProcessReceipt). The interface and assets methods gained the emoji, finished-screen, contrast and picture-checking rules.
+- Ultra now finishes with a short plain line, not a long report; failures, unchecked items and anything needing the user are still said in one sentence.
+- Other engines are unchanged. Not tested in Studio; the existing test suite was not run.
+
+**Pack integration: Roblox services, security, platform and tooling rules (from the supplied skills pack)** - the best of the 24-skill pack was folded into our skills in short form, with nothing copied whole.
+- **Game systems**: monetization (passes, subscriptions, refunds, paid random items and policy checks), teleports and places (untrusted teleport data, access control, handoff), live ops and analytics (configs, timed events, daily rewards), data extras (versioned saves, MemoryStore), combat hit validation.
+- **Code quality**: a severity-ordered review method and a compact deprecated-API map, plus text filtering and chat rules.
+- **Scripting power**: more security (prompts, click detectors, ownership), networking channel choices, physics, input and character rules, Open Cloud and HttpService, testing and toolchain, the Studio tool loop.
+- **NPCs**: pooling and scaling. **Effects**: audio and engine lighting facts. **Fix errors**: silent failures (animation, sound, remotes).
+- Added trigger words so purchases, teleports, audio, Rojo and testing requests pick the right skills.
+- The pack's facts were not all re-verified against the docs, and nothing was tested in Studio.
+
+**Check-Props: tighter and better (about 27 pages read in total)** - rewritten from about 30,000 to 13,000 characters with the duplicated check rows and repeated rules removed.
+- **Short finished reply**: the AI now just says the prop is finished and where it is, in one normal line, with no list of parts, techniques or checks.
+- **Look**: shape first, three passes, the zoom-out test, never a plain box, trim, a second material, wear, a value ladder, consistent grid and palette.
+- **Added from this round**: block out and walk it before detailing, hero and background triangle budgets, batching of identical meshes, Massless and collision settings, texture sizes, trim and modular-kit grid, ambient occlusion baked into the colour map, and a lighting check.
+- Kept: Luau helpers and orientation traps, union rules, scale minimums, recipes for common props and buildings.
+- YouTube pages are blocked to the tools used here and Discord is private, so neither was read. Sources were Roblox docs, DevForum threads, art guides and a few articles.
+- Not tested in Studio.
+
+**No emojis in GUIs, and deeper game-systems, NPC, error and prop rules (from about 55 more pages read)** - emojis in interface text render as empty boxes or the wrong font, so the AI now draws icons instead.
+- **No emojis in any GUI text** (always on): titles, buttons, tabs, prices and toasts use words; icons are real images, drawn shapes, small 3D models or BuilderIcons glyphs. Added to the final review and the asset checks.
+- **Game systems** (+24 rules): developer-product receipts (one handler, no double grants), safe saving with session locking, simulator costs and pacing, pets and luck (weighted rolls, luck done correctly, pity), trading and duplication, rounds and matchmaking, leaderboards, DataStore limits and error codes.
+- **NPCs and pathfinding** (+14 rules): real agent defaults and failure causes, costs, modifiers and links, smooth movement and stutter fixes, sight and hearing, state machines, horror director patterns.
+- **Fix errors** (+9 rules): common error messages and causes, remotes that do not fire, debugger use, data and purchase errors.
+- **Props** (+6 rules): triangle, texture and part budgets, materials and SurfaceAppearance values, silhouette and readability.
+- Not tested in Studio or on a live model. Numbers marked as tune are starting points.
+
+**Check-Clean-UI: finished, measured, reviewed screens (from about 80 more pages)** - a candy shop came out as a pink shell: an empty panel, two unreadable tabs, a Buy button with nothing to buy. Read about 80 pages (about 73 usable: Roblox UI and text docs, Fortnite and Roblox shop guidance, WCAG contrast, tab, empty-state and button-state guides, DevForum critiques, juice and shadow articles; 7 failed or were empty) plus 27 searches, and wrote five new sections:
+- **Complete screens and shops** (7 rules): never an empty panel; stress data (zero, one, many, long names, missing picture, cannot afford, owned, locked); shop anatomy, item cards with states, a Buy button tied to the selected item, tab rules (count, names that fit the shop, two cues for the selected tab, readable inactive tabs, 44 to 48 px), reach and close button.
+- **Contrast check** (5 rules): the real WCAG formula to run on every text and icon pair, targets (4.5:1, 3:1), testing both ends of gradients, same-hue failures (pink on pink), minimum text sizes.
+- **Text fitting** (5 rules): TextScaled pitfalls, fixed sizes with measured fit, truncate or wrap, fonts and outlines.
+- **Candy and sweets style** (8 rules): 60-30-10 palette with several accents, readable tabs, gloss and shine sweep, candy stripes, matching sweets art.
+- **Final review** (7 rules): completeness, readability, pictures, hierarchy and spacing, behaviour, honesty. A short version is now in the always-on core rules.
+- **Bridge fix**: the rule text sent with each request is now fitted to a cap by priority (the style you named, the review and contrast checks, then the rest) instead of dropping a skill's whole rule set to a pointer when over the cap. The cap is 44k characters in total (was 32k), with up to 32k for UI. Skipped sections are listed by name and `ms_get_skill` can now load just those sections (`sections`) or just what an objective needs (`objective`), instead of the whole skill.
+- Not tested in Studio, and the new rules were not tried on a live model. The contrast formula and thresholds are the standard WCAG ones; shop and tab numbers come from design guides, not Roblox limits.
+
+**Better pictures in UI: real Creator Store search and checking** - fixes UI that came out with the wrong or broken art (a faint clover, a currency button showing an empty box, item tiles with unrelated pictures, a name cut off at the tile edge).
+- The asset search tool (ms_roblox_asset_scout) was sending Studio the wrong argument names, so the asset type and result count were ignored. It now uses the real ones and can search up to four phrasings at once, with tags, facets, verified creators first (relaxed if that finds nothing), free assets by default, and it attaches the real thumbnails of the first results so the AI can look at them before choosing. It still never invents an id.
+- New "Finding and checking assets" section (12 rules): decide the subject and style, search with several phrasings, look at the thumbnails, reject mismatches, baked-in text and solid backgrounds, check the picture at its final size and load status, keep ids in one swappable table, fall back to shapes, Parts or the built-in icon font instead of a bad match, build prices as an icon plus a number (not a special character that can show as an empty box), and finish every UI with a screen capture to look for empty boxes, wrong pictures, clipped or misspelt text and low contrast. A short version of this is now in the always-on core rules.
+- Not tested in Studio. The thumbnail download (it fetches thumbnails from Roblox's public thumbnail service on your machine, and quietly skips any that fail) and the new search arguments were checked only against a fake Studio, not a live one.
+
+**Check-Clean-UI: 3D models inside UI + the studded shop look** - the AI can now build a 3D object from Parts (or take a Creator Store model) and show it in the UI with a ViewportFrame, like the 3D item and pet renders in studded simulator shops. Built from about 35 more pages (ViewportFrame, WorldModel, Model, Camera, Toolbox and InsertService docs, plus DevForum threads on fitting models to a viewport, spinning, hover, performance, character and accessory issues, and viewport freezes); 4 pages failed to load.
+- New "3D in UI" section (12 rules): when to use a viewport instead of an image, setup order, cleaning a clone (strip scripts, anchor, no collision), the camera-fit maths from bounding box, field of view and aspect ratio, framing angles for cards, fixed viewport lighting and its limits, spin and hover without per-item loops, known quirks, characters in a WorldModel, model sources, and a blocky-creature build recipe.
+- The 3D rules work in any style and any screen (main menu character, loot reveal, weapon inspector, dialogue portrait, hologram panel and more), with per-style advice (cartoon, modern, horror, sci-fi, fantasy, glass), not only for shops.
+- New "Studded shop screen" section (8 rules) that describes the screenshot you sent: studded blue title bar with a red close square, gradient offer rows, gradient item tiles with 3D renders, lime studded price buttons, text with thick black outlines. It describes the structure and colours, not any game's art.
+- Added trigger words (viewport, 3d icon, item preview, pet card and others).
+- Not tested in Studio. Camera-fit maths and sizes come from docs and forum threads; viewport performance limits and freezing fixes are community reports, not official numbers. Animations inside viewports are marked unreliable.
+
+**Check-Clean-UI: 16 more styles and 3 technique sections** - built from about 85 more pages read (Creator Hub UI docs for rich text, 9-slice, scrolling frames, proximity prompts and styling, DevForum threads on 3D buttons, hover and ripple effects, style transitions and glass UI, plus pack listings and design references). 13 more pages failed to load or had no usable content and were not used.
+- New style sections, sent only when the request names them: studded (Lego-brick look, stud rows, tiled stud texture, brick thickness), skeuomorphic, steampunk, comic, clay and candy, neumorphism (with an accessibility warning), neubrutalism, Y2K and retro OS, pixel, paper and sticker, blueprint and terminal, holographic, aurora, low-poly, dark mode and bento, anime and gacha. The cartoon look is still the default when no style is named.
+- New technique sections: shine sweep, 3D button, ripple, radial progress, prize wheel, radial menu, typewriter, count-up, frosted-glass options; drag and drop, tabs, text boxes, rich text tags, scrolling lists, 9-slice, custom proximity prompts; inventory grid and rarity rules.
+- Not tested in Studio. Stud textures are never invented: they must come from the user or a confirmed asset. Some figures (palettes, sizes, timings) are design starting points, not engine limits.
+
+**VFX and Code Quality reworked (expert level)** - two always-on standards were rebuilt from about 105 pages read in full (official Creator Hub docs for particles, beams, trails, lighting, atmosphere, post-processing, sky, clouds, audio, performance, events, deferred signals, testing modes and the Roblox Lua style guide; DevForum threads on effects, lightning, sword slashes, camera shake, impact frames, player lifecycle, memory leaks and OOP; Game Programming Patterns; Trove, PartCache, Spr, Zap, Jest Roblox, StyLua and Selene). Another 14 search result lists were only skimmed. Pages that failed or said very little (for example the Light, Highlight, Bloom and DepthOfField class pages) were not used for numbers.
+- **VFX and Assets** now has 92 rules in 13 sections, sent only when a request touches them: particles (official limits, shapes, flipbooks, orientation, wind), 12 effect recipes (explosion, hit, pickup, aura, heal, projectile, fire and smoke, dust, rain and snow, portal and shield, splash, muzzle flash), beams and trails, mesh effects (slashes, shockwaves), lightning, lighting and mood (Future vs ShadowMap, light costs, mood recipes, Atmosphere, sky, clouds, materials), post-processing, camera shake and feedback, sound, animation-marker timing, performance (fill rate, level of detail, pooling, quality scaling) and style and polish. Toolbox safety rules are kept.
+- **Code Quality** gained 44 rules in 8 sections on top of the 71 it had: engineering practice, architecture and lifecycle (init then start, services and controllers, dependencies), patterns (state machine, signals, tag components, commands and queues, pools, dirty flags, fixed timestep, flyweight), typed classes, errors and results, events and player lifecycle (deferred signals, character order, leaks), testing and debugging, and style and review. Data, purchases and security rules are unchanged.
+- The bridge trigger list for VFX has about 30 more words (beam, trail, shockwave, slash, camera shake, post-processing, mood, cinematic and others).
+- Not tested in Studio. A few third-party figures (for example the Highlight cap of 255) come from community summaries and are marked as such in the rules.
+
+**Check-Clean-UI reworked: any UI, any style** - the UI standard is no longer one fixed cartoon look. It can now build any menu, HUD, shop, inventory, dialogue, quest log, settings, leaderboard, notification, loading screen, minimap, crafting, tooltip or on-part screen in any style the user asks for. The cartoon recipes are kept exactly as before and stay the default when the user names no style. New sections (133 rules in total, 19 sections; only the ones a request touches are sent): a design system (colour, contrast, type, spacing, hierarchy, touch targets, states), layout and responsive rules (scale, constraints, layout objects, safe areas, avoiding the default Roblox controls), 17 component recipes, eight style families (sleek modern, glass, horror, sci-fi, fantasy, minimal, retro, realistic), StyleSheet use, feel and motion, gamepad and console, accessibility, world UI (billboards, surface screens, proximity prompts), UI performance (build once, event-driven updates, pooled long lists, sprite sheets, cleanup) and assets, icons and fonts. A new optional `ruleSectionDefaults` field lets a section (here the cartoon look) be sent when no other style matched. Research: about 75 Creator Hub and DevForum pages read in full plus search results for another 30 or so (WCAG contrast and target size, Vide, Iris, virtualized lists, glass and blur, loading screens, button feel, design-system guides); pages that failed or were thin were not used. The StyleSheet rules are deliberately general and tell the model to read the class pages first, because that system is new and I could not confirm every detail. Not tested in Studio; the combined text is much larger than before, so it is delivered by section.
+
+**New skill: Scripting Power (241 skills in total)** - a mandatory, docs-backed skill for fast, safe, modern Luau. It carries 105 rules in 17 sections (Luau speed, native code and profiling, language features, types, library tricks, async and cleanup, networking, security, data, Parallel Luau, physics and queries, players and streaming, input and frame loop, architecture and style, tooling, lint-catchable bugs, debugging, optimisation) and only the sections a request touches are sent. Built from about 50 pages read in full: luau.org (performance, library, syntax, lint, recaps), the Creator Hub (native code gen, type checking, Parallel Luau, client-server security, remotes and bindables, DataStore limits, MicroProfiler, streaming, and the Players, WorldRoot, BasePart, CollectionService, MarketplaceService, ContextActionService and other class pages), Roblox's Lua style guide, the ProfileStore and DataStore best-practice posts, an optimisation guide, and the repos for Rojo, luau-lsp, Promise, RbxUtil, Jest Roblox, roblox-ts and Zap. Pages that did not load or were too thin were not used. One claim I first made from memory (that tick() is deprecated) was wrong according to the docs and was removed.
+The studio director's answer is now capped at about 32k characters of rules; whatever does not fit is a pointer to load with ms_get_skill (a 70k answer made sends slow).
+
+**Catalogue**
+- Cut the built-in skills from 906 to 240. Removed the templated families (professional, studio-craft, universal-mastery, presentation-craft and audio/NPC expansions, advanced Roblox). `runtime/skills.json` went from 10.6 MB to 1.7 MB.
+- Shared policy fields now live once in `runtime/skill-shared-policy.json` and are merged at load; `instructions` is derived from `steps`.
+- Fixed 23 skills that carried steps from the wrong domain and moved them to the right one.
+- Pack lists, capability index, product manifest and file hashes rebuilt to match; every skill has at least four valid related skills.
+
+**New always-on Roblox standards (7)**
+- check-clean-ui and check-props (full rules plus the full private check tables), code-quality, npc-pathfinding, game-systems, vfx-assets and fix-errors.
+- Each carries verified create.roblox.com doc references and official limits (DataStore limits and error codes, task library, raycasting, CollectionService, streaming, ProximityPrompt, GeometryService, UI classes, pathfinding, units, particles).
+- Selected automatically for Roblox requests by whole-word triggers (any physical object such as tree, boat, tank, car or stick triggers check-props); forced to the front of the director result with their full rules (up to five; code-quality sends only the sections the request touches).
+- The AI runs all checks privately and replies to the user in a few plain sentences without naming skills. Exception: asked for its main skills, it names the seven in plain words.
+
+**Startup prompt**
+- Short always-on rules plus a when-to-use-which guide for Roblox sessions.
+- The full text of the standards is sent once at startup, as many as fit under the provider's send limit (Clean UI and Props first). Added `startupCharBudget` for ChatGPT and Claude (their measured send caps minus a margin); a provider with no budget falls back to 50,000 characters instead of unlimited.
+- `tools/build_standards_prompt.py` regenerates that block from `runtime/skills.json`.
+
+**Bug fixes**
+- The chat site lagged, worst in long chats: on every streamed token the extension re-read the text of every turn twice. Quick checks now look at the newest turns only and are spaced at least 50-200 ms apart; a full pass still runs about every 1.5 s so older turns stay correct.
+- Sending was slow and often failed. The startup message was far too big (the full standards added up to 70k characters on top of a 26k base). Full standards at startup are now capped at 22k, the base prompt is cut from 26.5k to 21k by removing repeated "product scope / capability / settings" rules, and the other standards still arrive in full per task through the director. A send also now counts as accepted as soon as the site starts answering, not only when the box clears.
+- Raw command JSON could spill into the chat (long execute_luau commands sent as plain text were never hidden because the hider ignored anything over 600 characters). Fixed for Gemini, ChatGPT, Arena and GLM.
+- Tools: removed 39 Blender "specialists" that made no sense (shop HUD, multiplayer, NPC AI, save systems for Blender); 261 remain. The Roblox script audit was rewritten: it no longer reports noise (math.random, server containers), and now catches un-checked FindFirstChild, DataStore calls without pcall or BindToClose, SetAsync overwrites, InvokeClient, deprecated wait/spawn/delay/:connect/body movers/LoadAnimation, Instance.new parent argument, unvalidated remote arguments, per-frame allocations, and endless loops that yield further down.
+- "Message could not be sent - send acknowledgement was not confirmed" appeared far too fast (3.5 s). The wait now scales with message size (20 s minimum, up to 2 min), and Gemini's send-button waits scale the same way. The no-automatic-replay rule that prevents duplicate messages is unchanged.
+- Mandatory skills could be dropped from the director result when six higher-scoring skills existed; they are now placed first.
+- Trigger words matched inside other words ("ui" in "build"); now whole-word. The word "ai" no longer forces the NPC skill.
+- Wrong reference link on check-props (a Blender page) replaced.
+- Stale test pins fixed (Roblox companion tools 24 to 26; workflow revision v4 to v6); the two hand-written workflows are exempt from the generated-contract equality test.
+- Removed the three tests that only covered deleted skill families; all count pins updated.
+
+**Not done**
+- The test suite was not run on this build. Nothing has been used in a live Studio session.
+
 # 6.48.2
 
 Detect signed-in ChatGPT composer variants; keep Notion Auto beside its composer; unify portalled toolbar layout and ensure settings stay above a moved toolbar.
@@ -299,7 +657,7 @@ Automatic post-update setup, current ChatGPT composer support, collapsed effort 
 - Ultra: the final stop of the native slider now includes a task-specific four-stage delivery contract, evidence distinctions and failed-tool/completion rules alongside existing methods/research.
 - Code Flight: dedicated Workspace tab; actual Multi-Script icon, three layered worlds, Arcade/Practice, rising difficulty, precision bonuses, separate best scores, keyboard/touch controls and visibility-aware pausing. Static bundled icon is declared as a provider-accessible extension resource.
 - Smaller New idea action; six new consistent palettes, including Tidal, Starlight and Daybreak live scenes on both menu and chatbar. Reduced motion and independent bar themes remain supported.
-- PlazCode adaptation provenance and GPL notices retained. No foreign command transport, runtime, credentials or proprietary art imported.
+- upstream GPL source adaptation provenance and GPL notices retained. No foreign command transport, runtime, credentials or proprietary art imported.
 
 ## 6.41.0 — 2026-10-17
 
@@ -662,7 +1020,7 @@ ephemeral loopback auth, no `loadstring`, no arbitrary evaluation.
 - Added current “Ask anything” composer detection and explicit chat-route recovery.
 - Added a complete Setup category with live checks and a copyable end-to-end tutorial.
 - Removed the redundant MCP prompt wrappers and restored the authoritative 230-tool catalog.
-- Adapted PlazCode’s GPL Claude provider into Multi-Script’s universal multi-engine pipeline; no PlazCode IDE or AgentScript code is included.
+- Adapted upstream GPL source’s GPL Claude provider into Multi-Script’s universal multi-engine pipeline; no upstream GPL source IDE or AgentScript code is included.
 
 ## 6.19.0 — Universal
 
@@ -700,7 +1058,7 @@ no clamp anywhere, half of it left the screen.
 gutter, a 360px viewport, a bar pushed to the far left - and asserts the left edge is never negative.
 39/39 checks. `tools/validate_6_18_0_artifacts.py` asserts the same invariants against the built zips.
 
-**Improved - Notion AI detection, ported from PlazCode 1.18.74.** PlazCode is a derivative of
+**Improved - Notion AI detection, ported from upstream GPL source 1.18.74.** upstream GPL source is a derivative of
 Multi-Script with a far more mature Notion adapter (2,492 lines vs our 466). Its detection and
 transcript logic was merged in; the IDE and `.exe` were not.
 

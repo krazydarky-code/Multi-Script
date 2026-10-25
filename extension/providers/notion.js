@@ -902,7 +902,7 @@ const ZSProvider = (() => {
     // an explicit open. Not a /chat thread and not an /ai landing, so neither of
     // the branches above applies - but the transcript is still real. Use the
     // semantic turn selector (the detection Multi-Script shipped before the
-    // PlazCode merge) so these surfaces keep working instead of reporting an
+    // upstream GPL source merge) so these surfaces keep working instead of reporting an
     // empty conversation. Prefer anchored rows when they exist, then the block
     // structure, then plain semantic turns.
     const anchored = agentMessageRows();
@@ -1548,7 +1548,7 @@ This metadata is not a separate user task. Apply the shared Multi-Script instruc
       // acceptance now comes from isAiSurface(), a genuine explicit open, or
       // positive AI-composer evidence - see surfaceOk().
       try {
-        document.documentElement.dataset.zsNotionVer = "6.49.9";
+        document.documentElement.dataset.zsNotionVer = "6.50.0";
         new MutationObserver(() => { if (_editorCache && !_editorCache.isConnected) _editorCache = null; })
           .observe(document.documentElement, { childList: true, subtree: true });
       } catch {}

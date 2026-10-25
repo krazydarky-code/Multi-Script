@@ -9,6 +9,9 @@ PACKS={
     'roblox-pro-animation':('roblox-production','ANIMATION.md'),
     'blender-reference-blockout':('stud-creatures','MULTI-SCRIPT.md'),
     'roblox-architecture-services':('roblox-service-style','GUIDE.md'),
+    'game-systems':('roblox-kits','INDEX.md'),
+    'code-quality':('roblox-expert','INDEX.md'),
+    'scripting-power':('roblox-expert','INDEX.md'),
 }
 
 def read(args):
