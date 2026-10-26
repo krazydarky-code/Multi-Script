@@ -18,12 +18,13 @@ ok(/if \(gateEnhancedSend\(held,event\)\) return;/.test(MAIN), 'onUserMessage do
 ok(/submitAndGetBase\(text, undefined, \{ visible: true, settingsKey \}\)/.test(MAIN), 'chosen prompt is not sent visibly');
 
 function harness(settings, choiceFn) {
-  const calls = { submit: [], loop: 0, toasts: [], listeners: {} };
+  const calls = { submit: [], loop: 0, toolReads:0, toasts: [], listeners: {} };
   const A = { toolList: [], studios: [], running: false, starting: false, lastSendOk: true, userStopped: false };
   const window = { addEventListener: (n, f) => { calls.listeners[n] = f; } };
   const ui = { toast: (m) => calls.toasts.push(m), reviewEnhancedPrompt: choiceFn };
   const env = {
-    window, setTimeout, A, ui, ZSEnhance, MSStudio:require('../extension/core/studio-workflows'), ZSParse:new Function(fs.readFileSync(path.join(root,'extension/core/parser.js'),'utf8')+';return ZSParse;')(), bg:async()=>{await A.waitForBackground?.();return{ok:true};},
+    window, setTimeout, A, ui, ZSEnhance, MSStudio:require('../extension/core/studio-workflows'), ZSParse:new Function(fs.readFileSync(path.join(root,'extension/core/parser.js'),'utf8')+';return ZSParse;')(), bg:async message=>{await A.waitForBackground?.();if(message.type==='call_tool'){calls.toolReads++;return {ok:true,text:JSON.stringify({library:{available:true,references:522}})};}return{ok:true};},
+    ZS:{limits:{sendBudget:cap=>cap}},bareToolName:name=>String(name||'').split('/').pop().split('.').pop(),isBlockedTool:()=>false,softwareAllowsTool:()=>false,
     P: { conversationKey: () => A.chatKey || 'qa-chat' },
     getEnhanceSettings: () => settings,
     diag: () => {}, blenderWorkspaceInstructions:()=>'', activeEngineIds: () => ['roblox'], connectedEngineIds: () => ['roblox'], beginTaskProgress:()=>{}, bumpSys: () => {}, armCriticReview: () => {}, activeStudioInstructions: () => '[ACTIVE USER SETTINGS: ULTRA]',
@@ -84,6 +85,12 @@ t('Ultra methods reach one task send and disappear after lowering effort',async(
   ok(h.calls.submit.length===1);ok((h.calls.submit[0].text.match(/ULTRA · EXECUTION METHODS/g)||[]).length===1);ok(h.calls.submit[0].text.includes('Method: interface'));
   h.api.setEffort('maximum');h.press('Now fix its alignment');await tick();
   ok(h.calls.submit.length===2&&!h.calls.submit[1].text.includes('ULTRA · EXECUTION METHODS')&&!h.calls.submit[1].text.includes('REFERENCE RESEARCH AND VISUAL EVIDENCE'));
+});
+t('Ultra resource preload uses one read and preserves one original-first task send',async()=>{
+  const h=harness({...on,mode:'off'},async()=>null);h.api.setEffort('ultra');h.A.toolList=[{name:'ms_roblox_omni',server:'zeroscript'}];
+  const request='Build a Roblox inventory UI';h.press(request);await tick();await tick();
+  ok(h.calls.toolReads===1&&h.calls.submit.length===1);ok(h.calls.submit[0].text.startsWith(request));
+  ok(h.calls.submit[0].text.includes('LOADED RESOURCES')&&h.calls.submit[0].text.includes('522'));
 });
 
 t('navigation during background pacing resume cannot send into another chat',async()=>{
