@@ -14,3 +14,5 @@ for(const action of ['context','references','packages','preview','recipe','modul
 assert(routing.isEngineExecution('ms_roblox_omni',{action:'install'},[{name:'ms_roblox_omni',server:'zeroscript'}]));
 
 assert.strictEqual(studio.resourcePlan('Create a UI without using memory','ultra'),null);
+
+const fullTask='Original prompt '.repeat(100);assert.strictEqual(studio.appendResources(fullTask,context,fullTask.length),fullTask);assert(studio.appendResources(fullTask,context,fullTask.length+300).includes('on demand'));assert(studio.appendResources(fullTask,context,50000).startsWith(fullTask));

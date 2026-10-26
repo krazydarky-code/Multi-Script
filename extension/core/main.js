@@ -9655,7 +9655,7 @@ Read the shared board, preserve adjacent interfaces and work within this scope. 
       ui.toast('Not sent — the draft, task, conversation or settings changed while loading references.');return;
     }
     const addon=taskPromptAddon(source); if(addon) text += "\n\n" + addon;
-    if(resources){const budget=Number(P.sendCharBudget)||50000;text += text.length+resources.length+2<=budget?'\n\n'+resources:'\n\nBundled resources: ms_roblox_omni (status, packages, references, preview, recipe, modules); ms_obsidian (context, search, read). Retrieve relevant items on demand; optional preload was omitted to preserve your complete request within the composer budget.';}
+    if(resources){const cap=Number(P.sendCharBudget)||50000;const budget=ZS.limits?ZS.limits.sendBudget(cap):cap;text=MSStudio.appendResources(text,resources,budget);}
     if (studioSettingsDirty) text += "\n\n" + activeStudioInstructions(false);
     const base = await submitAndGetBase(text, undefined, { visible: true, settingsKey });
     if (!A.lastSendOk) return;             // submitAndGetBase already explained why
