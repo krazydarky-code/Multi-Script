@@ -26,7 +26,7 @@ def _first(*c):
 
 
 def blender_python():
-    return _first(os.environ.get("BLENDER_PY"), "/tmp/bpyenv/bin/python")
+    return _first(os.environ.get("BLENDER_PY"), os.environ.get("BLENDER_BIN"), "/tmp/bpyenv/bin/python")
 
 
 def godot_bin():
@@ -45,11 +45,24 @@ class LiveBlender(T.Ctx):
         py = blender_python()
         if not py:
             raise RuntimeError("no bpy python")
-        self.proc = subprocess.Popen([py, os.path.join(HERE, "bpy_worker.py")], stdin=subprocess.PIPE,
+        worker=os.path.join(HERE,"bpy_worker.py")
+        command=[py,'--background','--factory-startup','--python',worker] if os.path.basename(py).lower() in ('blender','blender.exe') else [py,worker]
+        self.proc = subprocess.Popen(command, stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
-        ready = json.loads(self.proc.stdout.readline())
+        ready = self._reply()
         self.version = ready.get("version")
         self.codes = []
+
+    def _reply(self):
+        # The official Blender executable also emits native startup/render logs.
+        # Keep real bpy execution while reading only the worker's JSON receipts.
+        for _ in range(4000):
+            line=self.proc.stdout.readline()
+            if not line:raise RuntimeError('Native Blender worker exited before returning its receipt')
+            try:reply=json.loads(line)
+            except ValueError:continue
+            if isinstance(reply,dict) and (reply.get('ready') or 'out' in reply and 'err' in reply):return reply
+        raise RuntimeError('Native Blender output exceeded its bounded receipt scan')
 
     def advertised(self, server):
         return {"execute_blender_code", "get_scene_info", "get_object_info"} if server == "blender" else None
@@ -59,7 +72,7 @@ class LiveBlender(T.Ctx):
         self.codes.append(code)
         self.proc.stdin.write(json.dumps({"code": code}) + "\n")
         self.proc.stdin.flush()
-        reply = json.loads(self.proc.stdout.readline())
+        reply = self._reply()
         return {"text": reply["out"] + (("\nTraceback\n" + reply["err"]) if reply["err"] else ""), "images": []}
 
     def close(self):

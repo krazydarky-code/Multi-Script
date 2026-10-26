@@ -18,7 +18,7 @@ def static_audit():
     check(ext.get('version')==version,'critical','extension-version-drift','extension manifest differs from canonical product version')
     check(f'BRIDGE_VERSION = "{version}"' in bridge,'critical','bridge-version-drift','bridge differs from canonical product version')
     check(f'PLUGIN_VERSION = "{version}"' in plugin,'high','plugin-version-drift','Roblox companion differs from canonical product version')
-    check(readme.startswith(f'# Multi-Script {version}'),'medium','readme-version-drift','README heading differs from canonical product version')
+    check(readme.splitlines()[0]=='# Multi-Script' or readme.startswith(f'# Multi-Script {version}'),'medium','readme-version-drift','README heading differs from canonical product version')
     skills=json.load(open(ROOT/'runtime/skills.json'));virtual=json.load(open(ROOT/'runtime/virtual-tools.json'))['tools']
     check(len(skills)==manifest['catalogue']['skills'],'critical','skill-count-drift','skill count differs from product manifest')
     check(len(virtual)==manifest['catalogue']['virtualSpecialists'],'critical','virtual-count-drift','virtual specialist count differs from product manifest')

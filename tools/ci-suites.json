@@ -135,5 +135,12 @@
   "test_vani_generation_lifecycle_642.js",
   "test_vani_progress_performance_6499.js",
   "test_vani_runtime_roundtrip_641.js",
-  "test_venice_classic_roundtrip_641.js"
+  "test_venice_classic_roundtrip_641.js",
+  "test_obsidian_vault_650.py",
+  "test_asset_vault_controls_650.js",
+  "test_blockbench_native_650.py",
+  "test_asset_vault_wire_650.py",
+  "test_code_only_recovery_650.js",
+  "test_cross_provider_tool_matrix.js",
+  "test_unix_scripts.py"
 ]

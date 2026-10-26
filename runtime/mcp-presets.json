@@ -78,6 +78,25 @@
         "export real frame capture"
       ],
       "documentation": "docs/FIGMA.md"
+    },
+    "blockbench": {
+      "displayName": "Blockbench assets",
+      "serverId": "blockbench",
+      "commandExample": "launch_blockbench_mcp.py",
+      "version": "1.10.1",
+      "repository": "https://github.com/jasonjgardner/blockbench-mcp-plugin",
+      "requirements": [
+        "Prepare the pinned runtime in Settings → Engines",
+        "Node.js with npm for explicit preparation",
+        "Node.js 24+ and compatible GPU for optional rendering"
+      ],
+      "recommendedChecks": [
+        "inspect the actual bbmodel revision",
+        "validate geometry and animations",
+        "render the textured pose when renderer is prepared",
+        "export and inspect the actual result"
+      ],
+      "documentation": "docs/BLOCKBENCH.md"
     }
   }
 }

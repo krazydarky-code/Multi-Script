@@ -3,7 +3,7 @@
   "version": "6.50.0",
   "catalogue": {
     "skills": 249,
-    "directTools": 283,
+    "directTools": 285,
     "virtualSpecialists": 263,
     "robloxSkills": 54,
     "robloxVirtualSpecialists": 90,
@@ -71,7 +71,7 @@
     "specialists": "searchable through ms_list_virtual_tools and coordinated by ms_studio_director",
     "nativeCounts": "reported separately and never presented as total product capability"
   },
-  "directTools": 283,
+  "directTools": 285,
   "engineToolkit": {
     "tools": {
       "blender": 45,
@@ -189,5 +189,19 @@
     "tool": "ms_roblox_omni",
     "loading": "on-demand",
     "sourceInstallIsNotPlaytest": true
+  },
+  "obsidianVault": {
+    "backend": "ordinary-files",
+    "defaultFolder": "Multi-Script Memory",
+    "setup": "native-host-v1",
+    "packagedMedia": false,
+    "privateDataPreserved": true
+  },
+  "blockbenchAssets": {
+    "backend": "headless-files",
+    "sourceVersion": "1.10.1",
+    "nativeTools": 21,
+    "preparation": "explicit",
+    "renderer": "optional-gpu"
   }
 }

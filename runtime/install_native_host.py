@@ -578,6 +578,14 @@ def main(argv=None):
     from pathlib import Path
     from update_manager import write_json,safe_path
     home=safe_path(Path(ROOT),'.updates');home.mkdir(exist_ok=True)
+    try:
+        import obsidian_vault
+        vault=obsidian_vault.setup()
+        say('  ok Obsidian vault connected: '+vault['vault'])
+    except (OSError,ValueError,RuntimeError) as error:
+        say('  x Obsidian vault setup failed: '+str(error))
+        say('    Choose a writable dedicated vault with MS_OBSIDIAN_VAULT, then rerun Setup. Existing notes and engine data were preserved.')
+        return 1
     write_json(home/'setup-complete.json',{'version':expected,'root':os.path.realpath(ROOT),'at':int(time.time()),'launcherVerified':True})
     if not a.no_start and not a.skip_deps and not a.post_update:
         replace_bridge(a.keep_running)

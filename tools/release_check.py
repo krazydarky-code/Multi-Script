@@ -50,6 +50,7 @@ required += ['tests/test_compact_effort_bar_6498.js','tests/test_effort_slider_6
 required += ['tests/test_progress_efficiency_6499.js','tests/test_vani_progress_performance_6499.js','tests/test_catalog_paging_6499.js','docs/QA_6.50.0.md']
 required += ['tests/test_scene_bar_layout_6499.js','tests/test_scene_bar_resize_6499.js']
 required += ['tests/test_bar_space_recovery_6499.js','tests/test_response_recovery_6499.js','tests/test_task_activity_6499.js','tests/test_arena_stream_performance_6499.js','tests/test_incremental_application_6499.js','tests/test_prompt_wording_ab_6499.js','tests/test_menu_idle_layout_6499.js']
+required += ['runtime/obsidian_vault.py','runtime/vault-library.json.gz','runtime/blockbench_workspace.py','runtime/launch_blockbench_mcp.py','docs/OBSIDIAN.md','docs/BLOCKBENCH.md']
 for x in required: need((ROOT/x).is_file(),f'missing {x}')
 handbook=load('runtime/ultra-handbook.json')
 need(len(handbook.get('manuals',{}))==12,'handbook must retain all twelve specialist domains')
@@ -208,6 +209,7 @@ for sid,v in skills.items():
     need(bool(v.get('name')) and bool(v.get('description')),f'incomplete skill {sid}')
     need(len(v.get('steps') or [])>=1,f'skill lacks steps {sid}')
 for p in ROOT.rglob('*'):
+    if any(part.casefold()=='multi-script memory' for part in p.relative_to(ROOT).parts): continue
     if p.is_file():
         rel=p.relative_to(ROOT).as_posix()
         if '__pycache__' in p.parts or rel.endswith('.pyc'): continue
@@ -222,6 +224,7 @@ for p in js:
 # Block common accidental secret forms without printing values.
 secret_re=re.compile(r'(?i)(api[_-]?key|access[_-]?token|client[_-]?secret|private[_-]?key)\s*[=:]\s*["\'][A-Za-z0-9_\-]{16,}')
 for p in ROOT.rglob('*'):
+    if any(part.casefold()=='multi-script memory' for part in p.relative_to(ROOT).parts): continue
     if p.is_file() and p.suffix.lower() in {'.py','.js','.json','.md','.yml','.yaml','.html','.css','.bat','.command','.sh'}:
         try:text=p.read_text(encoding='utf-8')
         except Exception:continue

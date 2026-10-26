@@ -126,6 +126,8 @@ function chromeStub(opts) {
         case 'call_tool': return window.__msTestTool ? window.__msTestTool(m) : {ok:true,result:{text:'{}'}};
         case 'ms_mobile_admin': return window.__msMobileAdmin ? window.__msMobileAdmin(m) : {ok:false,error:'Phone control requires the current running bridge.'};
         case 'ms_update_admin': return window.__msUpdateAdmin ? window.__msUpdateAdmin(m) : (o.updateState||{ok:true,current:'${VERSION}',configured:false,automatic:true});
+        case 'ms_obsidian_admin': return window.__msVaultAdmin ? window.__msVaultAdmin(m) : (o.vaultState||{ok:true,configured:false,available:false});
+        case 'ms_blockbench_admin': return window.__msBlockbenchAdmin ? window.__msBlockbenchAdmin(m) : (o.blockbenchState||{ok:true,prepared:false,connected:false});
         case 'ms_cowork_tabs': return window.__msCoworkTabs ? window.__msCoworkTabs(m) : {ok:false,error:'Provider tab discovery requires the extension service worker.'};
         case 'terminal_snapshot': return state.bridge==='up' ? {ok:true,via:'ws',lines:ring.filter(r=>r.seq>(m.since||0)),newest:7,service:service()} : {ok:false,kind:'unreachable'};
         case 'host_info': return state.host==='installed' ? {ok:true,hostVersion:'1.0.0',pythonVersion:'3.12.4',platform:'win32'} : {ok:false,code:'host_missing',error:'Specified native messaging host not found.',extensionId:'abcdefghijklmnopabcdefghijklmnop'};

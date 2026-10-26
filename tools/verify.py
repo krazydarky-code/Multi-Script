@@ -29,7 +29,7 @@ def main():
         command=([sys.executable,'-u','-X','utf8'] if group=='py' else ['node'])+[str(path)]
         started=time.monotonic();limit=900 if path.name in ('test_settings_sweep.js','test_fnaf_theme.js','test_new_theme_matrix.js') else 240
         with tempfile.TemporaryDirectory(prefix='multiscript-test-') as data:
-            env={**os.environ,'PYTHONUTF8':'1','PYTHONUNBUFFERED':'1','MS_TEST_PYTHON':sys.executable,'MS_STUDIO_DATA_DIR':data,'PATH':str(Path(sys.executable).parent)+os.pathsep+os.environ.get('PATH','')}
+            env={**os.environ,'PYTHONUTF8':'1','PYTHONUNBUFFERED':'1','MS_TEST_PYTHON':sys.executable,'MS_STUDIO_DATA_DIR':data,'MS_OBSIDIAN_VAULT':str(Path(data)/'vault'),'PATH':str(Path(sys.executable).parent)+os.pathsep+os.environ.get('PATH','')}
             if not shutil.which(command[0]):code=127;output='Missing test runtime: '+command[0]
             else:
                 process=subprocess.Popen(command,cwd=ROOT,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,start_new_session=os.name!='nt')

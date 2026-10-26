@@ -12,13 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'runtime'))
 from update_manager import protected
 VERSION = json.loads((ROOT/'extension/manifest.json').read_text(encoding='utf-8'))['version']
-SKIP_PARTS = {'.git','__pycache__','logs','generated','release','studio-data','node_modules','.venv','venv','.media-relay','test-results'}
+SKIP_PARTS = {'.git','__pycache__','logs','generated','release','studio-data','node_modules','.venv','venv','.media-relay','test-results','Multi-Script Memory'}
 PRIVATE_NAMES = {'.env','.workshop-connection.json','workspace-state.json','memory-graph.json','critic-loop-report.json','engine-compatibility-audit.json','bridge_debug.log','com.multiscript.bridge.json','native_host.bat','native_host.sh','engine-prefs.json','update-files.json'}
 
 
 def include(p):
     rel = p.relative_to(ROOT)
-    return p.is_file() and not any(x in SKIP_PARTS for x in rel.parts) and p.name not in PRIVATE_NAMES and p.suffix.lower() not in {'.pyc','.zip','.sqlite3','.db','.log','.pem','.key','.pfx','.p12'} and not p.name.endswith(('.sqlite3-wal','.sqlite3-shm','-state.json')) and not any(x.startswith('.') and x not in {'.github','.gitignore','.env.example'} for x in rel.parts)
+    return p.is_file() and not any(x.casefold() in {part.casefold() for part in SKIP_PARTS} for x in rel.parts) and p.name not in PRIVATE_NAMES and p.suffix.lower() not in {'.pyc','.zip','.sqlite3','.db','.log','.pem','.key','.pfx','.p12'} and not p.name.endswith(('.sqlite3-wal','.sqlite3-shm','-state.json')) and not any(x.startswith('.') and x not in {'.github','.gitignore','.env.example'} for x in rel.parts)
 
 
 def version_tuple(version):

@@ -87,3 +87,8 @@ Lowering effort clears the visual activation and supersedes prior Ultra policies
 6.42 adds editable/reorderable correction and goal queues, project filtering and priority sorting, acceptance-check/evidence/blocker completion gates, scoped enabled skills, Markdown import and project-pinned library methods. Ultra now carries a four-stage delivery contract. Code Flight is rebuilt around the actual MS icon, three worlds, Arcade/Practice modes, precision scoring and visibility-aware pausing. Six additional themes include live Tidal, Starlight and Daybreak scenes across the menu and chatbar.
 
 Provider sessions now discovers open supported tabs, reads bounded briefs locally and assigns shared tasks through each target’s own acknowledged transport. Vani waits for native generation to finish and a quiet interval before feedback; startup can be cancelled. Shared-task and acceptance-check counts show remaining work. The dashboard supports phone widths; remote phone pairing is not included.
+
+
+### 6.50.0 local asset and reference support
+
+Setup creates a connected **Multi-Script Memory** Obsidian vault in this installation root. The library and imported original archives/media stay outside extension code and are preserved by updates. See [vault setup](docs/OBSIDIAN.md). Headless Blockbench preparation and its optional renderer are in Settings → Engines; see [Blockbench setup](docs/BLOCKBENCH.md). These additions extend the existing skills and Ultra manuals.

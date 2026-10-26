@@ -3,7 +3,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 w=types.ModuleType('websockets');w.ConnectionClosed=Exception;sys.modules.setdefault('websockets',w)
 spec=importlib.util.spec_from_file_location('compat_bridge',ROOT/'runtime'/'bridge.py');b=importlib.util.module_from_spec(spec);spec.loader.exec_module(b)
-assert len(b.BUILTIN_TOOLS)==279 and 'ms_mcp_schema_audit' in b.BUILTIN_TOOL_NAMES
+assert len(b.BUILTIN_TOOLS)==json.loads((ROOT/'runtime/product-manifest.json').read_text())['catalogue']['directTools'] and 'ms_mcp_schema_audit' in b.BUILTIN_TOOL_NAMES
 schema={
  'type':'object','additionalProperties':False,
  '$defs':{'vec':{'type':'array','minItems':3,'maxItems':3,'items':{'type':'number'}}},

@@ -33,6 +33,7 @@ jobs:
           npm install --no-save playwright@1.63.0 prosemirror-view@1.42.8 prosemirror-state@1.4.4 prosemirror-schema-basic@1.2.5 esbuild@0.25.12
           npx playwright install --with-deps chromium
           python tools/prepare_luau.py
+          python tools/prepare_blockbench.py --ci-shard ${{ matrix.shard }}
           node -e "const fs=require('fs');const file=process.env.RUNNER_TEMP+'/native-editor.js';require('esbuild').buildSync({entryPoints:['tests/support/native-prosemirror.mjs'],bundle:true,format:'iife',outfile:file});fs.appendFileSync(process.env.GITHUB_ENV,'CHROMIUM_PATH='+require('playwright').chromium.executablePath()+'\nMS_NATIVE_EDITOR_BUNDLE='+file+'\n')"
       - name: Release integrity and syntax
         run: python tools/release_check.py
@@ -86,12 +87,13 @@ jobs:
           npm install --no-save playwright@1.63.0
           npx playwright install chromium
           python tools/prepare_luau.py
+          python tools/prepare_blockbench.py
           node -e "require('fs').appendFileSync(process.env.GITHUB_ENV,'CHROMIUM_PATH='+require('playwright').chromium.executablePath()+'\n')"
           $env:MS_BLENDER_CACHE = Join-Path $env:RUNNER_TEMP 'multi-script-blender-cache'
           Add-Content -Path $env:GITHUB_ENV -Value "MS_BLENDER_CACHE=$env:MS_BLENDER_CACHE"
           python -c "import sys; sys.path.insert(0,'runtime'); import blender_portable; print(blender_portable.prepare())"
       - name: Real Blender and browser roundtrips
-        run: python tools/verify.py all test_blender_workspace_real_6490.py test_blender_workspace_browser_6490.js test_blender_companion_real_6492.py test_blender_preview_persistence_6492.py test_blender_target_routing_6496.py test_blender_connection_faults_6497.py test_blender_owner_lifecycle_6497.py test_omni_gui_650.py --output test-results/blender-workspace
+        run: python tools/verify.py all test_blender_workspace_real_6490.py test_blender_workspace_browser_6490.js test_blender_companion_real_6492.py test_blender_preview_persistence_6492.py test_blender_target_routing_6496.py test_blender_connection_faults_6497.py test_blender_owner_lifecycle_6497.py test_omni_gui_650.py test_blockbench_native_650.py --output test-results/blender-workspace
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

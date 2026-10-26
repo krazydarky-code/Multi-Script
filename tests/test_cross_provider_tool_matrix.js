@@ -1,13 +1,9 @@
-const fs=require('fs'),path=require('path');
+const fs=require('fs'),path=require('path'),cp=require('child_process');
 const root=path.resolve(__dirname,'..');
 const parser=new Function(fs.readFileSync(path.join(root,'extension/core/parser.js'),'utf8')+';return ZSParse;')();
-const bridge=fs.readFileSync(path.join(root,'runtime/bridge.py'),'utf8');
-const tools=[...bridge.matchAll(/\{["']name["']:\s*["'](ms_[^"']+)["']/g)].map(x=>x[1]);
-const robloxLine=bridge.split(/\r?\n/).find(x=>x.startsWith('ROBLOX_STUDIO_V3_CONTRACTS = '))||'';
-tools.push(...[...robloxLine.matchAll(/'(ms_roblox_[^']+)': \{/g)].map(x=>x[1]));
-const engineLine=bridge.split(/\r?\n/).find(x=>x.startsWith('ENGINE_PRO_V3_CONTRACTS = '))||'';
-tools.push(...[...engineLine.matchAll(/'(ms_(?:unity|godot|blender)_[^']+)': \{/g)].map(x=>x[1]));
-if(tools.length!==231||new Set(tools).size!==231)throw new Error('expected 231 unique direct tools, got '+tools.length);
+const tools=JSON.parse(cp.execFileSync(process.env.MS_TEST_PYTHON||'python',['-X','utf8','-c',"import sys,json;sys.path.insert(0,'runtime');import bridge;print(json.dumps([t['name'] for t in bridge.BUILTIN_TOOLS]))"],{cwd:root,encoding:'utf8',maxBuffer:4e6}));
+const expected=JSON.parse(fs.readFileSync(path.join(root,'runtime/product-manifest.json'),'utf8')).catalogue.directTools;
+if(tools.length!==expected||new Set(tools).size!==expected)throw new Error('Runtime catalogue uniqueness/count differs from the product manifest: '+tools.length);
 const providers=['arena','chatgpt','claude','deepseek','gemini','glm','kimi','meta','notion','promptql','qwen','superapp','vani','venice','clickup'];
 let cases=0;
 for(const provider of providers){

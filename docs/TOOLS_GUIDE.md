@@ -637,3 +637,5 @@ Planning tools that return a structured brief, checklist or review for the model
 | `ms_cowork` | Shared local task board. Atomically claim a task for one worker, renew its 30-minute lease with update, report evidence and complete or release. |
 | `ms_screen_record` | Record the desktop for 0.25 to 5 seconds, at up to 12 fps. Saves a real MJPEG AVI and returns a timestamped contact sheet for providers with vision. |
 | `ms_fetch_reference` | Fetch a public HTTP(S) documentation/reference URL and return bounded plain text with its final URL. |
+
+The existing native `ms_roblox_ui_audit` keeps its path/viewport/safe-fix schema. The imported `ms_roblox_gui_audit` is a separate measured StarterGui/PlayerGui inspector with target/root parameters. Select the exact live schema; their names do not collide.

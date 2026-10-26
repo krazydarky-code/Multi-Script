@@ -12,7 +12,7 @@ assert virtual['total']==263 and virtual['engineCounts']=={'roblox':90,'unity':7
 for v in virtual['tools'].values():
  assert v.get('providerRole') and len(v.get('performanceChecklist') or [])==6
  assert v['outputContract'].get('providerModelOwnsExecution') and v['outputContract'].get('nativeToolsOnly')
-assert len(b.BUILTIN_TOOLS)==279 and len(b.BUILTIN_TOOL_NAMES)==279
+assert len(b.BUILTIN_TOOLS)==json.loads((ROOT/'runtime/product-manifest.json').read_text())['catalogue']['directTools'] and len(b.BUILTIN_TOOL_NAMES)==json.loads((ROOT/'runtime/product-manifest.json').read_text())['catalogue']['directTools']
 assert all('provider-model' in t['description'].lower() for t in b.BUILTIN_TOOLS)
 for field in ['providerExecution','performance','resultQuality','toolDiscipline']:assert len(standard[field])>=6
 assert len(json.load(open(ROOT/'runtime'/'roblox-plugin-tools.json'))['tools'])==26

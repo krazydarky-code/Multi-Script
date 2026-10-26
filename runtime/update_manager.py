@@ -32,7 +32,7 @@ MAX_ZIP = 80 * 1024 * 1024
 MAX_EXPANDED = 300 * 1024 * 1024
 PRIVATE = {'config.json', '.env', 'engine-prefs.json', 'native_host.bat', 'native_host.sh',
            'com.multiscript.bridge.json', 'workspace-state.json', 'memory-graph.json'}
-PRIVATE_PARTS = {'studio-data', 'logs', 'generated', '.git', '.updates', 'node_modules', '.venv'}
+PRIVATE_PARTS = {'studio-data', 'logs', 'generated', '.git', '.updates', 'node_modules', '.venv', 'Multi-Script Memory'}
 
 
 def version(value):
@@ -81,7 +81,7 @@ def safe_path(root, name):
 
 def protected(name):
     p = PurePosixPath(name)
-    return any(x in PRIVATE_PARTS or x.startswith('.') for x in p.parts) or p.name in PRIVATE or p.name.endswith(('-state.json', '.pem', '.key', '.db', '.sqlite3', '.log'))
+    return any(x.casefold() in {part.casefold() for part in PRIVATE_PARTS} or x.startswith('.') for x in p.parts) or p.name.casefold() in PRIVATE or p.name.endswith(('-state.json', '.pem', '.key', '.db', '.sqlite3', '.log'))
 
 
 def https(url):

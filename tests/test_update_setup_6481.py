@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'runtime'))
 import update_manager as u
+import obsidian_vault
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import rsa,padding
 ROOT=Path(__file__).resolve().parents[1];key=rsa.generate_private_key(public_exponent=65537,key_size=3072);pub=key.public_key().public_numbers();cfg={'feedUrl':'https://updates.example.test/feed','publicKey':{'n':format(pub.n,'x'),'e':pub.e}}
@@ -54,10 +55,12 @@ spec=importlib.util.spec_from_file_location('setup6481',ROOT/'runtime/install_na
 with tempfile.TemporaryDirectory(prefix='ms-real-launcher-') as temp:
  r=Path(temp);runtime=r/'runtime';runtime.mkdir();ext=r/'extension';ext.mkdir();(r/'logs').mkdir()
  manifest=json.loads((ROOT/'extension/manifest.json').read_text());manifest['version']='9.9.1';(ext/'manifest.json').write_text(json.dumps(manifest));(runtime/'native_host.py').write_bytes((ROOT/'runtime/native_host.py').read_bytes());(runtime/'bridge.py').write_text('BRIDGE_VERSION = "9.9.1"\n')
- with patch.multiple(module,ROOT=str(r),HERE=str(runtime),EXT_DIR=str(ext),HOST_PY=str(runtime/'native_host.py'),LOG_DIR=str(r/'logs')),patch.object(module,'register',return_value=['fixture']) as register,patch.object(module,'detect_extension_ids',side_effect=AssertionError('Post-update must not scan browser profiles')),patch.object(module,'sandboxed_browsers',return_value=[]),patch.object(module,'ensure_websockets',return_value=True) as deps,patch.object(module,'ensure_pillow',return_value=True),patch.object(module,'replace_bridge',side_effect=AssertionError('Setup must not start a bridge')):
+ (runtime/'vault-library.json.gz').write_bytes((ROOT/'runtime/vault-library.json.gz').read_bytes())
+ with patch.multiple(module,ROOT=str(r),HERE=str(runtime),EXT_DIR=str(ext),HOST_PY=str(runtime/'native_host.py'),LOG_DIR=str(r/'logs')),patch.object(obsidian_vault,'HERE',runtime),patch.object(module,'register',return_value=['fixture']) as register,patch.object(module,'detect_extension_ids',side_effect=AssertionError('Post-update must not scan browser profiles')),patch.object(module,'sandboxed_browsers',return_value=[]),patch.object(module,'ensure_websockets',return_value=True) as deps,patch.object(module,'ensure_pillow',return_value=True),patch.object(module,'replace_bridge',side_effect=AssertionError('Setup must not start a bridge')):
   assert module.main(['--post-update','--no-pause','--no-start'])==0
   receipt=json.loads((r/'.updates/setup-complete.json').read_text());assert receipt['version']=='9.9.1' and receipt['launcherVerified'] and Path(receipt['root'])==r
   assert register.call_count==1 and deps.call_count==1
+  assert obsidian_vault.status()['available'],'Real installer must connect its file vault before reporting setup complete'
   (r/'.updates/setup-complete.json').unlink()
   with patch.object(module,'self_test',return_value=(False,'fixture launch failure')):assert module.main(['--post-update','--no-pause','--no-start'])==1
   assert not (r/'.updates/setup-complete.json').exists(),'A failed launcher cannot create a completion receipt'

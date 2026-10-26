@@ -12,7 +12,7 @@ assert pack['created'] and pack['iconCount']==6 and pack['style']=='duotone'
 assert all(Path(x['path']).is_file() and Path(x['path']).read_text().startswith('<svg') for x in pack['icons'])
 assert Path(pack['spriteSheet']).is_file() and Path(pack['contactSheet']).is_file() and Path(pack['manifest']).is_file()
 manifest=json.loads(Path(pack['manifest']).read_text())
-assert manifest['version']=='6.49.9' and manifest['icons'][0]['name']=='sword' and 'does not automatically upload' in manifest['usage']['roblox']
+assert manifest['version']==json.loads((ROOT/'extension/manifest.json').read_text())['version'] and manifest['icons'][0]['name']=='sword' and 'does not automatically upload' in manifest['usage']['roblox']
 # Unknown glyphs use a deterministic fallback rather than failing or emitting broken SVG.
 fallback=call('ms_create_icon_pack',{'icons':['custom-unknown'],'style':'pixel'})
 assert fallback['icons'][0]['knownGlyph'] is False and Path(fallback['icons'][0]['path']).is_file()

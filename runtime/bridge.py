@@ -20,6 +20,7 @@
 # ──────────────────────────────────────────────────────────────────────────
 import asyncio
 import concurrent.futures
+import functools
 import hashlib
 import html
 import json
@@ -1236,6 +1237,11 @@ _NON_IDEMPOTENT_NATIVE = frozenset({
     "user_keyboard_input", "user_mouse_input",
     "figma_create_node", "figma_update_node", "figma_import_svg", "figma_delete_node", "figma_set_selection",
     "use_figma", "create_new_file", "upload_assets", "generate_figma_design",
+    "bbmodel_create", "bbmodel_edit", "bbmodel_add_texture", "bbmodel_render",
+    "bbmodel_export_bedrock_geometry", "bbmodel_export_bedrock_animations",
+    "bbmodel_export_java_block", "bbmodel_export_obj", "bbmodel_export_gltf",
+    "bbmodel_particle_effect", "bbmodel_particle_pack", "bbmodel_convert_legacy",
+    "bbmodel_import_java_block", "bbmodel_export_modded_entity", "bbmodel_contact_sheet",
 })
 
 
@@ -1249,6 +1255,15 @@ def _looks_like_transient_studio_drop(text):
 
 
 # ── config.json read / write (for extension-driven add/remove) ──────────────
+_CONFIG_LOCK=threading.RLock()
+
+def _serial_config(fn):
+    @functools.wraps(fn)
+    def run(*args,**kwargs):
+        with _CONFIG_LOCK:return fn(*args,**kwargs)
+    return run
+
+
 def _read_config():
     if os.path.exists(CONFIG_PATH):
         try:
@@ -1270,6 +1285,7 @@ def _write_config(cfg):
     os.replace(tmp, CONFIG_PATH)
 
 
+@_serial_config
 def config_add_server(server_id, command, args=None, env=None):
     """Add/replace an addon server in config.json. Refuses to touch the primary
     (roblox) server. Returns (ok, error)."""
@@ -1292,6 +1308,7 @@ def config_add_server(server_id, command, args=None, env=None):
     return True, None
 
 
+@_serial_config
 def config_remove_server(server_id):
     """Remove an addon server from config.json. Refuses the primary server."""
     sid = (server_id or "").strip()
@@ -1537,7 +1554,7 @@ BUILTIN_TOOLS = [
          "expected_properties": {"type": "object", "description": "Optional exact name->value pairs to assert"},
          "studio_id": {"type": "string"}},
       "required": ["path"]}},
-    {"name": "ms_roblox_ui_audit", "description": "Measure a real GUI inside Roblox Studio and report what a player would see wrong: text that does not fit, very small text, low text contrast (with UIStroke taken into account), emoji in text, buttons smaller than a finger, objects off screen or cut off by the screen edge, zero-size objects, empty lists, lists whose canvas cannot scroll, images that did not load, and buttons covering each other. target=starter audits StarterGui in Edit mode; target=player audits the PlayerGui during a play test. root narrows it to one ScreenGui or frame path. Run it after building or changing any UI, fix everything it reports, run it again until clean, then screen_capture.",
+    {"name": "ms_roblox_gui_audit", "description": "Measure a real GUI inside Roblox Studio and report what a player would see wrong: text that does not fit, very small text, low text contrast (with UIStroke taken into account), emoji in text, buttons smaller than a finger, objects off screen or cut off by the screen edge, zero-size objects, empty lists, lists whose canvas cannot scroll, images that did not load, and buttons covering each other. target=starter audits StarterGui in Edit mode; target=player audits the PlayerGui during a play test. root narrows it to one ScreenGui or frame path. Use it for affected UI after a useful change. Check reported findings against the real interface, reuse unchanged evidence and recheck after relevant repairs; capture the delivered interface when available.",
      "inputSchema": {"type": "object", "properties": {
          "target": {"type": "string", "enum": ["starter", "player"], "description": "starter = StarterGui (Edit), player = PlayerGui (during play)"},
          "root": {"type": "string", "description": "Optional path, e.g. StarterGui.ShopGui or StarterGui.ShopGui.Window"},
@@ -4307,8 +4324,44 @@ def _native_facade_call(name, args, manager):
     return None
 
 
+_BLOCKBENCH_ATTACH_LOCK=threading.RLock()
+
+def _blockbench_workspace_call(args,manager):
+    import blockbench_workspace as blockbench
+    if args.get('action') not in ('status','prepare'):raise ValueError('Blockbench action must be status or prepare.')
+    if args.get('action')=='prepare':
+        if not manager.engine_enabled('blockbench'):raise RuntimeError('Blockbench assets are disabled in Engines settings.')
+        configured=_read_config().get('mcpServers',{}).get('blockbench')
+        if configured and configured.get('command')!='launch_blockbench_mcp.py':raise RuntimeError('Your existing Blockbench server configuration is preserved. Use that server or explicitly change it in settings before preparing the managed workspace.')
+        state=blockbench.prepare(render=args.get('render') is True)
+        with _CONFIG_LOCK:
+            configured=_read_config().get('mcpServers',{}).get('blockbench')
+            if configured and configured.get('command')!='launch_blockbench_mcp.py':raise RuntimeError('Blockbench configuration changed during preparation. Your custom server was preserved; connect that server or change it explicitly in settings.')
+            client=manager.clients.get('blockbench')
+            if client is None:
+                client=MCPClient('blockbench','launch_blockbench_mcp.py',[])
+                client.start()
+                with manager.index_lock:
+                    manager.clients['blockbench']=client
+                    manager.specs['blockbench']={'command':'launch_blockbench_mcp.py','args':[]}
+            elif not client.is_alive():client.start()
+            ping=client._request('ping',{},timeout=10)
+            if not client.is_alive() or not client.tools_cache or not ping or ping.get('error'):
+                raise RuntimeError('Blockbench runtime did not complete its live handshake and ping. Prepared files alone are not a connection; existing engine sessions were preserved.')
+            manager.rebuild_index()
+            if not configured:
+                ok,message=config_add_server('blockbench','launch_blockbench_mcp.py',[])
+                if not ok:raise RuntimeError('Blockbench connected, but its persistent configuration could not be saved: '+str(message))
+    else:state=blockbench.status()
+    client=manager.clients.get('blockbench')
+    connected=bool(client and client.is_alive() and client.tools_cache)
+    return {'text':json.dumps({**state,'connected':connected,'nativeTools':[t['name'] for t in client.tools_cache] if connected else [],'next':'Use the real advertised bbmodel_* schemas. Save useful increments, pass expected_revision on edits, validate and inspect actual renders; never treat preparation as model completion.' if connected else 'Prepare Blockbench to connect the file workspace. Existing engine connections and models are preserved.'}),'images':[]}
+
+
 def _builtin_call(name, arguments, manager):
     args = arguments or {}
+    if name=='ms_blockbench_workspace':
+        with _BLOCKBENCH_ATTACH_LOCK:return _blockbench_workspace_call(args,manager)
     if name=='ms_roblox_omni' and args.get('action')=='install':
         import omni_gui
         def install_omni(bundle, params):
@@ -4773,7 +4826,7 @@ def _builtin_call(name, arguments, manager):
         return {"text": json.dumps({"objective": args.get("objective"), "verdict": verdict, "scores": scores, "unscored": unscored, "priorityImprovements": priorities, "evidenceCount": len(evidence), "notes": args.get("notes") or []}, indent=2), "images": []}
     if name == "ms_roblox_build_verifier":
         return _roblox_build_verifier(args, manager)
-    if name == "ms_roblox_ui_audit":
+    if name == "ms_roblox_gui_audit":
         return _roblox_ui_audit(args, manager)
     if name == "ms_roblox_script_audit":
         return _roblox_script_audit(args, manager)
@@ -5674,7 +5727,7 @@ class MCPClient:
 # restarts of the bridge, the browser and the PC.
 ENGINE_PREFS_PATH = os.path.join(HERE, "engine-prefs.json")
 KNOWN_ENGINE_IDS = ("roblox", "unity", "godot", "blender", "figma")
-ENGINE_LABELS = {"roblox": "Roblox Studio", "unity": "Unity", "godot": "Godot", "blender": "Blender", "figma": "Figma"}
+ENGINE_LABELS = {"roblox": "Roblox Studio", "unity": "Unity", "godot": "Godot", "blender": "Blender", "figma": "Figma", "blockbench": "Blockbench assets"}
 
 
 def _load_engine_prefs():
@@ -7020,6 +7073,29 @@ async def handler(ws):
                     result=await asyncio.to_thread(PHONE_REMOTE.admin,str(msg.get('op') or 'status'),msg.get('payload') or {},owner)
                 except Exception as error:result={'ok':False,'error':str(error)[:500]}
                 await ws.send(json.dumps({'type':'mobile_admin','id':rid,**result}))
+
+            elif mtype=='obsidian_admin':
+                try:
+                    headers=getattr(getattr(ws,'request',None),'headers',None) or getattr(ws,'request_headers',{})
+                    if headers.get('Origin')!=mobile_remote.extension_origin():raise PermissionError('Vault settings require the installed Multi-Script extension origin.')
+                    import obsidian_vault as vault
+                    op=msg.get('op');payload=msg.get('payload') or {}
+                    if op=='status':result=vault.status()
+                    elif op=='setup':result=await asyncio.to_thread(vault.setup,payload.get('path') or None)
+                    elif op=='import':result=await asyncio.to_thread(vault.import_attachment,payload.get('path') or '')
+                    else:raise ValueError('Unknown vault settings operation.')
+                except Exception as error:result={'ok':False,'error':str(error)[:1000]}
+                await ws.send(json.dumps({'type':'obsidian_admin','id':rid,**result}))
+
+            elif mtype=='blockbench_workspace_admin':
+                try:
+                    headers=getattr(getattr(ws,'request',None),'headers',None) or getattr(ws,'request_headers',{})
+                    if headers.get('Origin')!=mobile_remote.extension_origin():raise PermissionError('Blockbench setup requires the installed Multi-Script extension origin.')
+                    response=await asyncio.to_thread(_builtin_call,'ms_blockbench_workspace',{'action':msg.get('op','status'),'render':msg.get('render') is True},mgr)
+                    result={'ok':True,**json.loads(response['text'])}
+                    if msg.get('op')=='prepare':asyncio.create_task(broadcast_status())
+                except Exception as error:result={'ok':False,'error':str(error)[:1000]}
+                await ws.send(json.dumps({'type':'blockbench_workspace_admin','id':rid,**result}))
 
             elif mtype=='blender_workspace_admin':
                 try:

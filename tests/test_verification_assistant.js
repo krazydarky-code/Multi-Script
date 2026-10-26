@@ -60,8 +60,11 @@ ok(stripComments("x = grecaptcha.execute();").includes("grecaptcha.execute"),
   "the comment stripper must KEEP real code - the check above must not be vacuous");
 // The one place we intentionally interact: a single click, and no token read.
 ok(/function assistChallengeClick/.test(arenaSrc), "the assisted click must exist");
-const clickFn = arenaSrc.slice(arenaSrc.indexOf("function assistChallengeClick"));
-const clickBody = clickFn.slice(0, clickFn.indexOf("\n  }\n"));
+const normalizedArena = arenaSrc.replace(/\r\n?/g,"\n");
+const clickFn = normalizedArena.slice(normalizedArena.indexOf("function assistChallengeClick"));
+const clickEnd = clickFn.indexOf("\n  }\n");
+ok(clickEnd>0,"The static gesture check must find the actual function boundary on Windows and Unix");
+const clickBody = clickFn.slice(0, clickEnd);
 ok(!/value\s*=/.test(clickBody), "the assisted click must never WRITE a value (token injection)");
 ok(!/\.value/.test(clickBody), "the assisted click must never READ a value (token harvesting)");
 ok(!/querySelector\([^)]*response/i.test(clickBody), "the assisted click must never look for a response field");

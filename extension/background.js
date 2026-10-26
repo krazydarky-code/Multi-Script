@@ -492,6 +492,8 @@ async function refreshStudioStatus() {
 
 function handleBridgeMessage(msg) {
   if(msg.type==='blender_workspace_admin'){resolvePending(msg.id,msg);return;}
+  if(msg.type==='blockbench_workspace_admin'){resolvePending(msg.id,msg);return;}
+  if(msg.type==='obsidian_admin'){resolvePending(msg.id,msg);return;}
   if ("studio" in msg && (typeof msg.studio === "boolean" || msg.studio === null)) {
     studioConnected = msg.studio;
   }
@@ -965,6 +967,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
       case 'ms_blender_companion':
         if(_sender.id!==chrome.runtime.id||(_sender.tab&&!coworkTabs.allowed(_sender.tab.url))||!['status','ensure','companion'].includes(msg.op)){sendResponse({ok:false,error:'Use the Multi-Script controls in a supported AI chat.'});break;}
         sendResponse(await send({type:'blender_workspace_admin',op:msg.op,payload:msg.payload,engines:msg.engines},15000));break;
+      case 'ms_blockbench_admin':
+        if(_sender.id!==chrome.runtime.id||(_sender.tab&&!coworkTabs.allowed(_sender.tab.url))){sendResponse({ok:false,error:'Use the Multi-Script controls in a supported chat.'});break;}
+        if(!['status','prepare'].includes(msg.op)){sendResponse({ok:false,error:'Unknown Blockbench operation.'});break;}
+        sendResponse(await send({type:'blockbench_workspace_admin',op:msg.op,render:msg.render===true},msg.op==='prepare'?300000:15000));break;
+      case 'ms_obsidian_admin':
+        if(_sender.id!==chrome.runtime.id||(_sender.tab&&!coworkTabs.allowed(_sender.tab.url))){sendResponse({ok:false,error:'Use the Multi-Script controls in a supported chat.'});break;}
+        if(!['status','setup','import'].includes(msg.op)){sendResponse({ok:false,error:'Unknown vault operation.'});break;}
+        sendResponse(await send({type:'obsidian_admin',op:msg.op,payload:msg.payload||{}},msg.op==='status'?15000:120000));break;
       case 'ms_update_admin':
         if(_sender.id!==chrome.runtime.id||(_sender.tab&&!coworkTabs.allowed(_sender.tab.url))){sendResponse({ok:false,error:'Updates require a supported Multi-Script page.'});break;}
         sendResponse(await releaseUpdates.handle(msg));break;
