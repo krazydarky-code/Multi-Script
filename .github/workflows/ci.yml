@@ -31,7 +31,12 @@ jobs:
         run: |
           python -m pip install websockets cryptography Pillow lupa
           npm install --no-save playwright@1.63.0 prosemirror-view@1.42.8 prosemirror-state@1.4.4 prosemirror-schema-basic@1.2.5 esbuild@0.25.12
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
+          # Hosted runners usually have the browser libraries already. Avoid
+          # slow OS mirror upgrades unless a real launch needs dependencies.
+          if ! node -e "(async()=>{const b=await require('playwright').chromium.launch({headless:true});await b.close()})().catch(e=>{console.error(e.message);process.exit(1)})"; then
+            npx playwright install-deps chromium
+          fi
           python tools/prepare_luau.py
           python tools/prepare_blockbench.py --ci-shard ${{ matrix.shard }}
           node -e "const fs=require('fs');const file=process.env.RUNNER_TEMP+'/native-editor.js';require('esbuild').buildSync({entryPoints:['tests/support/native-prosemirror.mjs'],bundle:true,format:'iife',outfile:file});fs.appendFileSync(process.env.GITHUB_ENV,'CHROMIUM_PATH='+require('playwright').chromium.executablePath()+'\nMS_NATIVE_EDITOR_BUNDLE='+file+'\n')"

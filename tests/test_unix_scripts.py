@@ -165,7 +165,9 @@ try:
         'esac\nexec "%s" "$@"\n' % (pyreal, pyreal))
     os.chmod(os.path.join(shim, "python3"), 0o755)
     proj2 = os.path.join(work, "proj2"); shutil.copytree(proj, proj2, ignore=shutil.ignore_patterns("__pycache__", "logs", ".venv"))
-    envs = dict(env, PATH=shim + ":" + minbin + ":" + os.path.dirname(pyreal), ZS_BRIDGE_PORT=str(free_port()))
+    # The shim delegates to an absolute interpreter. Exposing its directory
+    # would let versioned python3.x names bypass this simulated PEP 668 policy.
+    envs = dict(env, PATH=shim + ":" + minbin, ZS_BRIDGE_PORT=str(free_port()))
     script = ('. runtime/unix_env.sh; MS_ROOT="$PWD"; MS_LOG=t.log; mkdir -p logs; ms_find_python || exit 9; '
               'ms_ensure_websockets || exit 8; echo "PY=$PY"; "$PY" -c "import websockets;print(websockets.__version__)"')
     r = subprocess.run(["bash", "-c", script], cwd=proj2, env=envs, capture_output=True, text=True, timeout=200, stdin=subprocess.DEVNULL)
