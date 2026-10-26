@@ -6,6 +6,7 @@ const ZSProvider = (()=>{
   const aiHeading=h=>/^(?:Tell .{1,60} what to do next|Ask Brain|Brain\s*[²2]?)$/i.test(h.textContent.trim().replace(/\s+/g,' '));
   const editors='textarea,[contenteditable="true"],[contenteditable="plaintext-only"],[data-zs-locked]';
   const aiHint=/^(?:Type your request:\s*I[’']ll search, answer, or build it for you\.?|Turn ideas into action\.\s*Create tasks, documents, or anything else with a prompt\.?|From quick questions to big projects,?\s*I[’']m here to help you get it done\.?)$/i;
+  const agentCreation=root=>[...root.querySelectorAll('[role="tab"][aria-selected="true"],button[aria-pressed="true"],textarea[placeholder],[data-placeholder],[aria-placeholder]')].some(e=>!!e.getClientRects().length&&!e.closest('[hidden],[inert],[aria-hidden="true"]')&&(e.matches('[role="tab"],button')?/^(?:Agents|Super Agents)$/i.test(e.textContent.trim()):/^Describe goals, roles, tasks, or processes for your Super Agent/i.test(e.getAttribute('placeholder')||e.getAttribute('data-placeholder')||e.getAttribute('aria-placeholder')||'')));
   let landing=null;
   function privateScopes(){
     const roots=[...document.querySelectorAll('[data-testid="brain-chat"], [data-test="brain-chat"], cu-ai-chat, cu-brain-chat, cu-ai-chat-modal, cu-ai-chat-panel, cu-ai-hub-chat, cu-brain-chat-conversation, [data-testid="ai-chat"], [data-test="ai-chat"], [data-ms-clickup-ai-chat], [data-test="ai-hub-chat"]')];
@@ -15,7 +16,7 @@ const ZSProvider = (()=>{
     // in that same bounded surface and route. Never retain a human-channel root.
     if(landing){
       const {root,heading,frame}=landing;
-      if(landing.route!==route||!root.isConnected||root.closest(human)||root.querySelector(human)||heading.isConnected&&!aiHeading(heading))landing=null;
+      if(landing.route!==route||!root.isConnected||root.closest(human)||root.querySelector(human)||agentCreation(root)||heading.isConnected&&!aiHeading(heading))landing=null;
       else{
         if(!landing.editor.isConnected&&frame?.isConnected&&root.contains(frame))landing.editor=[...frame.querySelectorAll(editors)].filter(e=>!e.closest(human)).at(-1)||landing.editor;
         const editor=landing.editor;
@@ -31,12 +32,12 @@ const ZSProvider = (()=>{
       const hint=hintNode.getAttribute('placeholder')||hintNode.getAttribute('data-placeholder')||hintNode.getAttribute('aria-placeholder')||'';
       if(!aiHint.test(hint.trim().replace(/\s+/g,' '))||editor.closest(human)||roots.some(r=>r.contains(editor)))continue;
       for(let parent=editor.parentElement;parent&&parent!==document.body;parent=parent.parentElement){
-        if(parent.matches(human)||parent.querySelector(human))break;
+        if(parent.matches(human)||parent.querySelector(human)||agentCreation(parent))break;
         const heading=[...parent.querySelectorAll(headingSelector)].find(aiHeading)||[...parent.querySelectorAll('span,div')].find(e=>e.children.length<=2&&/^Brain\s*[²2]?$/i.test(e.textContent.trim()));
         if(heading){landing={root:parent,editor,heading,route,frame:editor.closest('form,[data-ms-ai-composer],[data-testid="composer"]')||editor.parentElement};roots.push(parent);break;}
       }
     }
-    return [...new Set(roots)];
+    return [...new Set(roots)].filter(root=>!agentCreation(root));
   }
   return MSDomChat.create({id:"clickup",name:"ClickUp",vision:false,persistentBarWhenNoEditor:true,preferComposerScope:true,
   scope:privateScopes,
