@@ -330,6 +330,17 @@
   }
 
 
+  function toolTransportFailure(text,names=[]) {
+    const value=String(text||'').trim();if(!value||value.length>6000)return null;
+    const known=new Set(['list_commands','list_tools','list_mcp_servers',...names.map(x=>String(typeof x==='string'?x:x.name||'').split('/').pop().split('.').pop())]);
+    const native=value.match(/^Tool\s+[`'\"]?([a-z][a-z0-9_]*)[`'\"]?\s+(?:does not exist|not found|is not available|is not registered)\.?\s*$/i);
+    if(native&&known.has(native[1]))return {tool:native[1],kind:'native-tool-route'};
+    if(/^(?:I (?:can['’]t|cannot|do not have)|No Multi-Script)/i.test(value)&&/\b(?:list_commands|Multi-Script command interface)\b/i.test(value)&&/\b(?:no|not|cannot|can['’]t|unavailable|isn['’]t)\b/i.test(value))return {tool:'list_commands',kind:'transport-denial'};
+    return null;
+  }
+  function toolTransportRepair(request='') {
+    return '[MULTI-SCRIPT TEXT TRANSPORT RECOVERY]\nThe provider-native function system cannot run local Multi-Script tools. Print the following JSON as ordinary visible answer text, not a function/tool invocation: {"command":"list_commands","params":{}}. The installed extension will execute that read-only discovery and return the real result. Do not claim the interface is absent without this actual text-transport check. Do not replay previous writes or pretend any native failed attempt was executed locally.'+(request?'\nOriginal user request — retain it and continue after discovery:\n'+String(request).slice(0,12000):'\nThis is initialization only; no user project task has started.');
+  }
   function nativeResponseError(item) {
     if(!item?.querySelectorAll)return null;
     const error=/something went wrong (?:while )?(?:generating|getting)|failed to generate (?:the |a )?response|error while generating (?:the |a )?response/i;
@@ -359,6 +370,6 @@
     return false;
   }
 
-  const api={appendResources,resourcePlan,resourcePrompt,STYLES,PACKS,skillPrompt,escape,validateSkill,importSkill,adaptSkill,selectSkills,executionBrief,executionBriefPrompt,newGame,stepGame,mountGame,CRITIC_DEFAULTS,sanitizeCritic,criticPrompt,ultraResearchPrompt,taskAddon,installedSkillsPrompt,ULTRA_METHODS,ultraMethodsPrompt,createCoworkQueue,nativeResponseError,structuredToolFailure};g.MSStudio=api;
+  const api={toolTransportFailure,toolTransportRepair,appendResources,resourcePlan,resourcePrompt,STYLES,PACKS,skillPrompt,escape,validateSkill,importSkill,adaptSkill,selectSkills,executionBrief,executionBriefPrompt,newGame,stepGame,mountGame,CRITIC_DEFAULTS,sanitizeCritic,criticPrompt,ultraResearchPrompt,taskAddon,installedSkillsPrompt,ULTRA_METHODS,ultraMethodsPrompt,createCoworkQueue,nativeResponseError,structuredToolFailure};g.MSStudio=api;
   if(typeof module!=="undefined"&&module.exports)module.exports=api;
 })(globalThis);

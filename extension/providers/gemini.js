@@ -125,7 +125,7 @@ const ZSProvider = (() => {
   // hooks could swallow the site's login button).
   const visible=e=>!!e?.isConnected&&!e.closest('[hidden],[inert],[aria-hidden="true"],#zs-root')&&!!e.getClientRects().length&&!['hidden','collapse'].includes(getComputedStyle(e).visibility);
   const getEditor = () => [...document.querySelectorAll('.ql-editor:not(.ql-clipboard),rich-textarea [role="textbox"]')].filter(e=>!e.closest(S.anyItem)&&(!e.closest('dialog,[role="dialog"]')||e.closest(S.inputArea))).find(visible)||null;
-  const editorText=()=>{const e=getEditor();return e?('value' in e?e.value:textWithout(e)).replace(/\u00a0/g,' ').trimEnd():'';};
+  const editorText=()=>{const e=getEditor();return e?('value' in e?e.value:typeof ZS!=='undefined'&&ZS.readComposer?ZS.readComposer(e):textWithout(e)).replace(/\u00a0/g,' ').trimEnd():'';};
 
 
   const lastAssistant = () => {
@@ -336,12 +336,28 @@ const ZSProvider = (() => {
   // it happens - and lets the Stop button remain usable.
   const INSERT_CHUNK_LINES = 120;
   async function setEditorText(ed, text, controls={}) {
+    text=String(text).replace(/\r\n?/g,'\n');
     ed.focus();
     const sel = window.getSelection();
     const range = document.createRange();
     range.selectNodeContents(ed);
     sel.removeAllRanges();
     sel.addRange(range);
+    // One browser edit lets Quill reconcile a complete document. Repeated
+    // line edits can be normalized between chunks and lose the insertion point.
+    // Escape every character that could introduce markup; these are text-only
+    // paragraphs matching the current native editor's observed document shape.
+    if(text&&text.length>0){
+      const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      const html=text.split('\n').map(line=>'<p style="white-space:pre-wrap">'+(escape(line)||'<br>')+'</p>').join('');
+      if(controls.cancelled?.())throw new Error('Gemini send cancelled before insertion.');
+      if(document.execCommand('insertHTML',false,html)){
+        await sleep(0);
+        if(controls.cancelled?.()||!ed.isConnected)throw new Error('Gemini send cancelled or composer changed after insertion.');
+        if(editorText()===text.replace(/\u00a0/g,' ').trimEnd())return;
+        range.selectNodeContents(ed);sel.removeAllRanges();sel.addRange(range);
+      }
+    }
     const lines = String(text).split("\n");
     if(!text)document.execCommand("delete");
     const t0 = Date.now();
@@ -366,7 +382,7 @@ const ZSProvider = (() => {
     controls={...controls,cancelled:()=>callerCancelled?.()||getEditor()!==ed||location.pathname!==route};
     // Cap BEFORE any comparison below, so the retry path's `editorText() !== text`
     // test compares against what we actually typed.
-    text = truncateForSend(text);
+    text = truncateForSend(String(text).replace(/\r\n?/g,'\n'));
     const relock = _locked;let clicked=false;sending=true;
     if (relock) ed.setAttribute("contenteditable", "true"); // injection needs it editable
     try {

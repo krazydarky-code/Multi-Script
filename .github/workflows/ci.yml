@@ -30,7 +30,7 @@ jobs:
       - name: Install test dependencies
         run: |
           python -m pip install websockets cryptography Pillow lupa pypdfium2==5.14.0
-          npm install --no-save playwright@1.63.0 prosemirror-view@1.42.8 prosemirror-state@1.4.4 prosemirror-schema-basic@1.2.5 esbuild@0.25.12
+          npm install --no-save playwright@1.63.0 prosemirror-view@1.42.8 prosemirror-state@1.4.4 prosemirror-schema-basic@1.2.5 esbuild@0.25.12 quill@2.0.3
           npx playwright install chromium
           # Hosted runners usually have the browser libraries already. Avoid
           # slow OS mirror upgrades unless a real launch needs dependencies.
@@ -40,6 +40,7 @@ jobs:
           python tools/prepare_luau.py
           python tools/prepare_blockbench.py --ci-shard ${{ matrix.shard }}
           node -e "const fs=require('fs');const file=process.env.RUNNER_TEMP+'/native-editor.js';require('esbuild').buildSync({entryPoints:['tests/support/native-prosemirror.mjs'],bundle:true,format:'iife',outfile:file});fs.appendFileSync(process.env.GITHUB_ENV,'CHROMIUM_PATH='+require('playwright').chromium.executablePath()+'\nMS_NATIVE_EDITOR_BUNDLE='+file+'\n')"
+          node -e "const fs=require('fs');const file=process.env.RUNNER_TEMP+'/native-quill.js';require('esbuild').buildSync({entryPoints:['tests/support/native-quill.mjs'],bundle:true,format:'iife',outfile:file});fs.appendFileSync(process.env.GITHUB_ENV,'MS_NATIVE_QUILL_BUNDLE='+file+'\n')"
       - name: Release integrity and syntax
         run: python tools/release_check.py
       - name: Required provider, updater, skill and UI checks

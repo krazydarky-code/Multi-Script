@@ -3,9 +3,9 @@
 const ZSProvider = (()=>{
   const human='cu-chat-channel, cu-chat-thread, cu-task-comment, [data-testid="team-chat"], [data-testid="task-comments"], [data-ms-human-chat]';
   const headingSelector='h1,h2,h3,[role="heading"]';
-  const aiHeading=h=>/^(?:Tell .{1,60} what to do next|Ask Brain)$/i.test(h.textContent.trim().replace(/\s+/g,' '));
+  const aiHeading=h=>/^(?:Tell .{1,60} what to do next|Ask Brain|Brain\s*[²2]?)$/i.test(h.textContent.trim().replace(/\s+/g,' '));
   const editors='textarea,[contenteditable="true"],[contenteditable="plaintext-only"],[data-zs-locked]';
-  const aiHint=/^(?:Type your request:\s*I[’']ll search, answer, or build it for you\.?|Turn ideas into action\.\s*Create tasks, documents, or anything else with a prompt\.?)$/i;
+  const aiHint=/^(?:Type your request:\s*I[’']ll search, answer, or build it for you\.?|Turn ideas into action\.\s*Create tasks, documents, or anything else with a prompt\.?|From quick questions to big projects,?\s*I[’']m here to help you get it done\.?)$/i;
   let landing=null;
   function privateScopes(){
     const roots=[...document.querySelectorAll('[data-testid="brain-chat"], [data-test="brain-chat"], cu-ai-chat, cu-brain-chat, cu-ai-chat-modal, cu-ai-chat-panel, cu-ai-hub-chat, cu-brain-chat-conversation, [data-testid="ai-chat"], [data-test="ai-chat"], [data-ms-clickup-ai-chat], [data-test="ai-hub-chat"]')];
@@ -32,7 +32,7 @@ const ZSProvider = (()=>{
       if(!aiHint.test(hint.trim().replace(/\s+/g,' '))||editor.closest(human)||roots.some(r=>r.contains(editor)))continue;
       for(let parent=editor.parentElement;parent&&parent!==document.body;parent=parent.parentElement){
         if(parent.matches(human)||parent.querySelector(human))break;
-        const heading=[...parent.querySelectorAll(headingSelector)].find(aiHeading);
+        const heading=[...parent.querySelectorAll(headingSelector)].find(aiHeading)||[...parent.querySelectorAll('span,div')].find(e=>e.children.length<=2&&/^Brain\s*[²2]?$/i.test(e.textContent.trim()));
         if(heading){landing={root:parent,editor,heading,route,frame:editor.closest('form,[data-ms-ai-composer],[data-testid="composer"]')||editor.parentElement};roots.push(parent);break;}
       }
     }

@@ -183,7 +183,10 @@ const ZSProvider = (() => {
   // The composer box the Start gate hides as one unit.
   const composerFrame = () =>
     (getEditor()?.closest(S.composer)) ||
-    (getEditor() ? getEditor().closest("form, .relative") : null);
+    // The current Svelte editor has a nested .relative text-only wrapper.
+    // Prefer the observed enclosing form, which owns Send/model/upload.
+    (getEditor()?.closest('form')) ||
+    (getEditor() ? getEditor().closest(".relative") : null);
 
   // Integrated status bar (same approach as Kimi): GLM is a Svelte app that
   // reconciles the composer subtree, so we must NOT insert our #zs-bar into it

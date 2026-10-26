@@ -48,7 +48,7 @@ const MSDomChat = (() => {
       return items.filter(e=>{for(let p=e.parentElement;p;p=p.parentElement)if(set.has(p))return false;return true;});
     }
     const assistants=()=>allItems().filter(isAssistantItem);
-    const lastAssistant=()=>assistants().at(-1)||null;
+    const lastAssistant=()=>{const item=assistants().at(-1)||null,failed=c.responseError?.()?.item;return failed&&availableTurn(failed)&&(!item||item===failed||item.compareDocumentPosition(failed)&Node.DOCUMENT_POSITION_FOLLOWING)?failed:item;};
     const assistantCount=()=>assistants().length,userCount=()=>allItems().filter(isUserItem).length;
     function itemText(item,exclude="") {
       if(!item)return "";
@@ -67,6 +67,7 @@ const MSDomChat = (() => {
     }
     function answerRoots(item){
       if(!item)return [];
+      if(c.responseError?.()?.item===item)return [];
       if(!c.reply||!isAssistantItem(item))return [item];
       const roots=typeof c.reply==="function"?c.reply(item):[...item.querySelectorAll(c.reply)];
       const list=Array.isArray(roots)?roots:roots?[roots]:[];
@@ -143,7 +144,7 @@ const MSDomChat = (() => {
     const scopeKeys=new WeakMap();let scopeSeq=0;
     const conversationKey=()=>{const root=scope();const key=c.contextAttributes?.map(k=>root?.getAttribute?.(k)).find(Boolean);if(c.contextAttributes&&root&&!key&&!scopeKeys.has(root))scopeKeys.set(root,++scopeSeq);return location.pathname+location.search+(c.contextAttributes?"|"+(key||scopeKeys.get(root)||"no-private-ai"):"");};
     function scanError(){return query("[role='alert'],[data-testid='chat-error']").filter(visible).filter(e=>!e.closest(c.turns)&&!(c.busyNotice&&c.busyNotice.test(e.textContent||''))).map(x=>x.textContent).join("\n").slice(0,2000);}
-    function responseError(){const item=lastAssistant();return c.nativeError&&item?.matches(c.nativeError)?{text:itemText(item).slice(0,1000)||c.name+" marked the response as failed."}:null;}
+    function responseError(){const failure=c.responseError?.();if(failure)return failure;const item=lastAssistant();return c.nativeError&&item?.matches(c.nativeError)?{text:itemText(item).slice(0,1000)||c.name+" marked the response as failed."}:null;}
     const isTooLongMsg=t=>/context.{0,20}(limit|exceed)|message.{0,20}too long|too many tokens/i.test(t||"");
     const isBusyMsg=t=>/rate.?limit(?:ed| exceeded| reached)|too many requests|try again later|temporarily unavailable|quota (?:exceeded|reached)/i.test(t||"");
     function installSendHooks(h){

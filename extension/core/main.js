@@ -445,7 +445,7 @@
     { name: "ChatGPT", url: "https://chatgpt.com/" },
     { name: "Claude", url: "https://claude.ai/new" },
     { name: "Gemini", url: "https://gemini.google.com/app" },
-    { name: "Kimi", url: "https://www.kimi.com/" },
+    { name: "Kimi", url: "https://www.kimi.ai/" },
     { name: "GLM", url: "https://chat.z.ai/" },
     { name: "Qwen", url: "https://chat.qwen.ai/" },
     { name: "Arena", group: "multi", url: "https://arena.ai/text/direct" },
@@ -963,7 +963,7 @@
     let attempt = 0, nativeAttempts=0;
     for (;;) {
       const res = await waitForResponse(base);
-      if(res.kind==='provider_error'&&!A.stop){if(await retryNativeResponse(res,nativeAttempts++))continue;return res;}
+      if(res.kind==='provider_error'&&!A.stop){if(typeof MSStudio!=='undefined'&&MSStudio.toolTransportFailure(res.text,A.toolList))return res;if(await retryNativeResponse(res,nativeAttempts++))continue;return res;}
       if (!SITE_KINDS.has(res.kind) || A.stop) return res;
       const nb = await siteRecover(res, attempt++);
       if (nb === null || nb === undefined || A.lastSendOk === false) return res;
@@ -2661,6 +2661,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
     const memUser = String(A.lastUserText || A.memLastUser || "");
     A.memLastUser = "";
     const memTools = [];
+    let transportRepairs=0;
     let truncCount = 0;
     let contextContinuations = 0;
     const MAX_TRUNC = 6;
@@ -2734,6 +2735,10 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
           ui.inputCover(true);
         }
         const res = await waitSiteSafe(base);
+        if(res.kind!=='tool'&&MSStudio.toolTransportFailure(res.text,A.toolList)){
+          if(transportRepairs++===0&&!A.stop){base=await submitAndGetBase(MSStudio.toolTransportRepair(A.lastUserText));if(A.lastSendOk)continue;}
+          A.taskOutcome='provider-failed';ui.banner('warn','Local tool transport was not confirmed','The model kept using an unavailable native function route or denying the text interface. No previous writes were replayed.');break;
+        }
         if(res.kind==="provider_error"){
           A.responseFailure={chat:P.conversationKey(),base,text:res.text};A.taskOutcome="provider-failed";A.lastSendOk=false;A.userStopped=true;
           coworkQueue?.pause("Provider response failed. Use the site's Retry, then Resume response in Multi-Script; queued requests remain paused.");
@@ -3666,6 +3671,13 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
       // NOT declare the session ready - abort quietly so "Start" stays available.
       if (A.stop || startRes.kind === "stopped") { diag("start.aborted", { kind: startRes.kind }); return; }
 
+      // A ready sentence or native-function error is not a completed handshake.
+      if(startRes.kind!=='tool'&&!SITE_KINDS.has(startRes.kind)&&(startRes.kind!=='provider_error'||MSStudio.toolTransportFailure(startRes.text,A.toolList))){
+        const repairBase=await submitAndGetBase(MSStudio.toolTransportRepair());
+        if(!alive()||A.stop||!A.lastSendOk)return;
+        startRes=await waitSiteSafe(repairBase);if(!alive()||A.stop)return;
+      }
+      let startupToolVerified=false;
       // The initial response is not always list_commands: some models discover
       // skills or request the next catalog page first. Return a real result for
       // every allowed discovery call rather than silently abandoning that turn.
@@ -3684,6 +3696,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
           feedback=await runTool(calls[0]);
           if (!alive()||A.stop) return;
           decorate.toolBox(startRes.item,name,feedbackIsError(feedback)?"err":"done",feedbackIsError(feedback)?outSummary(feedback):"discovery result returned",true);
+          if(!feedbackIsError(feedback))startupToolVerified=true;
           diag("start.discovery",{name,round:round+1});
         }
         const nextBase=await submitAndGetBase(feedback);
@@ -3705,6 +3718,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
         ui.banner('warn','Startup could not be verified',`${P.displayName} received the prompt, but no readable reply was detected. Startup stopped. Use the provider's Retry or open a new chat; no task is marked complete.`);
         return;
       }
+      if(!startupToolVerified){A.lastSendOk=false;A.taskOutcome='provider-failed';ui.banner('warn','Tool transport could not be verified','No successful ordinary-JSON discovery was returned. The session is not marked ready, and no build verification reminder was sent.');return;}
       bootstrapReady=true;failedStartups.delete(bootstrapClaimKey());saveFailedStartups();
       A.started = true;
       rememberSession(P.conversationKey()); // survives virtualization AND reloads

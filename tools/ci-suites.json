@@ -145,5 +145,8 @@
   "test_update_setup_worker_6481.js",
   "test_resource_preload_6501.js",
   "test_resource_send_6501.js",
-  "test_resource_recall_6501.py"
+  "test_resource_recall_6501.py",
+  "test_gemini_native_quill_6501.js",
+  "test_provider_current_layouts_6501.js",
+  "test_tool_handshake_6501.js"
 ]

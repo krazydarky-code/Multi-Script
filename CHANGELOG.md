@@ -1,6 +1,6 @@
 # 6.50.1
 
-Automatic bounded resource discovery, OMNI package/PDF access, scoped recent vault recall, Arena streaming optimizations and GitHub Discord/Ko-fi integration. Existing skills, phases, projects and releases are preserved.
+Automatic bounded resource discovery, OMNI package/PDF access, scoped recent vault recall, Arena streaming optimizations and GitHub Discord/Ko-fi integration. Current GLM/Gemini/ClickUp/Kimi.ai adapters, real startup handshake and bounded native-route recovery are repaired. Existing skills, phases, projects and releases are preserved.
 
 # Multi-Script 6.49.9 — GitHub account migration and delivery safeguards
 
