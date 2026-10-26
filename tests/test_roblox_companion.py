@@ -22,7 +22,7 @@ assert sum(t["permission"] in ("read", "project") for t in tools) == 17
 
 plugin_source = (ROOT / "roblox-plugin" / "MultiScriptCompanion.server.lua").read_text(encoding="utf-8")
 for required in [
-    'BRIDGE_URL = "http://127.0.0.1:17614"', 'PLUGIN_VERSION = "6.49.9"',
+    'BRIDGE_URL = "http://127.0.0.1:17614"', 'PLUGIN_VERSION = "'+json.loads((ROOT/'extension/manifest.json').read_text())['version']+'"',
     "DIAGNOSTIC_VERSION = 3", '"/plugin/register"', '"/plugin/next"',
     '"/plugin/result"', '"/plugin/unregister"', "PERMISSION_RANK",
     "Confirm Full tools", "Run non-destructive readiness scan", "readinessScore",
@@ -110,7 +110,7 @@ async def main():
         code, public_catalog = await request(port, "GET", "/catalog?fresh=1")
         assert code == 200 and public_catalog["nativeToolCount"] == 2 and public_catalog["companionPluginTools"] == 26
         code, status = await request(port, "GET", "/status")
-        assert code == 200 and status["bridgeVersion"] == "6.49.9"
+        assert code == 200 and status["bridgeVersion"] == json.loads((ROOT / "extension/manifest.json").read_text())["version"]
         assert status["roblox"]["connected"] is True and status["companionPlugin"]["connected"] is True
         assert "sessionToken" not in status["companionPlugin"] and "executionLastSeen" not in status["companionPlugin"]
 

@@ -17,7 +17,8 @@ def sample(spec):
         return {name:sample(props[name]) for name in spec.get('required',[]) if name in props}
     return None
 
-assert len(b.BUILTIN_TOOLS)==279
+expected=json.loads((ROOT/'runtime/product-manifest.json').read_text())['catalogue']['directTools']
+assert len(b.BUILTIN_TOOLS)==len(b.BUILTIN_TOOL_NAMES)==expected
 for tool in b.BUILTIN_TOOLS:
     schema=tool['inputSchema'];props=schema.get('properties',{})
     args={name:sample(props[name]) for name in schema.get('required',[])}

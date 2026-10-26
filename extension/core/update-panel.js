@@ -39,7 +39,7 @@ function mount(root,{send}){
 // Storage changes carry availability; no timer, history observer or native-host
 // polling is needed in provider tabs. Applying still uses the guarded service.
 function notice({root,menu,storage,version,send,openSettings,onLayout=()=>{}}){
- const doc=root.ownerDocument;let available=null,dismissed=null,overlay=null,previousFocus=null,disposed=false,locked=[],forcedOpen=false;
+ const doc=root.ownerDocument||g.document;let available=null,dismissed=null,overlay=null,previousFocus=null,disposed=false,locked=[],forcedOpen=false;
  const newer=(a,b)=>{const x=String(a).split('.').map(Number),y=String(b).split('.').map(Number);for(let i=0;i<4;i++)if((x[i]||0)!==(y[i]||0))return (x[i]||0)>(y[i]||0);return false;};
  const button=doc.createElement('button');button.id='ms-update-notice';button.type='button';button.hidden=true;button.setAttribute('aria-label','Update Multi-Script');button.title='A new Multi-Script update is ready';
  button.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>';

@@ -1,4 +1,4 @@
-# Multi-Script 6.50.0 Dev — integration candidate
+# Multi-Script 6.50.0 Dev
 
 Integrates the supplied production additions into the existing Multi-Script architecture while preserving all 249 skills, existing style methods and useful prior tools.
 
@@ -8,4 +8,4 @@ Integrates the supplied production additions into the existing Multi-Script arch
 - Reconnects signed publishing to the new GitHub repository, with retained trust key, serial writes, host-directed cooldowns, bounded retry/backoff and CI-gated immutable release publication.
 - Removes upstream product branding from the running product, prompts and normal docs while retaining required original attribution/licences in the legal directory.
 
-The candidate is not published yet. Final Blockbench and Obsidian support, full verification and actual installed updater activation are still being completed. See [verification](../QA_6.50.0.md) for the exact coverage and boundaries.
+This release contains the provider, production-tool and signed-delivery improvements above. Blockbench and the new Obsidian backend remain in development and are not included in 6.50.0. Existing memory features remain available. See [verification](../QA_6.50.0.md) for coverage and boundaries.

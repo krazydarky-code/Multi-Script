@@ -1,6 +1,6 @@
-# 6.50.0 verification — integration candidate
+# 6.50.0 verification
 
-This record distinguishes executed checks from pending coverage. It will be finalized against the release commit before publication. Fixtures do not certify every live signed-in provider account or native editor.
+This record distinguishes executed checks from coverage boundaries. The release publisher requires a successful CI run for its exact source commit and attaches the complete required-suite receipt to the release. Fixtures do not certify every live signed-in provider account or native editor.
 
 Executed locally during integration:
 
@@ -13,4 +13,6 @@ Executed locally during integration:
 - Lazy Roblox docs API/global lookup reads no guide-body shards; a page read loads only its shard. Search/read correctness passes. A cold API lookup took 0.027 seconds locally; no claim is made about arbitrary provider/network latency.
 - Product identity scan passes; original required third-party attribution/licences remain under `legal/upstream-gpl`.
 
-Pending before final publication: final all-suite/CI verification, all-provider update-badge layouts, Blockbench integration, dedicated Obsidian vault backend, final package/signature/public-feed/updater roundtrip and activation in the registered installation. Mem0 and Codebase Memory were evaluated only; neither is a release dependency.
+Release gates: source integrity/syntax, all required CI suites with zero failed or skipped entries, the separate Windows native Blender job, signed archive verification, frozen Public archive preservation, and matching GitHub asset digests. CI-verification-results.json records the exact source commit and executed suites.
+
+Coverage boundaries: browser fixtures do not certify every signed-in provider account, real Roblox upload/moderation or all engine gameplay. Blockbench and the new Obsidian backend are deferred from this release at the user’s request to publish now; the unfinished work is preserved separately. Mem0 and Codebase Memory are not release dependencies. The existing updater retains idle/session/draft protections; activation may require reloading the extension and provider tabs.

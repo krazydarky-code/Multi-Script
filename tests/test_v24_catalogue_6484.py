@@ -9,7 +9,9 @@ restored=json.loads((R/'runtime/skill-restorations.json').read_text())['restored
 assert len(raw)==249 and len(restored)==8
 base={k:v for k,v in raw.items() if k not in restored}
 assert len(base)==241
-assert hashlib.sha256(json.dumps(base,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()=='bbec8fcbf1e65661070093ca4059820efc46c4021d88458d69ef5995555f5ff2'
+sys.path.insert(0,str(R/'tests/support'))
+from skill_preservation_650 import assert_preserved_skills
+assert_preserved_skills(raw,legacy_base_sha='bbec8fcbf1e65661070093ca4059820efc46c4021d88458d69ef5995555f5ff2')
 class Manager:
  def health(self):return []
 for sid in ['check-clean-ui','check-props','code-quality','scripting-power','fix-errors','game-systems','npc-pathfinding','vfx-assets']:

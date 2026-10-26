@@ -6,7 +6,9 @@ import schema_audit,ultra_handbook
 baseline=json.loads((R/'tests/fixtures/ultra-before-6493.json').read_text(encoding='utf-8'))
 book=ultra_handbook.load();production=json.loads((R/'runtime/skill-resources/roblox-production/methods.json').read_text(encoding='utf-8'))
 digest=lambda value:hashlib.sha256(json.dumps(value,sort_keys=True,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
-assert hashlib.sha256((R/'runtime/skills.json').read_bytes()).hexdigest()==baseline['skillsSha256'],'Do not replace or add skill definitions for this expansion'
+sys.path.insert(0,str(R/'tests/support'))
+from skill_preservation_650 import assert_preserved_skills
+assert_preserved_skills(json.loads((R/'runtime/skills.json').read_text(encoding='utf-8')),legacy_file_sha=baseline['skillsSha256'])
 assert set(book['manuals'])==set(baseline['manuals']) and len(book['manuals'])==12
 for mid,previous in baseline['manuals'].items():
     manual=book['manuals'][mid]
