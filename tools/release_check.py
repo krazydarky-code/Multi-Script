@@ -3,7 +3,7 @@
 from pathlib import Path
 import json, re, subprocess, sys
 ROOT=Path(__file__).resolve().parents[1]
-VERSION="6.50.1"
+VERSION="6.50.2"
 errors=[]
 def need(ok,msg):
     if not ok: errors.append(msg)
@@ -30,7 +30,7 @@ required=['runtime/product-manifest.json','tools/critic_loop.py','docs/VSCODE_EX
 required += ['runtime/figma_link.py','runtime/launch_figma_mcp.py','figma-plugin/manifest.json','figma-plugin/code.js','figma-plugin/ui.html','extension/core/ultra-manuals.js','docs/FIGMA.md','docs/CLICKUP.md','docs/ULTRA_MANUALS.md','tests/test_figma_bridge.py','tests/test_figma_ui_roundtrip.js','tests/test_ultra_manuals.js']
 required += ['extension/core/ultra-craft.js','extension/updates.js','runtime/update_manager.py','runtime/update-channel.json','tools/sign_update.py','docs/UPDATES.md','tests/test_update_manager.py','tests/test_updates.js','tests/test_updates_browser.js','tests/test_ultra_craft.js']
 required += ['extension/core/execution-discipline.js','runtime/skill_references.py','runtime/skill-resources/stud-creatures/LICENSE','runtime/skill-resources/stud-creatures/MULTI-SCRIPT.md','runtime/skill-resources/roblox-service-style/GUIDE.md','legal/upstream-gpl/1.24.20-LICENSE.txt','legal/upstream-gpl/1.24.20-BRANDING-NOTICE.txt','tests/test_execution_guard_loop_646.js','tests/test_effort_delivery_646.js','tests/test_chat_studio_isolation_646.js','tests/test_skill_references_646.py','tests/test_roblox_probe_capabilities_646.py']
-required += ['runtime/tool_discovery.py','runtime/plugin_console.py','docs/MODES_AND_MEDIA.md','docs/QA_6.50.1.md','tests/test_tool_discovery_647.py','tests/test_plugin_transfer_wire_647.py','tests/test_roblox_workbench_647.py','tests/support/roblox-plugin-host.lua','tests/test_tool_discovery_browser_647.js','tests/test_notion_runtime_roundtrip_647.js','tests/test_plugin_workbench_preview_647.js']
+required += ['runtime/tool_discovery.py','runtime/plugin_console.py','docs/MODES_AND_MEDIA.md','docs/QA_6.50.2.md','tests/test_tool_discovery_647.py','tests/test_plugin_transfer_wire_647.py','tests/test_roblox_workbench_647.py','tests/support/roblox-plugin-host.lua','tests/test_tool_discovery_browser_647.js','tests/test_notion_runtime_roundtrip_647.js','tests/test_plugin_workbench_preview_647.js']
 required += ['extension/core/update-panel.js','extension/core/roblox-production.js','runtime/skill-resources/roblox-production/methods.json','runtime/skill-resources/roblox-production/GUI.md','runtime/skill-resources/roblox-production/ANIMATION.md','runtime/skill-resources/roblox-production/PROVENANCE.json','tools/sync_production_methods.py','tests/test_updates_recovery_648.js','tests/test_update_reliability_648.py','tests/test_update_progress_browser_648.js','tests/test_production_methods_648.js','tests/test_production_resources_648.py']
 required += ['tests/test_chatgpt_composer_6481.js','tests/test_native_methods_6484.js','tests/test_native_popups_6484.js','tests/test_gemini_compatibility_6484.js','tests/test_v24_catalogue_6484.py','runtime/skill-restorations.json','tests/test_startup_budget_6485.js','tests/test_ultra_scope_6485.js','tests/test_restored_specialists_6485.py','tests/test_startup_comparison_6485.js','tests/test_update_setup_6481.py','tests/test_update_setup_worker_6481.js','tests/test_chatgpt_runtime_roundtrip_6481.js','tests/test_claude_runtime_roundtrip_6481.js']
 need(not (ROOT/'extension/providers/crax.js').exists(),'Crax adapter must be removed from the current build')
@@ -40,14 +40,14 @@ required += ['tests/test_bar_presentation_6483.js','tests/test_gemini_runtime_ro
 required += ['tests/test_provider_error_reload_6483.js','tests/test_deepseek_send_safety_6486.js','tests/test_deepseek_pacing_6486.js','tests/test_deepseek_startup_6486.js','docs/DEEPSEEK_ACCOUNT_ACCESS.md','tests/test_deepseek_engine_startup_6487.js']
 required += ['runtime/ultra-handbook.json','runtime/ultra_handbook.py','extension/core/ultra-handbook.js','tools/sync_ultra_handbook.py','tests/test_ultra_handbook_6488.js','tests/test_handbook_skills_6488.py','tests/test_handbook_browser_6488.js','tests/test_provider_boundaries_6488.js']
 required += ['runtime/blender_workspace.py','runtime/blender_workspace_worker.py','runtime/blender_workspace_http.py','runtime/blender_portable.py','runtime/blender-runtime.json','runtime/blender-studio/index.html','runtime/blender-studio/studio.js','runtime/blender-studio/studio.bundle.js','runtime/blender-studio/studio.css','runtime/blender-studio/package-lock.json','runtime/blender-studio/THIRD_PARTY_LICENSES.txt','docs/BLENDER_WORKSPACE.md','tests/test_blender_workspace_real_6490.py','tests/test_blender_workspace_browser_6490.js']
-required += ['extension/blender-tabs.js','extension/workspace-link.js','runtime/blender-studio/assistant.js','tests/test_gemini_slow_response_6491.js','tests/test_blender_session_grants_6491.js','docs/QA_6.50.1.md']
-required += ['runtime/blender_pipeline.py','runtime/blender_preview_materials.py','runtime/blender-studio/pipeline.js','tests/test_blender_companion_real_6492.py','tests/test_blender_companion_entry_6492.js','tests/test_blender_preview_persistence_6492.py','tests/test_provider_regressions_6492.js','docs/QA_6.50.1.md']
-required += ['tests/fixtures/ultra-before-6493.json','tests/test_existing_manual_expansion_6493.py','tests/test_existing_manual_browser_6493.js','docs/QA_6.50.1.md']
-required += ['tests/test_provider_composers_6495.js','tests/test_chatgpt_rich_roundtrip_6495.js','docs/QA_6.50.1.md']
-required += ['tests/test_prompt_reference_delivery_6496.js','tests/test_blender_target_routing_6496.py','tests/test_blender_target_entry_6496.js','docs/QA_6.50.1.md']
-required += ['runtime/blender_worker_lifecycle.py','tests/test_blender_connection_faults_6497.py','tests/test_blender_owner_lifecycle_6497.py','tests/test_glm_runtime_roundtrip_6497.js','tests/test_kimi_runtime_roundtrip_6497.js','tests/test_glm_kimi_sends_6497.js','tests/test_effort_appearance_6497.js','docs/QA_6.50.1.md']
-required += ['tests/test_compact_effort_bar_6498.js','tests/test_effort_slider_6498.js','tests/test_provider_bar_resize_6498.js','docs/QA_6.50.1.md']
-required += ['tests/test_progress_efficiency_6499.js','tests/test_vani_progress_performance_6499.js','tests/test_catalog_paging_6499.js','docs/QA_6.50.1.md']
+required += ['extension/blender-tabs.js','extension/workspace-link.js','runtime/blender-studio/assistant.js','tests/test_gemini_slow_response_6491.js','tests/test_blender_session_grants_6491.js','docs/QA_6.50.2.md']
+required += ['runtime/blender_pipeline.py','runtime/blender_preview_materials.py','runtime/blender-studio/pipeline.js','tests/test_blender_companion_real_6492.py','tests/test_blender_companion_entry_6492.js','tests/test_blender_preview_persistence_6492.py','tests/test_provider_regressions_6492.js','docs/QA_6.50.2.md']
+required += ['tests/fixtures/ultra-before-6493.json','tests/test_existing_manual_expansion_6493.py','tests/test_existing_manual_browser_6493.js','docs/QA_6.50.2.md']
+required += ['tests/test_provider_composers_6495.js','tests/test_chatgpt_rich_roundtrip_6495.js','docs/QA_6.50.2.md']
+required += ['tests/test_prompt_reference_delivery_6496.js','tests/test_blender_target_routing_6496.py','tests/test_blender_target_entry_6496.js','docs/QA_6.50.2.md']
+required += ['runtime/blender_worker_lifecycle.py','tests/test_blender_connection_faults_6497.py','tests/test_blender_owner_lifecycle_6497.py','tests/test_glm_runtime_roundtrip_6497.js','tests/test_kimi_runtime_roundtrip_6497.js','tests/test_glm_kimi_sends_6497.js','tests/test_effort_appearance_6497.js','docs/QA_6.50.2.md']
+required += ['tests/test_compact_effort_bar_6498.js','tests/test_effort_slider_6498.js','tests/test_provider_bar_resize_6498.js','docs/QA_6.50.2.md']
+required += ['tests/test_progress_efficiency_6499.js','tests/test_vani_progress_performance_6499.js','tests/test_catalog_paging_6499.js','docs/QA_6.50.2.md']
 required += ['tests/test_scene_bar_layout_6499.js','tests/test_scene_bar_resize_6499.js']
 required += ['tests/test_bar_space_recovery_6499.js','tests/test_response_recovery_6499.js','tests/test_task_activity_6499.js','tests/test_arena_stream_performance_6499.js','tests/test_incremental_application_6499.js','tests/test_prompt_wording_ab_6499.js','tests/test_menu_idle_layout_6499.js']
 required += ['runtime/obsidian_vault.py','runtime/vault-library.json.gz','runtime/blockbench_workspace.py','runtime/launch_blockbench_mcp.py','docs/OBSIDIAN.md','docs/BLOCKBENCH.md']
@@ -82,8 +82,8 @@ need((ROOT/'tests/test_elevenlabs_settings.py').is_file(),'missing ElevenLabs se
 need((ROOT/'tests/test_roblox_companion.py').is_file(),'missing Roblox companion test')
 need((ROOT/'tests/test_tool_parameter_contracts.py').is_file(),'missing parameter contract test')
 need((ROOT/'tests/test_model_improvement_layer.py').is_file(),'missing model-improvement architecture test')
-need((ROOT/'tests/test_creative_production_6361.js').is_file(),'missing 6.50.1 creative production prompt/settings test')
-need((ROOT/'tests/test_creative_asset_pack_6361.py').is_file(),'missing 6.50.1 icon asset generation test')
+need((ROOT/'tests/test_creative_production_6361.js').is_file(),'missing 6.50.2 creative production prompt/settings test')
+need((ROOT/'tests/test_creative_asset_pack_6361.py').is_file(),'missing 6.50.2 icon asset generation test')
 need((ROOT/'tests/test_full_spectrum_skill_mesh.py').is_file(),'missing full-spectrum skill mesh test')
 need('ms_roblox_capability_audit' in direct_names if 'direct_names' in locals() else True,'missing Roblox capability audit')
 need((ROOT/'tests/test_arena_human_verification.js').is_file(),'missing Arena verification test')
@@ -97,7 +97,7 @@ need((ROOT/'docs/release-notes/RELEASE_NOTES_6.28.2.md').is_file(),'missing 6.28
 need((ROOT/'docs/release-notes/RELEASE_NOTES_6.28.3.md').is_file(),'missing 6.28.3 release notes')
 need((ROOT/'docs/release-notes/RELEASE_NOTES_6.29.0.md').is_file(),'missing 6.29.0 release notes')
 need((ROOT/'docs/release-notes/RELEASE_NOTES_6.29.1.md').is_file(),'missing 6.29.1 release notes')
-need((ROOT/'docs/release-notes/RELEASE_NOTES_6.50.1.md').is_file(),'missing 6.50.1 release notes')
+need((ROOT/'docs/release-notes/RELEASE_NOTES_6.50.2.md').is_file(),'missing 6.50.2 release notes')
 readme=(ROOT/'README.md').read_text(encoding='utf-8')
 policy=load('release-policy.json')
 need(policy.get('primaryEdition')=='dev' and policy.get('publicBuild')=='frozen','release policy must keep Dev primary and Public frozen')

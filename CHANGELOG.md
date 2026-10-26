@@ -1,3 +1,7 @@
+# 6.50.2
+
+Fix fresh Obsidian context recall after actual native-bridge argument normalization. Preserve explicit cached reads, add an index-warm/external-note regression and retain all 6.50.1 resources/provider fixes.
+
 # 6.50.1
 
 Automatic bounded resource discovery, OMNI package/PDF access, scoped recent vault recall, Arena streaming optimizations and GitHub Discord/Ko-fi integration. Current GLM/Gemini/ClickUp/Kimi.ai adapters, real startup handshake and bounded native-route recovery are repaired. Existing skills, phases, projects and releases are preserved.

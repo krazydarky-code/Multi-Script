@@ -25,6 +25,18 @@ class Recall(unittest.TestCase):
    self.assertTrue(v.context({'project':'my_game'})['recent'])
    (root/'A newer note.md').write_text('freshcontextcanary',encoding='utf-8')
    self.assertTrue(v.context({'query':'freshcontextcanary','refresh':True})['results'])
+ def test_context_freshness_through_actual_schema_normalization(self):
+  import bridge
+  schema=next(tool['inputSchema'] for tool in bridge.BUILTIN_TOOLS if tool['name']=='ms_obsidian')
+  with tempfile.TemporaryDirectory() as temp,patch.dict(os.environ,{'MS_STUDIO_DATA_DIR':temp+'/data','MS_OBSIDIAN_VAULT':temp+'/vault'}):
+   v.setup();v.search({'query':'freshschemacanary','refresh':True})
+   (v._root()/'New external memory.md').write_text('freshschemacanary',encoding='utf-8')
+   cached=bridge._normalize_tool_arguments(schema,{'action':'context','query':'freshschemacanary','refresh':False},'ms_obsidian')
+   self.assertFalse(json.loads(v.call(cached)['text'])['results'],'An explicit cached read remains supported')
+   actual=bridge._normalize_tool_arguments(schema,{'action':'context','query':'freshschemacanary'},'ms_obsidian')
+   results=json.loads(v.call(actual)['text'])['results']
+   self.assertTrue(results,'The newly added note must survive native schema normalization')
+   self.assertEqual(results[0]['path'],'New external memory.md','Native schema defaults must preserve fresh context recall')
  def test_real_pdf_page_and_bounds(self):
   from PIL import Image
   import base64,io

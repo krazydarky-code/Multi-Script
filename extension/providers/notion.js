@@ -1548,7 +1548,7 @@ This metadata is not a separate user task. Apply the shared Multi-Script instruc
       // acceptance now comes from isAiSurface(), a genuine explicit open, or
       // positive AI-composer evidence - see surfaceOk().
       try {
-        document.documentElement.dataset.zsNotionVer = "6.50.1";
+        document.documentElement.dataset.zsNotionVer = "6.50.2";
         new MutationObserver(() => { if (_editorCache && !_editorCache.isConnected) _editorCache = null; })
           .observe(document.documentElement, { childList: true, subtree: true });
       } catch {}

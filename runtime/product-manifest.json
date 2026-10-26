@@ -1,6 +1,6 @@
 {
   "product": "Multi-Script",
-  "version": "6.50.1",
+  "version": "6.50.2",
   "catalogue": {
     "skills": 249,
     "directTools": 285,
@@ -20,7 +20,7 @@
     "general"
   ],
   "robloxCompanion": {
-    "version": "6.50.1",
+    "version": "6.50.2",
     "diagnosticOnly": false,
     "companionTools": 26,
     "defaultPermission": "off",
@@ -182,7 +182,7 @@
     "persistence": "Native .blend saved before preview export; stopped-worker snapshot/preview restored from disk with a Resume Blender control.",
     "handoff": "Validated Unity FBX / Godot GLB project-folder copy or pinned Roblox GLB download. Existing assets require explicit overwrite. Import verification remains a separate engine operation."
   },
-  "build": "6.50.1-integrated-production",
+  "build": "6.50.2-integrated-production",
   "omni": {
     "references": 522,
     "reviewedModules": 6,

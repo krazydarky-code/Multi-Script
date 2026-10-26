@@ -66,7 +66,7 @@ def references(args):
 def bundle(namespace=None):
     namespace=namespace or 'MultiScriptOmni_'+uuid.uuid4().hex[:12]
     if not isinstance(namespace,str) or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,59}',namespace):raise ValueError('Use a namespace of up to 60 letters/digits/underscores, starting with a letter.')
-    lines=['local RS = game:GetService("ReplicatedStorage")',f'assert(not RS:FindFirstChild("{namespace}"), "Existing namespace preserved; choose a fresh name")','local folder = Instance.new("Folder")',f'folder.Name = "{namespace}"','folder:SetAttribute("MultiScriptOmni", "6.50.1")','local ok, message = pcall(function()']
+    lines=['local RS = game:GetService("ReplicatedStorage")',f'assert(not RS:FindFirstChild("{namespace}"), "Existing namespace preserved; choose a fresh name")','local folder = Instance.new("Folder")',f'folder.Name = "{namespace}"','folder:SetAttribute("MultiScriptOmni", "6.50.2")','local ok, message = pcall(function()']
     hashes={}
     for name in MODULES:
         source=(HERE/'modules'/(name+'.luau')).read_text(encoding='utf-8');hashes[name]=hashlib.sha256(source.encode()).hexdigest()

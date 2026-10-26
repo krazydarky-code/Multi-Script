@@ -15,7 +15,7 @@ Multi-Script connects supported AI chat websites to **Roblox Studio, Unity, Godo
 
 **[Download & install](https://github.com/krazydarky-code/Multi-Script/releases/latest)** · [Setup guide](docs/INSTALL.md) · [Ultra workflows](docs/ULTRA_MANUALS.md) · [Obsidian memory](docs/OBSIDIAN.md) · [Update guide](docs/UPDATES.md)
 
-## Ultra resource discovery · 6.50.1
+## Ultra resource discovery · 6.50.2
 
 Ultra loads a compact selection of relevant manual excerpts, OMNI reference observations/recipes, Forge capabilities and available project memory with your original task. It reuses those reads; the complete library remains available on demand. OMNI exposes its actual source/recipe packages and can preview reference pages from the original PDF imported into your vault. Generated assets still require real project integration and verification.
 
@@ -29,11 +29,11 @@ Run **Setup.bat** (or the platform Setup launcher) in the complete permanent fol
 
 GitHub’s **Sponsor** button opens Ko-fi. Bug reports and feature requests remain available through [Issues](https://github.com/krazydarky-code/Multi-Script/issues); Discord and Ko-fi also appear in the issue chooser. Donations do not unlock provider subscriptions or bypass their limits.
 
-Current packages: `Multi-Script-6.50.1-Dev.zip` and `Multi-Script-6.50.1-Bundle.zip`, with the unchanged `Multi-Script-6.42.0-Public.zip` companion. The running terminal should report `Multi-Script Bridge v6.50.1`.
+Current packages: `Multi-Script-6.50.2-Dev.zip` and `Multi-Script-6.50.2-Bundle.zip`, with the unchanged `Multi-Script-6.42.0-Public.zip` companion. The running terminal should report `Multi-Script Bridge v6.50.2`.
 
 ## Delivery & coverage
 
-Dev uses a public signed feed; users need no GitHub account. Tested main commits publish through the scoped release workflow, serial uploads and immutable versioned assets. See [delivery safeguards](docs/GITHUB_DELIVERY.md) and [6.50.1 verification](docs/QA_6.50.1.md). Tests document their actual coverage; they do not certify every signed-in provider account or device.
+Dev uses a public signed feed; users need no GitHub account. Tested main commits publish through the scoped release workflow, serial uploads and immutable versioned assets. See [delivery safeguards](docs/GITHUB_DELIVERY.md) and [6.50.2 verification](docs/QA_6.50.2.md). Tests document their actual coverage; they do not certify every signed-in provider account or device.
 
 <details>
 <summary><strong>6.50.0 features, setup details and earlier improvements</strong></summary>
