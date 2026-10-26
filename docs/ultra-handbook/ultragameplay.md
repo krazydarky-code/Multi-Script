@@ -106,6 +106,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The failed owner/transition is repaired without masking it with cosmetic changes.
 
+## Resource application
+
+- retrieve: project memory decisions and existing gameplay/economy skills
+
+- apply: Reuse current services and ownership boundaries. Connect UI and effects only when the requested mechanic needs them; test server-authoritative outcomes and failure paths.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

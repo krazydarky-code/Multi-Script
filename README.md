@@ -1,11 +1,42 @@
 # Multi-Script
 
-Multi-Script connects supported AI chat websites to local tools for **Roblox Studio, Unity, Godot and Blender**. It includes 249 production skills, twelve Ultra specialist manuals, configurable effort modes, a browser chatbar, and a local bridge for project work. Engine access follows the active session and its permissions.
+![Multi-Script — your chat, your tools, your project](docs/assets/readme-banner.svg)
 
-- **Install:** download the [latest Dev release](https://github.com/krazydarky-code/Multi-Script/releases/latest), extract it to a permanent folder, run Setup, and load its extension folder. Keep your existing browser profile and private project data when upgrading.
-- **Updates:** Dev uses a public signed feed and verifies archive identity/hashes before an explicit idle install. Users do not need a GitHub account. [Update and migration guide](docs/UPDATES.md).
-- **Publishing:** tested main commits publish only when the maintainer enables `MS_AUTOPUBLISH`. Writes are serial, matching draft assets are reused, and published versions remain immutable. [GitHub delivery safeguards](docs/GITHUB_DELIVERY.md).
-- **Verification:** local provider fixtures, native-editor tests, real engine checks and CI receipts document their coverage. They do not guarantee every live provider/account combination.
+[![Latest release](https://img.shields.io/github/v/release/krazydarky-code/Multi-Script?style=for-the-badge&color=9b87f5&label=Download)](https://github.com/krazydarky-code/Multi-Script/releases/latest) [![Discord community](https://img.shields.io/badge/Discord-Join_the_community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/5Q6vvNcpM6) [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support_Multi--Script-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white)](https://ko-fi.com/multixscript) [![License](https://img.shields.io/badge/License-GPL--3.0-6b798e?style=for-the-badge)](LICENSE)
+
+Multi-Script connects supported AI chat websites to **Roblox Studio, Unity, Godot, Blender, Figma and headless Blockbench** through a local tool bridge. Keep your provider, your project and your workflow. Engine access follows the active session and its permissions.
+
+| Capability | What you get |
+| --- | --- |
+| **Create** | Native project tools and editable source assets |
+| **Reuse** | 249 skills, 12 Ultra manuals, OMNI references and Forge art generation |
+| **Remember** | A root Obsidian vault with scoped project notes and bounded recall |
+| **Verify** | Real tool results, readback, captures and executed checks |
+
+**[Download & install](https://github.com/krazydarky-code/Multi-Script/releases/latest)** · [Setup guide](docs/INSTALL.md) · [Ultra workflows](docs/ULTRA_MANUALS.md) · [Obsidian memory](docs/OBSIDIAN.md) · [Update guide](docs/UPDATES.md)
+
+## Ultra resource discovery · 6.50.1
+
+Ultra loads a compact selection of relevant manual excerpts, OMNI reference observations/recipes, Forge capabilities and available project memory with your original task. It reuses those reads; the complete library remains available on demand. OMNI exposes its actual source/recipe packages and can preview reference pages from the original PDF imported into your vault. Generated assets still require real project integration and verification.
+
+Run **Setup.bat** (or the platform Setup launcher) in the complete permanent folder, then load `extension` in your browser. Setup connects **Multi-Script Memory** beside `extension` and `runtime`; private notes, imported originals and projects survive signed updates. Reload the extension and refresh existing provider tabs after an update.
+
+## Community & support
+
+| Join the community | Support development |
+| --- | --- |
+| **[Multi-Script Discord](https://discord.gg/5Q6vvNcpM6)** — setup help, workflow discussions and project sharing. | **[Multi-Script on Ko-fi](https://ko-fi.com/multixscript)** — optional support for continued development. |
+
+GitHub’s **Sponsor** button opens Ko-fi. Bug reports and feature requests remain available through [Issues](https://github.com/krazydarky-code/Multi-Script/issues); Discord and Ko-fi also appear in the issue chooser. Donations do not unlock provider subscriptions or bypass their limits.
+
+Current packages: `Multi-Script-6.50.1-Dev.zip` and `Multi-Script-6.50.1-Bundle.zip`, with the unchanged `Multi-Script-6.42.0-Public.zip` companion. The running terminal should report `Multi-Script Bridge v6.50.1`.
+
+## Delivery & coverage
+
+Dev uses a public signed feed; users need no GitHub account. Tested main commits publish through the scoped release workflow, serial uploads and immutable versioned assets. See [delivery safeguards](docs/GITHUB_DELIVERY.md) and [6.50.1 verification](docs/QA_6.50.1.md). Tests document their actual coverage; they do not certify every signed-in provider account or device.
+
+<details>
+<summary><strong>6.50.0 features, setup details and earlier improvements</strong></summary>
 
 # Multi-Script 6.50.0 — deeper existing Ultra methods
 
@@ -92,3 +123,5 @@ Provider sessions now discovers open supported tabs, reads bounded briefs locall
 ### 6.50.0 local asset and reference support
 
 Setup creates a connected **Multi-Script Memory** Obsidian vault in this installation root. The library and imported original archives/media stay outside extension code and are preserved by updates. See [vault setup](docs/OBSIDIAN.md). Headless Blockbench preparation and its optional renderer are in Settings → Engines; see [Blockbench setup](docs/BLOCKBENCH.md). These additions extend the existing skills and Ultra manuals.
+
+</details>

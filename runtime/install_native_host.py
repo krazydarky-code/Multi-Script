@@ -272,6 +272,23 @@ def ensure_pillow():
     return False
 
 
+def ensure_reference_reader():
+    try:
+        __import__('pypdfium2')
+        say('  ok PDF reference reader present')
+        return True
+    except ImportError:
+        pass
+    say('  .. preparing the optional PDF reference reader...')
+    for extra in ([], ['--user']):
+        try:
+            result=subprocess.run([sys.executable,'-m','pip','install',*extra,'pypdfium2==5.14.0'])
+            if result.returncode==0:return True
+        except OSError:pass
+    say('  ! PDF previews unavailable; text references and the bridge remain usable. Run Setup again when online.')
+    return False
+
+
 def ensure_websockets():
     try:
         __import__("websockets")
@@ -507,6 +524,7 @@ def main(argv=None):
     say("  [2/4] Dependency")
     if not a.skip_deps and not (ensure_websockets() and ensure_pillow()):
         return 1
+    if not a.skip_deps:ensure_reference_reader()
 
     say("  [3/4] Finding your Multi-Script extension")
     ids = [i.strip() for i in a.extension_id if i.strip()]

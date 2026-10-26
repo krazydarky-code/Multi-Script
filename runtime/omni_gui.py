@@ -9,6 +9,7 @@ import gzip, hashlib, json, re, uuid
 
 HERE=Path(__file__).resolve().parent/'skill-resources'/'omni-gui'
 MODULES=('Maid','Signal','Spring','Tokens','ThemeRegistry','Toolkit')
+PDF_SHA='c10c86d39ea24e4ede9d1cba60c1f3862a11604d48b234bad7f5b5ae40e5d8ef'
 POLICY='Reference screenshots and approximate tokens are design evidence only, not current project verification, asset permissions or reusable game imagery. Preserve the project style and use real engine readback/playtests.'
 TOOL={'name':'ms_roblox_omni','description':'Query the compact OMNI UI/VFX/animation reference library, analyze relevant style, read reviewed modules, or explicitly install a namespaced native UI/cleanup/spring kit in connected Roblox Studio. Does not create combat/remotes, replace existing skills, or claim screenshots as playtests. Install performs a real engine call; bundle only returns source.', 'inputSchema':{'type':'object','additionalProperties':False,'required':['action'],'properties':{'action':{'type':'string','enum':['references','analyze','modules','bundle','install']},'query':{'type':'string','maxLength':1000},'style':{'type':'string','maxLength':80},'id':{'type':'string','maxLength':80},'limit':{'type':'integer','minimum':1,'maximum':8,'default':4},'module':{'type':'string','enum':list(MODULES)},'offset':{'type':'integer','minimum':0,'maximum':100000},'max_chars':{'type':'integer','minimum':1000,'maximum':16000},'namespace':{'type':'string','pattern':'^[A-Za-z][A-Za-z0-9_]{0,59}$'},'studio_id':{'type':'string'}}}}
 
@@ -18,6 +19,33 @@ def catalog():
 
 TOOL['inputSchema']['properties']['action']['enum'].append('recipe')
 TOOL['inputSchema']['properties']['recipe']={'type':'string','enum':['ui','vfx','pose','composite']}
+TOOL['inputSchema']['properties']['action']['enum']+=['status','packages','context','preview']
+TOOL['inputSchema']['properties']['project']={'type':'string','pattern':'^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$','default':'default'}
+
+def inventory():
+    import obsidian_vault as vault
+    state=vault.status();pdf=None
+    if state['available']:
+        candidate=vault._path(vault._root(),'Attachments/'+PDF_SHA+'.pdf')
+        if candidate.is_file():pdf=candidate
+    packages=[{'id':'native-ui-kit','kind':'reviewed Luau source','modules':list(MODULES),'read':{'action':'modules'},'install':'Explicit live Studio install; no automatic project writes.'}]
+    for kind in ('ui','vfx','pose','composite'):
+        packages.append({'id':kind+'-recipes','kind':'adaptable recipes','read':{'action':'recipe','recipe':kind}})
+    return {'available':True,'references':len(catalog()['references']),'modules':list(MODULES),'packages':packages,'pdfAvailable':bool(pdf),'pdfPreview':'Use preview with a reference id that has pdfPage; Setup prepares the bounded PDF reader.','policy':POLICY}
+
+def task_context(args):
+    import obsidian_vault as vault
+    query=str(args.get('query') or '')[:1000]
+    found=references({'query':query,'limit':3})
+    if not found['references']:
+        found=references({'limit':2});found['selection']='Representative examples; no exact keyword match.'
+    result={'library':inventory(),'references':found['references'],'selection':found.get('selection','Ranked for the current request.'),'policy':POLICY}
+    kind='vfx' if re.search(r'vfx|particle|effect|beam|trail',query,re.I) else 'pose' if re.search(r'animat|pose|rig|motion',query,re.I) else 'ui'
+    result['recipe']={'id':kind,'excerpt':(HERE/(kind+'-recipes.md')).read_text(encoding='utf-8')[:1600]}
+    try:result['memory']=vault.context({'project':args.get('project','default'),'query':query})
+    except (ValueError,OSError) as error:result['memory']={'available':False,'error':str(error)[:300]}
+    result['next']='Use these observations and recipes in the real deliverable. For a screenshot reference, call preview with its id and compare the actual page before claiming visual inspection. Generate requested editable artwork with ms_forge; read modules or install only when needed. Do not mix every style or replace existing systems.'
+    return result
 
 def references(args):
     data=catalog();rows=data['references'];query=str(args.get('query') or '').lower()[:1000]
@@ -38,7 +66,7 @@ def references(args):
 def bundle(namespace=None):
     namespace=namespace or 'MultiScriptOmni_'+uuid.uuid4().hex[:12]
     if not isinstance(namespace,str) or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,59}',namespace):raise ValueError('Use a namespace of up to 60 letters/digits/underscores, starting with a letter.')
-    lines=['local RS = game:GetService("ReplicatedStorage")',f'assert(not RS:FindFirstChild("{namespace}"), "Existing namespace preserved; choose a fresh name")','local folder = Instance.new("Folder")',f'folder.Name = "{namespace}"','folder:SetAttribute("MultiScriptOmni", "6.50.0")','local ok, message = pcall(function()']
+    lines=['local RS = game:GetService("ReplicatedStorage")',f'assert(not RS:FindFirstChild("{namespace}"), "Existing namespace preserved; choose a fresh name")','local folder = Instance.new("Folder")',f'folder.Name = "{namespace}"','folder:SetAttribute("MultiScriptOmni", "6.50.1")','local ok, message = pcall(function()']
     hashes={}
     for name in MODULES:
         source=(HERE/'modules'/(name+'.luau')).read_text(encoding='utf-8');hashes[name]=hashlib.sha256(source.encode()).hexdigest()
@@ -50,7 +78,18 @@ def bundle(namespace=None):
 
 def call(args,install=None):
     action=args.get('action','references')
-    if action=='references':result=references(args)
+    if action=='status' or action=='packages':result=inventory()
+    elif action=='context':result=task_context(args)
+    elif action=='preview':
+        import obsidian_vault as vault
+        rows=references({'id':args.get('id'),'limit':1})['references'] if args.get('id') else []
+        if not rows or type(rows[0].get('pdfPage')) is not int:raise ValueError('Choose a reference id with an actual pdfPage from references; no thumbnail is fabricated.')
+        path=vault._path(vault._root(),'Attachments/'+PDF_SHA+'.pdf')
+        if not path.is_file():raise ValueError('Import the supplied REFERENCES.pdf in Obsidian settings first. The built-in catalogue, modules and recipes are already available.')
+        with path.open('rb') as stream:
+            if vault._file_hash(stream)!=PDF_SHA:raise ValueError('The imported reference PDF changed; no unrelated page was substituted.')
+        return vault.read({'path':'Attachments/'+PDF_SHA+'.pdf','page':rows[0]['pdfPage']})
+    elif action=='references':result=references(args)
     elif action=='analyze':
         result=references(args);result['direction']='Keep the existing primary style and tokens; compare only these relevant references. Adapt spacing, hierarchy, state and VFX/pose recipes without importing branding or guessed assets.'
         result['recipes']=['ui-recipes.md','vfx-recipes.md','pose-recipes.md','composite-recipes.md']

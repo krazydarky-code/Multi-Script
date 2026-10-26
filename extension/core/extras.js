@@ -366,6 +366,7 @@ const ZSExtras = (() => {
   // critic loop, memory) - the "skills" add-on. Engine-specific ones stay out.
   function isGeneralDirectTool(name) {
     const n = String(name || "").split("/").pop();
+    if(n==='ms_roblox_omni')return true; // Read-only library; install is separately engine-gated.
     return /^ms_/.test(n) && !/^ms_ws_/.test(n) && !ENGINE_NAME_RX.test(n);
   }
   function softwareAllows(s, tool, server) {

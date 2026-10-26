@@ -106,6 +106,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** Trigger, permission, routing, gain or lifetime cause is repaired or explicitly blocked.
 
+## Resource application
+
+- retrieve: saved audio direction, asset permissions and existing audio skills
+
+- apply: Reuse the current buses and lifecycle. Match relevant animation/VFX cues to real markers; verify spatial behavior, permissions, interruption and accessible volume controls.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

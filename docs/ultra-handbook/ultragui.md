@@ -130,6 +130,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The supported cause is repaired or the exact access/import/device boundary is explicit.
 
+## Resource application
+
+- retrieve: OMNI UI references, ui/composite recipes and native Toolkit/Tokens/ThemeRegistry
+
+- apply: Compare hierarchy, populated states, typography and safe-area behavior; generate only the requested Forge UI pack, then wire the existing data and real interactions.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

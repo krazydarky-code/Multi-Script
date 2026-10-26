@@ -27,6 +27,9 @@ const ZSToolRouting = (() => {
     if (hint === "roblox-companion" || ENGINE_IDS.has(hint)) return true;
     const route = resolve(name, hint, tools);
     if (route.ok && (route.server === "roblox-companion" || ENGINE_IDS.has(String(route.server || "").toLowerCase()))) return true;
+    // The library is local reference data in general chats too. Only its
+    // explicit install action writes to Studio and requires an engine session.
+    if (n === 'ms_roblox_omni') return a.action === 'install';
     if (/^msrb_/.test(n) || /^ms_(roblox|unity|godot|blender)_/.test(n)) return true;
     if (ENGINE_BRIDGES.has(n)) {
       const target = String(a.server || a.engine || "").trim().toLowerCase();

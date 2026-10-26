@@ -29,7 +29,7 @@ jobs:
           node-version: '22'
       - name: Install test dependencies
         run: |
-          python -m pip install websockets cryptography Pillow lupa
+          python -m pip install websockets cryptography Pillow lupa pypdfium2==5.14.0
           npm install --no-save playwright@1.63.0 prosemirror-view@1.42.8 prosemirror-state@1.4.4 prosemirror-schema-basic@1.2.5 esbuild@0.25.12
           npx playwright install chromium
           # Hosted runners usually have the browser libraries already. Avoid
@@ -88,7 +88,7 @@ jobs:
       - name: Prepare real Blender and browser
         shell: pwsh
         run: |
-          python -m pip install websockets cryptography Pillow
+          python -m pip install websockets cryptography Pillow pypdfium2==5.14.0
           npm install --no-save playwright@1.63.0
           npx playwright install chromium
           python tools/prepare_luau.py
@@ -98,7 +98,7 @@ jobs:
           Add-Content -Path $env:GITHUB_ENV -Value "MS_BLENDER_CACHE=$env:MS_BLENDER_CACHE"
           python -c "import sys; sys.path.insert(0,'runtime'); import blender_portable; print(blender_portable.prepare())"
       - name: Real Blender and browser roundtrips
-        run: python tools/verify.py all test_blender_workspace_real_6490.py test_blender_workspace_browser_6490.js test_blender_companion_real_6492.py test_blender_preview_persistence_6492.py test_blender_target_routing_6496.py test_blender_connection_faults_6497.py test_blender_owner_lifecycle_6497.py test_omni_gui_650.py test_blockbench_native_650.py --output test-results/blender-workspace
+        run: python tools/verify.py all test_blender_workspace_real_6490.py test_blender_workspace_browser_6490.js test_blender_companion_real_6492.py test_blender_preview_persistence_6492.py test_blender_target_routing_6496.py test_blender_connection_faults_6497.py test_blender_owner_lifecycle_6497.py test_omni_gui_650.py test_blockbench_native_650.py test_resource_recall_6501.py --output test-results/blender-workspace
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

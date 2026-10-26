@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discord community and setup help
+    url: https://discord.gg/5Q6vvNcpM6
+    about: Get setup help, discuss workflows and share your Multi-Script projects.
+  - name: Support Multi-Script on Ko-fi
+    url: https://ko-fi.com/multixscript
+    about: Optional support for continued development. Donations do not unlock provider subscriptions.

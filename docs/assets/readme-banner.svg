@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="300" viewBox="0 0 1280 300" role="img" aria-label="Multi-Script: your AI chat, connected to your creative tools">
+ <defs>
+  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101425"/><stop offset="1" stop-color="#191331"/></linearGradient>
+  <linearGradient id="accent"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#55e4d3"/></linearGradient>
+ </defs>
+ <rect width="1280" height="300" rx="24" fill="url(#bg)"/>
+ <path d="M820 0 520 300M1080 0 780 300M1280 60 1040 300" stroke="#9b88ed" opacity=".09" stroke-width="80"/>
+ <rect x="42" y="45" width="5" height="132" rx="2.5" fill="url(#accent)"/>
+ <g font-family="Segoe UI,Arial,sans-serif">
+  <text x="70" y="91" fill="#c4b5fd" font-size="17" letter-spacing="4">YOUR CHAT. YOUR TOOLS. YOUR PROJECT.</text>
+  <text x="67" y="153" fill="#f5f6ff" font-size="58" font-weight="750">Multi-Script</text>
+  <text x="70" y="193" fill="#b4bed4" font-size="21">Build with connected tools, reusable skills and real verification.</text>
+  <g fill="#d2dcf0" font-size="16">
+   <text x="70" y="252">249 SKILLS</text><text x="233" y="252">12 ULTRA MANUALS</text><text x="466" y="252">OMNI REFERENCES</text><text x="698" y="252">LOCAL MEMORY</text>
+  </g>
+  <rect x="991" y="218" width="232" height="49" rx="24" fill="#10372f" stroke="#46cda5" stroke-opacity=".5"/>
+  <circle cx="1016" cy="243" r="5" fill="#59e8b9"/>
+  <text x="1033" y="249" font-size="16" fill="#bfffe9">Create. Apply. Verify.</text>
+ </g>
+</svg>

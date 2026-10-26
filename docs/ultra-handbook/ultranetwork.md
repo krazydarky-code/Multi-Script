@@ -106,6 +106,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The exact validation, commit or reconciliation cause is repaired without blind replay.
 
+## Resource application
+
+- retrieve: saved protocol decisions and current networking/persistence skills
+
+- apply: Treat recalled contracts as hypotheses until checked against handlers. Validate malformed input, replay/idempotence, late joins and server-owned state using real multi-client tests.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

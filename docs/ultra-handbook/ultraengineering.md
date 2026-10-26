@@ -106,6 +106,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The earliest supported failure is repaired or a concrete external boundary remains.
 
+## Resource application
+
+- retrieve: saved architecture decisions and relevant engineering skills
+
+- apply: Verify remembered paths against current source. Implement coherent increments in the existing structure; test cancellation, recovery, compatibility and preservation after each meaningful change.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

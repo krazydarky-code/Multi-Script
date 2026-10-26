@@ -35,8 +35,10 @@ const ZSProvider = (() => {
   function discoverShadows(node){
     if(!node?.querySelectorAll)return;
     const visit=el=>{if(el.shadowRoot&&!shadowRoots.has(el.shadowRoot)){shadowRoots.add(el.shadowRoot);discoverShadows(el.shadowRoot);surfaceObserver?.observe(el.shadowRoot,{childList:true,subtree:true,characterData:true});}};
-    if(node.nodeType===1)visit(node);
-    for(const el of node.querySelectorAll('*'))visit(el);
+    const irrelevant=el=>el.matches?.('.prose,pre,code,#zs-root,#zs-bar,.zs-chip');
+    if(node.nodeType===1){if(irrelevant(node)||node.closest('.prose,pre,code,#zs-root,#zs-bar,.zs-chip'))return;visit(node);}
+    const walker=document.createTreeWalker(node,NodeFilter.SHOW_ELEMENT,{acceptNode:el=>irrelevant(el)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+    for(let el=walker.nextNode();el;el=walker.nextNode())visit(el);
   }
   const proseTextCache=new WeakMap();
   function surfaceChanges(records){for(const record of records){
@@ -294,6 +296,11 @@ const ZSProvider = (() => {
   // The list is flex-col-reverse (newest-first in the DOM); reverse so the core
   // sees the usual chronological order and lastAssistant() = the latest reply.
   const allItems = () => domTurns().reverse();
+  const recentItems = (limit=4) => {
+    const list=listEl(),out=[];if(!list)return out;
+    for(const item of list.children){if((item.classList.contains('mx-auto')||isCarouselItem(item))&&item.querySelector(S.box))out.push(item);if(out.length>=limit)break;}
+    return out.reverse();
+  };
   const assistantItems = () => allItems().filter(isAssistantItem);
   const assistantCount = () => assistantItems().length;
   const userCount = () => allItems().filter(isUserItem).length;
@@ -1181,7 +1188,7 @@ const ZSProvider = (() => {
     // turns
     allItems, isUserItem, isAssistantItem, itemText, classifyText,
     assistantCount, userCount, lastAssistant, lastAssistantId, readAssistant,
-    streamLen, snapshot,
+    streamLen, snapshot, recentItems,
     // composer / state
     getEditor, editorText, chatIsEmpty, isFreshChat, composerFrame, barAnchor,
     setInputLock, typeAndSend, stopGeneration, waitForSendReady,

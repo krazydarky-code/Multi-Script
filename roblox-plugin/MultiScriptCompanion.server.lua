@@ -8,7 +8,7 @@ local RunService = game:GetService("RunService")
 local CollectionService = game:GetService("CollectionService")
 local ChangeHistoryService = game:GetService("ChangeHistoryService")
 
-local PLUGIN_VERSION = "6.50.0"
+local PLUGIN_VERSION = "6.50.1"
 local DIAGNOSTIC_VERSION = 3
 local BRIDGE_URL = "http://127.0.0.1:17614"
 local STATUS_SECONDS = 5

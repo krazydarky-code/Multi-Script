@@ -202,7 +202,7 @@ def _enable_ansi_colors():
 HOST = "127.0.0.1"
 # Keep in sync with extension/manifest.json "version" - printed at
 # startup so a user's terminal output alone tells us which build they're on.
-BRIDGE_VERSION = "6.50.0"
+BRIDGE_VERSION = "6.50.1"
 PORT = int(os.environ.get("ZS_BRIDGE_PORT", "17613"))
 # The Multi-Script folder this bridge runs from (parent of runtime/). Sent to the extension so a
 # stale copy left running from another folder can be named in the diagnosis.
@@ -5099,7 +5099,7 @@ def _builtin_call(name, arguments, manager):
         contact_svg=f'<svg xmlns="http://www.w3.org/2000/svg" width="{cw}" height="{ch}" viewBox="0 0 {cw} {ch}"><rect width="100%" height="100%" fill="{bg}"/>{"".join(contact)}</svg>'
         contact_path=os.path.join(out_dir,base+"-contact-sheet.svg")
         with open(contact_path,"w",encoding="utf-8") as f:f.write(contact_svg)
-        manifest={"name":safe,"version":"6.50.0","style":style,"size":size,"colors":{"primary":fg,"accent":accent,"background":bg},"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"usage":{"individual":"Use individual SVGs as editable source assets; convert/upload them through the target engine's supported image pipeline when required.","sprite":"Sprite sheet uses symbol ids; inspect target SVG support before relying on external references.","roblox":"Roblox ImageLabels require a supported uploaded image asset ID; this local SVG pack does not automatically upload or assign IDs."}}
+        manifest={"name":safe,"version":"6.50.1","style":style,"size":size,"colors":{"primary":fg,"accent":accent,"background":bg},"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"usage":{"individual":"Use individual SVGs as editable source assets; convert/upload them through the target engine's supported image pipeline when required.","sprite":"Sprite sheet uses symbol ids; inspect target SVG support before relying on external references.","roblox":"Roblox ImageLabels require a supported uploaded image asset ID; this local SVG pack does not automatically upload or assign IDs."}}
         manifest_path=os.path.join(out_dir,base+"-manifest.json")
         with open(manifest_path,"w",encoding="utf-8") as f:json.dump(manifest,f,indent=2,ensure_ascii=False)
         return {"text":json.dumps({"created":True,"name":safe,"style":style,"size":size,"iconCount":len(files),"icons":files,"spriteSheet":sprite_path,"contactSheet":contact_path,"manifest":manifest_path,"colors":manifest["colors"],"importNotes":manifest["usage"]},indent=2),"images":[]}

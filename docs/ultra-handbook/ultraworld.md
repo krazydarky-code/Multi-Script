@@ -130,6 +130,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The specific route, state, collision or loading cause is repaired and retested.
 
+## Resource application
+
+- retrieve: saved world/architecture style references and relevant existing kit skills
+
+- apply: Reuse one scale/grid and project palette. Implement a walkable blockout before dressing, then verify routes, landmarks, streaming and player-scale captures.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

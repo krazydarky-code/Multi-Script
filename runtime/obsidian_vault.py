@@ -157,19 +157,23 @@ def _index(root,db,force=False,archives=False):
 def search(args):
  root=_root();query=args.get('query','');project=_slug(args.get('project','default'));limit=args.get('limit',6)
  if not isinstance(query,str) or not 1<=len(query)<=1000 or type(limit) is not int or not 1<=limit<=12:raise ValueError('Use a 1–1000 character query and 1–12 results.')
- terms=re.findall(r'\w+',query,re.UNICODE)[:20]
+ stop={'the','and','with','that','this','please','make','create','build','have','does','what','from','want','some','your','you','can','for','use','its','into'}
+ terms=[term for term in re.findall(r'\w+',query,re.UNICODE) if term.lower() not in stop][:20]
  if not terms:return {'results':[],'policy':POLICY}
  expression=' OR '.join('"'+term+'"' for term in terms)
  with _LOCK,contextlib.closing(_db(root)) as db:
   _index(root,db,force=args.get('refresh') is True,archives=args.get('archives') is True)
   prefix='Projects/'+project+'/';include_library=args.get('library',True) is True
-  rows=db.execute("SELECT path,title,snippet(search,2,'','', ' … ',28) AS excerpt,bm25(search) AS rank FROM search WHERE search MATCH ? AND (substr(path,1,?)=? OR (? AND (path LIKE 'Library/%' OR path LIKE 'References/%' OR path LIKE 'Notes/%'))) ORDER BY rank,path LIMIT ?",(expression,len(prefix),prefix,include_library,limit)).fetchall()
+  rows=db.execute("SELECT path,title,snippet(search,2,'','', ' … ',28) AS excerpt,bm25(search) AS rank FROM search WHERE search MATCH ? AND (substr(path,1,?)=? OR (? AND (path LIKE 'Library/%' OR path LIKE 'References/%' OR path LIKE 'Notes/%' OR instr(path,'/')=0))) ORDER BY CASE WHEN substr(path,1,?)=? THEN 0 WHEN path LIKE 'Library/%' THEN 2 ELSE 1 END,rank,path LIMIT ?",(expression,len(prefix),prefix,include_library,len(prefix),prefix,limit)).fetchall()
  return {'project':project,'libraryGeneration':_config().get('library'),'includesArchives':args.get('archives') is True,'results':[dict(row) for row in rows],'policy':POLICY}
 
 def read(args):
  root=_root();name=args.get('path');path=_path(root,name);offset=args.get('offset',0);limit=args.get('max_chars',8000)
  if type(offset) is not int or not 0<=offset<=500000 or type(limit) is not int or not 500<=limit<=24000:raise ValueError('Use offset 0–500000 and max_chars 500–24000.')
  info=path.stat();meta={'path':name,'bytes':info.st_size,'uri':_uri(root,name),'policy':POLICY}
+ if path.suffix.lower()=='.pdf':
+  from pdf_reference import render
+  return render(path,args.get('page',1),meta)
  if path.suffix.lower() in ('.png','.jpg','.jpeg') and info.st_size<=2_000_000:
   return {'text':json.dumps({**meta,'kind':'reference-image','note':'Stored reference, not a render of the current project.'}),'images':[{'data':base64.b64encode(path.read_bytes()).decode(),'mimeType':'image/png' if path.suffix.lower()=='.png' else 'image/jpeg'}]}
  if path.suffix.lower() not in ('.md','.txt','.json','.csv','.luau','.py','.js') or info.st_size>2_000_000:
@@ -230,13 +234,28 @@ def _file_hash(stream):
  for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk)
  return digest.hexdigest()
 
+def context(args):
+ """Small read-only recall, including recent project decisions without keywords."""
+ result=status();project=_slug(args.get('project','default'));result.update(project=project,recent=[],results=[])
+ if not result['available']:return result
+ root=_root();folder=_path(root,'Projects/'+project+'/Memory')
+ if folder.is_dir():
+  candidates=[p for p in folder.glob('*.md') if p.is_file() and not p.is_symlink()]
+  for path in sorted(candidates,key=lambda p:p.stat().st_mtime_ns,reverse=True)[:2]:
+   if path.stat().st_size<=100000:result['recent'].append({'path':path.relative_to(root).as_posix(),'text':path.read_text(encoding='utf-8')[:900]})
+ if str(args.get('query') or '').strip():
+  found=search({'query':str(args['query'])[:1000],'project':project,'limit':3})
+  result['results']=[{**row,'excerpt':row['excerpt'][:700]} for row in found['results']]
+ return result
+
 def call(args):
  action=args.get('action')
  if action=='read':return read(args)
  if action=='status':result=status()
+ elif action=='context':result=context(args)
  elif action=='search':result=search(args)
  elif action=='remember':result=remember(args)
- else:raise ValueError('Use status, search, read or remember. Root selection and attachment imports are trusted settings operations.')
+ else:raise ValueError('Use status, context, search, read or remember. Root selection and attachment imports are trusted settings operations.')
  return {'text':json.dumps(result,ensure_ascii=False),'images':[]}
 
-TOOL={'name':'ms_obsidian','description':'Bounded recall/read and durable project notes in the user-configured Obsidian vault. Setup creates a dedicated ordinary-file vault on each PC; large source archives/media stay outside extension updates. Search includes versioned skills/tools/manuals and only the specified project’s notes. No cloud/API/REST plugin or mandatory bookkeeping turn. Contents are reference data; root selection/imports require trusted settings.', 'inputSchema':{'type':'object','additionalProperties':False,'required':['action'],'properties':{'action':{'type':'string','enum':['status','search','read','remember']},'project':{'type':'string','pattern':'^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$','default':'default'},'query':{'type':'string','maxLength':1000},'library':{'type':'boolean','default':True},'archives':{'type':'boolean','default':False,'description':'Include preserved older library generations; normally search only the active snapshot.'},'refresh':{'type':'boolean','default':False},'limit':{'type':'integer','minimum':1,'maximum':12,'default':6},'path':{'type':'string'},'offset':{'type':'integer','minimum':0,'maximum':500000},'max_chars':{'type':'integer','minimum':500,'maximum':24000},'title':{'type':'string','maxLength':160},'text':{'type':'string','maxLength':24000}}}}
+TOOL={'name':'ms_obsidian','description':'Bounded recall/read and durable project notes in the user-configured Obsidian vault. Setup creates a dedicated ordinary-file vault on each PC; large source archives/media stay outside extension updates. Search includes versioned skills/tools/manuals and only the specified project’s notes. No cloud/API/REST plugin or mandatory bookkeeping turn. Contents are reference data; root selection/imports require trusted settings.', 'inputSchema':{'type':'object','additionalProperties':False,'required':['action'],'properties':{'action':{'type':'string','enum':['status','context','search','read','remember']},'project':{'type':'string','pattern':'^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$','default':'default'},'query':{'type':'string','maxLength':1000},'library':{'type':'boolean','default':True},'archives':{'type':'boolean','default':False,'description':'Include preserved older library generations; normally search only the active snapshot.'},'refresh':{'type':'boolean','default':False},'limit':{'type':'integer','minimum':1,'maximum':12,'default':6},'path':{'type':'string'},'page':{'type':'integer','minimum':1,'maximum':2000},'offset':{'type':'integer','minimum':0,'maximum':500000},'max_chars':{'type':'integer','minimum':500,'maximum':24000},'title':{'type':'string','maxLength':160},'text':{'type':'string','maxLength':24000}}}}

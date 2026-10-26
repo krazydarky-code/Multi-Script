@@ -118,6 +118,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** A repeated failure produces a narrower diagnosis or explicit blocker, not invented completion.
 
+## Resource application
+
+- retrieve: prior acceptance decisions and existing regression/testing skills
+
+- apply: Separate fetched guidance, generated source, applied changes and observed behavior. Verify the actual artifact, capture relevant UI/motion, exercise failure paths and report exact coverage boundaries.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

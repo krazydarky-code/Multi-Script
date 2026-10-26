@@ -134,6 +134,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The supported cause is repaired or the exact access/import/device boundary is explicit.
 
+## Resource application
+
+- retrieve: OMNI UI references, ui/composite recipes and native Toolkit/Tokens/ThemeRegistry
+
+- apply: Compare hierarchy, populated states, typography and safe-area behavior; generate only the requested Forge UI pack, then wire the existing data and real interactions.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -385,6 +395,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 8. If an interrupted transition ends in the wrong pose or visibility state, inspect stale completion callbacks, cancellation tokens and restoration ownership. A still render does not verify motion, and an editable local clip does not prove successful asset publishing or replicated playback. Preserve source and report the remaining exact check.
 
 **Phase exit:** Rig, import, controller or publishing cause is isolated and repaired or precisely blocked.
+
+## Resource application
+
+- retrieve: OMNI pose recipes and Spring/Signal lifecycle modules
+
+- apply: Adapt timing, anticipation, overshoot and interruption to the existing rig. Verify multiple real poses and gameplay markers; a still reference is not motion evidence.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
 
 ## Engine application
 
@@ -645,6 +665,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The render, loading, ownership or conversion fault is repaired or precisely scoped.
 
+## Resource application
+
+- retrieve: OMNI VFX/composite recipes and relevant Forge VFX presets
+
+- apply: Adapt silhouette, lifetime, palette and density to the actual scene, then pool cosmetic emitters. Compare a temporal capture in real lighting and check cleanup.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -903,6 +933,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** Source versus export versus target cause is isolated without destructive guesswork.
 
+## Resource application
+
+- retrieve: saved silhouette/material references and applicable OMNI composite examples
+
+- apply: Preserve Parts-only or mesh constraints and editable sources. Use actual Blender or Blockbench schemas for relevant assets, then check geometry, textures, scale and exports.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -1144,6 +1184,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The specific route, state, collision or loading cause is repaired and retested.
 
+## Resource application
+
+- retrieve: saved world/architecture style references and relevant existing kit skills
+
+- apply: Reuse one scale/grid and project palette. Implement a walkable blockout before dressing, then verify routes, landmarks, streaming and player-scale captures.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -1361,6 +1411,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The failed owner/transition is repaired without masking it with cosmetic changes.
 
+## Resource application
+
+- retrieve: project memory decisions and existing gameplay/economy skills
+
+- apply: Reuse current services and ownership boundaries. Connect UI and effects only when the requested mechanic needs them; test server-authoritative outcomes and failure paths.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -1565,6 +1625,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** Trigger, permission, routing, gain or lifetime cause is repaired or explicitly blocked.
 
+## Resource application
+
+- retrieve: saved audio direction, asset permissions and existing audio skills
+
+- apply: Reuse the current buses and lifecycle. Match relevant animation/VFX cues to real markers; verify spatial behavior, permissions, interruption and accessible volume controls.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -1768,6 +1838,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 6. For unavailable backend or multi-client access, deliver a precise contract and isolated fixture results while labeling live correctness unverified.
 
 **Phase exit:** The exact validation, commit or reconciliation cause is repaired without blind replay.
+
+## Resource application
+
+- retrieve: saved protocol decisions and current networking/persistence skills
+
+- apply: Treat recalled contracts as hypotheses until checked against handlers. Validate malformed input, replay/idempotence, late joins and server-owned state using real multi-client tests.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
 
 ## Engine application
 
@@ -1995,6 +2075,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 8. If hardware profiling is unavailable or a service restricts the test, retain the reference-driven visual improvements and clearly separate measured, reviewed and unverified results. Do not manufacture FPS values, suppress device failures or promise zero performance bugs from a headless fixture.
 
 **Phase exit:** The measured cause is isolated and speculative regressions are removed.
+
+## Resource application
+
+- retrieve: prior measured baselines and current profiling skills
+
+- apply: Use the same workload and device class. Keep reference/library retrieval bounded, reuse valid reads, and compare actual frame time, memory, allocation and network evidence.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
 
 ## Engine application
 
@@ -2229,6 +2319,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The earliest supported failure is repaired or a concrete external boundary remains.
 
+## Resource application
+
+- retrieve: saved architecture decisions and relevant engineering skills
+
+- apply: Verify remembered paths against current source. Implement coherent increments in the existing structure; test cancellation, recovery, compatibility and preservation after each meaningful change.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
@@ -2444,6 +2544,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 7. If a reference-inspired interface loses readability or navigation, repair the actual contrast, target, layout or focus problem while retaining the useful style. A decorative screenshot cannot prove keyboard, touch or assistive-technology support.
 
 **Phase exit:** The specific focus, layout, input or preference cause is repaired and rechecked.
+
+## Resource application
+
+- retrieve: OMNI layout/state references and current accessibility skills
+
+- apply: Reference art is a starting point, not an accessibility certificate. Test contrast, long text, focus/escape, reduced motion and supported keyboard/touch/gamepad actions in the delivered interface.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
 
 ## Engine application
 
@@ -2684,6 +2794,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 7. If an expansion is unreachable, truncated or contradicts an existing project rule, fix retrieval scope and method precedence before adding more text. Do not equate more manual words, green tool chips or a plausible screenshot with a working, measured and integrated deliverable.
 
 **Phase exit:** A repeated failure produces a narrower diagnosis or explicit blocker, not invented completion.
+
+## Resource application
+
+- retrieve: prior acceptance decisions and existing regression/testing skills
+
+- apply: Separate fetched guidance, generated source, applied changes and observed behavior. Verify the actual artifact, capture relevant UI/motion, exercise failure paths and report exact coverage boundaries.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
 
 ## Engine application
 

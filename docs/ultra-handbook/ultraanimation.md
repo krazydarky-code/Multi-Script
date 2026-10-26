@@ -130,6 +130,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** Rig, import, controller or publishing cause is isolated and repaired or precisely blocked.
 
+## Resource application
+
+- retrieve: OMNI pose recipes and Spring/Signal lifecycle modules
+
+- apply: Adapt timing, anticipation, overshoot and interruption to the existing rig. Verify multiple real poses and gameplay markers; a still reference is not motion evidence.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

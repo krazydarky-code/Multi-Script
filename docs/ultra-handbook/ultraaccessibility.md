@@ -118,6 +118,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The specific focus, layout, input or preference cause is repaired and rechecked.
 
+## Resource application
+
+- retrieve: OMNI layout/state references and current accessibility skills
+
+- apply: Reference art is a starting point, not an accessibility certificate. Test contrast, long text, focus/escape, reduced motion and supported keyboard/touch/gamepad actions in the delivered interface.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

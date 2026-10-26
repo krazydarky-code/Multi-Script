@@ -130,6 +130,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** Source versus export versus target cause is isolated without destructive guesswork.
 
+## Resource application
+
+- retrieve: saved silhouette/material references and applicable OMNI composite examples
+
+- apply: Preserve Parts-only or mesh constraints and editable sources. Use actual Blender or Blockbench schemas for relevant assets, then check geometry, textures, scale and exports.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox

@@ -12,7 +12,7 @@ for mid,m in pack['manuals'].items():
     assert all(sid in skills for route in m['skillRoutes'].values() for sid in route)
     assert all(ref in pack['references'] for ref in m['referenceIds'])
 body=r'''
-function detail(id,engine,section){const m=pack.manuals[id];if(!m)return {};const phases=section?[section]:pack.phases;const result={revision:pack.revision,title:m.title,policy:pack.policy,phaseChecklists:Object.fromEntries(phases.map(p=>[p,m.phases[p]])),phaseExitCriteria:Object.fromEntries(phases.map(p=>[p,m.phaseExitCriteria[p]])),engine:engine||null,engineNotes:engine?m.engineNotes[engine]||null:null,skillApplication:{...pack.skillPolicy,candidateSkills:[...new Set([...(m.skillRoutes[engine]||[]),...m.skillRoutes.general])].slice(0,5),retrieve:'Use ms_get_skill with the selected skill_id and objective=current user goal. Load only a complementary skill needed by this operation. For deeper skill phases, pass manual_sections using the six listed phase names.'},references:m.referenceIds.map(ref=>pack.references[ref])};if(!section||section==='verify')result.acceptance=m.acceptance;if(!section||section==='failures')result.diagnostics=m.diagnostics;if(!section||['integrate','verify'].includes(section))result.deliverables=m.deliverables;return JSON.parse(JSON.stringify(result));}
+function detail(id,engine,section){const m=pack.manuals[id];if(!m)return {};const phases=section?[section]:pack.phases;const result={resourceApplication:m.resourceApplication,revision:pack.revision,title:m.title,policy:pack.policy,phaseChecklists:Object.fromEntries(phases.map(p=>[p,m.phases[p]])),phaseExitCriteria:Object.fromEntries(phases.map(p=>[p,m.phaseExitCriteria[p]])),engine:engine||null,engineNotes:engine?m.engineNotes[engine]||null:null,skillApplication:{...pack.skillPolicy,candidateSkills:[...new Set([...(m.skillRoutes[engine]||[]),...m.skillRoutes.general])].slice(0,5),retrieve:'Use ms_get_skill with the selected skill_id and objective=current user goal. Load only a complementary skill needed by this operation. For deeper skill phases, pass manual_sections using the six listed phase names.'},references:m.referenceIds.map(ref=>pack.references[ref])};if(!section||section==='verify')result.acceptance=m.acceptance;if(!section||section==='failures')result.diagnostics=m.diagnostics;if(!section||['integrate','verify'].includes(section))result.deliverables=m.deliverables;return JSON.parse(JSON.stringify(result));}
 const api={pack,detail};g.MSUltraHandbook=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(globalThis);
 '''
@@ -24,7 +24,7 @@ for mid,m in pack['manuals'].items():
     text='# '+m['title']+'\n\n'+pack['policy']+'\n\n'
     for phase,steps in m['phases'].items():
         text+='## '+phase.title()+'\n\n'+''.join(f'{i}. {step}\n\n' for i,step in enumerate(steps,1))+'**Phase exit:** '+m['phaseExitCriteria'][phase]+'\n\n'
-    text+='## Engine application\n\n'
+    text+='## Resource application\n\n'+''.join('- '+key+': '+value+'\n\n' for key,value in m.get('resourceApplication',{}).items())+'## Engine application\n\n'
     for engine,note in m['engineNotes'].items():text+='### '+engine+'\n\n'+note+'\n\nExisting candidate skills: '+', '.join(m['skillRoutes'][engine])+'. Load the smallest relevant set through the live skill tool.\n\n'
     text+='## Acceptance evidence\n\n'+''.join('- '+item+'\n' for item in m['acceptance'])+'\n## Diagnosis\n\n'
     for d in m['diagnostics']:text+='### '+d['symptom']+'\n\nProbe: '+d['probe']+'.\n\nRepair: '+d['repair']+'.\n\nRecheck: '+d['recheck']+'.\n\n'

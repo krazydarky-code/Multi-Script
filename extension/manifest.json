@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Multi-Script · Multi-Engine AI Studio",
-  "version": "6.50.0",
+  "version": "6.50.1",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo0m9zu2P+wdLOQumCpjuXQszz4W2tSzh8Tt/KeN+Fae1AGXG5Iy4LimsQ+pcVER1nhp1prU5WbFQi4oHoieeSeQCSw5OQnlc6Gyoom59jEDaQk0k01Nq8Otm5ppRb5kbPXxCdOzv3m2biXRwAsW33GprbDQiTc5g2WqXDTCcJFJQ5umF0ZsD334S6hLMwWF3ihmDA4omabroqk6t2VGfpQFtH7zgTiG1VNEhjopJBkbVjkP3DqtOmMcwwxrgADCQeMtDEJiR/2f59a02x4GxfNo+j6cTkfHA9tmvJxB0TVkASBkDbhwO4yEfzdE3uL0U1aT7hfnkppOj0IfIl31nRwIDAQAB",
   "description": "Customizable multi-provider AI workflows for Roblox, Unity, Godot, Blender, Figma, and MCP tools.",
   "permissions": [
@@ -723,7 +723,7 @@
     }
   ],
   "short_name": "Multi-Script",
-  "version_name": "6.50.0 Dev — Integrated production tools",
+  "version_name": "6.50.1 Dev — Integrated production tools",
   "web_accessible_resources": [
     {
       "resources": [

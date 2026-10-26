@@ -18,3 +18,9 @@ Settings → Engines → **Obsidian memory vault** reconnects a moved/synced vau
 The vault, index, configuration, notes and media are excluded from Git/release archives. Signed updates preserve the whole `Multi-Script Memory` folder, including case variants on Windows. The index can be rebuilt from ordinary notes and is kept under protected `runtime/studio-data`; it is not a cloud database. Existing browser graph memory remains available separately. Mem0 and Codebase Memory are not dependencies.
 
 If setup fails, it reports the exact filesystem issue and preserves existing notes. You can set `MS_OBSIDIAN_VAULT` to a writable dedicated folder before setup, or reconnect a folder in settings. A configured vault that disappears is reported unavailable; normal recall/write does not silently replace it. Sync clients, storage limits and external conflicts remain governed by the chosen sync service. Back up valuable originals.
+
+## Automatic task recall and PDF references
+
+Ultra preloads a compact read-only context for relevant tasks; the user request stays first. `context` returns recent notes for the selected project plus relevant shared/library matches without requiring a special keyword for recent decisions. Shared Markdown files in the vault root are searchable. Other project folders remain excluded. Stop, draft edits, navigation and effort changes cancel a pending send; a short timeout falls back to on-demand reads.
+
+`read` accepts a PDF `page` (1-based) and returns one actual rendered reference page plus bounded extracted text. Setup prepares the optional pinned reader; PDF work runs in a separate bounded process. OMNI `preview` resolves an indexed id to the checksum-verified original REFERENCES.pdf imported in this vault. Media are not automatically redistributed, and a catalogue observation does not count as visual inspection.

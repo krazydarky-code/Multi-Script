@@ -1710,7 +1710,7 @@
   }
   // Forge is drawn in this extension, so it is always advertised here, even when an older bridge
   // does not list it. Without this the chat rejects ms_forge as an unknown command.
-  const FORGE_TOOL={name:'ms_forge',description:'Forge: draws real game art (UI kits, VFX textures, backdrops) in the browser, uploads it through Studio and installs a ready Luau module in one call. action=ui_kit (ReplicatedStorage.ForgeKit + demo), action=vfx (ReplicatedStorage.ForgeVFX + showroom), action=backdrop (16:9 background). Options: style, pack (ui_kit defaults to the small shop pack; pass pack=full for everything), colours, reference_image, install, demo.',inputSchema:{type:'object',properties:{action:{type:'string',enum:['ui_kit','vfx','backdrop','styles']},style:{type:'string'},pack:{type:'string'},install:{type:'boolean'},demo:{type:'boolean'},quick:{type:'boolean',description:'ui_kit only, default true: at most 5 images per call so it finishes fast. false draws the whole pack.'},reference_image:{type:'string'}},required:['action']}};
+  const FORGE_TOOL={name:'ms_forge',description:'Forge: draws real game art (UI kits, VFX textures, backdrops) in the browser, uploads it through Studio and installs a ready Luau module in one call. action=ui_kit (art + optional ForgeKit integration), action=vfx (textures + optional ForgeVFX integration), action=backdrop (16:9 background). Options: style, pack (ui_kit defaults to essentials; pass pack=full for everything), colours, reference_image, install, demo.',inputSchema:{type:'object',properties:{action:{type:'string',enum:['ui_kit','vfx','backdrop','styles']},style:{type:'string'},pack:{type:'string'},install:{type:'boolean'},demo:{type:'boolean'},quick:{type:'boolean',description:'Legacy compatibility option. The selected pack always renders completely; choose a smaller pack for a smaller deliverable.'},reference_image:{type:'string'}},required:['action']}};
   const isForgeTool=n=>/^(?:(?:multiscript|zeroscript)[/.])?ms_forge$/.test(n||'');
   function knownTool(name) {
     if (!name || !A.toolNames.size) return false;
@@ -1943,6 +1943,7 @@
     }
     let name = call.tool;
     let args = call.arguments || {};
+    if(bareToolName(name)==='ms_roblox_omni'&&args.action==='install'&&A.software&&!softwareSettings.addons?.engines)return 'ERROR: OMNI installation requires the engines add-on. Read-only library actions remain available with the skills add-on.';
     if (!name) return ZS.FEEDBACK.parseError("malformed");
     if(isLocalUltraTool(name)&&typeof MSUltraManuals!=='undefined'){
       if(executionEffort!=='ultra')return 'ERROR: Ultra specialist manuals are inactive. The user must select Ultra on the effort slider; lower effort does not apply these methods.';
@@ -2193,7 +2194,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
           } else if (v.description && v.description.length > 45) {
             detailed.push(`    ${k}${mark}: ${v.type || "any"} - ${v.description}`);
           } else {
-            const ty = Array.isArray(v.enum) && v.enum.length <= 8 ? `(${v.enum.join("|")})` : (v.type || "any");
+            const ty = Array.isArray(v.enum) && v.enum.length <= 16 ? `(${v.enum.join("|")})` : (v.type || "any");
             compact.push(`${k}${mark}:${ty}${v.description ? ` "${v.description}"` : ""}`);
           }
         }
@@ -2229,7 +2230,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
       if (compactDirect) {
         // Bootstrap with discovery/retrieval schemas, not a mandatory workflow.
         // Every other direct tool stays in the index with exact schemas on demand.
-        const ESSENTIAL = new Set(["ms_ultra_manual", "ms_roblox_docs", "ms_forge", "ms_find_tool", "ms_get_skill"]);
+        const ESSENTIAL = new Set(["ms_ultra_manual", "ms_roblox_docs", "ms_forge", "ms_roblox_omni", "ms_obsidian", "ms_find_tool", "ms_get_skill"]);
         const direct = detailedTools.filter((t) => t.server === "zeroscript");
         detailedTools = detailedTools.filter((t) => t.server !== "zeroscript" || ESSENTIAL.has(t.name));
         const groups = {};
@@ -4312,7 +4313,7 @@ Use list_commands {"server":"multiscript"} for every direct command schema. For 
       // whether its injected result was an ERROR (error-aware settle above).
       // While a reply streams only the newest turns change, so quick sweeps look at the last few; the periodic
       // full sweep (every ~1.5 s) still repairs older turns. Re-reading every turn on every token made long chats lag.
-      const items = P.allItems();
+      const items = !full&&P.recentItems?P.recentItems(4):P.allItems();
       for (let i = full ? 0 : Math.max(0, items.length - 4); i < items.length; i++) this.classify(items[i], items[i + 1] || null);
       // Safety net for stopped turns whose chip lives OUTSIDE the enumerated
       // message list. On Arena an A/B comparison renders each candidate as a
@@ -9470,7 +9471,7 @@ Read the shared board, preserve adjacent interfaces and work within this scope. 
   // so the class lands before that first paint; the full sweep still runs after
   // to build the actual chip.
   function preHideWholeItems() {
-    const items = P.allItems();
+    const items = P.recentItems&&!(A.injectHideUntil&&Date.now()<A.injectHideUntil)?P.recentItems(4):P.allItems();
     // Optimistic pre-hide of a freshly injected result turn (armed in
     // submitAndGetBase). The text-based match below can only fire once the
     // "Output of '…'" caption has rendered, but the turn's NODE appears first
@@ -9582,6 +9583,30 @@ Read the shared board, preserve adjacent interfaces and work within this scope. 
       .finally(() => { A.enhanceBusy = false; });
     return true;
   }
+  const loadedResourceCache=new Map();
+  async function preloadTaskResources(source) {
+    if(typeof MSStudio==='undefined'||typeof MSStudio.resourcePlan!=='function')return '';
+    const plan=MSStudio.resourcePlan(source,executionEffort,{engines:A.software||A.chatOnly?['workspace']:connectedEngineIds()});
+    if(!plan)return '';
+    const resourceTool=plan.visual?'ms_roblox_omni':'ms_obsidian';
+    const available=A.toolList.some(t=>bareToolName(t.name)===resourceTool)&&!isBlockedTool(resourceTool)&&(!A.software||softwareAllowsTool(resourceTool));
+    const root=A.software?softwareSettings.root:((A.studios||[])[0]?.placeId||(A.studios||[])[0]?.place_id||'');
+    let hash=2166136261;for(const char of String(root)){hash^=char.charCodeAt(0);hash=Math.imul(hash,16777619);}
+    const project=root?'project-'+(hash>>>0).toString(16):'default';
+    const key=JSON.stringify([P.conversationKey(),studioSettingsFingerprint(),root,source]);
+    const cached=loadedResourceCache.get(key);if(cached&&Date.now()-cached.at<30000)return cached.text;
+    let data={available:false,reason:'The current filtered catalogue does not advertise '+resourceTool+'. Do not claim access; use advertised discovery if needed.'};
+    if(available){
+      let timer;
+      try{
+        const result=await Promise.race([bg({type:'call_tool',name:resourceTool,arguments:{action:'context',query:plan.query,project},timeout:2000}),new Promise(resolve=>{timer=setTimeout(()=>resolve(null),1800);})]);
+        data=result?.ok?JSON.parse(result.text||result.result?.text||'{}'):{toolAdvertised:true,preloadComplete:false,reason:result?.error||'Optional preload timed out; retrieve relevant resources on demand. The original task is unchanged.',next:{command:resourceTool,params:{action:plan.visual?'references':'search',query:plan.query}}};
+      }catch(error){data={toolAdvertised:true,preloadComplete:false,reason:String(error.message||error).slice(0,240)};}finally{clearTimeout(timer);}
+    }
+    const text=MSStudio.resourcePrompt(plan,data,typeof MSForge!=='undefined'?MSForge:null);
+    if(loadedResourceCache.size>=8)loadedResourceCache.delete(loadedResourceCache.keys().next().value);
+    loadedResourceCache.set(key,{at:Date.now(),text});return text;
+  }
   async function runEnhancedSend(source, r) {
     // Keep a newer Stop or chat navigation binding while the review is open.
     // A stale halt from an earlier turn must not cancel this new user message.
@@ -9625,7 +9650,12 @@ Read the shared board, preserve adjacent interfaces and work within this scope. 
     // The user's actual task leads every enhanced/Ultra send. A rewrite may
     // add clarification below it, but cannot replace it with setup instructions.
     if(!String(text).startsWith(source))text=source+'\n\n[Task clarification — original request above remains binding]\n'+String(text);
+    const resources=await preloadTaskResources(source);
+    if(A.running||A.starting||A.userStopped||(A.stopAt||0)!==reviewStopAt||P.conversationKey()!==reviewChatKey||settingsKey!==studioSettingsFingerprint()||(draftBeforeResume!==null&&P.editorText()!==draftBeforeResume)){
+      ui.toast('Not sent — the draft, task, conversation or settings changed while loading references.');return;
+    }
     const addon=taskPromptAddon(source); if(addon) text += "\n\n" + addon;
+    if(resources){const budget=Number(P.sendCharBudget)||50000;text += text.length+resources.length+2<=budget?'\n\n'+resources:'\n\nBundled resources: ms_roblox_omni (status, packages, references, preview, recipe, modules); ms_obsidian (context, search, read). Retrieve relevant items on demand; optional preload was omitted to preserve your complete request within the composer budget.';}
     if (studioSettingsDirty) text += "\n\n" + activeStudioInstructions(false);
     const base = await submitAndGetBase(text, undefined, { visible: true, settingsKey });
     if (!A.lastSendOk) return;             // submitAndGetBase already explained why

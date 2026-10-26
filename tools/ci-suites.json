@@ -142,5 +142,8 @@
   "test_updates_recovery_648.js",
   "test_task_progress.js",
   "test_deepseek_pacing_6486.js",
-  "test_update_setup_worker_6481.js"
+  "test_update_setup_worker_6481.js",
+  "test_resource_preload_6501.js",
+  "test_resource_send_6501.js",
+  "test_resource_recall_6501.py"
 ]

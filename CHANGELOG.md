@@ -1,3 +1,7 @@
+# 6.50.1
+
+Automatic bounded resource discovery, OMNI package/PDF access, scoped recent vault recall, Arena streaming optimizations and GitHub Discord/Ko-fi integration. Existing skills, phases, projects and releases are preserved.
+
 # Multi-Script 6.49.9 — GitHub account migration and delivery safeguards
 
 Move active repository/feed/download configuration to krazydarky-code/Multi-Script without rotating the signing key or extension identity. Preserve existing skills, manuals, native projects and all prior transport/UI fixes. Public 6.42.0 remains frozen; the migration release hosts it for later builds.

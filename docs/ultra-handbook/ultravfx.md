@@ -130,6 +130,16 @@ Detailed project-aware guidance, not weight training or permissions. Apply only 
 
 **Phase exit:** The render, loading, ownership or conversion fault is repaired or precisely scoped.
 
+## Resource application
+
+- retrieve: OMNI VFX/composite recipes and relevant Forge VFX presets
+
+- apply: Adapt silhouette, lifetime, palette and density to the actual scene, then pool cosmetic emitters. Compare a temporal capture in real lighting and check cleanup.
+
+- memory: Use bounded ms_obsidian context/search/read for this project. Save a useful durable decision once when appropriate; never require repeated bookkeeping turns.
+
+- reuse: Relevant task resources are preloaded before the user message is submitted when available. Reuse them, retrieve deeper sections only when needed, and never claim unavailable tools or unseen screenshots.
+
 ## Engine application
 
 ### roblox
