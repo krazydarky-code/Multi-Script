@@ -9594,7 +9594,7 @@ Read the shared board, preserve adjacent interfaces and work within this scope. 
     let hash=2166136261;for(const char of String(root)){hash^=char.charCodeAt(0);hash=Math.imul(hash,16777619);}
     const project=root?'project-'+(hash>>>0).toString(16):'default';
     const key=JSON.stringify([P.conversationKey(),studioSettingsFingerprint(),root,source]);
-    const cached=loadedResourceCache.get(key);if(cached&&Date.now()-cached.at<30000)return cached.text;
+    const cached=loadedResourceCache.get(key);if(!plan.refresh&&cached&&Date.now()-cached.at<30000)return cached.text;
     let data={available:false,reason:'The current filtered catalogue does not advertise '+resourceTool+'. Do not claim access; use advertised discovery if needed.'};
     if(available){
       let timer;

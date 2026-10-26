@@ -23,6 +23,8 @@ class Recall(unittest.TestCase):
    found=v.search({'query':'sharedrootcanary','refresh':True});self.assertEqual(found['results'][0]['path'],'New shared memory.md')
    # A new keyword is not required to recover a recent saved decision.
    self.assertTrue(v.context({'project':'my_game'})['recent'])
+   (root/'A newer note.md').write_text('freshcontextcanary',encoding='utf-8')
+   self.assertTrue(v.context({'query':'freshcontextcanary','refresh':True})['results'])
  def test_real_pdf_page_and_bounds(self):
   from PIL import Image
   import base64,io

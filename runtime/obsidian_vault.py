@@ -244,7 +244,7 @@ def context(args):
   for path in sorted(candidates,key=lambda p:p.stat().st_mtime_ns,reverse=True)[:2]:
    if path.stat().st_size<=100000:result['recent'].append({'path':path.relative_to(root).as_posix(),'text':path.read_text(encoding='utf-8')[:900]})
  if str(args.get('query') or '').strip():
-  found=search({'query':str(args['query'])[:1000],'project':project,'limit':3})
+  found=search({'query':str(args['query'])[:1000],'project':project,'limit':3,'refresh':args.get('refresh',True) is True})
   result['results']=[{**row,'excerpt':row['excerpt'][:700]} for row in found['results']]
  return result
 

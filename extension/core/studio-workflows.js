@@ -128,7 +128,7 @@
     const chosen=effort==='ultra'&&specialistManuals?specialistManuals.select(text).slice(0,2):[];
     const engine=(context.engines||[]).find(x=>['roblox','godot','unity','blender','workspace','figma'].includes(x));
     const manuals=chosen.map(m=>({id:m.id,resourceApplication:specialistManuals.read({action:'read',id:m.id,section:'inspect'}).handbook?.resourceApplication,sections:Object.fromEntries(['inspect','build','verify'].map(section=>[section,String(specialistManuals.read({action:'read',id:m.id,section,...(engine?{engine}:{})}).sections[section]||'').slice(0,650)]))}));
-    return {visual:visual||/omni/i.test(text),manuals,query:text.slice(0,1000)};
+    return {visual:visual||/omni/i.test(text),manuals,query:text.slice(0,1000),refresh:/\b(new|latest|updated|refresh|just saved)\b/i.test(text)};
   }
   function resourcePrompt(plan,data,forge) {
     if(!plan)return '';
