@@ -20,7 +20,7 @@ async function run(mode, maxMs) {
     const ed = document.getElementById('agent-editor'), send = document.getElementById('send');
     const thread = document.querySelector('.thread') || document.body;
     document.querySelectorAll('.msg').forEach((n) => n.remove());
-    let state = '';
+    let state = '',sends=0;
     const sync = () => { send.disabled = !state.trim(); };
     ed.addEventListener('input', (e) => {
       if (mode === 'refuse') { ed.textContent = ''; return; }
@@ -31,8 +31,8 @@ async function run(mode, maxMs) {
     const turn = (cls, side, txt) => { const d = document.createElement('div'); d.className = 'msg ' + cls; d.setAttribute('data-testid',cls==='u'?'user-message':'agent-message');d.setAttribute('data-message-id',cls+Date.now()); d.setAttribute('data-agent-service-scroll-anchor', cls + Date.now()); d.style.cssText = 'display:flex;justify-content:' + side; d.textContent = txt; thread.appendChild(d); };
     send.addEventListener('click', () => {
       if (send.disabled || mode === 'dead') return;
-      turn('u', 'flex-end', state.slice(0, 40)); ed.textContent = ''; state = ''; sync();
-      setTimeout(() => turn('a', 'flex-start', 'Ready. Studio profile loaded.'), 700);
+      const step=++sends;turn('u', 'flex-end', state.slice(0, 40)); ed.textContent = ''; state = ''; sync();
+      setTimeout(() => turn('a', 'flex-start', step===1?'{"command":"list_commands","params":{}}':'Ready. Studio profile loaded.'), 700);
     });
   }, mode);
   await page.waitForTimeout(300);

@@ -6,10 +6,14 @@ const {entries,html}=require('./support/provider-fixtures');
  for(const [id,x] of Object.entries(entries)){
   const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.stack));
   await p.route('**/*',r=>r.fulfill({contentType:'text/html',body:html(id,'<p>Previous answer</p>')}));await p.goto(x.url);
+  if(id==='gemini'){
+   assert(process.env.MS_NATIVE_QUILL_BUNDLE,'Prepare the native Quill bundle');await p.addScriptTag({path:process.env.MS_NATIVE_QUILL_BUNDLE});
+   await p.evaluate(()=>{const ed=document.querySelector('.ql-editor');ed.outerHTML='<div id="native-quill-mount"></div>';window.nativeQuill=new NativeQuill('#native-quill-mount',{modules:{toolbar:false}});document.querySelector('.ql-editor').style.minHeight='60px';});
+  }
   await p.evaluate(({userSource,reverse})=>{
    window.generic=(role,body)=>`<div data-message-author-role="${role}" data-message-id="sent-user">${body}</div>`;
    window.sent=[];const user=new Function('return ('+userSource+')')();const send=document.querySelector('#fixture-send,#composer-submit-button,#send-message-button');
-   send.addEventListener('click',e=>{e.preventDefault();const ed=window.transport.getEditor();const text=ed.value??ed.innerText;sent.push(text);const el=document.createElement('div');el.innerHTML=user(text.replaceAll('&','&amp;').replaceAll('<','&lt;'));const turn=el.firstElementChild;if(reverse)document.querySelector('#fixture-turns').prepend(turn);else document.querySelector('#fixture-turns').append(turn);if('value'in ed)ed.value='';else ed.textContent='';ed.dispatchEvent(new InputEvent('input',{bubbles:true}));});
+   send.addEventListener('click',e=>{e.preventDefault();const ed=window.transport.getEditor();const text=ed.value??(window.nativeQuill?nativeQuill.getText().replace(/\n$/,''):ed.innerText);sent.push(text);const el=document.createElement('div');el.innerHTML=user(text.replaceAll('&','&amp;').replaceAll('<','&lt;'));const turn=el.firstElementChild;if(reverse)document.querySelector('#fixture-turns').prepend(turn);else document.querySelector('#fixture-turns').append(turn);if('value'in ed)ed.value='';else if(window.nativeQuill)nativeQuill.setText('');else ed.textContent='';ed.dispatchEvent(new InputEvent('input',{bubbles:true}));});
   },{userSource:x.user.toString(),reverse:!!x.reverse});
   if(['vani','venice','clickup'].includes(id))await p.addScriptTag({path:path.join(__dirname,'../extension/providers/dom-chat.js')});
   await p.addScriptTag({path:path.join(__dirname,'../extension/providers/'+id+'.js')});await p.evaluate(()=>{window.transport=ZSProvider;transport.init?.({diag(){}});});
