@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Shared helpers for Setup.sh / Start.sh (macOS and Linux). Sourced, never run directly.
 # Written for bash 3.2 (the bash that ships with macOS): keep it to plain POSIX-style

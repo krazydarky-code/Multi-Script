@@ -87,7 +87,14 @@ try:
     nm = os.path.join(home, ".config", "google-chrome", "NativeMessagingHosts", "com.multiscript.bridge.json")
     check("registered for the installed Chrome (config dir)", os.path.isfile(nm), out)
     check("registered for Brave", os.path.isfile(os.path.join(home, ".config", "BraveSoftware", "Brave-Browser", "NativeMessagingHosts", "com.multiscript.bridge.json")))
-    check("not registered for browsers that are not installed", not os.path.exists(os.path.join(home, ".config", "microsoft-edge")) or not shutil.which("microsoft-edge"))
+    # CI can have Edge installed without a profile in this isolated HOME. The
+    # installer intentionally supports that case as well as existing profiles.
+    edge_present = (os.path.isdir("/Applications/Microsoft Edge.app") or
+                    os.path.isdir(os.path.join(home, "Applications", "Microsoft Edge.app"))) if sys.platform == "darwin" else any(
+                        shutil.which(command, path=env["PATH"]) for command in ("microsoft-edge", "microsoft-edge-stable"))
+    edge_manifest = os.path.join(home, "Library", "Application Support", "Microsoft Edge", "NativeMessagingHosts", "com.multiscript.bridge.json") if sys.platform == "darwin" else os.path.join(
+        home, ".config", "microsoft-edge", "NativeMessagingHosts", "com.multiscript.bridge.json")
+    check("Edge registration matches the installed browser, including an unused profile", os.path.isfile(edge_manifest) == edge_present)
     man = json.load(open(nm)) if os.path.isfile(nm) else {}
     check("manifest points at this folder's launcher and the pinned extension id",
           man.get("path", "").startswith(proj) and man.get("path", "").endswith("native_host.sh") and
