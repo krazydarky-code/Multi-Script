@@ -8,7 +8,8 @@ const ZSProvider = (() => {
   const agentUser = '[data-chat-turn-anchor] > .chakra-stack > [role="group"]:has(.assistant-content)';
   function responseError(){
     if(!agent())return null;
-    const turn=[...document.querySelectorAll('[data-chat-turn-anchor]')].filter(e=>e.getClientRects().length&&!e.closest('[hidden],[aria-hidden="true"],#zs-root')).at(-1);
+    const turns=document.querySelectorAll('[data-chat-turn-anchor]');let turn=null;
+    for(let i=turns.length-1;i>=0;i--){const node=turns[i];if(node.getClientRects().length&&!node.closest('[hidden],[aria-hidden="true"],#zs-root')){turn=node;break;}}
     if(!turn)return null;
     // Only the latest native error panel, outside model prose or quoted code.
     // A failed turn can have no assistant prose node at all.
