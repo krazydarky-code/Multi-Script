@@ -9,6 +9,7 @@ Actions job calls --require-ci and receives no signing key on pull requests.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -59,6 +60,23 @@ def validate_repository(repo,channel):
         raise ValueError('Repository must match the pinned, configured public update feed')
 
 
+def validate_access(repo,repository,environ=None):
+    """Actions tokens don't expose the human account's repository role flags.
+
+    A main-branch workflow in this exact public repository can use its scoped
+    token; GitHub enforces contents:write on every release mutation. This does
+    not relax the independent identity, exact-main or successful-CI checks.
+    """
+    environ=os.environ if environ is None else environ
+    scoped_actions=(environ.get('GITHUB_ACTIONS')=='true' and
+                    environ.get('GITHUB_REPOSITORY')==repo and
+                    environ.get('GITHUB_REF')=='refs/heads/main' and
+                    environ.get('GITHUB_EVENT_NAME') in ('workflow_run','workflow_dispatch'))
+    if repository.get('full_name')!=repo or repository.get('private') or not (
+            repository.get('permissions',{}).get('push') or scoped_actions):
+        raise ValueError('Publishing requires this public repository and an authorized account or its scoped main-branch Actions token')
+
+
 def verify_assets(metadata,artifacts):
     assets={a['name']:a for a in metadata['assets']}
     for path in artifacts:
@@ -88,8 +106,7 @@ def main():
     if subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip():
         raise ValueError('Publish only a clean, committed source tree')
     repository=gh_json(a.gh,['api',f'repos/{a.repo}'])
-    if repository.get('private') or not repository.get('permissions',{}).get('push'):
-        raise ValueError('Publishing requires write access to this public repository; end users must not need GitHub credentials')
+    validate_access(a.repo,repository)
     remote=gh_json(a.gh,['api',f'repos/{a.repo}/git/ref/heads/main'])['object']['sha']
     if remote!=head:
         raise ValueError('Only the exact current main commit can publish; checkout main after CI')

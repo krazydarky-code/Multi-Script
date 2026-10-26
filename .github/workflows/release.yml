@@ -43,7 +43,10 @@ jobs:
         run: |
           python - <<'PY'
           import json,os,pathlib,subprocess,sys
-          result=subprocess.run([sys.executable,'tools/publish_github.py','--repo',os.environ['GITHUB_REPOSITORY'],'--require-ci','--check-only'],check=True,capture_output=True,text=True)
+          result=subprocess.run([sys.executable,'tools/publish_github.py','--repo',os.environ['GITHUB_REPOSITORY'],'--require-ci','--check-only'],capture_output=True,text=True)
+          if result.returncode:
+              sys.stderr.write(result.stderr)
+              raise SystemExit(result.returncode)
           data=json.loads(result.stdout)
           print(result.stdout)
           with open(os.environ['GITHUB_OUTPUT'],'a') as output:output.write('publish='+str(data['publish']).lower()+'\n')

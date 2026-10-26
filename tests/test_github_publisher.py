@@ -3,6 +3,21 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('publisher',ROOT/'tools/publish_github.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 cfg={'feedUrl':'https://github.com/krazydarky-code/Multi-Script/releases/latest/download/dev-update.json','publicKey':{'n':'test'}}
+repo='krazydarky-code/Multi-Script'
+human={'full_name':repo,'private':False,'permissions':{'push':True}}
+actions={**human,'permissions':{'push':False}}
+environment={'GITHUB_ACTIONS':'true','GITHUB_REPOSITORY':repo,'GITHUB_REF':'refs/heads/main','GITHUB_EVENT_NAME':'workflow_dispatch'}
+m.validate_access(repo,human,{})
+m.validate_access(repo,actions,environment)
+m.validate_access(repo,actions,{**environment,'GITHUB_EVENT_NAME':'workflow_run'})
+for metadata,env in [(actions,{}),(actions,{**environment,'GITHUB_REPOSITORY':'other/repo'}),
+                     (actions,{**environment,'GITHUB_REF':'refs/heads/untrusted'}),
+                     (actions,{**environment,'GITHUB_EVENT_NAME':'pull_request'}),
+                     ({**actions,'private':True},environment),
+                     ({**human,'full_name':'other/repo'},environment)]:
+ try:m.validate_access(repo,metadata,env)
+ except ValueError:pass
+ else:raise AssertionError('Unscoped publisher accepted')
 m.validate_repository('krazydarky-code/Multi-Script',cfg)
 for repo in ['other/repo','../bad','https://github.com/krazydarky-code/Multi-Script']:
  try:m.validate_repository(repo,cfg)
